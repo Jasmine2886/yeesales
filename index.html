@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="销售易 YeeSales — YEE AI 智能大赛 2.0 参赛作品：面向全易宝 BD/销售的智能获客与客户经营平台。三场中东活动实战验证，可交互产品原型 + 完整作品说明，AI Agent 可读。">
-<title>销售易 YeeSales · YEE AI 智能大赛 2.0 参赛作品</title>
+<meta name="description" content="销售易 YeeSales v0.8 — YEE AI 智能大赛 2.0 参赛作品：BD 每天打开的 AI 销售助理。六个工作入口、三场海外活动实测、展后整理工时下降 90%。可交互原型与完整作品说明，AI Agent 可直接读取。">
+<title>销售易 YeeSales v0.8 · YEE AI 智能大赛 2.0 参赛作品</title>
 <style>
 :root{--green:#00C566;--green-deep:#00864A;--green-soft:#E9F9F0;--ink:#1A1D23;--sub:#646A73;--line:#E5E8EC}
 *{margin:0;box-sizing:border-box}
@@ -13,7 +13,7 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:
 .hero .tag{display:inline-block;background:var(--green);color:#fff;border-radius:20px;font-size:12px;padding:3px 14px;margin-bottom:14px}
 .hero h1{font-size:32px}
 .hero h1 small{font-size:16px;color:var(--sub);font-weight:400;display:block;margin-top:6px}
-.hero p.lead{max-width:760px;margin:16px auto 0;color:#3A414D}
+.hero p.lead{max-width:780px;margin:16px auto 0;color:#3A414D}
 .hero .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:760px;margin:26px auto 0}
 .hero .nums div{background:#fff;border:1px solid #D8F0E3;border-radius:10px;padding:12px 10px}
 .hero .nums b{display:block;font-size:28px;color:var(--green-deep);line-height:1.2}
@@ -32,7 +32,9 @@ main{max-width:920px;margin:0 auto;padding:36px 22px 60px}
 .card a{color:var(--green-deep);text-decoration:none;font-weight:600;font-size:14px}
 .facts{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:18px}
 .facts h2{font-size:16px;margin-bottom:12px}
-.facts li{margin:6px 0 6px 18px;font-size:14px}
+.facts ul{margin:0;padding:0;list-style:none}
+.facts li{margin:7px 0;font-size:14px;padding-left:16px;position:relative}
+.facts li:before{content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;background:var(--green)}
 .badge{display:inline-block;background:var(--green-soft);color:var(--green-deep);border-radius:5px;font-size:11px;padding:2px 8px}
 .footer{max-width:920px;margin:0 auto;padding:0 22px 46px;font-size:12px;color:var(--sub)}
 .footer code{background:#EDEFF1;padding:1px 6px;border-radius:5px}
@@ -55,14 +57,14 @@ main{max-width:920px;margin:0 auto;padding:36px 22px 60px}
 <header class="hero">
   <span class="tag">YEE AI 智能大赛 2.0 · 方向 1 内部提效</span>
   <h1>销售易 YeeSales
-    <small>全球销售操作系统 · AI 判断下一步，动作落到日历、任务与邮件</small>
+    <small>BD 每天打开的 AI 销售助理 · 你负责见人，其余交给它</small>
   </h1>
-  <p class="lead">六大分组覆盖销售全生命周期：<b>销售驾驶舱、线索获取、展会情报与行程规划、客户全景、商机与路线图、AI 工作台与集成</b>。AI Command Center 一句指令贯穿全程，AI Agent 工作组承担研究、记录、撰写与复盘；差异化底座是<b>跨文化判断 × 时区地理 × 国际合规</b>。标杆模块 Event Intelligence 把一次展会变成可运营的资产。</p>
+  <p class="lead">把复杂性留给 AI，把简单的工作界面留给销售。六个入口对应 BD 的六个动作：<b>今天做什么、开发哪些客户、展会与拜访怎么安排、这家客户聊到哪、单子卡在哪、直接跟它说要做什么</b>。行前筛名单排行程，现场拍名片录音，展后出跟进包，全程不需要理解 Agent、Event Intelligence 这类系统术语。</p>
   <div class="nums">
-    <div><b>3</b><span>场中东活动实战验证</span></div>
-    <div><b>8</b><span>场会面落日历</span></div>
-    <div><b>90%</b><span>会后整理工时下降</span></div>
-    <div><b>4</b><span>条新线索全部补联</span></div>
+    <div><b>6</b><span>个工作入口，对应 BD 的动作</span></div>
+    <div><b>3</b><span>场海外活动跑通闭环</span></div>
+    <div><b>8</b><span>场现场会面落进日历</span></div>
+    <div><b>90%</b><span>展后整理工时下降</span></div>
   </div>
   <div class="cta">
     <a class="primary" href="prototype.html">打开可交互产品原型</a>
@@ -74,66 +76,67 @@ main{max-width:920px;margin:0 auto;padding:36px 22px 60px}
   <div class="grid">
     <div class="card">
       <h2>产品原型</h2>
-      <p>9 个可点击视图：销售驾驶舱、线索获取、展会情报（五页签）、行程规划、客户全景、商机看板、成交路线图、AI Agent 活动中心、集成状态。单文件静态页，秒开。</p>
+      <p>6 个工作入口、9 个可点击页面：工作台、智能获客、展会与拜访（展前 / 展中 / 展后）、客户 360、商机看板、AI 助手。单文件静态页，秒开。</p>
       <a href="prototype.html">进入原型 →</a>
     </div>
     <div class="card">
       <h2>作品说明</h2>
-      <p>开头为评分维度摘要，正文按产品定位、六大模块、标杆功能、实战验证、商业路径、创新性展开，附边界说明与 12 张系统截图。</p>
+      <p>开头为评分维度摘要，正文按背景、定位、一个 BD 的 SFF 一周、关键能力、BD 用户测试、可验证成果、商业化路径展开，附 10 张截图。</p>
       <a href="proposal.html">阅读全文 →</a>
     </div>
     <div class="card">
       <h2>已沉淀公司平台</h2>
-      <p>会后复盘引擎已发布于公司 SkillHub（空间 hwfgs，v1.0.5）；全球节假日与文化日历（28 国 402 事件）已长期使用。</p>
+      <p>会后复盘引擎已发布于公司 SkillHub（空间 hwfgs，v1.0.5）；全球节假日与文化日历（28 国 402 事件）长期使用。</p>
       <span class="badge">真实业务实战验证</span>
     </div>
   </div>
 
   <div class="shots">
-    <h2>系统截图（12 张）</h2>
+    <h2>系统截图（10 张）</h2>
     <div class="thumbs">
-      <a href="proposal.html#fig1"><img src="screenshots/00-blueprint.svg" alt="产品蓝图"><span>产品蓝图</span></a>
-      <a href="proposal.html#fig2"><img src="screenshots/01-cockpit.png" alt="销售驾驶舱"><span>销售驾驶舱</span></a>
-      <a href="proposal.html#fig3"><img src="screenshots/02-leads.png" alt="线索获取"><span>线索获取</span></a>
-      <a href="proposal.html#fig4"><img src="screenshots/03-travel.png" alt="行程规划"><span>行程规划</span></a>
-      <a href="proposal.html#fig5"><img src="screenshots/04-event-overview.png" alt="展会情报总览"><span>展会情报 · 总览</span></a>
-      <a href="proposal.html#fig6"><img src="screenshots/05-event-accounts.png" alt="客户分级"><span>展会情报 · 客户分级</span></a>
-      <a href="proposal.html#fig7"><img src="screenshots/06-event-actions.png" alt="行动中心"><span>展会情报 · 行动中心</span></a>
-      <a href="proposal.html#fig8"><img src="screenshots/07-pipeline.png" alt="商机看板"><span>商机看板</span></a>
-      <a href="proposal.html#fig9"><img src="screenshots/08-roadmap.png" alt="成交路线图"><span>成交路线图</span></a>
-      <a href="proposal.html#fig10"><img src="screenshots/09-agents.png" alt="AI Agent 活动中心"><span>AI Agent 活动中心</span></a>
-      <a href="proposal.html#fig11"><img src="screenshots/10-account.png" alt="客户 360"><span>客户 360</span></a>
-      <a href="proposal.html#fig12"><img src="screenshots/11-integrations.png" alt="集成状态"><span>集成状态</span></a>
+      <a href="proposal.html#fig1"><img src="screenshots/10-version-map.png" alt="版本对照"><span>v0.7 到 v0.8：视图收敛</span></a>
+      <a href="proposal.html#fig2"><img src="screenshots/00-blueprint.png" alt="一周三段式"><span>一个 BD 的一周：分工</span></a>
+      <a href="proposal.html#fig3"><img src="screenshots/01-home.png" alt="Home 工作台"><span>Home 工作台</span></a>
+      <a href="proposal.html#fig4"><img src="screenshots/02-find.png" alt="智能获客"><span>Find Customers</span></a>
+      <a href="proposal.html#fig5"><img src="screenshots/03-event-before.png" alt="展前"><span>展前 · 名单与行程</span></a>
+      <a href="proposal.html#fig6"><img src="screenshots/04-event-during.png" alt="展中"><span>展中 · 名片与录音</span></a>
+      <a href="proposal.html#fig7"><img src="screenshots/05-event-after.png" alt="展后"><span>展后 · 跟进包</span></a>
+      <a href="proposal.html#fig8"><img src="screenshots/07-customer360.png" alt="客户 360"><span>Customer 360</span></a>
+      <a href="proposal.html#fig9"><img src="screenshots/08-pipeline.png" alt="商机看板"><span>My Pipeline</span></a>
+      <a href="proposal.html#fig10"><img src="screenshots/09-assistant.png" alt="AI 助手"><span>AI Assistant</span></a>
     </div>
-    <p class="more"><a href="proposal.html#fig1">在作品说明中查看全部 12 张截图 →</a></p>
+    <p class="more"><a href="proposal.html#fig1">在作品说明中查看全部 10 张截图 →</a></p>
   </div>
 
   <div class="agent" id="agent-guide">
     <h2>AI Agent 阅读指引（llms.txt）</h2>
-    <pre>本站为静态站点，无 JS 依赖、无登录、无验证码，全部正文直接渲染在 HTML 中。
+    <pre>本站为静态站点，无 JS 依赖、无登录、无验证码，正文全部直接渲染在 HTML 中。
 建议阅读顺序：
   1. /llms.txt        —— 站点摘要 + 关键事实清单（最快路径）
-  2. /proposal.html   —— 参赛作品说明全文（开头为关键点摘要，含可验证成果数据）
-  3. /prototype.html  —— 可交互产品原型（9 个视图均为纯文本可解析，支持 #event / #roadmap / #travel 深链）
-数据说明：全部客户为代称（客户甲/乙…），联系数据虚构；成本金额以遮蔽块呈现；不含报价、额度、真实联系方式。
+  2. /proposal.html   —— 参赛作品说明全文（开头为关键点摘要，含可验证成果与 BD 用户测试结论）
+  3. /prototype.html  —— 可交互产品原型（6 个入口，支持 #home / #find / #event / #customers / #pipeline / #assistant / #cust 深链）
+数据说明：全部客户为代称，联系人虚构；金额与交易量为演示数据；不含报价、额度、真实联系方式。
 robots.txt 允许全部抓取。</pre>
   </div>
 
   <div class="facts">
     <h2>关键事实（30 秒版）</h2>
-    <li><b>产品定位</b>：全球销售操作系统——AI 不只记录，而是判断下一步并把动作落到日历、任务与邮件草稿；六大模块覆盖销售全生命周期</li>
-    <li><b>实战验证</b>：2026-09 迪拜单次行程同期三场活动，14 场展会 App 约见、8 场确认并落日历、12 个会话全量回收、4 条无日历记录的新线索全部补联</li>
-    <li><b>核心指标</b>：单次展会会后整理从 1–2 人日压缩至 0.5 小时，整理工时下降约 90%；按 20 人团队年均 4 次展会测算，年节省约 120 人日</li>
-    <li><b>标杆功能</b>：Event Intelligence 五页签——总览、客户分级、会议洞察、行动中心、报告导出；AI Fit Score 五维加权可覆写，信息分「已确认 / AI 推断 / 缺失」三态，审批队列加只追加审计日志</li>
-    <li><b>差异化</b>：跨文化判断（三语气框架 / 伊斯兰礼仪 / 同名节日国别覆盖）× 时区地理（路线聚类与交通建议）× 国际合规（制裁初筛 / 两级脱敏）</li>
-    <li><b>完成度与边界</b>：九源会后引擎已上线实测，节假日日历长期使用；原型中的 AI 检索、评分与草稿为模拟演示，不触发真实外部调用，已在文档第 9 节标注</li>
-    <li><b>脱敏</b>：本站与两份 Skill 通过敏感词扫描——零客户名、零真实联系方式、零本机路径，成本金额以遮蔽块呈现</li>
+    <ul>
+      <li><b>产品定位</b>：BD 每天打开的 AI 销售助理。不是功能更多的 CRM，而是把「找客户、见客户、跟进客户」做成六个入口，AI 在背后执行，人只做批准</li>
+      <li><b>设计原则</b>：按工作场景组织（不按系统模块）、默认页回答「今天做什么」、AI 藏在动作后面、专业术语不出现在界面</li>
+      <li><b>实战验证</b>：2026-09 迪拜同期三场活动，34 家目标客户、14 场展会 App 约见、8 场现场会面、12 个会话归档、26 条待办写入任务系统</li>
+      <li><b>核心指标</b>：单场会面整理 25 分钟降至 3 分钟；20 封跟进邮件 4 小时降至 25 分钟；展后一周跟进计划半天降至 30 分钟</li>
+      <li><b>信任机制</b>：信息三态（确认 / AI 推断 / 缺失）、四类动作需人工审批、只追加审计日志、AI 结论可覆写并留痕</li>
+      <li><b>BD 用户测试</b>：不给培训，按 SFF 任务走查五项，结论为「不需要教学」；走查发现 4 处入口与交互问题，已在 v0.8 修复</li>
+      <li><b>边界</b>：原型中的检索、评分、草稿为模拟演示，不触发真实外部调用；邮件不自动发送，日历写入无参会人</li>
+      <li><b>脱敏</b>：零客户真名、零真实联系方式、零本机路径；金额与交易量为演示数据</li>
+    </ul>
   </div>
 
 </main>
 
 <div class="footer">
-  销售易 YeeSales · YEE AI 智能大赛 2.0 参赛作品 · 本站为演示站点，全部客户均为代称、数据虚构、成本金额遮蔽 ·
+  销售易 YeeSales v0.8 · YEE AI 智能大赛 2.0 参赛作品 · 本站为演示站点，全部客户均为代称、数据虚构 ·
   Agent 请从 <code>/llms.txt</code> 开始 · robots.txt 全开放
 </div>
 
