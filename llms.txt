@@ -1,35 +1,39 @@
-# 销售易 YeeSales · YEE AI 智能大赛 2.0 参赛作品
+# 销售易 YeeSales v0.8 · YEE AI 智能大赛 2.0 参赛作品
 
-> 全球销售操作系统（AI-powered Global Sales Operating System）。AI 不只记录，而是判断下一步并把动作落到日历、任务与邮件草稿。六大分组覆盖销售全生命周期：AI Sales Cockpit（销售驾驶舱）、Lead Generation（线索获取）、Event Intelligence + Travel Planner（展会情报与行程规划）、Customer 360（客户全景）、Pipeline & Roadmap（商机与路线图）、AI Workforce & Integrations（AI 工作台与集成）。标杆功能为 Event Intelligence 展会情报：五个页签把一次展会变成可运营资产。
+> BD 每天打开的 AI 销售助理。核心主张：把复杂性留给 AI，把简单的工作界面留给销售。六个入口对应 BD 的六个动作——今天做什么、开发哪些客户、展会与拜访怎么安排、这家客户聊到哪、单子卡在哪、直接跟 AI 说要做什么。AI 承担检索、研究、记录、撰写与复盘；发邮件、改阶段、建客户、承诺价格四类动作必须人点头。
 
 本站为纯静态站点：无 JS 依赖、无登录、无验证码、无弹窗；全部正文直接渲染在 HTML 中，可直接解析。品牌视觉采用易宝白绿色系；产品界面为英文，说明文档为中文。
 
 ## Pages
 
-- [/index.html](https://jasmine2886.github.io/yeesales/index.html)：作品导览首页——定位、关键数字（3 场活动 / 8 场会面 / 90% 工时下降 / 4 条补联）、三大入口、12 张截图、关键事实 30 秒版
-- [/proposal.html](https://jasmine2886.github.io/yeesales/proposal.html)：作品说明全文（v0.7）——评分维度摘要、1 产品定位、2 开发背景、3 六大模块、4 标杆功能 Event Intelligence、5 实战验证、6 商业价值与路径、7 创新性、8 可访问性、9 边界与下一步、附录 A-B；内嵌 12 张系统截图；评审重点页
-- [/prototype.html](https://jasmine2886.github.io/yeesales/prototype.html)：可交互产品原型——9 个视图：AI Sales Cockpit（AI 建议、Pipeline 分布、最近互动）、Lead Generation、Event Intelligence（总览 / 客户分级 / 会议洞察 / 行动中心 / 报告五页签）、Travel Planner、Customer 360、Pipeline（看板）、Deal Roadmap（45 天路线图）、AI Workforce（Agent 活动中心）、Integrations（集成状态）。支持深链 #event / #roadmap / #travel，正文均为静态 HTML 可解析
+- [/index.html](https://jasmine2886.github.io/yeesales/index.html)：作品导览——定位、关键数字（6 个入口 / 3 场活动 / 8 场会面 / 90% 工时下降）、10 张截图、关键事实 30 秒版
+- [/proposal.html](https://jasmine2886.github.io/yeesales/proposal.html)：作品说明全文（v0.8）——关键点摘要（评分卡）、一 开发背景（含 v0.7→v0.8 重构）、二 产品定位与六个入口、三 一个 BD 的 SFF 一周（端到端七步）、四 关键能力、五 BD 用户测试、六 可验证成果、七 商业化路径、八 创新点、九 链接与脱敏；内嵌 10 张截图；评审重点页
+- [/prototype.html](https://jasmine2886.github.io/yeesales/prototype.html)：可交互产品原型——6 个入口、9 个页面：Home 工作台、Find Customers（四路获客）、Events & Travel（展前 / 展中 / 展后三页签）、My Customers 与 Customer 360、My Pipeline（八阶段看板）、AI Assistant。深链 #home / #find / #event / #customers / #pipeline / #assistant / #cust，正文均为静态 HTML 可解析
 - [/YeeSales-AI-产品与开发说明-v2.html](https://jasmine2886.github.io/yeesales/YeeSales-AI-%E4%BA%A7%E5%93%81%E4%B8%8E%E5%BC%80%E5%8F%91%E8%AF%B4%E6%98%8E-v2.html)：产品与开发说明（工程视角，含实体模型、接口边界与实施顺序）
 
 ## Key facts（引用时可直接使用）
 
-- 产品定位：从记录型 CRM 升级为销售操作系统；AI 承担检索、评分、撰写与复盘，关键写入保留人工审批
-- 标杆功能：Event Intelligence 五页签——Overview、Account Intelligence、Meeting Insights、Action Center、Reports & Export；AI Fit Score 五维加权（战略契合 25%、中国收单需求 25%、交易体量 20%、牌照合规 15%、互动意向 15%），逐项给证据、可覆写并留痕
-- 信息可信度三态：已确认（有原文或凭证）/ AI 推断（附置信度，需确认）/ 缺失（显式标注），避免 AI 猜测被当作事实入库
-- 治理机制：审批队列（新建公司、联系人、商机与金额、阶段推进、对外邮件）＋只追加的审计日志；AI 不直接改 CRM、不发邮件、不写日历
-- 实战验证：2026-09 迪拜单次行程同期三场活动（Seamless Middle East、Forex Expo Dubai、MEA Finance Leaders in Payments）。展会 App 14 场约见、8 场确认并落日历、12 个会话全量回收、4 条无日历记录的新线索全部补联
-- 核心指标：单次展会会后整理 1–2 人日 → 0.5 小时，工时下降约 90%；按 20 人团队年均 4 次展会测算，年节省约 120 人日
-- 商业化路径：内部自用（已跑通）→ 部门复制（SkillHub 分发）→ 对外产品化（SaaS 订阅，规划中）；差异化在跨文化判断、时区与差旅编排、国际合规与脱敏三项能力
-- 平台沉淀：会后复盘引擎已发布公司 SkillHub（空间 hwfgs，v1.0.5）；全球节假日与文化日历 28 国 402 事件已长期使用
-- 边界：原型中的检索、评分、草稿与任务创建为模拟执行（界面标注 Simulated data），不触发真实外部调用；已真实执行的部分为会前名单、约见排期、日历落地、九源回收、跟进表与任务
-- 脱敏：本站与两份 Skill 通过敏感词扫描——零客户名、零真实联系方式、零本机路径、零凭据；页面客户均为代称（AtlasPay Global 等为虚构示例），成本金额以遮蔽块呈现
+- 产品定位：不是功能更多的 CRM，而是 BD 每天打开的 AI 销售助理；界面按工作场景组织，不按系统模块组织
+- 四条设计原则：按场景组织、默认页回答「今天做什么」、AI 藏在动作后面、专业术语不出现在界面
+- 六个入口：Home 工作台 / Find Customers 智能获客 / Events & Travel 展会与拜访 / My Customers 我的客户 / My Pipeline 我的商机 / AI Assistant 销售助手
+- 版本演进：v0.7 的 9 个视图收敛为 v0.8 的 6 个入口，能力未减；Agent、审批、审计下沉为后台机制，只在需要人点头时出现
+- 展会三段式：展前（名单、研究、约见邮件、行程与动线）、展中（名片建档、录音转写、会前小抄）、展后（沟通汇总、客户排序、跟进包、逐条复核）
+- 信任机制：信息三态（已确认 / AI 推断 / 缺失）、四类动作需人工审批（发邮件、改 CRM、建客户、承诺价格）、只追加审计日志、AI 结论可覆写并留痕
+- 实战验证：2026-09 迪拜同期三场活动（Seamless Middle East、Forex Expo Dubai、MEA Finance Leaders in Payments）。34 家目标客户、展会 App 14 场约见（4 场确认）、8 场现场会面、12 个会话归档、26 条待办写入任务系统
+- 核心指标：单场会面整理 25 分钟 → 3 分钟；20 封跟进邮件 4 小时 → 25 分钟；展后一周跟进计划半天 → 30 分钟；单客户背景研究 20–30 分钟 → 2 分钟
+- BD 用户测试：不给任何培训，按 SFF 任务（找 20 家有中国供应商付款需求的 PSP → 研究 → 约会议 → 展后整理 → 跟进计划 → 英文邮件）走查五项，结论为「不需要教学」；走查发现 4 处问题（20 家名单出口、客户页动作含糊、助手无输入框、看板末列裁切），已在 v0.8 修复
+- 商业化路径：内部自用（已跑通）→ 区域与团队复制（SkillHub 分发）→ 对外产品化（按席位订阅，展会期加购；按省下的 BD 工时与会面转化计价）
+- 平台沉淀：会后复盘引擎已发布公司 SkillHub（空间 hwfgs，v1.0.5）；全球节假日与文化日历 28 国 402 事件长期使用
+- 边界：原型中的检索、评分、草稿与任务创建为模拟执行（界面标注 Simulated data），不触发真实外部调用；邮件不自动发送，日历写入无参会人
+- 脱敏：零客户真名、零真实联系方式、零本机路径、零凭据；页面客户均为代称（AtlasPay Global 等为虚构示例）
 
-## Screenshots（12 张，均在 /proposal.html 内）
+## Screenshots（10 张，均在 /proposal.html 内）
 
-- 图 1 产品蓝图：AI 层（Command Center / Agent 工作组 / 可信机制）、六大分组、数据底座与落地形态
-- 图 2 销售驾驶舱 / 图 3 线索获取 / 图 4 行程规划 / 图 5 展会情报总览 / 图 6 客户分级 / 图 7 行动中心与审计日志 / 图 8 商机看板 / 图 9 成交路线图 / 图 10 AI Agent 活动中心 / 图 11 客户 360 / 图 12 集成状态
-- 图片路径：/screenshots/*.png 与 00-blueprint.svg，均为原型演示数据、客户代称、金额遮蔽
+- 图 1 v0.7 → v0.8 视图收敛对照：9 个系统视图映射到 6 个工作入口
+- 图 2 一个 BD 的 SFF 一周：三个阶段、12 个动作，9 个由 AI 完成、3 个必须人确认
+- 图 3 Home 工作台（今日优先级）/ 图 4 Find Customers（四路获客与线索表）/ 图 5 展前（名单、行程、动线）/ 图 6 展中（名片、录音、小抄）/ 图 7 展后（跟进包与复核）/ 图 8 Customer 360（资料、时间线、AI 洞察）/ 图 9 My Pipeline（八阶段看板）/ 图 10 AI Assistant（对话式完成任务）
+- 图片路径：/screenshots/*.png 与 00-blueprint.svg、10-version-map.svg，均为原型演示数据、客户代称
 
 ## Data notice
 
-全部客户为代称或虚构示例；不含报价、额度、真实联系方式、内部系统域名；成本金额以遮蔽块呈现。本站为演示站点。
+全部客户为代称或虚构示例；不含报价、额度、真实联系方式、内部系统域名。金额与交易量为演示数据。本站为演示站点。
