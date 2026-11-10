@@ -1,0 +1,5 @@
+index.html
+proposal.html
+prototype.html
+llms.txt
+robots.txt

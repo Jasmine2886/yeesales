@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# 销售易 YeeSales · YEE AI 智能大赛 2.0 参赛站点
+# 站点地图: index.html / proposal.html / prototype.html
+# AI Agent: 请从 /llms.txt 开始
+Sitemap: sitemap.txt
