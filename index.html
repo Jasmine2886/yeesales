@@ -3,141 +3,172 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="销售易 YeeSales v0.8 — YEE AI 智能大赛 2.0 参赛作品：BD 每天打开的 AI 销售助理。六个工作入口、三场海外活动实测、展后整理工时下降 90%。可交互原型与完整作品说明，AI Agent 可直接读取。">
-<title>销售易 YeeSales v0.8 · YEE AI 智能大赛 2.0 参赛作品</title>
+<meta name="description" content="YeeSales 销售易 v0.9 — YEE AI 智能大赛 2.0 参赛作品：BD 每天打开的 AI 销售助理。六个工作入口、八个交互闭环、三场海外活动真实跑通、China Payout 商机识别。含可交互原型、评委入口与完整作品说明，AI Agent 可直接读取。">
+<title>YeeSales 销售易 v0.9 · YEE AI 智能大赛 2.0 参赛作品</title>
 <style>
-:root{--green:#00C566;--green-deep:#00864A;--green-soft:#E9F9F0;--ink:#1A1D23;--sub:#646A73;--line:#E5E8EC}
+:root{--green:#00A85A;--green-deep:#00864A;--green-soft:#F1FBF5;--green-line:#C9EBDA;
+  --ink:#12181F;--sub:#5B6572;--mute:#9AA1AC;--line:#E6EAEF}
 *{margin:0;box-sizing:border-box}
-body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:#F6F8F7;font-size:15px;line-height:1.7}
-.hero{background:linear-gradient(135deg,#F1FBF6,#fff);border-bottom:1px solid #D8F0E3;padding:52px 22px 40px;text-align:center}
-.hero .tag{display:inline-block;background:var(--green);color:#fff;border-radius:20px;font-size:12px;padding:3px 14px;margin-bottom:14px}
-.hero h1{font-size:32px}
-.hero h1 small{font-size:16px;color:var(--sub);font-weight:400;display:block;margin-top:6px}
-.hero p.lead{max-width:780px;margin:16px auto 0;color:#3A414D}
-.hero .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:760px;margin:26px auto 0}
-.hero .nums div{background:#fff;border:1px solid #D8F0E3;border-radius:10px;padding:12px 10px}
-.hero .nums b{display:block;font-size:28px;color:var(--green-deep);line-height:1.2}
-.hero .nums span{font-size:12px;color:var(--sub)}
-.hero .cta{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.cta a{display:inline-block;padding:12px 26px;border-radius:10px;text-decoration:none;font-size:15px;font-weight:600}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  color:#2A313A;background:#fff;font-size:15.5px;line-height:1.75;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+a{color:var(--green-deep);text-decoration:none}
+a:hover{text-decoration:underline}
+
+.hero{padding:60px 0 44px;background:linear-gradient(180deg,#F7FDF9,#fff);border-bottom:1px solid var(--line)}
+.tag{display:inline-block;background:var(--green);color:#fff;border-radius:999px;font-size:12px;
+  padding:4px 14px;font-weight:600;letter-spacing:.3px}
+h1{font-size:40px;letter-spacing:-.6px;color:var(--ink);margin:18px 0 0;line-height:1.25}
+h1 small{display:block;font-size:16px;color:var(--sub);font-weight:400;margin-top:8px;letter-spacing:0}
+p.lead{max-width:780px;margin:16px 0 0;color:#3A414D;font-size:16.5px}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}
+.nums div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.nums b{display:block;font-size:27px;color:var(--ink);line-height:1.25;letter-spacing:-.5px}
+.nums b i{font-style:normal;font-size:14px;color:var(--sub);font-weight:600}
+.nums span{font-size:12.5px;color:var(--sub)}
+.cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+.cta a{display:inline-block;padding:11px 24px;border-radius:9px;font-size:14.5px;font-weight:600}
 .cta .primary{background:var(--green);color:#fff}
-.cta .primary:hover{background:var(--green-deep)}
-.cta .ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
-main{max-width:920px;margin:0 auto;padding:36px 22px 60px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-@media(max-width:760px){.grid{grid-template-columns:1fr}.hero .nums{grid-template-columns:repeat(2,1fr)}}
-.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px}
-.card h2{font-size:16px;margin:0 0 6px}
-.card p{font-size:13px;color:var(--sub)}
-.card a{color:var(--green-deep);text-decoration:none;font-weight:600;font-size:14px}
-.facts{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:18px}
-.facts h2{font-size:16px;margin-bottom:12px}
-.facts ul{margin:0;padding:0;list-style:none}
-.facts li{margin:7px 0;font-size:14px;padding-left:16px;position:relative}
-.facts li:before{content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;background:var(--green)}
-.badge{display:inline-block;background:var(--green-soft);color:var(--green-deep);border-radius:5px;font-size:11px;padding:2px 8px}
-.footer{max-width:920px;margin:0 auto;padding:0 22px 46px;font-size:12px;color:var(--sub)}
-.footer code{background:#EDEFF1;padding:1px 6px;border-radius:5px}
-.agent{background:#F5FCF8;border:1px solid #B9EDD2;border-radius:14px;padding:22px;margin-top:18px}
+.cta .primary:hover{background:var(--green-deep);text-decoration:none}
+.cta .ghost{background:#fff;color:var(--ink);border:1px solid #D7DDE4}
+.cta .ghost:hover{border-color:var(--green);color:var(--green-deep);text-decoration:none}
+
+main{padding:48px 0 20px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+.card h2{font-size:16px;color:var(--ink);margin-bottom:8px}
+.card p{font-size:13.5px;color:var(--sub);line-height:1.7}
+.card a{font-weight:600;font-size:14px}
+.badge{display:inline-block;background:var(--green-soft);color:var(--green-deep);border:1px solid var(--green-line);
+  border-radius:6px;font-size:11.5px;padding:2px 9px;font-weight:600}
+
+h2.sec{font-size:20px;color:var(--ink);margin:44px 0 6px;letter-spacing:-.2px}
+p.secsub{color:var(--sub);font-size:14px;margin-bottom:16px}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.thumbs a{display:block;border:1px solid var(--line);border-radius:10px;overflow:hidden;color:var(--ink)}
+.thumbs a:hover{border-color:var(--green);text-decoration:none}
+.thumbs img{width:100%;height:140px;object-fit:cover;object-position:top left;display:block}
+.thumbs span{display:block;font-size:12px;color:var(--sub);padding:8px 10px}
+
+.agent{background:#F7FCF9;border:1px solid var(--green-line);border-radius:14px;padding:22px;margin-top:34px}
 .agent h2{font-size:15px;color:var(--green-deep);margin-bottom:10px}
-.agent pre{white-space:pre-wrap;font-size:13px;line-height:1.8;color:#3A414D;font-family:inherit}
-.shots{margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px}
-.shots h2{font-size:16px;margin-bottom:12px}
-.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.thumbs a{text-decoration:none;color:var(--ink);font-size:12.5px;display:block}
-.thumbs img{width:100%;height:132px;object-fit:cover;object-position:top left;border:1px solid var(--line);border-radius:8px;display:block;margin-bottom:5px}
-.thumbs span{color:var(--sub)}
-.more{margin-top:12px;font-size:13px}
-.more a{color:var(--green-deep);text-decoration:none;font-weight:600}
-@media(max-width:760px){.thumbs{grid-template-columns:repeat(2,1fr)}}
+.agent pre{white-space:pre-wrap;font-size:13px;line-height:1.85;color:#3A414D;font-family:inherit}
+
+.facts{background:#FAFBFC;border:1px solid var(--line);border-radius:14px;padding:24px;margin-top:20px}
+.facts h2{font-size:16px;color:var(--ink);margin-bottom:12px}
+.facts ul{margin:0;padding:0;list-style:none}
+.facts li{margin:8px 0;font-size:14px;padding-left:16px;position:relative}
+.facts li:before{content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;background:var(--green)}
+
+.footer{padding:34px 0 56px;font-size:12.5px;color:var(--mute)}
+.footer code{background:#F1F3F5;padding:1px 6px;border-radius:5px}
+@media(max-width:820px){
+  h1{font-size:30px}.nums{grid-template-columns:repeat(2,1fr)}
+  .grid{grid-template-columns:1fr}.thumbs{grid-template-columns:repeat(2,1fr)}
+}
 </style>
 </head>
 <body>
 
 <header class="hero">
-  <span class="tag">YEE AI 智能大赛 2.0 · 方向 1 内部提效</span>
-  <h1>销售易 YeeSales
-    <small>BD 每天打开的 AI 销售助理 · 你负责见人，其余交给它</small>
-  </h1>
-  <p class="lead">把复杂性留给 AI，把简单的工作界面留给销售。六个入口对应 BD 的六个动作：<b>今天做什么、开发哪些客户、展会与拜访怎么安排、这家客户聊到哪、单子卡在哪、直接跟它说要做什么</b>。行前筛名单排行程，现场拍名片录音，展后出跟进包，全程不需要理解 Agent、Event Intelligence 这类系统术语。</p>
-  <div class="nums">
-    <div><b>6</b><span>个工作入口，对应 BD 的动作</span></div>
-    <div><b>3</b><span>场海外活动跑通闭环</span></div>
-    <div><b>8</b><span>场现场会面落进日历</span></div>
-    <div><b>90%</b><span>展后整理工时下降</span></div>
-  </div>
-  <div class="cta">
-    <a class="primary" href="prototype.html">打开可交互产品原型</a>
-    <a class="ghost" href="proposal.html">阅读作品说明</a>
+  <div class="wrap">
+    <span class="tag">YEE AI 智能大赛 2.0　方向一 内部提效</span>
+    <h1>YeeSales 销售易 v0.9
+      <small>把复杂性留给 AI，把简单的工作界面留给销售</small>
+    </h1>
+    <p class="lead">
+      一个面向海外 BD 的 AI 销售助理。六个入口对应 BD 的六个动作：<b>今天做什么、开发哪些客户、这趟怎么安排、这家聊到哪、单子卡在哪、直接跟它说要做什么</b>。
+      行前筛名单排行程，现场把说过的话记成支付结构，展后出跟进包。全程不需要理解 Agent、Event Intelligence 这类系统术语。
+    </p>
+    <div class="nums">
+      <div><b>6<i>个</i></b><span>工作入口，对应 BD 的动作</span></div>
+      <div><b>8<i>个</i></b><span>交互闭环，17 次点击走完全流程</span></div>
+      <div><b>3<i>场</i></b><span>海外活动跑通真实闭环</span></div>
+      <div><b>80<i>%</i></b><span>展后整理工时下降（含校对）</span></div>
+    </div>
+    <div class="cta">
+      <a class="primary" href="prototype.html">打开可交互产品原型</a>
+      <a class="ghost" href="proposal.html">评委入口 · 十段看完</a>
+    </div>
+    <p style="font-size:12.5px;color:var(--mute);margin-top:16px">原型为演示环境：客户为代称，金额与交易量为构造数据，页面固定标注 Simulated data。</p>
   </div>
 </header>
 
-<main>
+<main class="wrap">
+
   <div class="grid">
     <div class="card">
-      <h2>产品原型</h2>
-      <p>6 个工作入口、9 个可点击页面：工作台、智能获客、展会与拜访（展前 / 展中 / 展后）、客户 360、商机看板、AI 助手。单文件静态页，秒开。</p>
+      <h2>可交互原型</h2>
+      <p>6 个入口、9 个页面：工作台、智能获客、展会与拜访（展前 / 展中 / 展后）、客户 360、商机看板、AI 助手。单文件静态页，秒开，支持深链。</p>
       <a href="prototype.html">进入原型 →</a>
     </div>
     <div class="card">
-      <h2>作品说明</h2>
-      <p>开头为评分维度摘要，正文按背景、定位、一个 BD 的 SFF 一周、关键能力、BD 用户测试、可验证成果、商业化路径展开，附 10 张截图。</p>
-      <a href="proposal.html">阅读全文 →</a>
+      <h2>评委入口</h2>
+      <p>十段结构：问题、方案、流程、真实验证（含数据口径）、创新、界面、成熟度、路线图。每段都能单独看完。</p>
+      <a href="proposal.html">十段看完 →</a>
     </div>
     <div class="card">
       <h2>已沉淀公司平台</h2>
-      <p>会后复盘引擎已发布于公司 SkillHub（空间 hwfgs，v1.0.5）；全球节假日与文化日历（28 国 402 事件）长期使用。</p>
+      <p>会后复盘引擎已发布于公司 SkillHub（空间 hwfgs，v1.0.5）；全球节假日与文化日历 28 国 402 条事件，长期在用。</p>
       <span class="badge">真实业务实战验证</span>
     </div>
   </div>
 
-  <div class="shots">
-    <h2>系统截图（10 张）</h2>
-    <div class="thumbs">
-      <a href="proposal.html#fig1"><img src="screenshots/10-version-map.png" alt="版本对照"><span>v0.7 到 v0.8：视图收敛</span></a>
-      <a href="proposal.html#fig2"><img src="screenshots/00-blueprint.png" alt="一周三段式"><span>一个 BD 的一周：分工</span></a>
-      <a href="proposal.html#fig3"><img src="screenshots/01-home.png" alt="Home 工作台"><span>Home 工作台</span></a>
-      <a href="proposal.html#fig4"><img src="screenshots/02-find.png" alt="智能获客"><span>Find Customers</span></a>
-      <a href="proposal.html#fig5"><img src="screenshots/03-event-before.png" alt="展前"><span>展前 · 名单与行程</span></a>
-      <a href="proposal.html#fig6"><img src="screenshots/04-event-during.png" alt="展中"><span>展中 · 名片与录音</span></a>
-      <a href="proposal.html#fig7"><img src="screenshots/05-event-after.png" alt="展后"><span>展后 · 跟进包</span></a>
-      <a href="proposal.html#fig8"><img src="screenshots/07-customer360.png" alt="客户 360"><span>Customer 360</span></a>
-      <a href="proposal.html#fig9"><img src="screenshots/08-pipeline.png" alt="商机看板"><span>My Pipeline</span></a>
-      <a href="proposal.html#fig10"><img src="screenshots/09-assistant.png" alt="AI 助手"><span>AI Assistant</span></a>
-    </div>
-    <p class="more"><a href="proposal.html#fig1">在作品说明中查看全部 10 张截图 →</a></p>
+  <h2 class="sec">先看三张主图</h2>
+  <p class="secsub">评委若只看三张图：早上打开看到什么、出发前名单能不能看全、点开一家客户能不能看到全部。</p>
+  <div class="thumbs">
+    <a href="proposal.html#demo"><img src="screenshots/01-home.png" alt="Home 工作台"><span>Home · 今日优先级每条带动作</span></a>
+    <a href="proposal.html#demo"><img src="screenshots/02-find.png" alt="Find Customers"><span>Find Customers · 20 家可看全可筛</span></a>
+    <a href="proposal.html#demo"><img src="screenshots/07-customer360.png" alt="Customer 360"><span>Customer 360 · 三栏与来源标注</span></a>
+  </div>
+
+  <h2 class="sec">其余界面（共 13 张，以下 10 张）</h2>
+  <p class="secsub">前三张是说明图，其余为原型实拍，均为演示数据。</p>
+  <div class="thumbs">
+    <a href="proposal.html#maturity"><img src="screenshots/13-maturity.png" alt="三层成熟度"><span>三层成熟度：L1 / L2 / L3</span></a>
+    <a href="proposal.html#solution"><img src="screenshots/10-version-map.png" alt="版本演进"><span>v0.7 → v0.8 → v0.9</span></a>
+    <a href="proposal.html#workflow"><img src="screenshots/00-blueprint.png" alt="一周三段式"><span>一个 BD 的一周：三段分工</span></a>
+    <a href="proposal.html#workflow"><img src="screenshots/03-event-before.png" alt="展前"><span>展前 · 名单、行程、动线</span></a>
+    <a href="proposal.html#workflow"><img src="screenshots/04-event-during.png" alt="展中"><span>展中 · 支付结构提取</span></a>
+    <a href="proposal.html#workflow"><img src="screenshots/05-event-after.png" alt="展后"><span>展后 · 跟进包与批准</span></a>
+    <a href="proposal.html#demo"><img src="screenshots/08-pipeline.png" alt="商机看板"><span>My Pipeline · 八阶段看板</span></a>
+    <a href="proposal.html#demo"><img src="screenshots/11-deal.png" alt="商机详情"><span>商机详情 · AI 建议、人确认</span></a>
+    <a href="proposal.html#demo"><img src="screenshots/09-assistant.png" alt="AI 助手"><span>AI Assistant · 输入即得结论</span></a>
+    <a href="proposal.html#demo"><img src="screenshots/12-drafts.png" alt="草稿箱"><span>草稿箱 · 编辑、确认、放弃</span></a>
   </div>
 
   <div class="agent" id="agent-guide">
     <h2>AI Agent 阅读指引（llms.txt）</h2>
-    <pre>本站为静态站点，无 JS 依赖、无登录、无验证码，正文全部直接渲染在 HTML 中。
+    <pre>本站为静态站点，无 JS 依赖、无登录、无验证码，正文全部直接渲染。
 建议阅读顺序：
-  1. /llms.txt        —— 站点摘要 + 关键事实清单（最快路径）
-  2. /proposal.html   —— 参赛作品说明全文（开头为关键点摘要，含可验证成果与 BD 用户测试结论）
-  3. /prototype.html  —— 可交互产品原型（6 个入口，支持 #home / #find / #event / #customers / #pipeline / #assistant / #cust 深链）
-数据说明：全部客户为代称，联系人虚构；金额与交易量为演示数据；不含报价、额度、真实联系方式。
-robots.txt 允许全部抓取。</pre>
+  1. /llms.txt        —— 站点摘要 + 关键事实 + 数据口径（最快路径）
+  2. /proposal.html   —— 评委入口，十段结构，含真实数据表与成熟度分层
+  3. /prototype.html  —— 可交互原型（6 个入口，深链 #home / #find / #event /
+                          #customers / #pipeline / #assistant / #cust / #drafts）
+数据说明：客户为代称，联系人虚构；金额与交易量为构造数据；不含报价、额度、
+联系方式与内部系统域名。robots.txt 允许全部抓取。</pre>
   </div>
 
   <div class="facts">
     <h2>关键事实（30 秒版）</h2>
     <ul>
       <li><b>产品定位</b>：BD 每天打开的 AI 销售助理。不是功能更多的 CRM，而是把「找客户、见客户、跟进客户」做成六个入口，AI 在背后执行，人只做批准</li>
-      <li><b>设计原则</b>：按工作场景组织（不按系统模块）、默认页回答「今天做什么」、AI 藏在动作后面、专业术语不出现在界面</li>
-      <li><b>实战验证</b>：2026-09 迪拜同期三场活动，34 家目标客户、14 场展会 App 约见、8 场现场会面、12 个会话归档、26 条待办写入任务系统</li>
-      <li><b>核心指标</b>：单场会面整理 25 分钟降至 3 分钟；20 封跟进邮件 4 小时降至 25 分钟；展后一周跟进计划半天降至 30 分钟</li>
-      <li><b>信任机制</b>：信息三态（确认 / AI 推断 / 缺失）、四类动作需人工审批、只追加审计日志、AI 结论可覆写并留痕</li>
-      <li><b>BD 用户测试</b>：不给培训，按 SFF 任务走查五项，结论为「不需要教学」；走查发现 4 处入口与交互问题，已在 v0.8 修复</li>
+      <li><b>设计原则</b>：按工作场景组织；默认页回答「今天做什么」；AI 藏在动作后面；专业术语不出现在界面</li>
+      <li><b>真实验证</b>：2026-09 迪拜同期三场活动，34 家会前目标名单、14 场展会 App 约见（4 确认 + 10 待定，后追加 3 场）、12 个会话全量归档、8 场约见在日历留痕</li>
+      <li><b>口径纪律</b>：14 场约见不等于 14 场会面；8 场留痕包含见到、改期与未见到；26 条待办是跟进清单条目，同期写入任务系统的为 2 条</li>
+      <li><b>核心指标</b>：单场纪要 25 分钟降至 3 分钟；展后跟进计划 4 小时降至 30 分钟；单封英文邮件 15 分钟降至 5 分钟；整体整理工时约 −80%（含校对）</li>
+      <li><b>行业差异</b>：从一段口语对话读出七个支付字段，给出 China Payout 商机判断，而非只写「客户希望降低成本」</li>
+      <li><b>信任机制</b>：来源三态（客户自述 / 公开资料 / AI 推断）、AI 只建议不写入、可覆写并留痕</li>
+      <li><b>测试结论</b>：26 项端到端断言全部通过，17 次点击走完六步；不给培训、不需要术语解释</li>
       <li><b>边界</b>：原型中的检索、评分、草稿为模拟演示，不触发真实外部调用；邮件不自动发送，日历写入无参会人</li>
-      <li><b>脱敏</b>：零客户真名、零真实联系方式、零本机路径；金额与交易量为演示数据</li>
     </ul>
   </div>
 
 </main>
 
-<div class="footer">
-  销售易 YeeSales v0.8 · YEE AI 智能大赛 2.0 参赛作品 · 本站为演示站点，全部客户均为代称、数据虚构 ·
-  Agent 请从 <code>/llms.txt</code> 开始 · robots.txt 全开放
+<div class="footer wrap">
+  YeeSales 销售易 v0.9 · YEE AI 智能大赛 2.0 参赛作品 · 作者：周冰茹（易宝支付 海外子公司部）<br>
+  本站为演示站点，全部客户均为代称、数据为构造示例 · Agent 请从 <code>/llms.txt</code> 开始 · robots.txt 全开放
 </div>
 
 </body>
