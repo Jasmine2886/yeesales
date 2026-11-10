@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="692" viewBox="0 0 1240 692">
+<rect width="1240" height="660" fill="#FFFFFF"/>
+<text x="56" y="50" font-family="PingFang SC,Helvetica Neue,Arial" font-size="25" font-weight="700" fill="#12181F">三层成熟度：哪些已经发生，哪些可以点，哪些还没接</text>
+<text x="56" y="80" font-family="PingFang SC,Helvetica Neue,Arial" font-size="14" fill="#6B7480">评委最容易问的一句话是「这是真的还是做的」。这张图把三类证据分开，互不冒充。</text>
+<line x1="56" y1="102" x2="1184" y2="102" stroke="#EAEDF1"/>
+<rect x="56" y="124" width="1128" height="158" rx="14" fill="#F4FBF7" stroke="#BFE6D0"/>
+<rect x="56" y="124" width="6" height="158" rx="3" fill="#00A85A"/>
+<text x="86" y="170" font-family="Helvetica Neue,Arial" font-size="26" font-weight="700" fill="#00A85A">L1</text>
+<text x="86" y="190" font-family="Helvetica Neue,Arial" font-size="9.5" fill="#9AA1AC" letter-spacing=".3">Real-world validated</text>
+<text x="212" y="162" font-family="PingFang SC,Helvetica Neue,Arial" font-size="16" font-weight="700" fill="#12181F">真实业务，已发生</text>
+<text x="212" y="186" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12.5" fill="#5B6572">2026 年 9 月中东三场活动，用同一套流程走完行前、行中、行后；数据来自日历、展会 App、邮箱与本地记录。</text>
+<rect x="212.0" y="204" width="114.2" height="30" rx="15" fill="#FFFFFF" stroke="#BFE6D0"/>
+<text x="269.1" y="224" text-anchor="middle" font-family="PingFang SC,Helvetica Neue,Arial" font-size="11.5" fill="#0F7A44">3 场海外活动</text>
+<rect x="336.2" y="204" width="152.0" height="30" rx="15" fill="#FFFFFF" stroke="#BFE6D0"/>
+<text x="412.2" y="224" text-anchor="middle" font-family="PingFang SC,Helvetica Neue,Arial" font-size="11.5" fill="#0F7A44">34 家会前目标名单</text>
+<rect x="498.2" y="204" width="189.8" height="30" rx="15" fill="#FFFFFF" stroke="#BFE6D0"/>
+<text x="593.1" y="224" text-anchor="middle" font-family="PingFang SC,Helvetica Neue,Arial" font-size="11.5" fill="#0F7A44">14 场展会 App 约见</text>
+<rect x="698.0" y="204" width="152.0" height="30" rx="15" fill="#FFFFFF" stroke="#BFE6D0"/>
+<text x="774.0" y="224" text-anchor="middle" font-family="PingFang SC,Helvetica Neue,Arial" font-size="11.5" fill="#0F7A44">12 个会话全量归档</text>
+<rect x="860.0" y="204" width="139.4" height="30" rx="15" fill="#FFFFFF" stroke="#BFE6D0"/>
+<text x="929.7" y="224" text-anchor="middle" font-family="PingFang SC,Helvetica Neue,Arial" font-size="11.5" fill="#0F7A44">8 场约见日历留痕</text>
+<text x="212" y="258" font-family="PingFang SC,Helvetica Neue,Arial" font-size="11.5" fill="#9AA1AC">证据：日历 / 展会 App / 邮箱 / 本地记录</text>
+<rect x="56" y="296" width="1128" height="158" rx="14" fill="#F5F8FF" stroke="#CBD9F2"/>
+<rect x="56" y="296" width="6" height="158" rx="3" fill="#2F6BD8"/>
+<text x="86" y="342" font-family="Helvetica Neue,Arial" font-size="26" font-weight="700" fill="#2F6BD8">L2</text>
+<text x="86" y="362" font-family="Helvetica Neue,Arial" font-size="9.5" fill="#9AA1AC" letter-spacing=".3">Interactive prototype</text>
+<text x="212" y="334" font-family="PingFang SC,Helvetica Neue,Arial" font-size="16" font-weight="700" fill="#12181F">可点击原型，演示数据</text>
+<text x="212" y="358" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12.5" fill="#5B6572">六个入口全部可操作；名单、金额、沟通记录为构造的演示数据，界面标注 Simulated data。</text>
+<rect x="212.0" y="376" width="189.8" height="30" rx="15" fill="#FFFFFF" stroke="#CBD9F2"/>
+<text x="306.9" y="396" text-anchor="middle" font-family="PingFang SC,Helvetica Neue,Arial" font-size="11.5" fill="#1F4FA8">6 个入口 / 9 个页面</text>
+<rect x="411.8" y="376" width="189.8" height="30" rx="15" fill="#FFFFFF" stroke="#CBD9F2"/>
+<text x="506.7" y="396" text-anchor="middle" font-family="PingFang SC,Helvetica Neue,Arial" font-size="11.5" fill="#1F4FA8">20 家 SFF 演示名单</text>
+<rect x="611.6" y="376" width="139.4" height="30" rx="15" fill="#FFFFFF" stroke="#CBD9F2"/>
+<text x="681.3" y="396" text-anchor="middle" font-family="PingFang SC,Helvetica Neue,Arial" font-size="11.5" fill="#1F4FA8">12 封草稿可编辑</text>
+<rect x="761.0" y="376" width="139.4" height="30" rx="15" fill="#FFFFFF" stroke="#CBD9F2"/>
+<text x="830.7" y="396" text-anchor="middle" font-family="PingFang SC,Helvetica Neue,Arial" font-size="11.5" fill="#1F4FA8">21 场沟通时间线</text>
+<rect x="910.4" y="376" width="139.4" height="30" rx="15" fill="#FFFFFF" stroke="#CBD9F2"/>
+<text x="980.1" y="396" text-anchor="middle" font-family="PingFang SC,Helvetica Neue,Arial" font-size="11.5" fill="#1F4FA8">8 个闭环全部可走</text>
+<text x="212" y="430" font-family="PingFang SC,Helvetica Neue,Arial" font-size="11.5" fill="#9AA1AC">证据：可在 prototype.html 中逐项点击验证</text>
+<rect x="56" y="468" width="1128" height="158" rx="14" fill="#FAFBFC" stroke="#DDE2E8"/>
+<rect x="56" y="468" width="6" height="158" rx="3" fill="#8A929E"/>
+<text x="86" y="514" font-family="Helvetica Neue,Arial" font-size="26" font-weight="700" fill="#8A929E">L3</text>
+<text x="86" y="534" font-family="Helvetica Neue,Arial" font-size="9.5" fill="#9AA1AC" letter-spacing=".3">Planned integration</text>
+<text x="212" y="506" font-family="PingFang SC,Helvetica Neue,Arial" font-size="16" font-weight="700" fill="#12181F">已设计，未接生产</text>
+<text x="212" y="530" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12.5" fill="#5B6572">邮件、日历、名片识别、CRM 的正式写权限需要 IT 与合规排期；原型中以「演示」提示替代真实写入。</text>
+<rect x="212.0" y="548" width="101.6" height="30" rx="15" fill="#FFFFFF" stroke="#DDE2E8"/>
+<text x="262.8" y="568" text-anchor="middle" font-family="PingFang SC,Helvetica Neue,Arial" font-size="11.5" fill="#5B6572">企业邮箱读写</text>
+<rect x="323.6" y="548" width="101.6" height="30" rx="15" fill="#FFFFFF" stroke="#DDE2E8"/>
+<text x="374.4" y="568" text-anchor="middle" font-family="PingFang SC,Helvetica Neue,Arial" font-size="11.5" fill="#5B6572">日历双向同步</text>
+<rect x="435.2" y="548" width="139.4" height="30" rx="15" fill="#FFFFFF" stroke="#DDE2E8"/>
+<text x="504.9" y="568" text-anchor="middle" font-family="PingFang SC,Helvetica Neue,Arial" font-size="11.5" fill="#5B6572">名片 OCR 服务</text>
+<rect x="584.6" y="548" width="126.8" height="30" rx="15" fill="#FFFFFF" stroke="#DDE2E8"/>
+<text x="648.0" y="568" text-anchor="middle" font-family="PingFang SC,Helvetica Neue,Arial" font-size="11.5" fill="#5B6572">CRM 字段映射</text>
+<rect x="721.4" y="548" width="114.2" height="30" rx="15" fill="#FFFFFF" stroke="#DDE2E8"/>
+<text x="778.5" y="568" text-anchor="middle" font-family="PingFang SC,Helvetica Neue,Arial" font-size="11.5" fill="#5B6572">多语言与多币种</text>
+<text x="212" y="602" font-family="PingFang SC,Helvetica Neue,Arial" font-size="11.5" fill="#9AA1AC">状态：设计中，依赖内部系统授权与合规评审</text>
+<text x="56" y="656" font-family="PingFang SC,Helvetica Neue,Arial" font-size="11.5" fill="#9AA1AC">说明：三层之间不互相替代。L1 的数字不能用来证明原型好用，L2 的界面也不能用来证明业务已落地。</text>
+</svg>
