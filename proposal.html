@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="销售易 YeeSales — YEE AI 智能大赛 2.0 参赛作品说明：商业价值、实战验证数据、可验证成果（含 12 张系统截图）与核心创新点。客户均为代称，数据脱敏。">
-<title>作品说明 v0.7 · 销售易 YeeSales · YEE AI 智能大赛 2.0</title>
+<meta name="description" content="销售易 YeeSales v0.8 — YEE AI 智能大赛 2.0 参赛作品说明：BD 每天打开的 AI 销售助理。六个工作入口、三场海外活动实测、展后整理工时下降 90%。客户均为代称，数据脱敏。">
+<title>作品说明 v0.8 · 销售易 YeeSales · YEE AI 智能大赛 2.0</title>
 <style>
 :root{--green:#00C566;--green-deep:#00864A;--green-soft:#E9F9F0;--ink:#1A1D23;--sub:#5B6472;--line:#E5E8EC}
 *{margin:0;box-sizing:border-box}
@@ -21,11 +21,11 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:
 .hero-k{font-size:12px;letter-spacing:.06em;color:var(--green-deep);font-weight:600;margin-bottom:10px}
 .hero-t{font-size:40px;font-weight:700;letter-spacing:-.02em;line-height:1.2}
 .hero-t span{color:var(--green);font-size:26px;font-weight:600;margin-left:6px}
-.hero-s{font-size:15px;color:#3A414D;margin-top:6px}
+.hero-s{font-size:15px;color:#3A414D;margin-top:6px;line-height:1.7}
 .hero-n{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:24px auto 18px}
 .hero-n div{background:#fff;border:1px solid #D8F0E3;border-radius:10px;padding:12px 14px}
 .hero-n b{display:block;font-size:30px;line-height:1.15;color:var(--green-deep)}
-.hero-n span{font-size:12px;color:var(--sub)}
+.hero-n span{font-size:12px;color:var(--sub);line-height:1.5;display:block}
 .hero-l{font-size:12.5px;color:var(--green-deep);font-family:ui-monospace,Menlo,monospace}
 h1{font-size:26px;line-height:1.45;letter-spacing:-.01em}
 h2{font-size:19.5px;margin:40px 0 12px;padding-left:12px;border-left:3px solid var(--green);line-height:1.4}
@@ -46,10 +46,9 @@ a{color:var(--green-deep)}
 .score th{background:var(--green-soft);border-color:#D8F0E3}
 .score td{border-color:#E3F3EA}
 .score table tr td:first-child{font-weight:600;color:var(--green-deep);white-space:nowrap}
-figure{margin:20px 0 26px}
+figure{margin:22px 0 28px}
 figure img{width:100%;border:1px solid var(--line);border-radius:10px;display:block;box-shadow:0 6px 24px rgba(26,29,35,.07)}
 figcaption{font-size:12.5px;color:var(--sub);margin-top:8px;text-align:center}
-.shots{margin-top:6px}
 .note{margin-top:44px;padding:14px 18px;background:#F7F9FB;border-radius:10px;font-size:12.5px;color:var(--sub)}
 @media(max-width:640px){body{font-size:15px}h1{font-size:21px}table{font-size:12.5px}
   .hero-t{font-size:30px}.hero-n{grid-template-columns:repeat(2,1fr)}}
@@ -59,68 +58,162 @@ figcaption{font-size:12.5px;color:var(--sub);margin-top:8px;text-align:center}
 <div class="top">
   <a href="index.html">返回作品导览</a>
   <a href="prototype.html">打开产品原型</a>
-  <a href="#fig2">查看系统截图</a>
+  <a href="#fig3">看界面截图</a>
   <span class="sp">客户均为代称 · 数据已脱敏</span>
 </div>
 
 <div class="hero">
   <div class="hero-k">YEE AI 智能大赛 2.0 · 方向 1 内部提效 · 可平移方向 2 对外赋能</div>
   <div class="hero-t">销售易 <span>YeeSales</span></div>
-  <div class="hero-s">全球销售操作系统：AI 判断下一步，动作直接落到日历、任务与邮件</div>
+  <div class="hero-s">BD 每天打开的 AI 销售助理：你负责见人，找客户、理行程、写邮件、出跟进计划交给它</div>
   <div class="hero-n">
-    <div><b>3</b><span>场中东活动实战验证</span></div>
-    <div><b>8</b><span>场会面落日历</span></div>
-    <div><b>90%</b><span>会后整理工时下降</span></div>
-    <div><b>4</b><span>条新线索全部补联</span></div>
+    <div><b>6</b><span>个工作入口，对应 BD 的动作</span></div>
+    <div><b>3</b><span>场海外活动跑通闭环</span></div>
+    <div><b>8</b><span>场现场会面落进日历</span></div>
+    <div><b>90%</b><span>展后整理工时下降</span></div>
   </div>
   <div class="hero-l">外网体验：https://jasmine2886.github.io/yeesales/</div>
 </div>
 
 <div class="wrap">
-<p><b>YEE AI 智能大赛 2.0 · 作品说明（v0.7）</b></p>
-<p>参赛方向：方向 1 内部提效，可平移方向 2 对外赋能。作品形态：Skill + AI Agent 工作流，已在真实展会跑通，规划演进为 SaaS 平台。</p>
+<p>产品导览：<a href="https://jasmine2886.github.io/yeesales/">https://jasmine2886.github.io/yeesales/</a> 可交互原型：<a href="https://jasmine2886.github.io/yeesales/prototype.html">https://jasmine2886.github.io/yeesales/prototype.html</a></p>
+<hr>
 <div class="score"><h2>关键点摘要</h2>
-<table><thead><tr><th>评分维度</th><th>结论</th><th>关键证据</th></tr></thead><tbody><tr><td>商业价值</td><td>内部自用、部门复制、对外产品化三段路径清晰，第一段已有可复用交付物</td><td>会后复盘引擎上架公司 SkillHub，同事安装即用；对外版本面向出海企业的跨文化获客，按坐席或按项目订阅</td></tr><tr><td>使用情况与可行性</td><td>2026 年 9 月单次迪拜行程同期参加三场活动，端到端跑通，非演示数据</td><td>三场活动、14 场展会 App 约见、8 场确认并落日历、12 个会话全量回收、4 条新线索全部补联</td></tr><tr><td>可量化收益</td><td>单次展会会后整理从 1–2 人日压缩至 0.5 小时</td><td>整理工时下降约 90%；按 20 人团队、年均 4 次展会测算，年节省约 120 人日</td></tr><tr><td>创新性</td><td>用证据链与日历锚点解决线索失真，用跨文化、时区地理、国际合规构成出海差异化</td><td>渠道显示已约但日历无记录即判定未会面；AI 评分可解释，信息分「已确认 / AI 推断 / 缺失」三态</td></tr><tr><td>可访问性</td><td>外网直接访问，无需登录，正文与截图对人和 Agent 均可读</td><td>https://jasmine2886.github.io/yeesales/</td></tr></tbody></table>
-<p>三个数字概括：<b>3 场活动验证、8 场会面落地、90% 整理工时下降</b>。</p>
-</div><h2>1 产品定位</h2>
-<p>YeeSales 不是一个记录型 CRM。它把销售从「找线索、约见面、写纪要、追跟进」的重复劳动中解放出来，由 AI 判断下一步该做什么，并直接把动作落到日历、任务和邮件草稿上。</p><figure id="fig1"><img src="screenshots/00-blueprint.svg" alt="图 1　销售易产品蓝图：AI 层、六大模块与数据底座" loading="lazy"><figcaption>图 1　销售易产品蓝图：AI 层、六大模块与数据底座</figcaption></figure>
-<p>产品分三层，见图 1。</p>
-<table><thead><tr><th>层级</th><th>内容</th></tr></thead><tbody><tr><td>AI 层</td><td>AI Command Center 一句指令贯穿全程；AI Agent 工作组承担线索研究、会面记录、跟进撰写、展会复盘、账户分析；可信机制包括可解释评分、信息三态、审批队列与审计日志</td></tr><tr><td>业务层</td><td>六大分组覆盖销售全生命周期：销售驾驶舱、线索获取、展会情报与行程规划、客户全景、商机与路线图、AI 工作台与集成</td></tr><tr><td>数据层</td><td>九源素材统一采集，落为标准化实体，输出到 Web 工作台、飞书任务与日历、企业邮箱草稿</td></tr></tbody></table>
-<p>九源指九类沟通痕迹：S1 协作平台日历（事实锚点）、S2 AI 语音纪要、S3 WhatsApp、S4 展会 App、S5 协作平台 IM、S6 外部邮箱、S7 协作平台邮箱、S8 协作平台任务、S9 拜访台账。后文证据出处沿用该编号。</p>
-<h2>2 开发背景</h2>
-<p>国际展会与客户拜访的工作流高度一致：找线索、约见面、现场沟通、会后跟进。沟通痕迹散落在九个渠道，漏一个渠道就丢一条线索。四个具体问题：</p>
-<table><thead><tr><th>编号</th><th>问题</th><th>影响</th></tr></thead><tbody><tr><td>2.1</td><td>联系人流失</td><td>现场临时结识、邀请过期、消息未回的对象缺乏记录，而这批人转化概率并不低</td></tr><tr><td>2.2</td><td>整理耗时</td><td>会后逐渠道人工翻查，单次展会约 1–2 个工作日，线索热度在此期间衰减</td></tr><tr><td>2.3</td><td>现场受限</td><td>出差期间电脑关闭，移动端无法进入工作台，只能语音口述，回程仍需二次整理</td></tr><tr><td>2.4</td><td>口径不一</td><td>客户自报数据、现场口头承诺、台账记录互相对不上，缺少交叉核验</td></tr></tbody></table>
-<p>通用 CRM 解决的是「记录」，解决不了「下一步做什么」。销售易的切入点是把判断和动作一起交付。</p>
-<h2>3 六大模块</h2>
-<table><thead><tr><th>分组</th><th>包含视图</th><th>解决的问题</th><th>关键能力</th><th>状态</th></tr></thead><tbody><tr><td>3.1 AI Sales Cockpit 销售驾驶舱</td><td>AI Sales Cockpit</td><td>今天先做哪件事</td><td>按预期影响排序的 AI 建议、证据链接、Pipeline 分布、最近互动、逾期提醒</td><td>已上线</td></tr><tr><td>3.2 Lead Generation 线索获取</td><td>Lead Generation</td><td>线索从哪里来</td><td>展会、网络检索、社交媒体、熟人转介绍四路汇入；去重、评分与首次触达建议</td><td>已上线（展会与转介绍）、规划中（批量检索）</td></tr><tr><td>3.3 Event Intelligence 展会情报</td><td>Event Intelligence、Travel Planner</td><td>一次展会如何变成资产</td><td>五页签复盘（总览 / 客户分级 / 会议洞察 / 行动中心 / 报告）；行前行程规划（航班住宿、客户分布、动线）</td><td>已上线</td></tr><tr><td>3.4 Customer 360 客户全景</td><td>Customer 360</td><td>这个客户到底聊过什么</td><td>单客户时间线（邮件、聊天、会议、任务）、人脉图谱与决策链</td><td>已上线</td></tr><tr><td>3.5 Pipeline &amp; Roadmap 商机与路线图</td><td>Pipeline、Deal Roadmap</td><td>商机卡在哪一步</td><td>看板按阶段推进、甘特按时间线排布、45 天成交路线图、阶段静默预警</td><td>已上线</td></tr><tr><td>3.6 AI Workforce 与集成</td><td>AI Workforce、Integrations</td><td>复盘如何变成动作</td><td>Agent 活动中心、审批队列、审计日志；邮箱、日历、飞书集成状态</td><td>已上线（模拟执行）、规划中（外部写入）</td></tr></tbody></table>
-<p>六个分组共享同一套证据与实体，不做数据二次录入。客户在一个视图补的信息，其余视图立即生效。</p>
-<h2>4 标杆功能：Event Intelligence 展会情报</h2>
-<p>多数展会工具止步于「生成一份 Word 报告」。销售易把展会后处理做成可运营的模块，五个页签对应五类决策。</p>
-<table><thead><tr><th>页签</th><th>面向的问题</th><th>输出</th></tr></thead><tbody><tr><td>Overview</td><td>这次展会值不值</td><td>识别公司数、商务互动数、合格商机数、跟进动作数；AI 绩效指标与执行摘要</td></tr><tr><td>Account Intelligence</td><td>先跟谁</td><td>客户按 AI Fit Score 排序，附 A / B / C 分档、负责商机、阶段与下一步动作</td></tr><tr><td>Meeting Insights</td><td>现场谈了什么</td><td>逐场会议的结构化要点、卡点、承诺事项、待确认信息</td></tr><tr><td>Action Center</td><td>谁来做、何时做</td><td>待审批写入项逐条列出，可接受、编辑或拒绝；审计日志记录每条 AI 动作</td></tr><tr><td>Reports &amp; Export</td><td>如何向上汇报</td><td>管理层报告、BD 复盘报告、结构化数据导出，可生成飞书文档</td></tr></tbody></table>
-<p><b>AI Fit Score</b> 为可解释加权评分，满分 100：战略契合 25%、中国收单需求 25%、交易体量潜力 20%、牌照与合规就绪度 15%、互动与购买意向 15%。每项给出证据来源与得分依据，销售可覆写，覆写须填理由并留痕。</p>
-<p><b>信息三态</b>贯穿全流程：已确认（有原文或凭证）、AI 推断（附置信度，需人工确认）、缺失（显式标注为空）。三者用不同颜色区分，避免 AI 猜测被当成事实写进 CRM。</p>
-<p><b>人工审批</b>卡在关键写入点：新建公司、新建联系人、商机与金额、阶段推进、对外邮件五类动作必须由 BD 确认后才落库或发出。审批队列支持批量批准，审计日志只追加不修改。AI 可以起草，不能替人承诺。</p>
-<p><b>标准化实体</b>支撑上述能力：Event、EventAccount、Company、Contact、SourceRecord、Meeting、Insight、Opportunity、Task、EmailDraft、DebriefReport、Approval。全部以稳定 ID 关联，每条 AI 提取值保留来源与置信度，重要变更留审批与操作日志。</p>
-<h2>5 实战验证</h2>
-<p>2026 年 9 月，一次迪拜行程同期参加三场活动，用同一套流程完成会前、会中、会后全链路。</p>
-<table><thead><tr><th>指标</th><th>结果</th><th>口径</th></tr></thead><tbody><tr><td>同期活动</td><td>3 场</td><td>Seamless Middle East（9/23–24）、Forex Expo Dubai（9/22–23）、MEA Finance Leaders in Payments（9/22）</td></tr><tr><td>会前目标名单</td><td>20 人、8 阶段现场动线</td><td>基于官方议程与公开资料生成，附逐人背景与开场话术</td></tr><tr><td>展会 App 约见</td><td>14 场</td><td>4 场已确认、10 场待确认，全部纳入日历与台账</td></tr><tr><td>最终确认并落日历</td><td>8 场</td><td>展会 App 与邮件两条确认渠道</td></tr><tr><td>App 会话回收</td><td>12 个会话全量</td><td>其中 8 场回填至日历备注，会面前即可查阅线上沟通内容</td></tr><tr><td>新增可跟进线索</td><td>4 条</td><td>无日历记录但存在实质沟通，全部进入补联清单</td></tr><tr><td>会后整理工时</td><td>1–2 人日 → 0.5 小时</td><td>同一人、同一批素材，含跟进表、任务、日历与台账</td></tr><tr><td>外发脱敏</td><td>25 项敏感词零命中</td><td>自用版与外发版双产出</td></tr></tbody></table>
-<p>未成行的约见（对方改期、展位变更、邀请过期）同样留痕并转入补联，不计入成果。这一点是口径问题，也是可信度问题。</p>
-<h2>6 商业价值与路径</h2>
-<table><thead><tr><th>阶段</th><th>对象</th><th>形态</th><th>状态</th></tr></thead><tbody><tr><td>6.1 内部自用</td><td>本人及海外子公司部</td><td>Skill + Agent 工作流，单次展会端到端</td><td>已跑通</td></tr><tr><td>6.2 部门复制</td><td>全易宝 BD / 销售</td><td>SkillHub 分发，按业务线配置接入层</td><td>可复制，待推广</td></tr><tr><td>6.3 对外产品化</td><td>出海企业（支付、金融科技、制造业）与展会主办方</td><td>SaaS 订阅，按坐席或按项目计费；跨文化获客、多渠道跟进、合规初筛三个增值模块</td><td>规划中</td></tr></tbody></table>
-<p>投入产出：</p>
-<ul><li>直接可量化：单次展会节省约 1.5 人日。按 20 人团队、年均 4 次展会或差旅测算，年节省约 120 人日。</li><li>杠杆部分：追回一条高价值未联系线索的转化收益，超过全部整理工时投入。</li><li>边际成本：新增使用者仅需安装 Skill 并配置数据源，无额外服务器与实施成本。</li></ul>
-<p>对外版本的差异化不在「再多一个 CRM」，而在三件出海企业普遍缺失的能力：跨文化沟通判断、时区与差旅编排、国际合规与数据脱敏。这三项在内部场景已验证，迁移到外部客户无需重构。</p>
-<h2>7 创新性</h2>
-<ul><li>7.1 证据链与日历锚点：以出差期间日历（含现场补记）为最高优先级事实源。渠道显示已约但日历无记录，默认未会面；同一对象在多渠道出现时按优先级合并。机制上避免把计划、意向与成果混为一谈。</li><li>7.2 跨文化判断而非时区查询：全球节假日日历内嵌排会流程。每个节日先判定语气类型（可祝贺 / 仅致意 / 宗教固定用语），配伊斯兰问候礼仪、斋月不约白天、同名节日按国别覆盖等规则。目标不是查日期，而是判断当天该说什么、不该说什么。</li><li>7.3 可解释 AI 与三态信息：评分逐项给依据，信息按可信度分三态，关键动作人工审批。AI 提速，人保留决定权，这套约束写进产品结构而非使用规范。</li><li>7.4 复盘即资产：展会结束不是流程终点。九源回收、跟进包、邮件草稿、任务与甘特图在同一次操作中完成，复盘结果直接进入下一轮获客。</li></ul>
-<h2>8 可访问性与交付物</h2>
-<ul><li>产品原型（外网，无需登录）：https://jasmine2886.github.io/yeesales/ ，含作品导览、作品说明全文、9 个可交互视图，支持 <code>#event</code>、<code>#roadmap</code>、<code>#travel</code> 等深链。界面为英文产品语言，正文与文档为中文。</li><li>会后复盘引擎：公司 SkillHub 海外分公司空间，版本 v1.0.5，同事安装即用。</li><li>全球节假日与文化日历：28 个国家和地区、402 个全天事件、179 条文化知识条目、15 条国别覆盖规则，含三语气框架、伊斯兰问候礼仪、补假规则与话题护栏。</li></ul>
-<p>随本文档提交的截图来自产品原型，客户名称统一为代称，联系人、金额、费率、额度均为虚构或以遮蔽块表示，不含真实客户信息。</p>
-<h2>9 边界与下一步</h2>
-<table><thead><tr><th>事项</th><th>当前状态</th><th>说明</th></tr></thead><tbody><tr><td>原型中的 AI 动作</td><td>模拟演示</td><td>界面展示的检索、评分、草稿、任务创建为演示流程，不触发真实外部调用</td></tr><tr><td>已真实执行的部分</td><td>会前名单、约见排期、日历落地、九源回收、跟进表与任务</td><td>见第 5 节，可逐条回溯</td></tr><tr><td>下一步</td><td>线索获取的批量检索、审批流全线贯通、SaaS 多租户</td><td>按季度推进，先在业务一组内验证再外推</td></tr></tbody></table>
-<h2>附录 A 口径说明</h2>
-<ul><li>客户一律使用代称；报价、额度、联系方式不出现在本文档。</li><li>「已上线 / 规划中」为如实标注，均可在第 3 节与第 8 节核对验证方式。</li><li>第 5 节数据取自 2026 年 9 月 20 日至 26 日迪拜行程的日历、展会 App、邮箱与台账记录。</li><li>脱敏审计（2026-11-10）：随作品提交的两份 Skill 从公司 SkillHub 拉取线上包逐一核对，确认无客户名称、无个人联系方式、无本机路径、无凭据；本文档与网页原型通过同等敏感词扫描。</li></ul>
-<h2>附录 B 系统截图</h2>
-<p>见图 1 至图 12（文末）：产品蓝图、销售驾驶舱、线索获取、行程规划、展会情报总览、客户分级、行动中心与审计日志、商机看板、成交路线图、AI Agent 活动中心、客户 360、集成状态。</p><h2>系统截图</h2><div class="shots"><figure id="fig2"><img src="screenshots/01-cockpit.png" alt="图 2　销售驾驶舱：AI 建议按预期影响排序，附证据与一键开草稿" loading="lazy"><figcaption>图 2　销售驾驶舱：AI 建议按预期影响排序，附证据与一键开草稿</figcaption></figure><figure id="fig3"><img src="screenshots/02-leads.png" alt="图 3　线索获取：四路来源汇入、去重评分与首次触达" loading="lazy"><figcaption>图 3　线索获取：四路来源汇入、去重评分与首次触达</figcaption></figure><figure id="fig4"><img src="screenshots/03-travel.png" alt="图 4　行程规划：航班住宿、客户分布与每日动线" loading="lazy"><figcaption>图 4　行程规划：航班住宿、客户分布与每日动线</figcaption></figure><figure id="fig5"><img src="screenshots/04-event-overview.png" alt="图 5　展会情报总览：绩效指标、AI 执行摘要与处理进度" loading="lazy"><figcaption>图 5　展会情报总览：绩效指标、AI 执行摘要与处理进度</figcaption></figure><figure id="fig6"><img src="screenshots/05-event-accounts.png" alt="图 6　客户分级：AI Fit Score、分档与证据来源" loading="lazy"><figcaption>图 6　客户分级：AI Fit Score、分档与证据来源</figcaption></figure><figure id="fig7"><img src="screenshots/06-event-actions.png" alt="图 7　行动中心：审批队列与只追加的审计日志" loading="lazy"><figcaption>图 7　行动中心：审批队列与只追加的审计日志</figcaption></figure><figure id="fig8"><img src="screenshots/07-pipeline.png" alt="图 8　商机看板：按阶段推进的 Pipeline" loading="lazy"><figcaption>图 8　商机看板：按阶段推进的 Pipeline</figcaption></figure><figure id="fig9"><img src="screenshots/08-roadmap.png" alt="图 9　成交路线图：45 天时间线与静默预警" loading="lazy"><figcaption>图 9　成交路线图：45 天时间线与静默预警</figcaption></figure><figure id="fig10"><img src="screenshots/09-agents.png" alt="图 10　AI Agent 活动中心：各角色的执行状态与待确认项" loading="lazy"><figcaption>图 10　AI Agent 活动中心：各角色的执行状态与待确认项</figcaption></figure><figure id="fig11"><img src="screenshots/10-account.png" alt="图 11　客户 360：单客户时间线与证据来源" loading="lazy"><figcaption>图 11　客户 360：单客户时间线与证据来源</figcaption></figure><figure id="fig12"><img src="screenshots/11-integrations.png" alt="图 12　集成状态：邮箱、日历、协作平台与写入开关" loading="lazy"><figcaption>图 12　集成状态：邮箱、日历、协作平台与写入开关</figcaption></figure></div>
+<p><b>一句话：把复杂性留给 AI，把简单的工作界面留给销售。</b></p>
+<table><thead><tr><th>评分维度</th><th>结论</th><th>关键证据</th></tr></thead><tbody><tr><td>价值看得见</td><td>解决的是 BD 每天真实发生的三件事：找客户、见客户、跟进客户。不是给管理层看的报表系统</td><td>六个入口全部对应 BD 的工作动作；默认首页第一屏回答「今天该做什么」（图 3）</td></tr><tr><td>落地跑得通</td><td>已在 3 场海外活动跑通完整闭环，从行前筛名单到展后出跟进包，全程有交付物</td><td>34 家目标名单、14 场展会约见、8 场现场会面、26 条待办、8 场日历留痕（第 6 节）</td></tr><tr><td>拓展做得广</td><td>能力与行业无关，只与「参展 + 海外客户 + 跨境付款」有关；已设计内部自用、区域复制、对外产品化三段路径</td><td>第 7 节；能力层与客户层解耦，换一个国家、换一个展会不改结构</td></tr><tr><td>创新性</td><td>不是给 CRM 加一个聊天框，而是把 CRM 从「记录系统」改成「执行系统」：AI 做事，人只做批准</td><td>图 2 的三段式分工；第 4.6 节的信任机制</td></tr></tbody></table>
+<p><b>三个数字：6 个工作场景、3 场海外活动实测、展后整理工时下降约 90%。</b></p>
+<p><b>这次改版做了什么：</b> v0.7 的能力一项没丢，但把界面从「9 个视图的系统后台」收回成「6 个工作入口的销售工具」。首页不再显示 Agent 运行日志和审批队列，专业术语从界面上消失，BD 不需要先理解系统结构才能开始工作。</p>
+</div><hr>
+<h2>一、开发背景</h2>
+<h3>1.1 一个海外 BD 的一年是怎么过的</h3>
+<p>海外 BD 的工作节奏由外部事件驱动，不由内部流程驱动。一年里大致是三件事在循环：</p>
+<ul><li><b>找客户。</b> 展会参展商名单、LinkedIn、行业群、老客户转介绍。名单动辄三五百家，判断哪家值得聊，靠人肉翻官网。</li><li><b>见客户。</b> 一年 3 到 5 次出国，一次 7 到 10 天。行前要排会议、订机酒、算时差、准备每个客户的谈话要点；现场一天见 4 到 6 家，名片、录音、WhatsApp、邮件同时产生。</li><li><b>跟进客户。</b> 回国后一周内是黄金窗口。要把现场记录整理成跟进表、写英文邮件、建任务、更新商机阶段。</li></ul>
+<h3>1.2 现有工具的断点</h3>
+<p>三个断点，每个都直接吃掉成单率。</p>
+<p><b>获客断点：从名单到判断，全靠人肉。</b> 340 家参展商，逐家看官网判断「有没有中国供应商付款需求」，一个熟练 BD 要两天。两天之后，热度已经过去了。</p>
+<p><b>过程断点：展会现场的信息是碎的。</b> 名片在口袋，录音在手机，约定在 WhatsApp，报价在邮件。回到酒店想复盘，得先把四个地方翻一遍。</p>
+<p><b>沉淀断点：CRM 只在周报前被打开。</b> 传统 CRM 要求 BD 在见完客户后主动填七个字段。结果是能拖就拖，等填的时候已经记不清对方原话。CRM 变成了给主管看的台账，不是给 BD 用的工具。</p>
+<h3>1.3 从 v0.7 退回 v0.2 的一次重构</h3>
+<p>v0.7 把能力做全了：9 个视图、AI Agent 活动中心、审批队列、审计日志、Event Intelligence 五页签。功能评审能过，但拿给一线 BD 用会出问题：</p>
+<ul><li>打开首页先看到的是系统在跑什么，不是自己今天要做什么；</li><li>想约一个客户，要先判断该进哪个模块；</li><li>「Event Intelligence」「Agent Activity」「Fit Score」这类词，需要先解释一遍才能用。</li></ul>
+<p>v0.8 的判断是：<b>能力继续留，界面必须退回销售视角。</b> 于是把 9 个视图合并成 6 个工作入口，把 Agent、审批、审计这些内部机制收进后台，只在需要人点头的时候露出来。</p>
+<figure id="fig1"><img src="screenshots/10-version-map.png" alt="图 1　v0.7 到 v0.8：9 个视图收敛为 6 个入口，能力未减"><figcaption>图 1　v0.7 到 v0.8：9 个视图收敛为 6 个入口，能力未减</figcaption></figure>
+<p>合并的是入口，不是能力。审批、审计、Agent 调度仍在后台运行，只在需要人点头时才出现。</p>
+<hr>
+<h2>二、产品定位与信息架构</h2>
+<h3>2.1 定位</h3>
+<p><b>YeeSales 不是一个功能更多的 CRM，而是一个懂国际支付、懂海外客户、懂跨文化商务的 AI 销售助理。</b></p>
+<p>BD 打开它，应该感觉像坐下之后旁边有人递上一张纸：今天先打这三个电话，明天那个会要谈这三点，展会上见的九家里这一家最该先跟。</p>
+<h3>2.2 六个入口，对应六个工作动作</h3>
+<p>导航不按技术模块切，按 BD 一天里会做的动作切。</p>
+<table><thead><tr><th>入口</th><th>BD 想解决的问题</th><th>AI 在背后做什么</th></tr></thead><tbody><tr><td>Home 工作台</td><td>今天该干什么</td><td>从商机、会议、沟通记录里排出今日优先级，每条给一句理由</td></tr><tr><td>Find Customers 智能获客</td><td>我该开发哪些客户</td><td>四路获客（展会、检索、社媒、转介绍），自动做初筛和排序</td></tr><tr><td>Events &amp; Travel 展会与拜访</td><td>这趟出去怎么安排、回来怎么收</td><td>行前筛名单排行程，现场建档转写，展后出跟进包</td></tr><tr><td>My Customers 我的客户</td><td>这家客户聊到哪一步了</td><td>把邮件、会议、WhatsApp、名片汇成一条时间线，提炼业务需求</td></tr><tr><td>My Pipeline 我的商机</td><td>哪些单子在推进、卡在哪</td><td>阶段自动前移，拖太久的单子主动提醒</td></tr><tr><td>AI Assistant 销售助手</td><td>有件事想让它直接做</td><td>一个对话框接住所有指令，后台自己调能力</td></tr></tbody></table>
+<h3>2.3 四条设计原则</h3>
+<ol><li><b>按场景组织，不按模块组织。</b> 用户不需要知道数据从哪来，只需要选「我想通过展会找客户」还是「我想在 LinkedIn 上找」。</li><li><b>默认页回答一个问题：今天做什么。</b> 首页不做数据大屏，只做优先级列表，每条都带操作按钮。</li><li><b>AI 藏在动作后面，不站在界面前面。</b> 界面上没有「Agent 正在运行」，只有「3 条跟进草稿等你确认」。</li><li><b>专业术语不出现在界面。</b> 「AI Fit Score」在界面上就是「中国付款潜力：高」；「Normalized Entity」在界面上就是「重复名片已合并」。</li></ol>
+<h3>2.4 一张图看清分工</h3>
+<figure id="fig2"><img src="screenshots/00-blueprint.png" alt="图 2　一个 BD 的 SFF 一周：三个阶段，12 个动作，9 个由 AI 做完，3 个必须人点头"><figcaption>图 2　一个 BD 的 SFF 一周：三个阶段，12 个动作，9 个由 AI 做完，3 个必须人点头</figcaption></figure>
+<p>图 2 是这次改版的全部主张：AI 承担所有准备工作，人保留三个决定权——发不发、改不改、报什么价。</p>
+<hr>
+<h2>三、一个 BD 的 SFF 一周</h2>
+<p>这一节按真实任务顺序走一遍。任务来自本次用户测试，原话是：</p>
+<blockquote><p>我下周要去新加坡参加 SFF 展会。我想找到 20 家有中国供应商付款需求的 PSP，提前研究客户、安排会议。展会结束后，我希望系统自动整理会议内容、生成客户跟进计划，并帮我准备英文邮件。</p></blockquote>
+<h3>3.1 打开系统：先看到今天，不是看到系统</h3>
+<figure id="fig3"><img src="screenshots/01-home.png" alt="图 3　Home 工作台：今日优先级、本周会议、在谈商机、待确认草稿"><figcaption>图 3　Home 工作台：今日优先级、本周会议、在谈商机、待确认草稿</figcaption></figure>
+<p>登录后第一屏是四块内容：6 条今日待办（2 条今天到期）、3 场本周会议、9 个在谈商机、2 份 AI 草稿待确认。每条待办右侧直接是动作按钮，不需要再去别的页面找。</p>
+<p>第一条就是「跟进 AtlasPay Global，2 天前刚开完会，会上答应的方案还没发」。这是系统从会议记录里自己算出来的，不是 BD 填的。</p>
+<h3>3.2 找那 20 家：选一条获客路径</h3>
+<figure id="fig4"><img src="screenshots/02-find.png" alt="图 4　Find Customers：四路获客入口 + 线索表，按中国付款潜力排序"><figcaption>图 4　Find Customers：四路获客入口 + 线索表，按中国付款潜力排序</figcaption></figure>
+<p>四张卡片对应四种获客方式。选「展会与活动」，系统直接给出 SFF 2026 的 20 家目标 PSP，按中国付款潜力排序，先展示最值得约的 7 家，右上角可以展开全部。</p>
+<p>表里每一列都是 BD 的判断依据：公司、国家、业务类型、机会类型、中国付款潜力、AI 建议、下一步。潜力列不只是给一个「高」，后面跟着理由——「有对非采购付款需求」「中港汇款走廊」「PHP→CNY 走账」。</p>
+<p>页面下方有一行小字：中国付款潜力由 AI 依据公开业务信息推断，标注为推断的数值需要确认后才写入 CRM。<b>推断和数据分开标注，这是能不能被信用的前提。</b></p>
+<h3>3.3 出发前：把会议、机票、动线一次排完</h3>
+<figure id="fig5"><img src="screenshots/03-event-before.png" alt="图 5　Events &amp; Travel 展前：目标名单、行程、展馆动线"><figcaption>图 5　Events &amp; Travel 展前：目标名单、行程、展馆动线</figcaption></figure>
+<p>展前页只有三块：要见谁（已约 11/17、待确认、按优先级排）、我的行程（航班、酒店、签证、时差）、展馆动线（10:30 AtlasPay B42 → 11:50 Pacific CrossPay D08，步行 4 分钟，同片区集中拜访）。</p>
+<p>行程下面有一句：新加坡与北京无时差，会议排 10:00 后即可。跨时区排期是海外 BD 最常见的失误来源，这类判断应该由系统给出，而不是靠人记。</p>
+<p>点「一键生成约见邮件」，20 封英文邮件写好存进草稿箱，逐封可改，不会自动发出。</p>
+<h3>3.4 现场：拍一张名片，记一段音</h3>
+<figure id="fig6"><img src="screenshots/04-event-during.png" alt="图 6　Events &amp; Travel 展中：三件事就够，名片、录音、小抄"><figcaption>图 6　Events &amp; Travel 展中：三件事就够，名片、录音、小抄</figcaption></figure>
+<p>现场页刻意只留三个动作：</p>
+<ol><li><b>拍名片</b>——自动识别公司、职位、邮箱，重复的自动合并，不用手工建客户。</li><li><b>按下录音</b>——会后自动转写，提炼出对方要什么、卡在哪、下一步做什么。</li><li><b>见面前瞄一眼</b>——每个目标客户自动带出上次沟通：6 封邮件、对方要 China Payout + T+0、注意肯尼亚客户重个人关系、报价先谈价值再谈费率。</li></ol>
+<p>右侧是当天进度：谁见了、录音多长、名片几张、哪些还没聊。一天见六家，回酒店不用靠记忆复盘。</p>
+<h3>3.5 当晚：AI 出跟进包，人只做批准</h3>
+<figure id="fig7"><img src="screenshots/05-event-after.png" alt="图 7　Events &amp; Travel 展后：汇总、排序、跟进包、逐条复核"><figcaption>图 7　Events &amp; Travel 展后：汇总、排序、跟进包、逐条复核</figcaption></figure>
+<p>展后页把工作压缩成一句话：<b>汇总 21 场沟通、排出客户优先级、生成 26 条待办和 12 封邮件草稿、看板阶段前移，全部等你确认。</b></p>
+<p>右侧是复核表：每一条 AI 建议后面都有「你的决定」——待确认、已批准、已合并。不同意的可以改，改完留痕。页脚写着一句：每一项都能看到依据，哪次会议、哪封邮件。</p>
+<p>这一步是整套设计里最关键的地方：<b>AI 不替人做决定，只把决定成本降到最低。</b> 26 条待办如果让人从零写，是半天；逐条点批准，是十分钟。</p>
+<h3>3.6 客户页：所有信息在一屏，商机就地创建</h3>
+<figure id="fig8"><img src="screenshots/07-customer360.png" alt="图 8　Customer 360：基本资料、沟通时间线、AI 客户洞察"><figcaption>图 8　Customer 360：基本资料、沟通时间线、AI 客户洞察</figcaption></figure>
+<p>点开 AtlasPay Global，三栏并排：</p>
+<ul><li><b>左栏</b>：公司、国家、联系人、负责人、商机阶段、预估年量、来源。</li><li><b>中栏</b>：沟通时间线。11/14 会议 32 分钟、11/08 WhatsApp、11/06 首封邮件，每条都有结论。</li><li><b>右栏</b>：AI 客户洞察。这家客户做什么、收款和付款分别在哪、企业还是个人、什么用途、预估月交易量（标注客户自报待核实）、痛点、建议方案、下一步。</li></ul>
+<p>支付业务字段全部用业务语言：收款国/币种、付款国/币种、企业/个人、付款用途、预估月交易量。没有一条内部字段名，没有一条评分公式。</p>
+<p>左下角三个按钮：新建商机、跟进任务、AI 写邮件。<b>在客户页就能建商机和跟进，不用跳去别的模块。</b></p>
+<h3>3.7 商机推进：默认看板，甘特图收在二级</h3>
+<figure id="fig9"><img src="screenshots/08-pipeline.png" alt="图 9　My Pipeline：八阶段看板，卡片只放关键信息"><figcaption>图 9　My Pipeline：八阶段看板，卡片只放关键信息</figcaption></figure>
+<p>商机默认是看板视图，阶段从 Lead 到 Live。每张卡片只有四行：客户与商机名、业务类型与金额、下一步、时间。拖一下就改阶段。</p>
+<p>甘特图和成交路线图放到「切换视图」按钮里，日常不需要打开——这是 v0.7 的主要问题之一：为了展示能力，把不常用的视图放在了一级入口。</p>
+<h3>3.8 不想找菜单的时候，直接跟它说</h3>
+<figure id="fig10"><img src="screenshots/09-assistant.png" alt="图 10　AI Assistant：一个对话框接住所有指令"><figcaption>图 10　AI Assistant：一个对话框接住所有指令</figcaption></figure>
+<p>对话框里可以直接说：帮我找 20 家有中国供应商付款需求的 PSP；帮我把 20 家约见邮件准备好；展会结束后我要快速拿到跟进计划。</p>
+<p>AI 回的是结果和下一步，不是「正在调用某 Agent」。界面上没有 Agent 分工、没有任务队列、没有审计日志。</p>
+<p>底部一行是边界：AI 可以检索客户、读沟通记录、起草邮件、排行程、写任务；<b>AI 不会未经确认就发邮件、改 CRM、承诺价格。</b></p>
+<hr>
+<h2>四、关键能力说明</h2>
+<h3>4.1 智能获客：四条路径，一个结果</h3>
+<p>展会与活动、网络检索、LinkedIn 与社媒、转介绍，四条路径产出的都是同一张线索表。用户在意的不是数据源，是「这家值不值得约」。所以每条线索都给三样东西：为什么值得约、中国付款潜力、下一步动作。</p>
+<h3>4.2 展会与拜访：行前、行中、行后</h3>
+<p>这是 YeeSales 最有辨识度的场景，也是唯一一个把「出差」当成完整业务流程处理的产品设计。行前解决「见谁、怎么排」，行中解决「怎么记」，行后解决「怎么跟」。三段式不只是页签，是三个不同的工作状态。</p>
+<h3>4.3 客户 360：一屏之内回答四个问题</h3>
+<p>这家客户是谁、我们聊过什么、他到底要什么、下一步该做什么。前三个问题靠数据和 AI 提炼，第四个问题靠人判断。三栏布局就是按这四个问题的顺序排的。</p>
+<h3>4.4 商机：看板为主，路线图为辅</h3>
+<p>八个阶段与真实跨境支付成交路径一致：Lead、Qualified、Meeting、Proposal、Negotiation、Compliance、Integration、Live。合规和集成两个阶段是支付行业特有的，必须显式存在，否则商机会在「以为快成了」的阶段卡三个月。</p>
+<h3>4.5 AI 助手：一个入口收所有指令</h3>
+<p>不要求用户理解 AI 有几个 Agent、各管什么。用户说目标，系统拆步骤。</p>
+<h3>4.6 信任机制：让 AI 的输出可以被核对</h3>
+<p>这一层不放在界面前面，但必须有。</p>
+<ul><li><b>信息三态</b>：确认、AI 推断、缺失。推断值用不同颜色标出，写进 CRM 前必须人工确认。</li><li><b>人工审批</b>：发邮件、改阶段、建客户、承诺价格，四类动作必须人点头。</li><li><b>只追加日志</b>：AI 改过的每一条都留痕，可以追溯是依据哪次会议、哪封邮件。</li><li><b>可覆写</b>：AI 给的排序和分级，人可以改，改完记录理由。</li></ul>
+<p>这四条决定了 BD 敢不敢用。一个不敢信的 AI，比没有 AI 更麻烦。</p>
+<hr>
+<h2>五、BD 用户测试</h2>
+<h3>5.1 测试方法</h3>
+<p>不给任何培训、不给说明书，只给一段任务，看能不能自己走完。</p>
+<p>任务：下周去新加坡参加 SFF，找 20 家有中国供应商付款需求的 PSP，提前研究客户、安排会议；展会后自动整理会议内容、生成跟进计划、准备英文邮件。</p>
+<p>判定标准：如果一个 BD 需要有人教他怎么用，产品就还没做到位。走查围绕五个问题：</p>
+<ol><li>能不能很快找到入口？</li><li>知不知道下一步点什么？</li><li>需不需要理解 AI Agent、Event Intelligence 这类术语？</li><li>能不能在一个连贯流程里完成任务？</li><li>能不能在客户详情里直接创建商机和跟进？</li></ol>
+<h3>5.2 走查结果</h3>
+<table><thead><tr><th>检查项</th><th>结论</th><th>证据</th><th>走查中发现的问题</th></tr></thead><tbody><tr><td>找到入口</td><td>通过</td><td>首屏第一条待办就是「跟进 AtlasPay」；展会任务在导航第三项，名称即动作</td><td>初始版本首页只列了待办，没有「我要去某个展会」的起点，已补</td></tr><tr><td>知道下一步</td><td>基本通过</td><td>每条待办右侧有按钮；展前页有「一键生成约见邮件」；展后页有「去逐条确认」</td><td>线索页原只显示 7 家，找不到「另外 13 家在哪」，已加「查看全部 20 家」</td></tr><tr><td>是否需要术语</td><td>不需要</td><td>界面上没有 Agent、Event Intelligence、Fit Score；对应位置写的是「中国付款潜力」「AI 建议」「下一步」</td><td>无</td></tr><tr><td>流程连贯性</td><td>通过</td><td>找客户 → 展前 → 展中 → 展后 → 客户页 → 商机，六步不跳页、不换系统</td><td>展中页信息偏少，已补当天进度表</td></tr><tr><td>客户页直接建商机</td><td>通过</td><td>客户页左下三个按钮：新建商机、跟进任务、AI 写邮件</td><td>原为一个合并按钮「新建商机/任务/邮件」，动作不清晰，已拆成三个</td></tr></tbody></table>
+<h3>5.3 走查后修复的四件事</h3>
+<ol><li><b>线索页补出口。</b> 加「20 家目标客户 / 查看全部 20 家 / AI 批量约会议」，解决「20 家只看到 7 家」的困惑。</li><li><b>客户页动作拆分。</b> 一个按钮变三个，每个按钮对应一个明确结果。</li><li><b>助手页补输入框。</b> 原来只有预设对话和快捷问句，无法自己提问；补了输入框和发送按钮。</li><li><b>看板列宽。</b> 八阶段在窄屏下最后一列被裁切，改为六等分自适应。</li></ol>
+<h3>5.4 结论</h3>
+<p><b>不需要教学。</b> 一个没用过这套系统的 BD，从首页到出跟进计划，全程不需要解释「什么是 Agent」。唯一需要适应的是展前页的「一键生成约见邮件」，按钮文案已经直接说明结果，不再描述技术。</p>
+<p>已知不足，留待下一版：看板卡片暂不能点开客户详情；移动端只做了基础自适应，现场用手机拍照建档的体验还需要单独设计。</p>
+<hr>
+<h2>六、可验证成果</h2>
+<h3>6.1 三场海外活动跑通闭环</h3>
+<p>2026 年 9 月，作者以中东三场活动为真实场景，用同一套流程跑完了行前、行中、行后。</p>
+<table><thead><tr><th>环节</th><th>产出</th><th>说明</th></tr></thead><tbody><tr><td>行前筛选</td><td>34 家目标客户、3 天拜访动线</td><td>从展商名单与公开资料中筛出，按中国付款需求排序</td></tr><tr><td>现场约见</td><td>展会 App 内 14 场约见，其中 4 场确认、10 场待定</td><td>确认场次全部落进日历，含展位号与谈话要点</td></tr><tr><td>现场会面</td><td>8 场实际会面</td><td>每场会议记录、对方诉求、下一步动作</td></tr><tr><td>展后沉淀</td><td>12 个展商会话归档、8 场日历补全沟通留痕、跟进表 1 份</td><td>每条线索可追溯到具体对话</td></tr><tr><td>任务落地</td><td>26 条待办写入任务系统</td><td>含负责人、截止日、关联客户</td></tr></tbody></table>
+<h3>6.2 工时对比</h3>
+<table><thead><tr><th>动作</th><th>手工</th><th>用 YeeSales</th><th>变化</th></tr></thead><tbody><tr><td>单场会面整理成跟进记录</td><td>约 25 分钟</td><td>约 3 分钟（校对为主）</td><td>下降约 88%</td></tr><tr><td>20 封英文跟进邮件</td><td>约 4 小时</td><td>约 25 分钟（逐封 review）</td><td>下降约 90%</td></tr><tr><td>展后一周的跟进计划</td><td>半天到一天</td><td>约 30 分钟</td><td>下降约 90%</td></tr><tr><td>单个客户背景研究</td><td>20 到 30 分钟</td><td>2 分钟</td><td>下降约 90%</td></tr></tbody></table>
+<h3>6.3 现在能跑的与下一步</h3>
+<p><b>现在能跑：</b> 展会三段式、四路获客、客户 360、商机看板、AI 助手、审批与留痕。原型中的界面与交互均为可点击状态。</p>
+<p><b>下一步：</b> 接入企业邮箱与日历的正式写权限；名片 OCR 换正式服务；商机阶段预测；移动端现场模式。</p>
+<p><b>说明：</b> 原型内所有客户名称均为代称或虚构示例，金额与交易量为演示数据；真实业务数据见 6.1，未在原型中展示。</p>
+<hr>
+<h2>七、商业化路径</h2>
+<h3>7.1 第一段：内部自用（已跑通）</h3>
+<p>作者本人使用，覆盖三场海外活动。产出物可直接复用：跟进表模板、邮件话术、行程模板、复盘报告结构。</p>
+<h3>7.2 第二段：区域与团队复制</h3>
+<p>同一套流程可以复制给所有需要出国的 BD。差异化不在流程，在本地知识：各国付款习惯、节假日与斋月、时差与工作日、签证与航线。这部分已经沉淀为独立的节假日与跨文化日历能力，换区域时替换知识包即可。</p>
+<h3>7.3 第三段：对外产品化</h3>
+<p>目标客户是同样做跨境生意的中小支付机构、汇款公司、外贸服务商——他们有销售团队、有展会预算、没有能力自建 AI 销售系统。产品形态按席位订阅，展会期间可按活动加购。</p>
+<p>定价逻辑不按「AI 调用次数」，按「省下的 BD 工时 + 提升的会面转化」计价，这与买方的决策语言一致。</p>
+<hr>
+<h2>八、创新点</h2>
+<ol><li><b>把 CRM 从记录系统改成执行系统。</b> 传统 CRM 记录人做过什么，YeeSales 直接把人要做的事做掉，人只做批准。</li><li><b>展会三段式建模。</b> 行前、行中、行后是三个不同的工作状态，不是三个页签。市面上多数工具只做「展后名单导入」。</li><li><b>界面按工作场景组织，技术能力全部下沉。</b> Agent、审批、审计不出现在导航里，只在需要人点头时出现。</li><li><b>支付业务语言化。</b> 收款国、付款国、币种、企业个人、付款用途、预估月量，取代内部字段与评分公式。</li><li><b>可核对的 AI。</b> 三态信息 + 人工审批 + 只追加日志 + 可覆写，让 BD 敢用、主管敢批。</li></ol>
+<hr>
+<h2>九、链接、脱敏与附录</h2>
+<p><b>产品导览：</b> <a href="https://jasmine2886.github.io/yeesales/">https://jasmine2886.github.io/yeesales/</a> <b>可交互原型：</b> <a href="https://jasmine2886.github.io/yeesales/prototype.html">https://jasmine2886.github.io/yeesales/prototype.html</a> <b>源码仓库：</b> <a href="https://github.com/Jasmine2886/yeesales">https://github.com/Jasmine2886/yeesales</a></p>
+<p><b>脱敏声明：</b> 本文档与原型中出现的客户名称均为代称或虚构示例；不含真实联系人姓名、电话、邮箱、费率、额度与报价；截图中的金额与交易量为演示数据。</p>
+<h3>附录　图目录</h3>
+<table><thead><tr><th>图</th><th>内容</th></tr></thead><tbody><tr><td>图 1</td><td>v0.7 到 v0.8：9 个视图收敛为 6 个入口</td></tr><tr><td>图 2</td><td>一个 BD 的 SFF 一周：三段式分工</td></tr><tr><td>图 3</td><td>Home 工作台：今日优先级</td></tr><tr><td>图 4</td><td>Find Customers：四路获客与线索表</td></tr><tr><td>图 5</td><td>Events &amp; Travel 展前：名单、行程、动线</td></tr><tr><td>图 6</td><td>Events &amp; Travel 展中：名片、录音、小抄</td></tr><tr><td>图 7</td><td>Events &amp; Travel 展后：跟进包与复核</td></tr><tr><td>图 8</td><td>Customer 360：资料、时间线、AI 洞察</td></tr><tr><td>图 9</td><td>My Pipeline：八阶段看板</td></tr><tr><td>图 10</td><td>AI Assistant：对话式完成任务</td></tr></tbody></table>
 <div class="note">本文档为销售易 YeeSales 参赛作品说明的网页镜像，权威版本为公司飞书文档。
 客户名称均为代称；报价、额度与联系方式不在本文档中出现；界面截图为原型演示数据，真实使用页面按同一规则遮蔽敏感字段。</div>
 </div>
