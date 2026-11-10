@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="885" viewBox="0 0 1440 885" font-family="-apple-system, PingFang SC, Helvetica Neue, Arial, sans-serif">
+<rect width="1440" height="885" fill="#F4F6F8"/>
+<rect width="1440" height="260" fill="#FFF7F1"/>
+<rect x="0" y="640" width="1440" height="245" fill="#F7F8FA"/>
+<rect x="44" y="42" width="22" height="2" fill="#FF6A00"/>
+<text x="74" y="47" font-size="12" letter-spacing="1.7" fill="#FF6A00" font-weight="600">YEE AI 智能大赛 2.0 · 作品蓝图</text>
+<text x="44" y="100" font-size="40" font-weight="700" fill="#1A1D23">销售易<tspan fill="#FF6A00" font-size="30" font-weight="600">  YeeSales</tspan></text>
+<text x="44" y="128" font-size="13.5" fill="#5B6472">全易宝 BD / 销售的智能获客与客户经营平台　·　四路获客 × 出海三件套 × 任务与项目管理</text>
+<rect x="1306" y="46" width="90" height="26" rx="13" fill="#FFFFFF" stroke="#E6E9EE"/>
+<text x="1351.0" y="63.5" font-size="12" fill="#454C59" text-anchor="middle">9 个可交互视图</text>
+<rect x="1159" y="46" width="139" height="26" rx="13" fill="#FFFFFF" stroke="#E6E9EE"/>
+<text x="1228.5" y="63.5" font-size="12" fill="#454C59" text-anchor="middle">SkillHub v1.0.5</text>
+<rect x="1061" y="46" width="90" height="26" rx="13" fill="#FFF1E6" stroke="#FFD3B0"/>
+<text x="1106.0" y="63.5" font-size="12" fill="#FF6A00" text-anchor="middle">展会易已实测上线</text>
+<rect x="44" y="146" width="1352" height="50" rx="14" fill="#FFFFFF" stroke="#EDEFF2"/>
+<text x="60.0" y="176" font-size="13.5" font-weight="700" fill="#1A1D23">会前</text>
+<text x="94.0" y="176" font-size="12" fill="#8A919E">线索挖掘 · 跨时区约见 · 行前简报 · 路线规划</text>
+<text x="490.6666666666667" y="177" font-size="16" font-weight="700" fill="#FFB27A">›</text>
+<text x="510.6666666666667" y="176" font-size="13.5" font-weight="700" fill="#1A1D23">会中</text>
+<text x="544.6666666666667" y="176" font-size="12" fill="#8A919E">现场记录 · 录音转写 · 九源沟通记录汇集</text>
+<text x="941.3333333333334" y="177" font-size="16" font-weight="700" fill="#FFB27A">›</text>
+<text x="961.3333333333334" y="176" font-size="13.5" font-weight="700" fill="#1A1D23">会后</text>
+<text x="995.3333333333334" y="176" font-size="12" fill="#8A919E">九源回收 · 跟进待办 · 任务与日历落地 · 复盘与甘特图</text>
+<rect x="44" y="208" width="1352" height="152" rx="16" fill="#FFFFFF" stroke="#EDEFF2"/>
+<path d="M60 208 h80 v152 h-80 a16 16 0 0 1 -16 -16 v-120 a16 16 0 0 1 16 -16 z" fill="#F8F9FB"/>
+<line x1="140" y1="208" x2="140" y2="360" stroke="#EFF1F4"/>
+<text x="92" y="250.0" font-size="11" letter-spacing="1.6" fill="#9AA1AD" text-anchor="middle" font-weight="600">01</text>
+<text x="92" y="264.0" font-size="14.5" font-weight="700" fill="#3A414D" text-anchor="middle" style="writing-mode:vertical-rl;letter-spacing:4px">接入层</text>
+<text x="92" y="338" font-size="9" letter-spacing="1.2" fill="#B3B9C4" text-anchor="middle">ACQUIRE</text>
+<text x="157" y="234" font-size="15" font-weight="700" fill="#1A1D23">四路获客</text>
+<text x="227" y="234" font-size="12" fill="#8A919E">展会、线上检索、社交渠道、熟人引荐，共用同一套证据体系</text>
+<rect x="157.0" y="248" width="298.0" height="88" rx="11" fill="#FFFFFF" stroke="#EFF1F4"/>
+<rect x="169.0" y="260" width="22" height="22" rx="7" fill="#FF6A00"/>
+<text x="180.0" y="275.5" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="199.0" y="276" font-size="13" font-weight="600" fill="#1A1D23">展会</text>
+<text x="169.0" y="298" font-size="10.5" fill="#7B8391">名录筛选、批量约见、现场补记、展后复盘</text>
+<rect x="465.0" y="248" width="298.0" height="88" rx="11" fill="#FFFFFF" stroke="#EFF1F4"/>
+<rect x="477.0" y="260" width="22" height="22" rx="7" fill="#FF6A00"/>
+<text x="488.0" y="275.5" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="507.0" y="276" font-size="13" font-weight="600" fill="#1A1D23">网络检索</text>
+<text x="477.0" y="298" font-size="10.5" fill="#7B8391">官网、行业名录、新闻与公开资料，自动生成简报</text>
+<rect x="773.0" y="248" width="298.0" height="88" rx="11" fill="#FFFFFF" stroke="#EFF1F4"/>
+<rect x="785.0" y="260" width="22" height="22" rx="7" fill="#FF6A00"/>
+<text x="796.0" y="275.5" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="815.0" y="276" font-size="13" font-weight="600" fill="#1A1D23">社交媒体</text>
+<text x="785.0" y="298" font-size="10.5" fill="#7B8391">LinkedIn 触达、WhatsApp 与展会</text>
+<text x="785.0" y="312" font-size="10.5" fill="#7B8391"> App 会话</text>
+<rect x="1081.0" y="248" width="298.0" height="88" rx="11" fill="#FFFFFF" stroke="#EFF1F4"/>
+<rect x="1093.0" y="260" width="22" height="22" rx="7" fill="#FF6A00"/>
+<text x="1104.0" y="275.5" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="1123.0" y="276" font-size="13" font-weight="600" fill="#1A1D23">熟人介绍</text>
+<text x="1093.0" y="298" font-size="10.5" fill="#7B8391">转介绍链路可追溯，引荐致谢有完整记录</text>
+<line x1="720.0" y1="370" x2="720.0" y2="394" stroke="#D9DEE6"/>
+<rect x="612.0" y="372" width="216" height="20" rx="10" fill="#F4F6F8"/>
+<text x="720.0" y="386" font-size="11" fill="#A6ADB9" text-anchor="middle">统一沉淀为九源证据（S1–S9）</text>
+<rect x="44" y="402" width="1352" height="152" rx="16" fill="#FFFCF9" stroke="#FFD6B8"/>
+<path d="M60 402 h80 v152 h-80 a16 16 0 0 1 -16 -16 v-120 a16 16 0 0 1 16 -16 z" fill="#FFF3E9"/>
+<line x1="140" y1="402" x2="140" y2="554" stroke="#FFE1CB"/>
+<text x="92" y="444.0" font-size="11" letter-spacing="1.6" fill="#9AA1AD" text-anchor="middle" font-weight="600">02</text>
+<text x="92" y="458.0" font-size="14.5" font-weight="700" fill="#C24E00" text-anchor="middle" style="writing-mode:vertical-rl;letter-spacing:4px">智能层</text>
+<text x="92" y="532" font-size="9" letter-spacing="1.2" fill="#B3B9C4" text-anchor="middle">INTELLIGENCE</text>
+<text x="157" y="428" font-size="15" font-weight="700" fill="#1A1D23">出海三件套</text>
+<text x="242" y="428" font-size="12" fill="#8A919E">与国内同类作品的差异所在：跨文化、时区地理、国际合规</text>
+<rect x="157.0" y="442" width="236.4" height="88" rx="11" fill="#FFFFFF" stroke="#FFE3CE"/>
+<rect x="169.0" y="454" width="22" height="22" rx="7" fill="#FF6A00"/>
+<text x="180.0" y="469.5" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="199.0" y="470" font-size="13" font-weight="600" fill="#1A1D23">全球节假日与文化日历</text>
+<text x="169.0" y="492" font-size="10.5" fill="#7B8391">28 国 402 事件；可祝贺、仅致</text>
+<text x="169.0" y="506" font-size="10.5" fill="#7B8391">意、宗教用语三档语气</text>
+<rect x="403.4" y="442" width="236.4" height="88" rx="11" fill="#FFFFFF" stroke="#FFE3CE"/>
+<rect x="415.4" y="454" width="22" height="22" rx="7" fill="#FF6A00"/>
+<text x="426.4" y="469.5" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="445.4" y="470" font-size="13" font-weight="600" fill="#1A1D23">时区感知排会</text>
+<text x="415.4" y="492" font-size="10.5" fill="#7B8391">对方时区、节假日、斋期、我方时区四重</text>
+<text x="415.4" y="506" font-size="10.5" fill="#7B8391">过滤</text>
+<rect x="649.8" y="442" width="236.4" height="88" rx="11" fill="#FFFFFF" stroke="#FFE3CE"/>
+<rect x="661.8" y="454" width="22" height="22" rx="7" fill="#FF6A00"/>
+<text x="672.8" y="469.5" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="691.8" y="470" font-size="13" font-weight="600" fill="#1A1D23">差旅路线优化</text>
+<text x="661.8" y="492" font-size="10.5" fill="#7B8391">地理聚类排半天，逐段给出交通方式与缓</text>
+<text x="661.8" y="506" font-size="10.5" fill="#7B8391">冲</text>
+<rect x="896.2" y="442" width="236.4" height="88" rx="11" fill="#FFFFFF" stroke="#FFE3CE"/>
+<rect x="908.2" y="454" width="22" height="22" rx="7" fill="#FF6A00"/>
+<text x="919.2" y="469.5" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="938.2" y="470" font-size="13" font-weight="600" fill="#1A1D23">国际合规与脱敏</text>
+<text x="908.2" y="492" font-size="10.5" fill="#7B8391">制裁与负面初筛；自用版与外发版两级标</text>
+<text x="908.2" y="506" font-size="10.5" fill="#7B8391">准</text>
+<rect x="1142.6" y="442" width="236.4" height="88" rx="11" fill="#FFFFFF" stroke="#FFE3CE"/>
+<rect x="1154.6" y="454" width="22" height="22" rx="7" fill="#FF6A00"/>
+<text x="1165.6" y="469.5" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+<text x="1184.6" y="470" font-size="13" font-weight="600" fill="#1A1D23">多语言语气校准</text>
+<text x="1154.6" y="492" font-size="10.5" fill="#7B8391">问候、跟进、催复按文化调整措辞与语气</text>
+<line x1="720.0" y1="564" x2="720.0" y2="588" stroke="#D9DEE6"/>
+<rect x="612.0" y="566" width="216" height="20" rx="10" fill="#F4F6F8"/>
+<text x="720.0" y="580" font-size="11" fill="#A6ADB9" text-anchor="middle">自动落到人、到日、到账</text>
+<rect x="44" y="596" width="1352" height="152" rx="16" fill="#FFFFFF" stroke="#EDEFF2"/>
+<path d="M60 596 h80 v152 h-80 a16 16 0 0 1 -16 -16 v-120 a16 16 0 0 1 16 -16 z" fill="#F8F9FB"/>
+<line x1="140" y1="596" x2="140" y2="748" stroke="#EFF1F4"/>
+<text x="92" y="638.0" font-size="11" letter-spacing="1.6" fill="#9AA1AD" text-anchor="middle" font-weight="600">03</text>
+<text x="92" y="652.0" font-size="14.5" font-weight="700" fill="#3A414D" text-anchor="middle" style="writing-mode:vertical-rl;letter-spacing:4px">落地层</text>
+<text x="92" y="726" font-size="9" letter-spacing="1.2" fill="#B3B9C4" text-anchor="middle">EXECUTE</text>
+<text x="157" y="622" font-size="15" font-weight="700" fill="#1A1D23">任务与项目管理</text>
+<text x="272" y="622" font-size="12" fill="#8A919E">输出不停留在报告，而是转化为次日可执行的动作</text>
+<rect x="157.0" y="636" width="298.0" height="88" rx="11" fill="#FFFFFF" stroke="#EFF1F4"/>
+<rect x="169.0" y="648" width="22" height="22" rx="7" fill="#FF6A00"/>
+<text x="180.0" y="663.5" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="199.0" y="664" font-size="13" font-weight="600" fill="#1A1D23">跟进任务自动落地</text>
+<text x="169.0" y="686" font-size="10.5" fill="#7B8391">动词开头、带截止时间、可直接转发客户</text>
+<rect x="465.0" y="636" width="298.0" height="88" rx="11" fill="#FFFFFF" stroke="#EFF1F4"/>
+<rect x="477.0" y="648" width="22" height="22" rx="7" fill="#FF6A00"/>
+<text x="488.0" y="663.5" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="507.0" y="664" font-size="13" font-weight="600" fill="#1A1D23">日历提醒（零参会人）</text>
+<text x="477.0" y="686" font-size="10.5" fill="#7B8391">只写本人日历，不代发任何邀请</text>
+<rect x="773.0" y="636" width="298.0" height="88" rx="11" fill="#FFFFFF" stroke="#EFF1F4"/>
+<rect x="785.0" y="648" width="22" height="22" rx="7" fill="#FF6A00"/>
+<text x="796.0" y="663.5" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="815.0" y="664" font-size="13" font-weight="600" fill="#1A1D23">Pipeline 与台账回填</text>
+<text x="785.0" y="686" font-size="10.5" fill="#7B8391">证据链可回溯，展会投入产出可核算</text>
+<rect x="1081.0" y="636" width="298.0" height="88" rx="11" fill="#FFFFFF" stroke="#EFF1F4"/>
+<rect x="1093.0" y="648" width="22" height="22" rx="7" fill="#FF6A00"/>
+<text x="1104.0" y="663.5" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="1123.0" y="664" font-size="13" font-weight="600" fill="#1A1D23">复盘报告与商机甘特图</text>
+<text x="1093.0" y="686" font-size="10.5" fill="#7B8391">每商机一条时间线，静默 14 天预警</text>
+<rect x="44.0" y="764" width="442.6666666666667" height="76" rx="14" fill="#1F2329"/>
+<text x="62.0" y="811" font-size="23" font-weight="700" fill="#FF8A3D">九源</text>
+<text x="120.0" y="797" font-size="13.5" font-weight="600" fill="#FFFFFF">线索不漏</text>
+<text x="120.0" y="819" font-size="10.5" fill="#A9B0BC">日历、语音、WhatsApp、展会 App、IM、双邮箱、任务、台账</text>
+<rect x="498.6666666666667" y="764" width="442.6666666666667" height="76" rx="14" fill="#1F2329"/>
+<text x="516.6666666666667" y="811" font-size="23" font-weight="700" fill="#FF8A3D">14 天</text>
+<text x="591.6666666666667" y="797" font-size="13.5" font-weight="600" fill="#FFFFFF">商机可管</text>
+<text x="591.6666666666667" y="819" font-size="10.5" fill="#A9B0BC">阶段静默自动预警，未联系对象全部有清单与动作</text>
+<rect x="953.3333333333334" y="764" width="442.6666666666667" height="76" rx="14" fill="#1F2329"/>
+<text x="971.3333333333334" y="811" font-size="23" font-weight="700" fill="#FF8A3D">1 天</text>
+<text x="1033.3333333333335" y="797" font-size="13.5" font-weight="600" fill="#FFFFFF">能力可复制</text>
+<text x="1033.3333333333335" y="819" font-size="10.5" fill="#A9B0BC">方法论沉淀为 Skill，同事安装即用，新人 1 天上手</text>
+<text x="1396" y="864" font-size="10" fill="#A6ADB9" text-anchor="end">本图客户均为代称、数据为演示口径 · 外发版</text>
+</svg>
