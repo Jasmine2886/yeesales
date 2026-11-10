@@ -6,10 +6,10 @@
 <text x="44" y="124" font-size="13" fill="#5B6472">AI-powered Global Sales Operating System　·　从展会线索到成交的完整闭环，AI 主动推动下一步</text>
 <rect x="1270" y="50" width="126" height="26" rx="13" fill="#FFFFFF" stroke="#E6E9EE"/>
 <text x="1333.0" y="67" font-size="11.5" fill="#454C59" text-anchor="middle">已在业务一组实测</text>
-<rect x="1124" y="50" width="138" height="26" rx="13" fill="#FFFFFF" stroke="#E6E9EE"/>
-<text x="1193.0" y="67" font-size="11.5" fill="#454C59" text-anchor="middle">12 个可交互视图</text>
-<rect x="1038" y="50" width="78" height="26" rx="13" fill="#F1FBF6" stroke="#C4F1DC"/>
-<text x="1077.0" y="67" font-size="11.5" fill="#00864A" text-anchor="middle">六大模块</text>
+<rect x="1136" y="50" width="126" height="26" rx="13" fill="#FFFFFF" stroke="#E6E9EE"/>
+<text x="1199.0" y="67" font-size="11.5" fill="#454C59" text-anchor="middle">9 个可交互视图</text>
+<rect x="1050" y="50" width="78" height="26" rx="13" fill="#F1FBF6" stroke="#C4F1DC"/>
+<text x="1089.0" y="67" font-size="11.5" fill="#00864A" text-anchor="middle">六大模块</text>
 <text x="44" y="166" font-size="11.5" letter-spacing="1.2" fill="#8A919E" font-weight="600">使用者</text>
 <rect x="44.0" y="176" width="442.6666666666667" height="46" rx="10" fill="#FFFFFF" stroke="#E6E9EE"/>
 <text x="60.0" y="196" font-size="12.5" font-weight="600" fill="#1A1D23">BD / 销售</text>
@@ -23,75 +23,76 @@
 <text x="44" y="258" font-size="11.5" letter-spacing="1.2" fill="#00864A" font-weight="600">AI 层 · 主动编排，而非被动记录</text>
 <rect x="44" y="268" width="1352" height="118" rx="14" fill="#F1FBF6" stroke="#C4F1DC"/>
 <text x="60.0" y="298" font-size="13" font-weight="700" fill="#00864A">AI Command Center</text>
-<text x="60.0" y="318" font-size="11.5" fill="#3F4855">自然语言下达目标，例如「找出 20 家需要 China</text>
-<text x="60.0" y="335" font-size="11.5" fill="#3F4855">Payout 的非洲 PSP」</text>
-<text x="60.0" y="352" font-size="11.5" fill="#3F4855">自动拆解为检索、建联、排期、跟进四类动作</text>
+<text x="60.0" y="318" font-size="11.5" fill="#3F4855">一句指令贯穿全程：找线索、备行程、写跟进</text>
+<text x="60.0" y="335" font-size="11.5" fill="#3F4855">自动拆解为检索、建联、排期、跟进四类动作</text>
 <text x="502.6666666666667" y="298" font-size="13" font-weight="700" fill="#00864A">AI Agent 工作组</text>
 <text x="502.6666666666667" y="318" font-size="11.5" fill="#3F4855">账户研究、会面助理、跟进 Agent、复盘 Agent、销售</text>
 <text x="502.6666666666667" y="335" font-size="11.5" fill="#3F4855">分析</text>
 <text x="502.6666666666667" y="352" font-size="11.5" fill="#3F4855">每个动作留下执行记录与待确认项</text>
 <text x="945.3333333333334" y="298" font-size="13" font-weight="700" fill="#00864A">可信机制</text>
-<text x="945.3333333333334" y="318" font-size="11.5" fill="#3F4855">可解释评分：五维加权，逐项给出依据</text>
-<text x="945.3333333333334" y="335" font-size="11.5" fill="#3F4855">信息三态：已确认 / AI 推断 / 缺失；关键写入需人工审</text>
-<text x="945.3333333333334" y="352" font-size="11.5" fill="#3F4855">批</text>
+<text x="945.3333333333334" y="318" font-size="11.5" fill="#3F4855">评分可解释可覆盖，覆盖需填理由</text>
+<text x="945.3333333333334" y="335" font-size="11.5" fill="#3F4855">信息三态 + 审批队列 + 审计日志，AI 不直接改 CRM</text>
 <text x="44" y="424" font-size="11.5" letter-spacing="1.2" fill="#8A919E" font-weight="600">六大模块 · 覆盖销售全生命周期</text>
-<rect x="44.0" y="436" width="442.6666666666667" height="98" rx="12" fill="#FFFFFF" stroke="#E6E9EE"/>
-<rect x="44.0" y="436" width="3" height="98" rx="1.5" fill="#00C566"/>
+<rect x="44.0" y="436" width="442.6666666666667" height="104" rx="12" fill="#FFFFFF" stroke="#E6E9EE"/>
+<rect x="44.0" y="436" width="3" height="104" rx="1.5" fill="#00C566"/>
 <text x="62.0" y="462" font-size="11.5" font-weight="700" fill="#00C566">01</text>
 <text x="84.0" y="462" font-size="12.5" font-weight="700" fill="#1A1D23">销售驾驶舱</text>
 <text x="157.0" y="462" font-size="11" fill="#9AA1AC">AI Sales Cockpit</text>
-<text x="62.0" y="484" font-size="11.5" fill="#5B6472">今日该做什么，按截止时间排序</text>
+<text x="62.0" y="484" font-size="11.5" fill="#5B6472">今天该跟谁、先做什么，AI 排好优先级</text>
 <text x="62.0" y="501" font-size="11.5" fill="#5B6472">Pipeline、逾期、静默商机一屏可见</text>
-<rect x="498.6666666666667" y="436" width="442.6666666666667" height="98" rx="12" fill="#FFFFFF" stroke="#E6E9EE"/>
-<rect x="498.6666666666667" y="436" width="3" height="98" rx="1.5" fill="#00C566"/>
+<rect x="498.6666666666667" y="436" width="442.6666666666667" height="104" rx="12" fill="#FFFFFF" stroke="#E6E9EE"/>
+<rect x="498.6666666666667" y="436" width="3" height="104" rx="1.5" fill="#00C566"/>
 <text x="516.6666666666667" y="462" font-size="11.5" font-weight="700" fill="#00C566">02</text>
 <text x="538.6666666666667" y="462" font-size="12.5" font-weight="700" fill="#1A1D23">线索获取</text>
 <text x="598.6666666666667" y="462" font-size="11" fill="#9AA1AC">Lead Generation</text>
 <text x="516.6666666666667" y="484" font-size="11.5" fill="#5B6472">展会、网络检索、社交媒体、熟人转介绍</text>
-<text x="516.6666666666667" y="501" font-size="11.5" fill="#5B6472">约见排期与行前简报自动生成</text>
-<rect x="953.3333333333334" y="436" width="442.6666666666667" height="98" rx="12" fill="#FFFFFF" stroke="#E6E9EE"/>
-<rect x="953.3333333333334" y="436" width="3" height="98" rx="1.5" fill="#00C566"/>
+<text x="516.6666666666667" y="501" font-size="11.5" fill="#5B6472">名单去重、评分与首次触达建议</text>
+<rect x="953.3333333333334" y="436" width="442.6666666666667" height="104" rx="12" fill="#FFFFFF" stroke="#E6E9EE"/>
+<rect x="953.3333333333334" y="436" width="3" height="104" rx="1.5" fill="#00C566"/>
 <text x="971.3333333333334" y="462" font-size="11.5" font-weight="700" fill="#00C566">03</text>
-<text x="993.3333333333334" y="462" font-size="12.5" font-weight="700" fill="#1A1D23">全球客户触达</text>
-<text x="1079.3333333333335" y="462" font-size="11" fill="#9AA1AC">Global Engagement</text>
-<text x="971.3333333333334" y="484" font-size="11.5" fill="#5B6472">跨时区建议发送窗口、节假日与文化日历</text>
-<text x="971.3333333333334" y="501" font-size="11.5" fill="#5B6472">会中记录、多语言跟进邮件草稿</text>
-<rect x="44.0" y="546" width="442.6666666666667" height="98" rx="12" fill="#FFFFFF" stroke="#E6E9EE"/>
-<rect x="44.0" y="546" width="3" height="98" rx="1.5" fill="#00C566"/>
-<text x="62.0" y="572" font-size="11.5" font-weight="700" fill="#00C566">04</text>
-<text x="84.0" y="572" font-size="12.5" font-weight="700" fill="#1A1D23">客户全景</text>
-<text x="144.0" y="572" font-size="11" fill="#9AA1AC">Customer 360</text>
-<text x="62.0" y="594" font-size="11.5" fill="#5B6472">单客户时间线：邮件、聊天、会议、任务</text>
-<text x="62.0" y="611" font-size="11.5" fill="#5B6472">人脉图谱与决策链识别</text>
-<rect x="498.6666666666667" y="546" width="442.6666666666667" height="98" rx="12" fill="#FFFFFF" stroke="#E6E9EE"/>
-<rect x="498.6666666666667" y="546" width="3" height="98" rx="1.5" fill="#00C566"/>
-<text x="516.6666666666667" y="572" font-size="11.5" font-weight="700" fill="#00C566">05</text>
-<text x="538.6666666666667" y="572" font-size="12.5" font-weight="700" fill="#1A1D23">商机管理</text>
-<text x="598.6666666666667" y="572" font-size="11" fill="#9AA1AC">Deal Management</text>
-<text x="516.6666666666667" y="594" font-size="11.5" fill="#5B6472">看板与甘特双视图，阶段停留超 14 天预警</text>
-<text x="516.6666666666667" y="611" font-size="11.5" fill="#5B6472">商机关联源展会与源会议，可追溯</text>
-<rect x="953.3333333333334" y="546" width="442.6666666666667" height="98" rx="12" fill="#FFFFFF" stroke="#E6E9EE"/>
-<rect x="953.3333333333334" y="546" width="3" height="98" rx="1.5" fill="#00C566"/>
-<text x="971.3333333333334" y="572" font-size="11.5" font-weight="700" fill="#00C566">06</text>
-<text x="993.3333333333334" y="572" font-size="12.5" font-weight="700" fill="#1A1D23">AI 工作台</text>
-<text x="1079.3333333333335" y="572" font-size="11" fill="#9AA1AC">AI Workforce</text>
-<text x="971.3333333333334" y="594" font-size="11.5" fill="#5B6472">Event Debrief 情报中枢：五页签复盘</text>
-<text x="971.3333333333334" y="611" font-size="11.5" fill="#5B6472">标准化实体与审批流，数据可导出</text>
+<text x="993.3333333333334" y="462" font-size="12.5" font-weight="700" fill="#1A1D23">展会情报</text>
+<text x="1053.3333333333335" y="462" font-size="11" fill="#9AA1AC">Event Intelligence</text>
+<text x="971.3333333333334" y="484" font-size="11.5" fill="#5B6472">五个页签：总览、客户分级、会议洞察、行动中心、报告</text>
+<text x="971.3333333333334" y="501" font-size="11.5" fill="#5B6472">Travel Planner 行程规划：航班住宿、客户分布与</text>
+<text x="971.3333333333334" y="518" font-size="11.5" fill="#5B6472">动线</text>
+<rect x="44.0" y="552" width="442.6666666666667" height="104" rx="12" fill="#FFFFFF" stroke="#E6E9EE"/>
+<rect x="44.0" y="552" width="3" height="104" rx="1.5" fill="#00C566"/>
+<text x="62.0" y="578" font-size="11.5" font-weight="700" fill="#00C566">04</text>
+<text x="84.0" y="578" font-size="12.5" font-weight="700" fill="#1A1D23">客户全景</text>
+<text x="144.0" y="578" font-size="11" fill="#9AA1AC">Customer 360</text>
+<text x="62.0" y="600" font-size="11.5" fill="#5B6472">单客户时间线：邮件、聊天、会议、任务</text>
+<text x="62.0" y="617" font-size="11.5" fill="#5B6472">人脉图谱与决策链识别</text>
+<rect x="498.6666666666667" y="552" width="442.6666666666667" height="104" rx="12" fill="#FFFFFF" stroke="#E6E9EE"/>
+<rect x="498.6666666666667" y="552" width="3" height="104" rx="1.5" fill="#00C566"/>
+<text x="516.6666666666667" y="578" font-size="11.5" font-weight="700" fill="#00C566">05</text>
+<text x="538.6666666666667" y="578" font-size="12.5" font-weight="700" fill="#1A1D23">商机与路线图</text>
+<text x="624.6666666666667" y="578" font-size="11" fill="#9AA1AC">Pipeline &amp; Roadmap</text>
+<text x="516.6666666666667" y="600" font-size="11.5" fill="#5B6472">看板按阶段推进，甘特按时间线排布</text>
+<text x="516.6666666666667" y="617" font-size="11.5" fill="#5B6472">45 天成交路线图，阶段静默自动预警</text>
+<rect x="953.3333333333334" y="552" width="442.6666666666667" height="104" rx="12" fill="#FFFFFF" stroke="#E6E9EE"/>
+<rect x="953.3333333333334" y="552" width="3" height="104" rx="1.5" fill="#00C566"/>
+<text x="971.3333333333334" y="578" font-size="11.5" font-weight="700" fill="#00C566">06</text>
+<text x="993.3333333333334" y="578" font-size="12.5" font-weight="700" fill="#1A1D23">AI 工作台与集成</text>
+<text x="1118.3333333333335" y="578" font-size="11" fill="#9AA1AC">AI Workforce</text>
+<text x="971.3333333333334" y="600" font-size="11.5" fill="#5B6472">Agent 活动中心：研究、记录、跟进、复盘</text>
+<text x="971.3333333333334" y="617" font-size="11.5" fill="#5B6472">审批队列与审计日志；邮箱、日历、飞书集成</text>
 <text x="44" y="664" font-size="11.5" letter-spacing="1.2" fill="#8A919E" font-weight="600">数据底座与落地形态</text>
 <rect x="44" y="674" width="1352" height="150" rx="14" fill="#FFFFFF" stroke="#E6E9EE"/>
 <text x="64.0" y="702" font-size="12.5" font-weight="700" fill="#1A1D23">九源素材采集</text>
-<text x="64.0" y="724" font-size="11" fill="#6B7280">日历、AI 语音纪要、WhatsApp、展会 App</text>
-<text x="64.0" y="740" font-size="11" fill="#6B7280">、飞书消息、外部邮箱、飞书邮件、飞书任务、拜访台账</text>
+<text x="64.0" y="724" font-size="11" fill="#6B7280">日历、AI 语音纪要、WhatsApp、展会</text>
+<text x="64.0" y="740" font-size="11" fill="#6B7280">App、飞书消息、外部邮箱、飞书邮件、飞书任务、</text>
+<text x="64.0" y="756" font-size="11" fill="#6B7280">拜访台账</text>
 <line x1="490.6666666666667" y1="696" x2="490.6666666666667" y2="798" stroke="#EEF0F3"/>
 <text x="504.6666666666667" y="702" font-size="12.5" font-weight="700" fill="#1A1D23">标准化实体</text>
-<text x="504.6666666666667" y="724" font-size="11" fill="#6B7280">Event · Company · Contact</text>
-<text x="504.6666666666667" y="740" font-size="11" fill="#6B7280">· Meeting · MeetingInsight</text>
-<text x="504.6666666666667" y="756" font-size="11" fill="#6B7280">· Opportunity · Task ·</text>
-<text x="504.6666666666667" y="772" font-size="11" fill="#6B7280">EmailDraft · Approval，全部稳定</text>
+<text x="504.6666666666667" y="724" font-size="11" fill="#6B7280">Event · Company ·</text>
+<text x="504.6666666666667" y="740" font-size="11" fill="#6B7280">Contact · Meeting ·</text>
+<text x="504.6666666666667" y="756" font-size="11" fill="#6B7280">Insight · Opportunity ·</text>
+<text x="504.6666666666667" y="772" font-size="11" fill="#6B7280">Task · EmailDraft ·</text>
+<text x="504.6666666666667" y="788" font-size="11" fill="#6B7280">Approval，稳定 ID 关联</text>
 <line x1="931.3333333333334" y1="696" x2="931.3333333333334" y2="798" stroke="#EEF0F3"/>
 <text x="945.3333333333334" y="702" font-size="12.5" font-weight="700" fill="#1A1D23">落地形态</text>
-<text x="945.3333333333334" y="724" font-size="11" fill="#6B7280">Web 工作台（本原型）· 飞书任务与日历 · 企业</text>
-<text x="945.3333333333334" y="740" font-size="11" fill="#6B7280">邮箱草稿 · 移动端现场记录</text>
+<text x="945.3333333333334" y="724" font-size="11" fill="#6B7280">Web 工作台（本原型）· 飞书任务与日历 ·</text>
+<text x="945.3333333333334" y="740" font-size="11" fill="#6B7280">企业邮箱草稿 · 移动端现场记录</text>
 <line x1="44" y1="858" x2="1396" y2="858" stroke="#E3E6EA"/>
 <text x="44" y="884" font-size="11" fill="#9AA1AC">原型演示：全部客户为代称、数据虚构；金额类信息按外发口径遮蔽。会后复盘引擎已上架公司 SkillHub。</text>
 <text x="1396" y="884" font-size="11" fill="#9AA1AC" text-anchor="end">销售易 YeeSales · 2026.11</text>
