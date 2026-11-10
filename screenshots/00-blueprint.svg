@@ -2,7 +2,7 @@
 <defs><filter id="sh" x="-5%%" y="-5%%" width="110%%" height="115%%"><feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#0B1B12" flood-opacity="0.05"/></filter></defs>
 <rect width="1240" height="548" fill="#FFFFFF"/>
 <text x="40" y="52" font-family="PingFang SC,Helvetica Neue,Arial" font-size="25" font-weight="700" fill="#12181F">一个 BD 的 SFF 一周：你负责见人，AI 负责其余</text>
-<text x="40" y="82" font-family="PingFang SC,Helvetica Neue,Arial" font-size="14" fill="#6B7480">三个工作阶段，12 个动作：9 个由 AI 做完交给你，3 个必须你点头才生效</text>
+<text x="40" y="82" font-family="PingFang SC,Helvetica Neue,Arial" font-size="14" fill="#6B7480">三个工作阶段，12 个动作：9 个由 AI 做完交给你，3 个必须你点头才生效　｜　演示场景，客户为代称</text>
 <line x1="40" y1="104" x2="1200" y2="104" stroke="#EAEDF1"/>
 <rect x="40.0" y="126" width="373.3" height="326" rx="14" fill="#FFFFFF" stroke="#E4E8EE" filter="url(#sh)"/>
 <path d="M40.0 126 h373.3 a14,14 0 0 1 14,14 v38 h-373.3 v-38 a14,14 0 0 1 14,-14 z" fill="#F6FBF8"/>
@@ -19,7 +19,7 @@
 <line x1="60.0" y1="292" x2="393.3" y2="292" stroke="#EDF0F4"/>
 <text x="62.0" y="318" font-family="PingFang SC,Helvetica Neue,Arial" font-size="11.5" font-weight="700" fill="#00A85A" letter-spacing="1">AI 替你做完</text>
 <path d="M63.0 334 l4 4 l7 -8" fill="none" stroke="#00A85A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="80.0" y="340" font-family="PingFang SC,Helvetica Neue,Arial" font-size="13.5" fill="#2A313A">从 340 家参展商里筛出 20 家有中国付款信号的</text>
+<text x="80.0" y="340" font-family="PingFang SC,Helvetica Neue,Arial" font-size="13.5" fill="#2A313A">从 SFF 展商名单里筛出 20 家有中国付款信号的</text>
 <text x="80.0" y="360" font-family="PingFang SC,Helvetica Neue,Arial" font-size="13.5" fill="#2A313A">PSP</text>
 <path d="M63.0 380 l4 4 l7 -8" fill="none" stroke="#00A85A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
 <text x="80.0" y="386" font-family="PingFang SC,Helvetica Neue,Arial" font-size="13.5" fill="#2A313A">每家附一段「为什么约」和对方业务摘要</text>
