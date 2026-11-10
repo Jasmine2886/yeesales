@@ -3,2390 +3,495 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YeeSales AI · Global Sales Operating System</title>
+<title>YeeSales AI · 我的 AI 销售助理</title>
 <style>
-*,*::before,*::after{box-sizing:border-box}
-:root{
-  --brand:#00A870; --brand-6:#008E5E; --brand-7:#00714A;
-  --brand-50:#EAF7F1; --brand-100:#D5EFE3;
-  --ink:#12161A; --ink2:#3B464D; --ink3:#6A767D; --ink4:#96A1A7;
-  --line:#E6EBE8; --line2:#F2F5F3;
-  --bg:#FAFBFA; --card:#FFFFFF;
-  --amber:#A96500; --amber-bg:#FFF7E7; --amber-line:#F0DCB6;
-  --red:#BE3A2C; --red-bg:#FCEEEC;
-  --blue:#2563EB; --blue-bg:#EEF3FE;
-  --violet:#6D5BD0; --violet-bg:#F3F0FD;
-  --r:10px; --r-sm:7px; --r-xs:5px;
-  --sh:0 1px 2px rgba(16,24,20,.05);
-  --sh2:0 8px 24px -12px rgba(16,24,20,.22);
-  --ease:cubic-bezier(.16,1,.3,1);
-  --mono:"SF Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-}
-html,body{height:100%}
-body{
-  margin:0; background:var(--bg); color:var(--ink);
-  font-family:"Inter",-apple-system,BlinkMacSystemFont,"PingFang SC","HarmonyOS Sans SC","Microsoft YaHei",system-ui,sans-serif;
-  font-size:13px; line-height:1.6; -webkit-font-smoothing:antialiased;
-}
-button{font-family:inherit;font-size:inherit;color:inherit;cursor:pointer;background:none;border:none;padding:0}
-input,select{font-family:inherit;font-size:inherit;color:inherit}
-::selection{background:var(--brand-100);color:var(--brand-7)}
-.ico{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
-.ico.sm{width:12px;height:12px}.ico.lg{width:18px;height:18px}.ico.xl{width:22px;height:22px}
-.num{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
-.mono{font-family:var(--mono);font-size:11px}
-a{color:var(--brand-6);text-decoration:none}
-
-/* ================= shell ================= */
-.app{display:grid;grid-template-columns:234px minmax(0,1fr);min-height:100dvh}
-
-/* ---------------- sidebar ---------------- */
-.side{
-  position:sticky;top:0;height:100dvh;background:#fff;border-right:1px solid var(--line);
-  display:flex;flex-direction:column;overflow:hidden;
-}
-.brand{display:flex;align-items:center;gap:9px;padding:16px 16px 14px;border-bottom:1px solid var(--line)}
-.brand .mk{
-  width:28px;height:28px;border-radius:7px;background:var(--brand);color:#fff;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;
-}
-.brand .mk svg{width:16px;height:16px;stroke:#fff;stroke-width:1.9;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.brand b{display:block;font-size:13.5px;line-height:1.3;letter-spacing:-.01em}
-.brand small{display:block;font-size:10px;color:var(--ink4);letter-spacing:.01em;line-height:1.4}
-
-.nav{flex:1;overflow-y:auto;padding:10px 10px 16px;scrollbar-width:thin}
-.nav .mod{
-  display:flex;align-items:center;gap:7px;padding:14px 8px 5px;
-  font-size:10px;font-weight:600;letter-spacing:.08em;color:var(--ink4);text-transform:uppercase;
-}
-.nav .mod .no{
-  font-family:var(--mono);font-size:9.5px;color:var(--ink4);
-  background:var(--line2);border-radius:3px;padding:0 3px;letter-spacing:0;
-}
-.nav a{
-  display:flex;align-items:center;gap:8px;padding:6.5px 9px;border-radius:var(--r-sm);
-  color:var(--ink2);text-decoration:none;cursor:pointer;font-size:12.5px;
-  transition:background .14s,color .14s;position:relative;
-}
-.nav a .ic{display:flex;color:var(--ink4);transition:color .14s}
-.nav a:hover{background:var(--line2);color:var(--ink)}
-.nav a:hover .ic{color:var(--brand-6)}
-.nav a.on{background:var(--brand-50);color:var(--brand-7);font-weight:600}
-.nav a.on .ic{color:var(--brand)}
-.nav a.sub{padding-left:22px;font-size:12px}
-.nav a .en{margin-left:auto;font-size:9.5px;color:var(--ink4);letter-spacing:.02em;font-weight:400}
-.nav a.on .en{color:var(--brand-6);opacity:.75}
-.side .foot{padding:11px 14px;border-top:1px solid var(--line);display:flex;align-items:center;gap:8px}
-.side .foot .av{
-  width:26px;height:26px;border-radius:6px;background:var(--brand-50);color:var(--brand-7);
-  display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;
-}
-.side .foot .nm{font-size:11.5px;font-weight:600;line-height:1.3}
-.side .foot .rl{font-size:10px;color:var(--ink4);line-height:1.3}
-
-/* ---------------- main ---------------- */
-.main{min-width:0;display:flex;flex-direction:column}
-.topbar{
-  position:sticky;top:0;z-index:30;height:52px;flex-shrink:0;
-  display:flex;align-items:center;gap:12px;padding:0 22px;
-  background:rgba(255,255,255,.92);backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--line);
-}
-.crumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink3);white-space:nowrap}
-.crumb b{color:var(--ink);font-weight:600}
-.crumb .sp{color:var(--ink4);opacity:.7}
-
-.cmd{
-  flex:1;max-width:520px;margin:0 auto;position:relative;
-  display:flex;align-items:center;gap:8px;
-  background:var(--line2);border:1px solid transparent;border-radius:7px;
-  padding:6px 9px;transition:background .16s,border-color .16s,box-shadow .16s;
-}
-.cmd:focus-within{background:#fff;border-color:var(--brand);box-shadow:0 0 0 3px rgba(0,168,112,.1)}
-.cmd .ico{color:var(--ink4)}
-.cmd input{flex:1;border:none;background:none;outline:none;font-size:12.5px;color:var(--ink);min-width:0}
-.cmd input::placeholder{color:var(--ink4)}
-.cmd kbd{
-  font-family:var(--mono);font-size:9.5px;color:var(--ink3);background:#fff;
-  border:1px solid var(--line);border-radius:4px;padding:1px 4px;letter-spacing:.02em;
-}
-.tb-right{display:flex;align-items:center;gap:6px;margin-left:auto}
-.icon-btn{
-  width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;
-  color:var(--ink3);transition:background .14s,color .14s;position:relative;
-}
-.icon-btn:hover{background:var(--line2);color:var(--ink)}
-.icon-btn .dot-live{
-  position:absolute;top:4px;right:4px;width:5px;height:5px;border-radius:50%;
-  background:var(--brand);box-shadow:0 0 0 2px #fff;
-}
-.sim-pill{
-  display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:500;
-  color:var(--amber);background:var(--amber-bg);border:1px solid var(--amber-line);
-  border-radius:4px;padding:2px 6px;white-space:nowrap;
-}
-
-.content{padding:18px 22px 56px;flex:1;min-width:0}
-.page{max-width:1420px;margin:0 auto;animation:rise .28s var(--ease) both}
-@keyframes rise{from{transform:translateY(4px)}to{transform:none}}
-
-/* ---------------- page head ---------------- */
-.ph{display:flex;align-items:flex-start;gap:14px;margin-bottom:16px;flex-wrap:wrap}
-.ph h1{font-size:19px;margin:0;font-weight:650;letter-spacing:-.015em;line-height:1.35;display:flex;align-items:center;gap:9px}
-.ph .sub{font-size:12px;color:var(--ink3);margin-top:3px;line-height:1.6}
-.ph .acts{margin-left:auto;display:flex;gap:7px;align-items:center;flex-wrap:wrap}
-.ph .back{color:var(--ink3);display:flex;align-items:center;gap:5px;font-size:12px;margin-bottom:7px;cursor:pointer}
-.ph .back:hover{color:var(--brand-6)}
-
-/* ---------------- buttons ---------------- */
-.btn{
-  display:inline-flex;align-items:center;gap:5px;height:29px;padding:0 11px;
-  border-radius:var(--r-sm);font-size:12.5px;font-weight:500;
-  background:var(--brand);color:#fff;border:1px solid var(--brand);
-  transition:background .14s,box-shadow .14s,transform .1s;
-  white-space:nowrap;
-}
-.btn:hover{background:var(--brand-6);border-color:var(--brand-6)}
-.btn:active{transform:translateY(.5px)}
-.btn.ghost{background:#fff;color:var(--ink2);border-color:var(--line)}
-.btn.ghost:hover{background:var(--line2);color:var(--ink);border-color:#D8E0DC}
-.btn.sub{background:var(--brand-50);color:var(--brand-7);border-color:var(--brand-100)}
-.btn.sub:hover{background:var(--brand-100)}
-.btn.sm{height:26px;padding:0 9px;font-size:11.5px;border-radius:6px}
-.btn.xs{height:23px;padding:0 7px;font-size:11px;border-radius:5px}
-.btn:disabled{opacity:.5;cursor:not-allowed}
-
-/* ---------------- cards ---------------- */
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh)}
-.card.pad{padding:14px 16px}
-.ch{
-  display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line2);
-}
-.ch h3{margin:0;font-size:12.5px;font-weight:650;letter-spacing:-.005em;display:flex;align-items:center;gap:7px}
-.ch .r{margin-left:auto;font-size:11px;color:var(--ink4);display:flex;align-items:center;gap:6px}
-.cb{padding:14px 16px}
-.grid{display:grid;gap:12px;align-items:start}
-.grid.g4,.grid.g5{align-items:stretch}
-.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
-.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
-.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
-.g5{grid-template-columns:repeat(5,minmax(0,1fr))}
-.g-32{grid-template-columns:1.7fr minmax(0,1fr)}
-.g-23{grid-template-columns:minmax(0,1fr) 1.7fr}
-.g-31{grid-template-columns:2.2fr minmax(0,1fr)}
-.mt{margin-top:12px}.mt-s{margin-top:6px}.mt-l{margin-top:20px}
-
-/* ---------------- kpi ---------------- */
-.kpi{padding:13px 15px;display:flex;flex-direction:column;gap:2px}
-.kpi .k{font-size:11px;color:var(--ink3);display:flex;align-items:center;gap:5px}
-.kpi .v{font-size:22px;font-weight:640;letter-spacing:-.025em;line-height:1.25}
-.kpi .v small{font-size:11px;font-weight:500;color:var(--ink4);margin-left:2px;letter-spacing:0}
-.kpi .d{font-size:10.5px;color:var(--ink4);display:flex;align-items:center;gap:4px;margin-top:1px}
-.kpi .d .up{color:var(--brand-6)}
-.kpi .d .dn{color:var(--red)}
-.kpi .d .wn{color:var(--amber)}
-
-/* ---------------- table ---------------- */
-.tw{overflow-x:auto}
-table.t{width:100%;border-collapse:collapse;font-size:12px}
-table.t th{
-  text-align:left;font-weight:500;color:var(--ink4);font-size:10.5px;
-  letter-spacing:.05em;text-transform:uppercase;
-  padding:8px 12px;border-bottom:1px solid var(--line);white-space:nowrap;
-  background:#fff;
-}
-table.t td{padding:9px 12px;border-bottom:1px solid var(--line2);vertical-align:middle;color:var(--ink2)}
-table.t tbody tr:last-child td{border-bottom:none}
-table.t tbody tr.cursor{cursor:pointer;transition:background .12s}
-table.t tbody tr.cursor:hover{background:var(--brand-50)}
-table.t tbody tr.cursor:hover td:first-child{box-shadow:inset 2px 0 0 var(--brand)}
-table.t td .nm{color:var(--ink);font-weight:600;font-size:12.5px;display:block;line-height:1.35}
-table.t td .sm2{color:var(--ink4);font-size:10.5px;display:block;line-height:1.4}
-table.t td.r,table.t th.r{text-align:right}
-
-/* ---------------- badges ---------------- */
-.b{
-  display:inline-flex;align-items:center;gap:3px;border-radius:4px;
-  font-size:10.5px;font-weight:600;padding:1.5px 6px;line-height:1.5;
-  white-space:nowrap;letter-spacing:.01em;
-}
-.b-g{background:var(--brand-50);color:var(--brand-7)}
-.b-s{background:var(--brand);color:#fff}
-.b-a{background:var(--amber-bg);color:var(--amber)}
-.b-r{background:var(--red-bg);color:var(--red)}
-.b-b{background:var(--blue-bg);color:var(--blue)}
-.b-v{background:var(--violet-bg);color:var(--violet)}
-.b-n{background:var(--line2);color:var(--ink3)}
-.b-o{background:#fff;border:1px solid var(--line);color:var(--ink3)}
-.dot{width:5px;height:5px;border-radius:50%;display:inline-block;flex-shrink:0}
-
-/* tier */
-.tier{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:4px;font-size:10px;font-weight:700}
-.tier.a{background:var(--brand);color:#fff}
-.tier.b{background:var(--brand-50);color:var(--brand-7);border:1px solid var(--brand-100)}
-.tier.c{background:var(--line2);color:var(--ink3)}
-
-/* score */
-.score{display:inline-flex;align-items:center;gap:6px}
-.score .bar{width:38px;height:3px;border-radius:2px;background:var(--line2);overflow:hidden}
-.score .bar i{display:block;height:100%;border-radius:2px;background:var(--brand)}
-.score .bar i.mid{background:#D5A24A}
-.score .bar i.low{background:#C8D0CC}
-.score .n{font-size:12px;font-weight:650;font-variant-numeric:tabular-nums;color:var(--ink)}
-
-/* ---------------- tabs ---------------- */
-.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin-bottom:16px;overflow-x:auto}
-.tabs button{
-  padding:8px 12px;font-size:12.5px;color:var(--ink3);border-bottom:2px solid transparent;
-  margin-bottom:-1px;white-space:nowrap;transition:color .14s,border-color .14s;font-weight:500;
-  display:inline-flex;align-items:center;gap:5px;
-}
-.tabs button:hover{color:var(--ink)}
-.tabs button.on{color:var(--brand-7);border-bottom-color:var(--brand);font-weight:600}
-.tabs button .b{margin-left:2px}
-.pane{display:none}
-.pane.on{display:block;animation:rise .26s var(--ease) both}
-
-/* ---------------- misc lists ---------------- */
-.rows{display:flex;flex-direction:column}
-.row{
-  display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line2);
-  font-size:12px;
-}
-.row:last-child{border-bottom:none}
-.row .g{flex:1;min-width:0}
-.row .t{font-size:12px;color:var(--ink);font-weight:500;line-height:1.45}
-.row .s{font-size:10.5px;color:var(--ink4);line-height:1.5;margin-top:1px}
-.row .end{margin-left:auto;white-space:nowrap;display:flex;align-items:center;gap:6px}
-
-.kv{display:grid;grid-template-columns:96px minmax(0,1fr);gap:7px 10px;font-size:12px;align-items:baseline}
-.kv dt{color:var(--ink4);font-size:11px}
-.kv dd{margin:0;color:var(--ink2)}
-
-.metrics{display:flex;gap:20px;flex-wrap:wrap}
-.metrics .m .mv{font-size:16px;font-weight:640;letter-spacing:-.02em;line-height:1.3}
-.metrics .m .mk2{font-size:10.5px;color:var(--ink4);margin-top:1px}
-
-.divider{height:1px;background:var(--line2);margin:12px 0}
-
-/* progress */
-.pg{height:4px;border-radius:3px;background:var(--line2);overflow:hidden}
-.pg i{display:block;height:100%;border-radius:3px;background:var(--brand)}
-
-/* timeline */
-.tl{position:relative;padding-left:16px}
-.tl::before{content:"";position:absolute;left:3px;top:4px;bottom:4px;width:1px;background:var(--line)}
-.tl .it{position:relative;padding:0 0 13px 12px}
-.tl .it:last-child{padding-bottom:0}
-.tl .it::before{
-  content:"";position:absolute;left:-16px;top:5px;width:7px;height:7px;border-radius:50%;
-  background:#fff;border:1.5px solid var(--line);box-sizing:border-box;
-}
-.tl .it.key::before{border-color:var(--brand);background:var(--brand);box-shadow:0 0 0 3px var(--brand-50)}
-.tl .it .m{font-size:10px;color:var(--ink4);display:flex;align-items:center;gap:6px;margin-bottom:2px;line-height:1.5}
-.tl .it .b2{font-size:12px;color:var(--ink2);line-height:1.6}
-.tl .it .b2 b{color:var(--ink);font-weight:600}
-
-/* source icon chip */
-.sic{
-  width:20px;height:20px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;
-}
-.sic .ico{width:11px;height:11px;stroke-width:1.8}
-
-/* ---------------- approval rows ---------------- */
-.apx{
-  display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border-bottom:1px solid var(--line2);
-  transition:background .12s;
-}
-.apx:hover{background:#FCFDFC}
-.apx:last-child{border-bottom:none}
-.apx.done{background:#FBFDFC}
-.apx input[type=checkbox]{margin:2px 0 0;width:13px;height:13px;accent-color:var(--brand);cursor:pointer;flex-shrink:0}
-.apx .g{flex:1;min-width:0}
-.apx .h{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.apx .h .nm{font-size:12.5px;font-weight:600;color:var(--ink)}
-.apx .d{font-size:11px;color:var(--ink3);margin-top:2px;line-height:1.55}
-.apx .a{display:flex;gap:5px;flex-shrink:0}
-
-/* agent card */
-.ag{padding:14px;border:1px solid var(--line);border-radius:var(--r);background:#fff;transition:border-color .16s,box-shadow .16s}
-.ag:hover{border-color:#D6E3DC;box-shadow:var(--sh2)}
-.ag .ah{display:flex;align-items:center;gap:8px;margin-bottom:9px}
-.ag .ah .ic2{
-  width:26px;height:26px;border-radius:7px;background:var(--brand-50);color:var(--brand-6);
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;
-}
-.ag .ah b{font-size:12.5px;font-weight:650;line-height:1.3;display:block}
-.ag .ah small{font-size:10px;color:var(--ink4);display:block;line-height:1.3}
-.ag .st{font-size:11px;color:var(--ink3);margin-top:8px;line-height:1.6}
-.ag .out{
-  margin-top:9px;padding:8px 10px;background:var(--line2);border-radius:6px;
-  font-size:11px;color:var(--ink2);line-height:1.6;
-}
-.ag .af{display:flex;align-items:center;gap:6px;margin-top:10px}
-
-/* ---------------- kanban ---------------- */
-.kb{display:grid;grid-template-columns:repeat(4,minmax(200px,1fr));gap:10px}
-.kb .col{background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:9px;min-height:120px}
-.kb .col h4{
-  margin:0 0 8px;font-size:11px;color:var(--ink3);font-weight:600;
-  display:flex;align-items:center;gap:6px;letter-spacing:.02em;
-}
-.kb .col h4 .c{margin-left:auto;font-size:10px;color:var(--ink4);background:#fff;border:1px solid var(--line);border-radius:3px;padding:0 4px}
-.kc{
-  background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px 10px;margin-bottom:7px;
-  cursor:pointer;transition:border-color .14s,box-shadow .14s,transform .14s var(--ease);
-}
-.kc:hover{border-color:var(--brand-100);box-shadow:0 4px 14px -8px rgba(0,113,74,.4);transform:translateY(-1px)}
-.kc .t{font-size:12px;font-weight:600;color:var(--ink);line-height:1.4}
-.kc .s{font-size:10.5px;color:var(--ink4);margin-top:2px}
-.kc .f{display:flex;align-items:center;gap:5px;margin-top:7px;flex-wrap:wrap}
-.kc .v{font-size:11px;font-weight:650;color:var(--ink2);font-variant-numeric:tabular-nums}
-
-/* ---------------- gantt ---------------- */
-.gt-wrap{overflow-x:auto}
-.gt{min-width:780px}
-.gt .gh{display:flex;margin-left:186px;font-size:9.5px;color:var(--ink4);margin-bottom:6px;font-variant-numeric:tabular-nums}
-.gt .gh span{flex:1;text-align:left;padding-left:2px}
-.gt-row{display:flex;align-items:center;gap:0;margin-bottom:5px}
-.gt-row .lbl{width:186px;flex-shrink:0;font-size:11.5px;color:var(--ink2);padding-right:10px;line-height:1.3}
-.gt-row .lbl .s2{font-size:9.5px;color:var(--ink4);display:block}
-.gt-track{
-  flex:1;height:22px;position:relative;border-radius:4px;
-  background-image:repeating-linear-gradient(90deg,var(--line2),var(--line2) 1px,transparent 1px,transparent calc(100%/10));
-  background-color:#FCFDFC;
-}
-.gt-bar{
-  position:absolute;top:4px;height:14px;border-radius:3px;font-size:9.5px;color:#fff;
-  display:flex;align-items:center;padding:0 5px;white-space:nowrap;overflow:hidden;
-  background:var(--brand);font-weight:600;transition:filter .14s;
-}
-.gt-bar:hover{filter:brightness(1.08)}
-.gt-bar.plan{background:var(--brand-50);color:var(--brand-7);border:1px solid var(--brand-100)}
-.gt-bar.warn{background:#D9A451}
-.gt-bar.done{background:#9FC4B2}
-.gt-ms{
-  position:absolute;top:2px;width:10px;height:10px;background:#fff;border:1.5px solid var(--brand);
-  transform:rotate(45deg);border-radius:1px;
-}
-
-/* ---------------- drawer ---------------- */
-.mask{display:none;position:fixed;inset:0;background:rgba(12,20,16,.28);z-index:60}
-.drawer{
-  position:fixed;top:0;right:0;height:100dvh;width:520px;max-width:96vw;background:#fff;z-index:61;
-  box-shadow:-8px 0 32px rgba(12,20,16,.14);display:flex;flex-direction:column;
-  transform:translateX(100%);transition:transform .3s var(--ease);
-}
-.drawer.open{transform:none}
-.drawer .dh{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;gap:10px}
-.drawer .dh .t{font-size:13.5px;font-weight:650;line-height:1.35}
-.drawer .dh .s{font-size:11px;color:var(--ink4);margin-top:2px}
-.drawer .dh .x{margin-left:auto;color:var(--ink4);width:26px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.drawer .dh .x:hover{background:var(--line2);color:var(--ink)}
-.drawer .db{padding:16px 18px 30px;overflow-y:auto;flex:1}
-.drawer .df{padding:11px 18px;border-top:1px solid var(--line);display:flex;gap:7px;background:#fff}
-
-/* ---------------- rail ---------------- */
-.rail{
-  position:fixed;top:0;right:0;height:100dvh;width:390px;max-width:94vw;background:#fff;z-index:61;
-  box-shadow:-8px 0 32px rgba(12,20,16,.14);display:flex;flex-direction:column;
-  transform:translateX(100%);transition:transform .3s var(--ease);
-}
-.rail.open{transform:none}
-.rail .rh{padding:13px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
-.rail .rh b{font-size:12.5px}
-.rail .rb{overflow-y:auto;flex:1;padding:0}
-.rail .ri{padding:10px 16px;border-bottom:1px solid var(--line2);display:flex;gap:9px;align-items:flex-start}
-.rail .ri:last-child{border:none}
-.rail .ri .ic3{
-  width:22px;height:22px;border-radius:5px;background:var(--line2);color:var(--ink3);
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;
-}
-.rail .ri .g{flex:1;min-width:0}
-.rail .ri .tt{font-size:11.5px;font-weight:600;line-height:1.4}
-.rail .ri .dd{font-size:10.5px;color:var(--ink4);line-height:1.55;margin-top:1px}
-.rail .ri .tm2{font-size:9.5px;color:var(--ink4);margin-top:3px;font-variant-numeric:tabular-nums}
-
-/* ---------------- toast ---------------- */
-.toast{
-  position:fixed;left:50%;bottom:28px;transform:translate(-50%,14px);z-index:90;
-  background:var(--ink);color:#fff;font-size:12px;padding:8px 14px;border-radius:7px;
-  display:flex;align-items:center;gap:6px;opacity:0;pointer-events:none;
-  transition:opacity .2s,transform .26s var(--ease);box-shadow:0 12px 30px -12px rgba(0,0,0,.5);
-}
-.toast.show{opacity:1;transform:translate(-50%,0)}
-.toast .ico{color:#6EE7B7}
-
-.note{font-size:11px;color:var(--ink4);line-height:1.65}
-.hint{display:flex;gap:6px;align-items:flex-start;font-size:11px;color:var(--ink4);line-height:1.6}
-.hint .ico{width:13px;height:13px;margin-top:2px;color:var(--ink4)}
-.banner-sim{
-  display:flex;align-items:center;gap:7px;padding:8px 12px;border-radius:7px;
-  background:var(--amber-bg);border:1px solid var(--amber-line);color:var(--amber);
-  font-size:11px;line-height:1.6;
-}
-.empty{padding:26px;text-align:center;color:var(--ink4);font-size:11.5px}
-
-/* footer */
-.fn{margin-top:26px;padding:14px 0 0;border-top:1px solid var(--line);font-size:10.5px;color:var(--ink4);line-height:1.8;text-align:center}
-
-/* mobile */
-.menu-btn{display:none}
-@media (max-width:1200px){
-  .g-32,.g-23,.g-31{grid-template-columns:1fr}
-  .g4{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .g5{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .kb{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media (max-width:900px){
-  .app{grid-template-columns:1fr}
-  .side{position:fixed;left:0;top:0;z-index:70;transform:translateX(-100%);transition:transform .28s var(--ease);box-shadow:6px 0 26px rgba(12,20,16,.14)}
-  .side.open{transform:none}
-  .menu-btn{display:flex}
-  .content{padding:14px 14px 40px}
-  .topbar{padding:0 14px}
-  .cmd{max-width:none}
-  .crumb .hide-sm{display:none}
-  .g2,.g3,.g4,.g5{grid-template-columns:1fr}
-  .kb{grid-template-columns:1fr}
-  .ph h1{font-size:17px}
-  .drawer,.rail{width:100%}
-}
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}
-}
+:root{--g:#00C566;--gd:#00864A;--gs:#E9F9F0;--ink:#1F2329;--sub:#6B7280;--line:#E8EAED;--bg:#F7F8FA;--amber:#B7791F;--amber-bg:#FFF7E6;--red:#D64545}
+*{margin:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);font-size:14px;background:var(--bg);display:flex;height:100vh;overflow:hidden}
+a{color:var(--gd);text-decoration:none}
+/* ---------- sidebar ---------- */
+.side{width:212px;background:#fff;border-right:1px solid var(--line);display:flex;flex-direction:column;flex:0 0 212px}
+.logo{padding:18px 16px 14px;border-bottom:1px solid var(--line)}
+.logo .mark{display:flex;align-items:center;gap:9px}
+.logo .sq{width:30px;height:30px;border-radius:8px;background:var(--g);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px}
+.logo b{font-size:15px}
+.logo small{display:block;color:var(--sub);font-size:11px;margin-top:2px}
+nav{padding:10px 8px;flex:1}
+nav .cap{font-size:10.5px;color:#9AA1AC;letter-spacing:.08em;padding:12px 10px 5px;font-weight:600}
+nav a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;color:#3A414D;font-size:13.5px;margin-bottom:2px}
+nav a .ic{width:16px;height:16px;border-radius:4px;background:#EEF0F3;flex:0 0 16px}
+nav a:hover{background:#F3F4F6}
+nav a.on{background:var(--gs);color:var(--gd);font-weight:600}
+nav a.on .ic{background:var(--g)}
+nav a .n{margin-left:auto;background:#F0F1F3;color:#6B7280;border-radius:9px;font-size:11px;padding:1px 7px}
+nav a.on .n{background:var(--g);color:#fff}
+.me{padding:12px 16px;border-top:1px solid var(--line);font-size:12px;color:var(--sub)}
+.me b{color:var(--ink);font-size:12.5px}
+/* ---------- main ---------- */
+.main{flex:1;overflow-y:auto;display:flex;flex-direction:column}
+.top{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);padding:10px 24px;display:flex;align-items:center;gap:14px;z-index:5}
+.top .crumb{font-size:12.5px;color:var(--sub)}
+.top .crumb b{color:var(--ink)}
+.ask{flex:1;max-width:520px;display:flex;align-items:center;gap:8px;background:#F3F4F6;border:1px solid var(--line);border-radius:9px;padding:7px 12px;color:var(--sub);font-size:13px}
+.ask .spark{color:var(--gd);font-weight:700}
+.sim{margin-left:auto;background:var(--amber-bg);color:var(--amber);border:1px solid #F0DDB0;font-size:11px;border-radius:12px;padding:2px 10px}
+.avatar{width:30px;height:30px;border-radius:50%;background:var(--gd);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.page{padding:22px 26px 40px;max-width:1180px;width:100%}
+.view{display:none}.view.on{display:block}
+h1{font-size:20px;font-weight:700}
+.sub{color:var(--sub);font-size:13px;margin-top:3px}
+h2{font-size:15px;margin:26px 0 10px;display:flex;align-items:center;gap:8px}
+h2 .more{margin-left:auto;font-size:12px;font-weight:400;color:var(--gd)}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
+.grid{display:grid;gap:14px;align-items:start}
+.g2{grid-template-columns:1.6fr 1fr}.g2e{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.btn{background:var(--g);color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:13px;cursor:pointer;font-family:inherit}
+.btn.ghost{background:#fff;color:var(--gd);border:1px solid #BFE8D2}
+.btn.sm{padding:4px 10px;font-size:12px;border-radius:7px}
+.pill{display:inline-flex;align-items:center;font-size:11.5px;border-radius:10px;padding:2px 9px;font-weight:600}
+.p-g{background:var(--gs);color:var(--gd)}.p-a{background:var(--amber-bg);color:var(--amber)}.p-r{background:#FDEBEB;color:var(--red)}.p-n{background:#F0F1F3;color:#5B6472}.p-b{background:#EAF1FF;color:#2B5DB8}
+table{width:100%;border-collapse:collapse;font-size:13px;background:#fff}
+th{text-align:left;color:var(--sub);font-weight:600;font-size:12px;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:9px 10px;border-bottom:1px solid #F0F1F3;vertical-align:top}
+tr:hover td{background:#FAFBFC}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px}
+.bar .mut{color:var(--sub);font-size:12px;margin-left:8px}
+.bar .btn{margin-left:8px}
+.composer{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-top:16px;color:#9AA1AC;font-size:13px}
+.tbl-wrap{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.tbl-cust td:nth-child(2),.tbl-cust th:nth-child(2){white-space:nowrap}
+.tbl-cust td:last-child{text-align:right;white-space:nowrap}
+.tbl-cust td:last-child{text-align:right;white-space:nowrap}
+/* ---------- home ---------- */
+.hello{display:flex;align-items:baseline;gap:12px}
+.pri .item{display:flex;gap:12px;align-items:flex-start;padding:13px 4px;border-bottom:1px solid #F0F1F3}
+.pri .item:last-child{border-bottom:none}
+.pri .dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex:0 0 8px}
+.pri .t{flex:1}
+.pri .t b{font-size:13.5px}
+.pri .t p{color:var(--sub);font-size:12.5px;margin-top:3px}
+.kpis{display:flex;gap:0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.kpis div{flex:1;padding:14px 18px;border-right:1px solid var(--line)}
+.kpis div:last-child{border-right:none}
+.kpis b{font-size:22px;display:block}
+.kpis span{font-size:12px;color:var(--sub)}
+.meet{display:flex;gap:12px;padding:11px 4px;border-bottom:1px solid #F0F1F3;align-items:flex-start}
+.meet:last-child{border:none}
+.meet .tm{flex:0 0 92px;font-size:12.5px;color:var(--sub);padding-top:2px}
+.meet b{font-size:13.5px}
+.meet p{color:var(--sub);font-size:12.5px;margin-top:2px}
+/* ---------- find ---------- */
+.chan{display:flex;gap:12px}
+.chan .c{flex:1;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;cursor:pointer;transition:border-color .15s}
+.chan .c:hover{border-color:var(--g)}
+.chan .c.on{border-color:var(--g);background:var(--gs)}
+.chan .c b{font-size:13.5px}
+.chan .c p{color:var(--sub);font-size:12px;margin-top:4px;line-height:1.5}
+.fit{font-weight:700;font-size:13.5px}
+.fit.hi{color:var(--gd)}.fit.md{color:var(--amber)}.fit.lo{color:#9AA1AC}
+/* ---------- event ---------- */
+.etabs{display:flex;gap:6px;margin-bottom:16px}
+.etabs button{padding:8px 18px;border-radius:9px;border:1px solid var(--line);background:#fff;font-size:13.5px;cursor:pointer;font-family:inherit;color:#3A414D}
+.etabs button.on{background:var(--g);border-color:var(--g);color:#fff;font-weight:600}
+.step{display:flex;gap:10px;margin-bottom:14px;align-items:flex-start}
+.step .no{width:22px;height:22px;border-radius:50%;background:var(--g);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;flex:0 0 22px;margin-top:1px}
+.step .bd{flex:1}
+.step .bd b{font-size:13.5px}
+.step .bd p{color:var(--sub);font-size:12.5px;margin-top:2px}
+.route{display:flex;align-items:center;gap:0;margin:6px 0 2px;flex-wrap:wrap}
+.route .stop{background:#fff;border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-size:12px}
+.route .stop b{display:block;font-size:12.5px}
+.route .stop span{color:var(--sub);font-size:11px}
+.route .leg{color:#9AA1AC;font-size:11px;padding:0 7px}
+/* ---------- customers ---------- */
+.cust-layout{display:grid;grid-template-columns:1.1fr 1.45fr 1.35fr;gap:16px;align-items:start}
+.tl{position:relative;padding-left:18px}
+.tl:before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:#EDEFF2}
+.tl .ev{position:relative;padding:8px 0}
+.tl .ev:before{content:"";position:absolute;left:-17px;top:13px;width:8px;height:8px;border-radius:50%;background:var(--g);border:2px solid #fff}
+.tl .ev .tm{font-size:11px;color:#9AA1AC}
+.tl .ev b{font-size:12.5px}
+.tl .ev p{font-size:12px;color:var(--sub);margin-top:2px}
+.kv{width:100%;font-size:12.5px}
+.kv td{padding:6px 2px;border-bottom:1px dashed #F0F1F3}
+.kv td:first-child{color:var(--sub);width:42%}
+.insight p{font-size:12.5px;color:#3A414D;margin:7px 0;line-height:1.6}
+.insight p b{color:var(--ink)}
+/* ---------- pipeline ---------- */
+.kanban{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;padding-bottom:6px}
+.kcol{background:#F1F2F4;border-radius:10px;padding:8px;min-width:0}
+.kcol h4{font-size:12px;color:#5B6472;padding:4px 6px 8px;display:flex;justify-content:space-between}
+.kcard{background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px;margin-bottom:8px;font-size:12.5px;cursor:pointer}
+.kcard:hover{border-color:var(--g)}
+.kcard b{font-size:12.5px;display:block}
+.kcard .m{color:var(--sub);font-size:11.5px;margin-top:4px}
+.kcard .due{margin-top:6px;font-size:11px;color:var(--amber)}
+/* ---------- assistant ---------- */
+.chat{display:flex;flex-direction:column;gap:12px;max-width:760px}
+.msg{display:flex;gap:10px}
+.msg .who{width:28px;height:28px;border-radius:50%;flex:0 0 28px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
+.msg.ai .who{background:var(--g)}
+.msg.me .who{background:#454C59}
+.msg .bubble{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.7;flex:1}
+.msg.me .bubble{background:var(--gs);border-color:#CFF0DD}
+.msg .bubble ul{margin:8px 0 2px 18px}
+.msg .bubble li{margin:4px 0}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.chip{background:#fff;border:1px solid var(--line);border-radius:16px;padding:6px 13px;font-size:12.5px;color:#3A414D;cursor:pointer}
+.chip:hover{border-color:var(--g);color:var(--gd)}
+.appr{background:var(--amber-bg);border:1px solid #F0DDB0;border-radius:10px;padding:10px 12px;margin-top:10px;font-size:12.5px}
+.appr b{color:var(--amber)}
+.footer{margin-top:30px;color:#9AA1AC;font-size:11px;text-align:center}
+.note{background:#F3F4F6;border-radius:9px;padding:9px 13px;font-size:12px;color:var(--sub)}
+@media(max-width:1000px){.g2,.g2e,.g3,.g4,.cust-layout{grid-template-columns:1fr}.kanban{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
 <body>
-<svg style="display:none" aria-hidden="true">
-<symbol id="i-cockpit" viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="3" width="7.5" height="4.5" rx="1.6"/><rect x="13.5" y="10.5" width="7.5" height="10.5" rx="1.6"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6"/></symbol>
-<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><circle cx="12" cy="12" r="4.4"/><circle cx="12" cy="12" r=".9" fill="currentColor" stroke="none"/></symbol>
-<symbol id="i-plane" viewBox="0 0 24 24"><path d="M2.6 13.2 21 4.6l-6.8 16-3.3-6.5z"/><path d="m10.9 14.1 10.1-9.5"/></symbol>
-<symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V6.5L12 3l8 3.5V21"/><path d="M4 21h16M9 21v-5h6v5M8.5 10h1.5M14 10h1.5M8.5 13.5h1.5M14 13.5h1.5"/></symbol>
-<symbol id="i-deal" viewBox="0 0 24 24"><path d="M3 10.5 12 4l9 6.5"/><path d="M5 10.5V20h14v-9.5"/><path d="M9 14.5h6"/></symbol>
-<symbol id="i-bot" viewBox="0 0 24 24"><rect x="3.5" y="7.5" width="17" height="12" rx="3"/><path d="M12 3v4.5M8.5 13v1.5M15.5 13v1.5M1.5 12v3M22.5 12v3"/></symbol>
-<symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.8h17M8 2.8V6M16 2.8V6"/></symbol>
-<symbol id="i-cam" viewBox="0 0 24 24"><path d="M3 8.4h3.2l1.9-2.7h7.8l1.9 2.7H21v10.3H3z"/><circle cx="12" cy="13.2" r="3.5"/></symbol>
-<symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V11M9.4 20V5M14.8 20v-6M20.2 20V8"/></symbol>
-<symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.3"/><path d="M2.9 20.3a6.1 6.1 0 0 1 12.2 0"/><path d="M16.5 5.3a3.3 3.3 0 0 1 0 6.4M18 14.6a5.9 5.9 0 0 1 3.2 5.7"/></symbol>
-<symbol id="i-net" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M10.5 7.1 6.5 15.5M13.5 7.1l4 8.4M7.5 18h9"/></symbol>
-<symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M3.4 12h17.2M12 3.4a14 14 0 0 1 0 17.2 14 14 0 0 1 0-17.2z"/></symbol>
-<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.4" width="18" height="13.2" rx="2"/><path d="m3.7 6.8 8.3 5.8 8.3-5.8"/></symbol>
-<symbol id="i-chat" viewBox="0 0 24 24"><path d="M20.8 11.6a7.8 7.8 0 0 1-7.8 7.8H8.7L4.3 22v-5.8a7.8 7.8 0 1 1 16.5-4.6z"/></symbol>
-<symbol id="i-file" viewBox="0 0 24 24"><path d="M13.4 3.4H7.2A1.5 1.5 0 0 0 5.7 4.9v14.2a1.5 1.5 0 0 0 1.5 1.5h9.6a1.5 1.5 0 0 0 1.5-1.5V8.4z"/><path d="M13.4 3.4v5h4.9"/></symbol>
-<symbol id="i-send" viewBox="0 0 24 24"><path d="M20.6 3.4 10.4 13.6M20.6 3.4l-6.5 17.4-3.7-7.2L3.2 9.9z"/></symbol>
-<symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.2 6.1 6.1 2.2-6.1 2.2L12 19.6l-2.2-6.1L3.7 11.3l6.1-2.2z"/></symbol>
-<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.6 4.4 4.4L19 6.6"/></symbol>
-<symbol id="i-x" viewBox="0 0 24 24"><path d="m6.4 6.4 11.2 11.2M17.6 6.4 6.4 17.6"/></symbol>
-<symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3.8 21 20.2H3z"/><path d="M12 9.8v4.2M12 17v.1"/></symbol>
-<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M12 7.2v5l3.2 1.9"/></symbol>
-<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21c3.9-4.5 5.9-7.6 5.9-10.2a5.9 5.9 0 1 0-11.8 0C6.1 13.4 8.1 16.5 12 21z"/><circle cx="12" cy="10.6" r="2.2"/></symbol>
-<symbol id="i-car" viewBox="0 0 24 24"><path d="M4 16.2V12l2-5h12l2 5v4.2z"/><path d="M4 12h16M7 16.2v2.3M17 16.2v2.3"/></symbol>
-<symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.4 14.6A8.7 8.7 0 1 1 9.4 3.6a7.1 7.1 0 0 0 11 11z"/></symbol>
-<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.1"/><path d="M12 2.8v2.3M12 18.9v2.3M2.8 12h2.3M18.9 12h2.3M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4 17 7M7 17l-1.6 1.6"/></symbol>
-<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></symbol>
-<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5.2v13.6M5.2 12h13.6"/></symbol>
-<symbol id="i-down" viewBox="0 0 24 24"><path d="M12 3.6v12.4m0 0 4-4m-4 4-4-4M4 20.4h16"/></symbol>
-<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4.6 12h14M13.4 6.6 18.8 12l-5.4 5.4"/></symbol>
-<symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 5.5 6.5 6.5L9 18.5"/></symbol>
-<symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 8.6 4.7L12 12.4 3.4 7.7z"/><path d="m3.9 12.4 8.1 4.5 8.1-4.5M3.9 16.6l8.1 4.5 8.1-4.5"/></symbol>
-<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 20 6.2v5.9c0 4.9-3.3 7.9-8 9.3-4.7-1.4-8-4.4-8-9.3V6.2z"/><path d="m8.9 11.9 2.2 2.2 4.1-4.3"/></symbol>
-<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
-<symbol id="i-filter" viewBox="0 0 24 24"><path d="M3.5 5.5h17l-6.6 7.6v6.4l-3.8-2v-4.4z"/></symbol>
-<symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 3.6V8h-4.4"/></symbol>
-<symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m14.5 5.5 4 4"/></symbol>
-<symbol id="i-merge" viewBox="0 0 24 24"><path d="M7 3v5a5 5 0 0 0 5 5h5"/><path d="M7 21v-5a5 5 0 0 1 5-5h5"/><path d="m14.5 10 3 3-3 3"/></symbol>
-<symbol id="i-kanban" viewBox="0 0 24 24"><rect x="3" y="4" width="5" height="16" rx="1.4"/><rect x="9.5" y="4" width="5" height="11" rx="1.4"/><rect x="16" y="4" width="5" height="7" rx="1.4"/></symbol>
-<symbol id="i-gantt" viewBox="0 0 24 24"><path d="M4 6h8M8 12h9M12 18h8M4 4v16"/></symbol>
-<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H19v16.5H5.5A1.5 1.5 0 0 0 4 21z"/><path d="M4 17.5A1.5 1.5 0 0 1 5.5 16H19"/></symbol>
-<symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13.2 2.5 4.6 13.4h6.1l-.9 8.1 8.6-10.9h-6.1z"/></symbol>
-<symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
-<symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5 19 12 7 19.5z"/></symbol>
-<symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2.8" width="6" height="10.6" rx="3"/><path d="M5.2 11.2a6.8 6.8 0 0 0 13.6 0M12 18v3.2"/></symbol>
-<symbol id="i-card" viewBox="0 0 24 24"><rect x="2.8" y="5.4" width="18.4" height="13.2" rx="2"/><path d="M2.8 10h18.4M6.5 14.6h3.4"/></symbol>
-<symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V3.6c4-2 8 2 12 0v10c-4 2-8-2-12 0"/></symbol>
-<symbol id="i-handshake" viewBox="0 0 24 24"><path d="m3 12 4-4 5 4 5-4 4 4"/><path d="M7 8v8l5 4 5-4V8"/></symbol>
-<symbol id="i-doc-check" viewBox="0 0 24 24"><path d="M13.4 3.4H7.2A1.5 1.5 0 0 0 5.7 4.9v14.2a1.5 1.5 0 0 0 1.5 1.5h9.6a1.5 1.5 0 0 0 1.5-1.5V8.4z"/><path d="m9.2 13.6 1.9 1.9 3.8-4"/></symbol>
-<symbol id="i-pause" viewBox="0 0 24 24"><path d="M8.5 4.5v15M15.5 4.5v15"/></symbol>
-</svg>
 
-<div class="app">
-
-<!-- ================= SIDEBAR ================= -->
-<aside class="side" id="side">
-  <div class="brand">
-    <div class="mk"><svg viewBox="0 0 24 24"><path d="M4 15.5 9.5 5l4 7.5L17 8l3 7.5"/><path d="M3.5 19.5h17"/></svg></div>
-    <div>
-      <b>YeeSales AI</b>
-      <small>Global Sales OS</small>
-    </div>
-  </div>
-
-  <nav class="nav" id="nav">
-    <div class="mod"><span class="no">01</span>Core</div>
-    <a class="on" data-v="cockpit"><span class="ic"><svg class="ico"><use href="#i-cockpit"/></svg></span>AI Sales Cockpit</a>
-
-    <div class="mod"><span class="no">02</span>Acquire</div>
-    <a data-v="leads"><span class="ic"><svg class="ico"><use href="#i-target"/></svg></span>Lead Generation</a>
-
-    <div class="mod"><span class="no">03</span>Engage</div>
-    <a data-v="event"><span class="ic"><svg class="ico"><use href="#i-flag"/></svg></span>Event Intelligence</a>
-    <a class="sub" data-v="travel"><span class="ic"><svg class="ico"><use href="#i-plane"/></svg></span>Travel Planner</a>
-
-    <div class="mod"><span class="no">04</span>Intelligence</div>
-    <a data-v="account"><span class="ic"><svg class="ico"><use href="#i-building"/></svg></span>Customer 360</a>
-
-    <div class="mod"><span class="no">05</span>Execute</div>
-    <a data-v="pipeline"><span class="ic"><svg class="ico"><use href="#i-kanban"/></svg></span>Pipeline</a>
-    <a class="sub" data-v="roadmap"><span class="ic"><svg class="ico"><use href="#i-gantt"/></svg></span>Deal Roadmap</a>
-
-    <div class="mod"><span class="no">06</span>Automation</div>
-    <a data-v="agents"><span class="ic"><svg class="ico"><use href="#i-bot"/></svg></span>AI Workforce</a>
-    <a class="sub" data-v="integrations"><span class="ic"><svg class="ico"><use href="#i-db"/></svg></span>Integrations</a>
+<aside class="side">
+  <div class="logo"><div class="mark"><div class="sq">销</div><div><b>YeeSales AI</b><small>我的 AI 销售助理</small></div></div></div>
+  <nav id="nav">
+    <div class="cap">我的工作</div>
+    <a class="on" data-v="home"><span class="ic"></span>Home · 工作台</a>
+    <a data-v="find"><span class="ic"></span>Find Customers <span class="n">20</span></a>
+    <a data-v="event"><span class="ic"></span>Events &amp; Travel</a>
+    <div class="cap">我的客户</div>
+    <a data-v="customers"><span class="ic"></span>My Customers</a>
+    <a data-v="pipeline"><span class="ic"></span>My Pipeline</a>
+    <div class="cap">助理</div>
+    <a data-v="assistant"><span class="ic"></span>AI Assistant</a>
   </nav>
-
-  <div class="foot">
-    <div class="av">JZ</div>
-    <div>
-      <div class="nm">Jasmine Zhou</div>
-      <div class="rl">BD · Overseas Subsidiary</div>
-    </div>
-  </div>
+  <div class="me"><b>Jasmine Zhou</b><br>BD · Overseas Subsidiary</div>
 </aside>
-<div style="position:fixed;left:12px;bottom:56px;z-index:99;background:#fff;border:1px solid #E5E8EC;border-radius:8px;padding:6px 10px;font-size:12px"><a href="index.html" style="color:#00864A;text-decoration:none">返回作品导览</a> · <a href="proposal.html" style="color:#00864A;text-decoration:none">作品说明</a></div>
 
+<div class="main">
+  <div class="top">
+    <span class="crumb"><b id="crumb-v">Home</b> · YeeSales AI</span>
+    <div class="ask" onclick="go('assistant')"><span class="spark">AI</span> 问 AI：帮我找 20 家有中国供应商付款需求的 PSP…</div>
+    <span class="sim">Simulated data</span>
+    <div class="avatar">JZ</div>
+  </div>
+  <div class="page">
 
-<!-- ================= MAIN ================= -->
-<main class="main">
-  <header class="topbar">
-    <button class="menu-btn icon-btn" onclick="document.getElementById('side').classList.toggle('open')"><svg class="ico"><use href="#i-menu"/></svg></button>
-    <div class="crumb">
-      <span class="hide-sm">YeeSales AI</span>
-      <span class="sp hide-sm">/</span>
-      <b id="tb-title">AI Sales Cockpit</b>
+  <!-- ============ HOME ============ -->
+  <section class="view on" id="v-home">
+    <div class="hello"><h1>早上好，Jasmine</h1><span class="sub">11 月 16 日 周一 · 距 SFF 2026 开展还有 2 天</span></div>
+    <div class="kpis" style="margin-top:16px">
+      <div><b>6</b><span>今日待办 · 2 项今天到期</span></div>
+      <div><b>3</b><span>本周客户会议</span></div>
+      <div><b>9</b><span>在谈商机</span></div>
+      <div><b>2</b><span>AI 草稿待你确认</span></div>
     </div>
 
-    <div class="cmd">
-      <svg class="ico sm"><use href="#i-spark"/></svg>
-      <input id="cmdInput" placeholder="Ask YeeSales AI — find leads, prep a trip, draft follow-ups…">
-      <kbd>⌘K</kbd>
-    </div>
-
-    <div class="tb-right">
-      <span class="sim-pill" title="All data in this prototype is fictional">Simulated data</span>
-      <button class="icon-btn" onclick="openRail()" title="AI Activity">
-        <svg class="ico"><use href="#i-bolt"/></svg><span class="dot-live"></span>
-      </button>
-      <button class="icon-btn" title="Notifications"><svg class="ico"><use href="#i-chat"/></svg></button>
-      <button class="icon-btn" title="Help"><svg class="ico"><use href="#i-book"/></svg></button>
-    </div>
-  </header>
-
-  <div class="content">
-
-  <!-- =============== 01 COCKPIT =============== -->
-  <section class="page" id="v-cockpit">
-    <div class="ph">
+    <div class="grid g2" style="margin-top:18px">
+      <div class="card pri">
+        <h2 style="margin-top:0">Today's Priorities <span class="pill p-g">AI 排序</span></h2>
+        <div class="item"><span class="dot" style="background:var(--red)"></span><div class="t"><b>跟进 AtlasPay Global — 2 天前刚开完会</b><p>会上答应了 China Payout 方案，还没发。再等就冷了。</p></div><button class="btn sm ghost" onclick="go('customers')">打开客户</button></div>
+        <div class="item"><span class="dot" style="background:var(--red)"></span><div class="t"><b>准备明天与 Meridian Payments（阿联酋 MSB）的会议</b><p>AI 已生成会议简报：对方关注 VA 开户与 UBO 结构，先看 3 分钟。</p></div><button class="btn sm ghost" onclick="go('assistant')">看简报</button></div>
+        <div class="item"><span class="dot" style="background:var(--amber)"></span><div class="t"><b>审核 SFF 带来的 3 条新线索</b><p>Harbour Remit、Sable Financial、Mekong Pay，AI 初筛都通过。</p></div><button class="btn sm ghost" onclick="go('find')">看线索</button></div>
+        <div class="item"><span class="dot" style="background:var(--amber)"></span><div class="t"><b>批准 2 封 AI 起草的英文跟进邮件</b><p>分别发给 AtlasPay 和 Pacific CrossPay，草稿已备好。</p></div><button class="btn sm ghost" onclick="go('assistant')">去确认</button></div>
+        <div class="item"><span class="dot" style="background:var(--g)"></span><div class="t"><b>确认 SFF 行程：航班、酒店、20 家目标名单</b><p>行程规划已生成，确认后写入日历（不会通知任何人）。</p></div><button class="btn sm ghost" onclick="go('event')">看行程</button></div>
+        <div class="item"><span class="dot" style="background:var(--g)"></span><div class="t"><b>Nimbus Pay · 尼日利亚 PSP，等第二次触达</b><p>展会后第 9 天，建议今天发 LinkedIn 定向消息。</p></div><button class="btn sm ghost" onclick="go('find')">看线索</button></div>
+      </div>
       <div>
-        <h1>AI Sales Cockpit</h1>
-        <div class="sub">YeeSales AI · Your AI-powered Global Sales Operating System　—　今天有 <b>5</b> 项跟进已超期，AI 已排好优先级。</div>
-      </div>
-      <div class="acts">
-        <button class="btn ghost sm" onclick="toast('Demo：报表导出为模拟')"><svg class="ico sm"><use href="#i-down"/></svg>Export</button>
-        <button class="btn sm" onclick="go('event')"><svg class="ico sm"><use href="#i-spark"/></svg>Open SFF debrief</button>
-      </div>
-    </div>
-
-    <div class="grid g5">
-      <div class="card kpi">
-        <div class="k"><svg class="ico sm"><use href="#i-target"/></svg>Active leads</div>
-        <div class="v num">32</div>
-        <div class="d"><span class="up">+21</span> from SFF 2026</div>
-      </div>
-      <div class="card kpi">
-        <div class="k"><svg class="ico sm"><use href="#i-handshake"/></svg>Qualified opps</div>
-        <div class="v num">9</div>
-        <div class="d"><span class="up">3</span> at Tier A</div>
-      </div>
-      <div class="card kpi">
-        <div class="k"><svg class="ico sm"><use href="#i-chart"/></svg>Pipeline value</div>
-        <div class="v num">$2.4<small>M</small></div>
-        <div class="d">weighted <span style="color:var(--ink3)">$860K</span></div>
-      </div>
-      <div class="card kpi">
-        <div class="k"><svg class="ico sm"><use href="#i-cal"/></svg>Meetings this week</div>
-        <div class="v num">6</div>
-        <div class="d">2 need prep briefs</div>
-      </div>
-      <div class="card kpi">
-        <div class="k"><svg class="ico sm"><use href="#i-clock"/></svg>Overdue follow-ups</div>
-        <div class="v num" style="color:var(--amber)">5</div>
-        <div class="d"><span class="wn">2</span> over 7 days</div>
-      </div>
-    </div>
-
-    <div class="card mt" style="border-color:var(--brand-100);background:linear-gradient(90deg,#F6FCF9,#fff)">
-      <div class="cb" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-        <div style="width:28px;height:28px;border-radius:7px;background:var(--brand-50);color:var(--brand-6);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-          <svg class="ico"><use href="#i-spark"/></svg>
+        <div class="card" style="margin-bottom:14px">
+          <h2 style="margin-top:0">My Meetings <span class="more" onclick="go('event')">全部日程 →</span></h2>
+          <div class="meet"><span class="tm">明天<br>14:00</span><div><b>Meridian Payments · 线上</b><p>VA 开户需求确认 · 简报已生成</p></div></div>
+          <div class="meet"><span class="tm">11/17<br>10:30</span><div><b>SFF 展馆 · AtlasPay Global</b><p>展位 B42 · 已约 · 谈 China Payout 方案</p></div></div>
+          <div class="meet"><span class="tm">11/17<br>15:00</span><div><b>SFF 展馆 · Pacific CrossPay</b><p>展位 D08 · 已约 · 菲律宾汇款走廊</p></div></div>
         </div>
-        <div style="flex:1;min-width:220px">
-          <div style="font-size:12.5px;font-weight:600">SFF 2026 debrief is ready for review</div>
-          <div class="note">32 companies · 21 interactions · 9 qualified opportunities · 26 tasks and 12 email drafts pending approval.</div>
-        </div>
-        <div style="display:flex;gap:6px">
-          <button class="btn ghost sm" onclick="go('integrations')">Review sources</button>
-          <button class="btn sm" onclick="go('event')">Open debrief</button>
+        <div class="card">
+          <h2 style="margin-top:0">My Pipeline <span class="more" onclick="go('pipeline')">看板 →</span></h2>
+          <div class="meet"><div><b>AtlasPay · China Payout</b><p>Proposal · 预估 $480K · 周五前发方案</p></div></div>
+          <div class="meet"><div><b>Meridian · VA 开户</b><p>Negotiation · 预估 $820K · 明天会议推进</p></div></div>
+          <div class="meet"><div><b>Pacific CrossPay · Collection</b><p>Qualified · 预估 $440K · 展会上见面</p></div></div>
         </div>
       </div>
     </div>
-
-    <div class="grid g-32 mt">
-      <div class="card">
-        <div class="ch">
-          <h3><svg class="ico sm" style="color:var(--brand-6)"><use href="#i-spark"/></svg>AI recommendations</h3>
-          <div class="r">ranked by expected impact · explainable</div>
-        </div>
-        <div class="rows" style="padding:2px 16px 6px">
-          <div class="row">
-            <div class="g">
-              <div class="t">Send AtlasPay Global the China Payout proposal today</div>
-              <div class="s">Fit score 94 · deal stage Proposal → Negotiation. They asked for T+0 settlement <b>including weekends</b>; the written cut-off policy is the blocker.</div>
-            </div>
-            <div class="end"><span class="b b-r">P1</span><button class="btn xs ghost" onclick="openDraft('a1')">Open draft</button></div>
-          </div>
-          <div class="row">
-            <div class="g">
-              <div class="t">Chase Meridian Payments for UBO disclosure depth</div>
-              <div class="s">Compliance is waiting on 1 field. Deal has been idle 9 days — the 14-day silent alarm will trigger on 24 Nov.</div>
-            </div>
-            <div class="end"><span class="b b-r">P1</span><button class="btn xs ghost" onclick="go('pipeline')">Pipeline</button></div>
-          </div>
-          <div class="row">
-            <div class="g">
-              <div class="t">Re-contact 4 accounts from SFF with no follow-up yet</div>
-              <div class="s">Pacific CrossPay, Kestrel Acquiring, Orinoco Pay, Tanuki Wallet. All had booth conversations but no email sent.</div>
-            </div>
-            <div class="end"><span class="b b-a">P2</span><button class="btn xs ghost" onclick="go('event');setTab('event','t-accounts')">Accounts</button></div>
-          </div>
-          <div class="row">
-            <div class="g">
-              <div class="t">Prepare a Singapore trip note for Money20/20 Asia</div>
-              <div class="s">Mar 2027 · 6 target accounts within 2 km of Marina Bay. AI can draft the Feishu travel doc.</div>
-            </div>
-            <div class="end"><span class="b b-n">P3</span><button class="btn xs ghost" onclick="go('travel')">Travel</button></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="ch">
-          <h3><svg class="ico sm" style="color:var(--brand-6)"><use href="#i-bolt"/></svg>AI agent activity</h3>
-          <div class="r"><button class="btn xs ghost" onclick="openRail()">View all</button></div>
-        </div>
-        <div class="rows" style="padding:2px 16px 6px" id="cockpitAgents"></div>
-      </div>
-    </div>
-
-    <div class="grid g-23 mt">
-      <div class="card">
-        <div class="ch"><h3>Pipeline by stage</h3><div class="r">9 opportunities · $2.4M</div></div>
-        <div class="cb" id="funnel"></div>
-      </div>
-      <div class="card">
-        <div class="ch"><h3>Recent interactions</h3><div class="r">last 7 days · 6 sources</div></div>
-        <div class="tw">
-          <table class="t">
-            <thead><tr><th>Company</th><th>Channel</th><th>Summary</th><th>When</th></tr></thead>
-            <tbody>
-              <tr class="cursor" onclick="openAccount('atlas')">
-                <td><span class="nm">AtlasPay Global</span><span class="sm2">Kenya · PSP</span></td>
-                <td><span class="sic" style="background:var(--brand-50);color:var(--brand-7)"><svg class="ico"><use href="#i-mic"/></svg></span></td>
-                <td>Booth meeting 38 min — China Payout, T+0 incl. weekends</td>
-                <td class="num" style="color:var(--ink4)">Nov 06</td>
-              </tr>
-              <tr class="cursor" onclick="openAccount('meridian')">
-                <td><span class="nm">Meridian Payments</span><span class="sm2">UAE · MSB</span></td>
-                <td><span class="sic" style="background:var(--blue-bg);color:var(--blue)"><svg class="ico"><use href="#i-mail"/></svg></span></td>
-                <td>Re: VA onboarding — asked for UBO structure chart</td>
-                <td class="num" style="color:var(--ink4)">Nov 05</td>
-              </tr>
-              <tr class="cursor" onclick="openAccount('pacific')">
-                <td><span class="nm">Pacific CrossPay</span><span class="sm2">Philippines · Remittance</span></td>
-                <td><span class="sic" style="background:var(--violet-bg);color:var(--violet)"><svg class="ico"><use href="#i-chat"/></svg></span></td>
-                <td>WhatsApp: asked whether PHP→CNY is supported at scale</td>
-                <td class="num" style="color:var(--ink4)">Nov 05</td>
-              </tr>
-              <tr class="cursor" onclick="openAccount('harbour')">
-                <td><span class="nm">Harbour Remit</span><span class="sm2">Hong Kong, China · MSO</span></td>
-                <td><span class="sic" style="background:var(--brand-50);color:var(--brand-7)"><svg class="ico"><use href="#i-file"/></svg></span></td>
-                <td>Feishu meeting transcript — 2 opportunities identified</td>
-                <td class="num" style="color:var(--ink4)">Nov 04</td>
-              </tr>
-              <tr class="cursor" onclick="openAccount('sable')">
-                <td><span class="nm">Sable Financial</span><span class="sm2">UK · EMI</span></td>
-                <td><span class="sic" style="background:var(--line2);color:var(--ink3)"><svg class="ico"><use href="#i-card"/></svg></span></td>
-                <td>Business card scanned — contact created, pending approval</td>
-                <td class="num" style="color:var(--ink4)">Nov 04</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <div class="fn">
-      YeeSales AI · Product prototype for YEE AI Hackathon 2.0 · All companies, contacts and figures are fictional and marked as simulated ·
-      External actions (email send, Feishu sync, event-app outreach) are never executed by this prototype.
-    </div>
-  </section>
-  <!-- =============== 02 LEAD GENERATION =============== -->
-  <section class="page" id="v-leads" hidden>
-    <div class="ph">
-      <div>
-        <h1>Lead Generation</h1>
-        <div class="sub">四类获客渠道汇入同一张客户表，AI 负责初筛、去重与打分。</div>
-      </div>
-      <div class="acts">
-        <button class="btn ghost sm" onclick="toast('Filter — demo only')"><svg class="ico sm"><use href="#i-filter"/></svg>Filter</button>
-        <button class="btn sm" onclick="toast('AI prospecting queued (simulated)')"><svg class="ico sm"><use href="#i-spark"/></svg>Run AI prospecting</button>
-      </div>
-    </div>
-
-    <div class="grid g4">
-      <div class="card kpi">
-        <div class="k"><svg class="ico sm"><use href="#i-flag"/></svg>Trade shows &amp; events</div>
-        <div class="v num">21</div>
-        <div class="d">SFF 2026 · 9 qualified</div>
-      </div>
-      <div class="card kpi">
-        <div class="k"><svg class="ico sm"><use href="#i-users"/></svg>Customer referral</div>
-        <div class="v num">6</div>
-        <div class="d">reply rate <span class="up">78%</span></div>
-      </div>
-      <div class="card kpi">
-        <div class="k"><svg class="ico sm"><use href="#i-globe"/></svg>Digital &amp; media</div>
-        <div class="v num">13</div>
-        <div class="d">LinkedIn · website · press</div>
-      </div>
-      <div class="card kpi">
-        <div class="k"><svg class="ico sm"><use href="#i-spark"/></svg>AI prospecting</div>
-        <div class="v num">8</div>
-        <div class="d">ICP matched, not yet contacted</div>
-      </div>
-    </div>
-
-    <div class="grid g-32 mt">
-      <div class="card">
-        <div class="ch">
-          <h3>Unified lead database</h3>
-          <div class="r">48 leads · 3 duplicates auto-merged · 2 awaiting review</div>
-        </div>
-        <div class="tw">
-          <table class="t">
-            <thead><tr><th>Company</th><th>Country</th><th>Type</th><th>Source</th><th class="r">Fit</th><th>Tier</th><th>Next action</th></tr></thead>
-            <tbody>
-              <tr class="cursor" onclick="openAccount('atlas')">
-                <td><span class="nm">AtlasPay Global</span><span class="sm2">B2B cross-border payments</span></td>
-                <td>Kenya</td><td>PSP</td><td><span class="b b-n">Event · SFF</span></td>
-                <td class="r"><span class="score"><span class="n">94</span><span class="bar"><i style="width:94%"></i></span></span></td>
-                <td><span class="tier a">A</span></td>
-                <td>Send China Payout proposal</td>
-              </tr>
-              <tr class="cursor" onclick="openAccount('meridian')">
-                <td><span class="nm">Meridian Payments</span><span class="sm2">Money services business</span></td>
-                <td>UAE</td><td>MSB</td><td><span class="b b-v">Referral</span></td>
-                <td class="r"><span class="score"><span class="n">88</span><span class="bar"><i style="width:88%"></i></span></span></td>
-                <td><span class="tier a">A</span></td>
-                <td>Request UBO structure chart</td>
-              </tr>
-              <tr class="cursor" onclick="openAccount('pacific')">
-                <td><span class="nm">Pacific CrossPay</span><span class="sm2">Remittance &amp; payout</span></td>
-                <td>Philippines</td><td>Remittance</td><td><span class="b b-n">Event · SFF</span></td>
-                <td class="r"><span class="score"><span class="n">86</span><span class="bar"><i style="width:86%"></i></span></span></td>
-                <td><span class="tier a">A</span></td>
-                <td>Confirm PHP→CNY corridor</td>
-              </tr>
-              <tr class="cursor" onclick="openAccount('nimbus')">
-                <td><span class="nm">Nimbus Pay</span><span class="sm2">Merchant acquiring</span></td>
-                <td>Nigeria</td><td>PSP</td><td><span class="b b-n">Event · SFF</span></td>
-                <td class="r"><span class="score"><span class="n">79</span><span class="bar"><i class="mid" style="width:79%"></i></span></span></td>
-                <td><span class="tier b">B</span></td>
-                <td>Send meeting recap</td>
-              </tr>
-              <tr class="cursor" onclick="openAccount('harbour')">
-                <td><span class="nm">Harbour Remit</span><span class="sm2">MSO licence, HK</span></td>
-                <td>Hong Kong, China</td><td>MSO</td><td><span class="b b-v">Partner</span></td>
-                <td class="r"><span class="score"><span class="n">74</span><span class="bar"><i class="mid" style="width:74%"></i></span></span></td>
-                <td><span class="tier b">B</span></td>
-                <td>Intro to risk team</td>
-              </tr>
-              <tr class="cursor" onclick="openAccount('sable')">
-                <td><span class="nm">Sable Financial</span><span class="sm2">E-money institution</span></td>
-                <td>United Kingdom</td><td>EMI</td><td><span class="b b-n">Event · SFF</span></td>
-                <td class="r"><span class="score"><span class="n">71</span><span class="bar"><i class="mid" style="width:71%"></i></span></span></td>
-                <td><span class="tier b">B</span></td>
-                <td>Follow up on card scan</td>
-              </tr>
-              <tr class="cursor" onclick="openAccount('kestrel')">
-                <td><span class="nm">Kestrel Acquiring</span><span class="sm2">Card acquirer</span></td>
-                <td>Poland</td><td>Acquirer</td><td><span class="b b-n">Event · SFF</span></td>
-                <td class="r"><span class="score"><span class="n">63</span><span class="bar"><i class="low" style="width:63%"></i></span></span></td>
-                <td><span class="tier c">C</span></td>
-                <td>Qualify ICP fit</td>
-              </tr>
-              <tr class="cursor" onclick="openAccount('orinoco')">
-                <td><span class="nm">Orinoco Pay</span><span class="sm2">Regional PSP</span></td>
-                <td>Colombia</td><td>PSP</td><td><span class="b b-n">Event · SFF</span></td>
-                <td class="r"><span class="score"><span class="n">58</span><span class="bar"><i class="low" style="width:58%"></i></span></span></td>
-                <td><span class="tier c">C</span></td>
-                <td>Nurture sequence</td>
-              </tr>
-              <tr class="cursor" onclick="openAccount('tanuki')">
-                <td><span class="nm">Tanuki Wallet</span><span class="sm2">Consumer wallet</span></td>
-                <td>Japan</td><td>Wallet</td><td><span class="b b-b">Digital</span></td>
-                <td class="r"><span class="score"><span class="n">52</span><span class="bar"><i class="low" style="width:52%"></i></span></span></td>
-                <td><span class="tier c">C</span></td>
-                <td>Nurture sequence</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="cb" style="border-top:1px solid var(--line2);padding:10px 16px">
-          <div class="hint"><svg class="ico"><use href="#i-merge"/></svg>AI merged 3 duplicates (same domain, different contact spelling). Merged records keep the original source IDs in the audit log.</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="ch">
-          <h3><svg class="ico sm" style="color:var(--brand-6)"><use href="#i-shield"/></svg>AI lead qualification</h3>
-          <div class="r">AtlasPay Global</div>
-        </div>
-        <div class="cb">
-          <div class="note" style="margin-bottom:10px">六项判定，每一项都能点开看原文出处。不满足的会标红，而不是简单给一个分数。</div>
-          <div class="rows">
-            <div class="row"><div class="g"><div class="t">持牌 PSP / MSB / EMI</div><div class="s">Kenya CBK payment service provider licence · PS-2019-0442</div></div><div class="end"><span class="b b-g">Pass</span></div></div>
-            <div class="row"><div class="g"><div class="t">有跨境汇款或收单业务</div><div class="s">B2B cross-border collection, 14 corridors</div></div><div class="end"><span class="b b-g">Pass</span></div></div>
-            <div class="row"><div class="g"><div class="t">服务中国贸易商 / 有对华付款需求</div><div class="s">62% of volume is supplier payment into Guangdong &amp; Zhejiang</div></div><div class="end"><span class="b b-g">Pass</span></div></div>
-            <div class="row"><div class="g"><div class="t">具备本地收款或 VA 能力</div><div class="s">Local collection in KES, UGX, TZS</div></div><div class="end"><span class="b b-g">Pass</span></div></div>
-            <div class="row"><div class="g"><div class="t">有中国市场扩张计划</div><div class="s">No public statement found — inferred from corridor mix only</div></div><div class="end"><span class="b b-a">Inferred</span></div></div>
-            <div class="row"><div class="g"><div class="t">有明确合作触发事件</div><div class="s">Booth meeting 6 Nov, asked for T+0 payout terms</div></div><div class="end"><span class="b b-g">Pass</span></div></div>
-          </div>
-          <div class="divider"></div>
-          <div class="metrics">
-            <div class="m"><div class="mv num">94</div><div class="mk2">Fit score</div></div>
-            <div class="m"><div class="mv num">A</div><div class="mk2">Tier</div></div>
-            <div class="m"><div class="mv num">2</div><div class="mk2">Open questions</div></div>
-          </div>
-          <button class="btn ghost sm mt" style="width:100%;justify-content:center" onclick="openScore()">See how 94 was calculated</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="fn">Leads are fictional demo records. Lead source, licence details and volume figures are illustrative and must not be treated as verified.</div>
+    <div class="note" style="margin-top:16px">提示：不确定下一步做什么时，直接在顶部输入框问 AI，例如「帮我准备明天会议」「把 AtlasPay 的沟通汇总一下」。</div>
   </section>
 
-  <!-- =============== 03 EVENT INTELLIGENCE =============== -->
-  <section class="page" id="v-event" hidden>
-    <div class="ph">
-      <div>
-        <div class="back" onclick="go('cockpit')"><svg class="ico sm"><use href="#i-arrow"/></svg> AI Sales Cockpit</div>
-        <h1>Event Intelligence <span class="b b-g">Debrief ready</span></h1>
-        <div class="sub">Singapore FinTech Festival 2026 · 4–6 Nov 2026 · Singapore Expo · Owner Jasmine Zhou</div>
-      </div>
-      <div class="acts">
-        <button class="btn ghost sm" onclick="go('integrations')"><svg class="ico sm"><use href="#i-db"/></svg>Review sources</button>
-        <button class="btn ghost sm" onclick="toast('Export is simulated in this prototype')"><svg class="ico sm"><use href="#i-down"/></svg>Export</button>
-        <button class="btn sm" onclick="runDebrief()"><svg class="ico sm"><use href="#i-refresh"/></svg>Re-run AI debrief</button>
-      </div>
+  <!-- ============ FIND CUSTOMERS ============ -->
+  <section class="view" id="v-find">
+    <h1>Find Customers · 我要开发什么样的客户？</h1>
+    <p class="sub">选一个获客方式，AI 负责检索、去重和初筛，你只看值得联系的人。</p>
+    <div class="chan" style="margin-top:16px">
+      <div class="c on"><b>展会与活动</b><p>下一步：SFF 2026 有 20 家目标 PSP。按中国付款需求排序。</p></div>
+      <div class="c"><b>网络检索</b><p>输入一句话需求，例如「东南亚做 B2B 收单的钱包」，AI 生成名单。</p></div>
+      <div class="c"><b>LinkedIn / 社交媒体</b><p>按地区和业务类型找决策人，生成首次触达话术。</p></div>
+      <div class="c"><b>转介绍</b><p>记录谁引荐了谁，跟进结果自动回填到引荐人。</p></div>
+    </div>
+    <div class="bar">
+      <div><b>20 家目标客户</b><span class="mut">按中国付款需求排序，先看最值得约的 7 家</span></div>
+      <div><button class="btn ghost sm" onclick="alert('演示：展开全部 20 家，按 A/B/C 分级')">查看全部 20 家</button>
+        <button class="btn sm" onclick="go('event')">AI 批量约会议</button></div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl-cust">
+        <tr><th>公司</th><th>国家</th><th>业务类型</th><th>机会</th><th>中国付款潜力</th><th>AI 建议</th><th>下一步</th><th style="width:96px"></th></tr>
+        <tr><td><b>AtlasPay Global</b><br><span style="color:#9AA1AC;font-size:11px">atlaspay.example</span></td><td>肯尼亚</td><td>PSP</td><td>China Payout</td><td class="fit hi">高 · 有对非采购付款需求</td><td>展会见过的 9 家里排第 1，24 小时内跟进</td><td>今天发方案</td><td><button class="btn sm">加入 Pipeline</button></td></tr>
+        <tr><td><b>Harbour Remit</b></td><td>中国香港</td><td>MSO</td><td>Collection + Payout</td><td class="fit hi">高 · 中港汇款走廊</td><td>新线索 · 制裁初筛通过</td><td>展会首触达</td><td><button class="btn sm ghost">收藏</button></td></tr>
+        <tr><td><b>Pacific CrossPay</b></td><td>菲律宾</td><td>Remittance</td><td>Collection</td><td class="fit hi">高 · PHP→CNY 走廊</td><td>已约 SFF 展会见面</td><td>11/17 展位见面</td><td><button class="btn sm ghost">看详情</button></td></tr>
+        <tr><td><b>Sable Financial</b></td><td>英国</td><td>EMI</td><td>Global Collection</td><td class="fit md">中 · 先补牌照材料</td><td>等对方回牌照问询，别催</td><td>11/20 跟进</td><td><button class="btn sm ghost">收藏</button></td></tr>
+        <tr><td><b>Nimbus Pay</b></td><td>尼日利亚</td><td>PSP</td><td>Collection</td><td class="fit md">中 · 有 B2B 进口商客户群</td><td>展会后第 9 天未回，换渠道触达</td><td>今天 LinkedIn</td><td><button class="btn sm ghost">看详情</button></td></tr>
+        <tr><td><b>Mekong Pay</b></td><td>越南</td><td>Wallet</td><td>Payout</td><td class="fit md">中 · 供应链付款需求待确认</td><td>新线索 · AI 推断月交易量 $300K（待确认）</td><td>SFF 现场约见</td><td><button class="btn sm ghost">收藏</button></td></tr>
+        <tr><td><b>Kestrel Acquiring</b></td><td>波兰</td><td>Acquirer</td><td>Collection</td><td class="fit lo">低 · 欧洲收单为主</td><td>暂缓，等 SFF 之后复盘</td><td>观察</td><td><button class="btn sm ghost">收藏</button></td></tr>
+      </table>
+    </div>
+    <div class="note" style="margin-top:12px">「中国付款潜力」由 AI 根据公开业务信息推断，标注为推断的数值需要你确认后才写入 CRM。</div>
+  </section>
+
+  <!-- ============ EVENTS & TRAVEL ============ -->
+  <section class="view" id="v-event">
+    <h1>Events &amp; Travel · 新加坡 SFF 2026</h1>
+    <p class="sub">Singapore FinTech Festival · 11 月 18–20 日 · Expo · 我的角色：参展 BD</p>
+    <div class="etabs" style="margin-top:16px">
+      <button class="on" data-p="eb">① 展前 · 我要准备好</button>
+      <button data-p="ed">② 展中 · 现场帮我记</button>
+      <button data-p="ea">③ 展后 · 帮我整理跟进</button>
     </div>
 
-    <div class="tabs" id="tabs-event">
-      <button class="on" data-pane="t-overview">Overview</button>
-      <button data-pane="t-accounts">Account Intelligence<span class="b b-n">32</span></button>
-      <button data-pane="t-meetings">Meeting Insights<span class="b b-n">21</span></button>
-      <button data-pane="t-actions">Action Center<span class="b b-a">18</span></button>
-      <button data-pane="t-reports">Reports &amp; Export</button>
-    </div>
-
-    <!-- ---- overview ---- -->
-    <div class="pane on" id="t-overview">
-      <div class="grid g5">
-        <div class="card kpi"><div class="k">Companies identified</div><div class="v num">32</div><div class="d">21 new to CRM</div></div>
-        <div class="card kpi"><div class="k">Business interactions</div><div class="v num">21</div><div class="d">14 with recordings</div></div>
-        <div class="card kpi"><div class="k">New leads</div><div class="v num">21</div><div class="d">9 already qualified</div></div>
-        <div class="card kpi"><div class="k">Qualified opportunities</div><div class="v num">9</div><div class="d">3 at Tier A</div></div>
-        <div class="card kpi"><div class="k">Follow-up tasks</div><div class="v num">26</div><div class="d">5 overdue</div></div>
-      </div>
-
-      <div class="grid g-32 mt">
+    <div class="epane on" id="p-eb">
+      <div class="grid g2">
         <div class="card">
-          <div class="ch">
-            <h3><svg class="ico sm" style="color:var(--brand-6)"><use href="#i-spark"/></svg>AI executive summary</h3>
-            <div class="r">generated 7 Nov 09:12 · 14 sources</div>
-          </div>
-          <div class="cb" style="font-size:12.5px;line-height:1.75;color:var(--ink2)">
-            <p style="margin:0 0 9px">三天里有效接触 21 家机构，其中 9 家进入合格商机。结构性变化很清楚：<b>客户不再问「能不能收人民币」，而是直接问「出款多久到」</b>——通道存在这件事已经是共识，竞争点整体后移到时效与稳定性。</p>
-            <p style="margin:0 0 9px">第二件值得注意的事：<b>合规材料正在变成销售武器</b>。两家欧洲机构在看到资质包之前只肯聊流程，递过去之后态度明显松动。谁先把合规做成一页纸，谁就先拿到对话权。</p>
-            <p style="margin:0">风险面：<b>我们至少被三家问到同区域已上线客户</b>，目前只能给脱敏描述。这是下一次展会前必须补的功课。</p>
-          </div>
-          <div class="cb" style="border-top:1px solid var(--line2);padding-top:11px">
-            <div class="hint"><svg class="ico"><use href="#i-warn"/></svg>Summary is AI-drafted from source material and should be reviewed by the owner before being shared internally.</div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="ch"><h3>Lead distribution</h3><div class="r">by tier</div></div>
-          <div class="cb" id="tierBars"></div>
-          <div class="divider" style="margin:2px 16px 0"></div>
-          <div class="ch" style="border-top:1px solid var(--line2);border-bottom:none"><h3 style="font-size:12px">Opportunity by product</h3></div>
-          <div class="cb" style="padding-top:0" id="prodBars"></div>
-        </div>
-      </div>
-
-      <div class="grid g-32 mt">
-        <div class="card">
-          <div class="ch"><h3><svg class="ico sm" style="color:var(--brand-6)"><use href="#i-bulb"/></svg>AI strategic insights</h3><div class="r">4 findings · evidence linked</div></div>
-          <div class="rows" style="padding:2px 16px 8px">
-            <div class="row">
-              <div class="g"><div class="t">Demand has shifted from access to speed</div>
-                <div class="s">Three tier-A accounts opened with settlement timing, not capability. Move T+0 to page 1 of the proposal deck.</div>
-                <div class="mono" style="color:var(--ink4);margin-top:2px">evidence: MTG-0042 · MTG-0051 · MTG-0058</div></div>
-              <div class="end"><span class="b b-g">High</span></div>
-            </div>
-            <div class="row">
-              <div class="g"><div class="t">Compliance readiness is a sales asset, not a gate</div>
-                <div class="s">Sable Financial moved from “review only” to a second call after receiving the licence pack.</div>
-                <div class="mono" style="color:var(--ink4);margin-top:2px">evidence: SRC-0011 · MTG-0055</div></div>
-              <div class="end"><span class="b b-g">High</span></div>
-            </div>
-            <div class="row">
-              <div class="g"><div class="t">Volume is under-reported, willingness to pay is not</div>
-                <div class="s">Self-reported volumes are conservative, but no prospect pushed back on price once weekend settlement was offered. Anchor pricing on speed.</div>
-                <div class="mono" style="color:var(--ink4);margin-top:2px">evidence: MTG-0042 · MTG-0063</div></div>
-              <div class="end"><span class="b b-a">Medium</span></div>
-            </div>
-            <div class="row">
-              <div class="g"><div class="t">We lose on reference cases</div>
-                <div class="s">Two accounts explicitly asked for a live customer in the same region. We could only describe one anonymously.</div>
-                <div class="mono" style="color:var(--ink4);margin-top:2px">evidence: MTG-0051 · MTG-0068</div></div>
-              <div class="end"><span class="b b-r">Risk</span></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="ch"><h3>AI recommended actions</h3><div class="r">3 of 18</div></div>
-          <div class="rows" style="padding:2px 16px 8px">
-            <div class="row">
-              <div class="g"><div class="t">Approve the 18 pending CRM records</div><div class="s">9 companies · 4 contacts · 5 opportunities</div></div>
-              <div class="end"><button class="btn xs sub" onclick="setTab('event','t-actions')">Review</button></div>
-            </div>
-            <div class="row">
-              <div class="g"><div class="t">Send 12 follow-up drafts</div><div class="s">All written, none sent — awaiting owner approval</div></div>
-              <div class="end"><button class="btn xs ghost" onclick="setTab('event','t-reports')">Drafts</button></div>
-            </div>
-            <div class="row">
-              <div class="g"><div class="t">Fix the 2 missing source records</div><div class="s">WhatsApp consent and one unattributed recording</div></div>
-              <div class="end"><button class="btn xs ghost" onclick="go('integrations')">Fix</button></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ---- account intelligence ---- -->
-    <div class="pane" id="t-accounts">
-      <div class="card">
-        <div class="ch">
-          <h3>Qualified accounts</h3>
-          <div class="r">
-            <button class="btn xs ghost" onclick="toast('Filters are illustrative in this prototype')"><svg class="ico sm"><use href="#i-filter"/></svg>Tier A only</button>
-            <button class="btn xs ghost" onclick="openScore()">Scoring model</button>
-          </div>
-        </div>
-        <div class="tw">
-          <table class="t">
-            <thead><tr><th>Company</th><th>Country</th><th>Industry</th><th>Business type</th><th>Source</th><th>Account</th><th class="r">Fit</th><th>Tier</th><th>Opportunity</th><th>Stage</th><th>Owner</th><th>Next action</th></tr></thead>
-            <tbody>
-              <tr class="cursor" onclick="openAccount('atlas')">
-                <td><span class="nm">AtlasPay Global</span><span class="sm2">atlaspay.example</span></td>
-                <td>Kenya</td><td>Payments</td><td>PSP</td><td><span class="b b-n">Booth</span></td><td><span class="b b-g">New</span></td>
-                <td class="r"><span class="score"><span class="n">94</span><span class="bar"><i style="width:94%"></i></span></span></td>
-                <td><span class="tier a">A</span></td><td>China Payout</td><td><span class="b b-b">Proposal</span></td><td>JZ</td><td>Send proposal</td>
-              </tr>
-              <tr class="cursor" onclick="openAccount('meridian')">
-                <td><span class="nm">Meridian Payments</span><span class="sm2">meridian.example</span></td>
-                <td>UAE</td><td>Payments</td><td>MSB</td><td><span class="b b-v">Referral</span></td><td><span class="b b-n">Existing</span></td>
-                <td class="r"><span class="score"><span class="n">88</span><span class="bar"><i style="width:88%"></i></span></span></td>
-                <td><span class="tier a">A</span></td><td>Payout + VA</td><td><span class="b b-a">Negotiation</span></td><td>JZ</td><td>UBO chart</td>
-              </tr>
-              <tr class="cursor" onclick="openAccount('pacific')">
-                <td><span class="nm">Pacific CrossPay</span><span class="sm2">pacificcross.example</span></td>
-                <td>Philippines</td><td>Remittance</td><td>Remittance</td><td><span class="b b-n">Booth</span></td><td><span class="b b-g">New</span></td>
-                <td class="r"><span class="score"><span class="n">86</span><span class="bar"><i style="width:86%"></i></span></span></td>
-                <td><span class="tier a">A</span></td><td>Collection</td><td><span class="b b-g">Qualified</span></td><td>JZ</td><td>Confirm corridor</td>
-              </tr>
-              <tr class="cursor" onclick="openAccount('nimbus')">
-                <td><span class="nm">Nimbus Pay</span><span class="sm2">nimbuspay.example</span></td>
-                <td>Nigeria</td><td>Payments</td><td>PSP</td><td><span class="b b-n">Booth</span></td><td><span class="b b-g">New</span></td>
-                <td class="r"><span class="score"><span class="n">79</span><span class="bar"><i class="mid" style="width:79%"></i></span></span></td>
-                <td><span class="tier b">B</span></td><td>Collection</td><td><span class="b b-g">Meeting</span></td><td>JZ</td><td>Send recap</td>
-              </tr>
-              <tr class="cursor" onclick="openAccount('harbour')">
-                <td><span class="nm">Harbour Remit</span><span class="sm2">harbourremit.example</span></td>
-                <td>Hong Kong, China</td><td>Remittance</td><td>MSO</td><td><span class="b b-v">Partner</span></td><td><span class="b b-n">Existing</span></td>
-                <td class="r"><span class="score"><span class="n">74</span><span class="bar"><i class="mid" style="width:74%"></i></span></span></td>
-                <td><span class="tier b">B</span></td><td>Virtual account</td><td><span class="b b-g">Qualified</span></td><td>JZ</td><td>Risk intro</td>
-              </tr>
-              <tr class="cursor" onclick="openAccount('sable')">
-                <td><span class="nm">Sable Financial</span><span class="sm2">sablefin.example</span></td>
-                <td>United Kingdom</td><td>Fintech</td><td>EMI</td><td><span class="b b-n">Booth</span></td><td><span class="b b-g">New</span></td>
-                <td class="r"><span class="score"><span class="n">71</span><span class="bar"><i class="mid" style="width:71%"></i></span></span></td>
-                <td><span class="tier b">B</span></td><td>Payout</td><td><span class="b b-g">Meeting</span></td><td>JZ</td><td>Card follow-up</td>
-              </tr>
-              <tr class="cursor" onclick="openAccount('kestrel')">
-                <td><span class="nm">Kestrel Acquiring</span><span class="sm2">kestrelacq.example</span></td>
-                <td>Poland</td><td>Acquiring</td><td>Acquirer</td><td><span class="b b-n">Booth</span></td><td><span class="b b-g">New</span></td>
-                <td class="r"><span class="score"><span class="n">63</span><span class="bar"><i class="low" style="width:63%"></i></span></span></td>
-                <td><span class="tier c">C</span></td><td>Collection</td><td><span class="b b-n">Lead</span></td><td>JZ</td><td>Qualify</td>
-              </tr>
-              <tr class="cursor" onclick="openAccount('orinoco')">
-                <td><span class="nm">Orinoco Pay</span><span class="sm2">orinocopay.example</span></td>
-                <td>Colombia</td><td>Payments</td><td>PSP</td><td><span class="b b-n">Booth</span></td><td><span class="b b-g">New</span></td>
-                <td class="r"><span class="score"><span class="n">58</span><span class="bar"><i class="low" style="width:58%"></i></span></span></td>
-                <td><span class="tier c">C</span></td><td>Payout</td><td><span class="b b-n">Lead</span></td><td>JZ</td><td>Nurture</td>
-              </tr>
-              <tr class="cursor" onclick="openAccount('tanuki')">
-                <td><span class="nm">Tanuki Wallet</span><span class="sm2">tanuki.example</span></td>
-                <td>Japan</td><td>Wallet</td><td>Wallet</td><td><span class="b b-b">Digital</span></td><td><span class="b b-g">New</span></td>
-                <td class="r"><span class="score"><span class="n">52</span><span class="bar"><i class="low" style="width:52%"></i></span></span></td>
-                <td><span class="tier c">C</span></td><td>Collection</td><td><span class="b b-n">Lead</span></td><td>JZ</td><td>Nurture</td>
-              </tr>
-            </tbody>
+          <h2 style="margin-top:0">目标客户名单 · 20 家有中国供应商付款需求的 PSP</h2>
+          <p style="color:var(--sub);font-size:12.5px">AI 从参展商名录和公开资料筛出，按「中国付款潜力」排序，前 8 家已约或已触达。</p>
+          <table style="margin-top:8px">
+            <tr><th>公司</th><th>国家</th><th>为什么约</th><th>状态</th></tr>
+            <tr><td><b>AtlasPay Global</b></td><td>肯尼亚</td><td>对华采购付款，已在谈</td><td><span class="pill p-g">已约 11/17</span></td></tr>
+            <tr><td><b>Pacific CrossPay</b></td><td>菲律宾</td><td>PHP→CNY 汇款走廊</td><td><span class="pill p-g">已约 11/17</span></td></tr>
+            <tr><td><b>Mekong Pay</b></td><td>越南</td><td>供应链付款待确认</td><td><span class="pill p-a">待确认</span></td></tr>
+            <tr><td><b>Lion City Settle</b></td><td>新加坡</td><td>本地收单 + 跨境 payout</td><td><span class="pill p-a">待确认</span></td></tr>
+            <tr><td><b>另外 16 家</b></td><td>亚非欧</td><td>名单已导出到行程单</td><td><span class="pill p-n">按优先级排定</span></td></tr>
           </table>
+          <div style="margin-top:12px;display:flex;gap:8px"><button class="btn">一键生成约见邮件（英文）</button><button class="btn ghost">导出名单</button></div>
         </div>
-        <div class="cb" style="border-top:1px solid var(--line2);padding:10px 16px">
-          <div class="hint"><svg class="ico"><use href="#i-shield"/></svg>Scores are explainable and editable. Any AI-assigned score can be overridden by the BD, and the override is logged with a reason.</div>
-        </div>
-      </div>
-
-      <div class="grid g4 mt">
-        <div class="card kpi"><div class="k">Qualified / identified</div><div class="v num">9<span style="font-size:13px;color:var(--ink4);font-weight:500"> / 32</span></div><div class="d">28% conversion at the booth</div></div>
-        <div class="card kpi"><div class="k">Tier A accounts</div><div class="v num">3</div><div class="d">94 · 88 · 86</div></div>
-        <div class="card kpi"><div class="k">Weighted pipeline</div><div class="v num">$1.6<small>M</small></div><div class="d">before stage weighting</div></div>
-        <div class="card kpi"><div class="k">First contact pending</div><div class="v num" style="color:var(--amber)">4</div><div class="d">no email sent since the event</div></div>
-      </div>
-    </div>
-    <!-- ---- meeting insights ---- -->
-    <div class="pane" id="t-meetings">
-      <div class="grid g-32">
-        <div class="card">
-          <div class="ch">
-            <h3>Source records</h3>
-            <div class="r">14 captured · 12 processed · 1 needs consent</div>
-          </div>
-          <div class="tw">
-            <table class="t">
-              <thead><tr><th>Source</th><th>Type</th><th>Captured</th><th>Owner</th><th>Linked company</th><th>Status</th></tr></thead>
-              <tbody>
-                <tr class="cursor" onclick="openSource('SRC-0001')">
-                  <td class="mono">SRC-0001</td>
-                  <td><span class="sic" style="background:var(--brand-50);color:var(--brand-7);vertical-align:-6px"><svg class="ico"><use href="#i-mic"/></svg></span> Voice</td>
-                  <td class="num">6 Nov 14:22</td><td>JZ</td><td>AtlasPay Global</td>
-                  <td><span class="b b-g">Transcribed</span></td>
-                </tr>
-                <tr class="cursor" onclick="openSource('SRC-0002')">
-                  <td class="mono">SRC-0002</td>
-                  <td><span class="sic" style="background:var(--blue-bg);color:var(--blue);vertical-align:-6px"><svg class="ico"><use href="#i-file"/></svg></span> Feishu</td>
-                  <td class="num">6 Nov 16:05</td><td>JZ</td><td>Meridian Payments</td>
-                  <td><span class="b b-g">Transcribed</span></td>
-                </tr>
-                <tr class="cursor" onclick="openSource('SRC-0003')">
-                  <td class="mono">SRC-0003</td>
-                  <td><span class="sic" style="background:var(--violet-bg);color:var(--violet);vertical-align:-6px"><svg class="ico"><use href="#i-chat"/></svg></span> WhatsApp</td>
-                  <td class="num">5 Nov 21:40</td><td>JZ</td><td>Pacific CrossPay</td>
-                  <td><span class="b b-a">Needs consent</span></td>
-                </tr>
-                <tr class="cursor" onclick="openSource('SRC-0004')">
-                  <td class="mono">SRC-0004</td>
-                  <td><span class="sic" style="background:var(--blue-bg);color:var(--blue);vertical-align:-6px"><svg class="ico"><use href="#i-mail"/></svg></span> Email</td>
-                  <td class="num">3 Nov 09:12</td><td>JZ</td><td>Meridian Payments</td>
-                  <td><span class="b b-g">Parsed</span></td>
-                </tr>
-                <tr class="cursor" onclick="openSource('SRC-0005')">
-                  <td class="mono">SRC-0005</td>
-                  <td><span class="sic" style="background:var(--line2);color:var(--ink3);vertical-align:-6px"><svg class="ico"><use href="#i-card"/></svg></span> Card</td>
-                  <td class="num">5 Nov 11:20</td><td>JZ</td><td>Sable Financial</td>
-                  <td><span class="b b-g">OCR done</span></td>
-                </tr>
-                <tr class="cursor" onclick="openSource('SRC-0006')">
-                  <td class="mono">SRC-0006</td>
-                  <td><span class="sic" style="background:var(--brand-50);color:var(--brand-7);vertical-align:-6px"><svg class="ico"><use href="#i-cam"/></svg></span> Booth photo</td>
-                  <td class="num">5 Nov 11:18</td><td>JZ</td><td>Sable Financial</td>
-                  <td><span class="b b-g">Matched</span></td>
-                </tr>
-                <tr class="cursor" onclick="openSource('SRC-0007')">
-                  <td class="mono">SRC-0007</td>
-                  <td><span class="sic" style="background:var(--line2);color:var(--ink3);vertical-align:-6px"><svg class="ico"><use href="#i-file"/></svg></span> PDF</td>
-                  <td class="num">5 Nov 12:02</td><td>JZ</td><td>Nimbus Pay</td>
-                  <td><span class="b b-g">Parsed</span></td>
-                </tr>
-                <tr class="cursor" onclick="openSource('SRC-0008')">
-                  <td class="mono">SRC-0008</td>
-                  <td><span class="sic" style="background:var(--line2);color:var(--ink3);vertical-align:-6px"><svg class="ico"><use href="#i-edit"/></svg></span> Manual</td>
-                  <td class="num">6 Nov 17:44</td><td>JZ</td><td>Harbour Remit</td>
-                  <td><span class="b b-g">Saved</span></td>
-                </tr>
-                <tr class="cursor" onclick="openSource('SRC-0009')">
-                  <td class="mono">SRC-0009</td>
-                  <td><span class="sic" style="background:var(--brand-50);color:var(--brand-7);vertical-align:-6px"><svg class="ico"><use href="#i-mic"/></svg></span> Voice</td>
-                  <td class="num">6 Nov 15:10</td><td>JZ</td><td>Pacific CrossPay</td>
-                  <td><span class="b b-g">Transcribed</span></td>
-                </tr>
-                <tr class="cursor" onclick="openSource('SRC-0010')">
-                  <td class="mono">SRC-0010</td>
-                  <td><span class="sic" style="background:var(--blue-bg);color:var(--blue);vertical-align:-6px"><svg class="ico"><use href="#i-mail"/></svg></span> Email</td>
-                  <td class="num">4 Nov 08:30</td><td>JZ</td><td>Kestrel Acquiring</td>
-                  <td><span class="b b-g">Parsed</span></td>
-                </tr>
-                <tr class="cursor" onclick="openSource('SRC-0011')">
-                  <td class="mono">SRC-0011</td>
-                  <td><span class="sic" style="background:var(--line2);color:var(--ink3);vertical-align:-6px"><svg class="ico"><use href="#i-file"/></svg></span> Licence pack</td>
-                  <td class="num">6 Nov 10:05</td><td>JZ</td><td>Sable Financial</td>
-                  <td><span class="b b-g">Attached</span></td>
-                </tr>
-                <tr>
-                  <td colspan="6" style="color:var(--ink4);font-size:11px;padding:9px 12px">+ 3 more source records (SRC-0012 to SRC-0014) · all processed</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="ch">
-            <h3>Extracted insight</h3>
-            <div class="r">MTG-0042 · AtlasPay</div>
-          </div>
-          <div class="cb">
-            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:11px">
-              <span class="b b-g"><span class="dot" style="background:var(--brand)"></span>Confirmed 9</span>
-              <span class="b b-a"><span class="dot" style="background:var(--amber)"></span>Inferred 2</span>
-              <span class="b b-n"><span class="dot" style="background:var(--ink4)"></span>Missing 2</span>
-            </div>
-            <dl class="kv">
-              <dt>Objective</dt><dd>Evaluate China Payout for supplier payments</dd>
-              <dt>Participants</dt><dd>D. Otieno (Head of Partnerships) · J. Zhou</dd>
-              <dt>Business</dt><dd>B2B cross-border collection, 14 corridors, 62% volume into China</dd>
-              <dt>Pain points</dt><dd>Weekend settlement gap · beneficiary pre-validation failures</dd>
-              <dt>Requirements</dt><dd>T+0 payout including weekends; CNY corporate beneficiary</dd>
-              <dt>Products</dt><dd><span class="b b-g">China Payout</span> <span class="b b-g">Virtual Account</span></dd>
-              <dt>Volume</dt><dd><span class="b b-n">Missing</span> <span style="color:var(--ink4);font-size:11px">self-reported “40–60M USD / month”, unconfirmed</span></dd>
-              <dt>Commercial</dt><dd><span class="b b-n">Missing</span> <span style="color:var(--ink4);font-size:11px">no pricing discussed on site — policy: never quote at booth</span></dd>
-              <dt>Compliance</dt><dd>UBO depth to be confirmed · purpose code for trade settlement</dd>
-              <dt>Objections</dt><dd>“T+0 including weekends” — needs a written cut-off policy</dd>
-              <dt>Commitments</dt><dd>Proposal by 11 Nov (us) · UBO chart by 13 Nov (them)</dd>
-            </dl>
-            <div class="divider"></div>
-            <div style="font-size:10px;font-weight:600;letter-spacing:.06em;color:var(--ink4);text-transform:uppercase;margin-bottom:8px">Payment flow extraction</div>
-            <div class="grid g2" style="gap:8px 12px">
-              <div><div class="note">Origin</div><div style="font-size:12px">Kenya <span class="b b-g" style="margin-left:4px">Confirmed</span></div></div>
-              <div><div class="note">Destination</div><div style="font-size:12px">China <span class="b b-g" style="margin-left:4px">Confirmed</span></div></div>
-              <div><div class="note">Collection currency</div><div style="font-size:12px">KES / USD</div></div>
-              <div><div class="note">Settlement currency</div><div style="font-size:12px">CNY</div></div>
-              <div><div class="note">Beneficiary</div><div style="font-size:12px">Corporate (suppliers)</div></div>
-              <div><div class="note">Purpose</div><div style="font-size:12px">Trade settlement</div></div>
-              <div><div class="note">Frequency</div><div style="font-size:12px">Daily batches</div></div>
-              <div><div class="note">China payout</div><div style="font-size:12px">Required <span class="b b-b" style="margin-left:4px">Core need</span></div></div>
-            </div>
-            <div class="hint mt" style="margin-top:12px"><svg class="ico"><use href="#i-warn"/></svg>Inferred values are marked and can be corrected. Nothing here is written to CRM until approved in the Action Center.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ---- action center ---- -->
-    <div class="pane" id="t-actions">
-      <div class="card" style="margin-bottom:12px">
-        <div class="cb" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-          <div>
-            <div style="font-size:12.5px;font-weight:600">18 records pending your decision</div>
-            <div class="note">14 validated by AI · 4 need a human call. Nothing is written to CRM until you approve.</div>
-          </div>
-          <div style="margin-left:auto;display:flex;gap:6px;flex-wrap:wrap">
-            <button class="btn ghost sm" onclick="toast('Reject flow — demo only')">Reject</button>
-            <button class="btn ghost sm" onclick="toast('Merge preview — demo only')"><svg class="ico sm"><use href="#i-merge"/></svg>Merge duplicates</button>
-            <button class="btn ghost sm" onclick="approveSelected()">Approve selected</button>
-            <button class="btn sm" onclick="approveAll()"><svg class="ico sm"><use href="#i-check"/></svg>Approve all validated</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid g-32">
-        <div class="card">
-          <div class="ch"><h3>Approval queue</h3><div class="r"><span id="apCount">18 pending</span> · 12 shown</div></div>
-          <div id="apList">
-            <div class="apx">
-              <input type="checkbox" data-ap checked>
-              <div class="g">
-                <div class="h"><span class="b b-g">New company</span><span class="nm">AtlasPay Global</span><span class="b b-n">Validated</span></div>
-                <div class="d">Kenya · PSP · 14 corridors · licence PS-2019-0442 · created from booth meeting MTG-0042</div>
-              </div>
-              <div class="a"><button class="btn xs ghost" onclick="rejectRow(this)">Reject</button><button class="btn xs ghost">Edit</button></div>
-            </div>
-            <div class="apx">
-              <input type="checkbox" data-ap checked>
-              <div class="g">
-                <div class="h"><span class="b b-g">New contact</span><span class="nm">Daniel Otieno</span><span class="b b-n">Validated</span></div>
-                <div class="d">Head of Partnerships · AtlasPay Global · card scanned 5 Nov 11:20</div>
-              </div>
-              <div class="a"><button class="btn xs ghost" onclick="rejectRow(this)">Reject</button><button class="btn xs ghost">Edit</button></div>
-            </div>
-            <div class="apx">
-              <input type="checkbox" data-ap checked>
-              <div class="g">
-                <div class="h"><span class="b b-b">New opportunity</span><span class="nm">AtlasPay · China Payout</span><span class="b b-n">Validated</span></div>
-                <div class="d">USD 480K estimated annual value · stage Proposal · owner JZ · source meeting MTG-0042</div>
-              </div>
-              <div class="a"><button class="btn xs ghost" onclick="rejectRow(this)">Reject</button><button class="btn xs ghost">Edit</button></div>
-            </div>
-            <div class="apx">
-              <input type="checkbox" data-ap checked>
-              <div class="g">
-                <div class="h"><span class="b b-b">CRM update</span><span class="nm">Meridian Payments → Negotiation</span><span class="b b-a">Needs review</span></div>
-                <div class="d">Stage auto-advance proposed from transcript. UBO depth still missing — consider holding at Proposal.</div>
-              </div>
-              <div class="a"><button class="btn xs ghost" onclick="rejectRow(this)">Reject</button><button class="btn xs ghost">Edit</button></div>
-            </div>
-            <div class="apx">
-              <input type="checkbox" data-ap checked>
-              <div class="g">
-                <div class="h"><span class="b b-g">New company</span><span class="nm">Pacific CrossPay</span><span class="b b-n">Validated</span></div>
-                <div class="d">Philippines · remittance · WhatsApp consent flag pending, company record itself is clean</div>
-              </div>
-              <div class="a"><button class="btn xs ghost" onclick="rejectRow(this)">Reject</button><button class="btn xs ghost">Edit</button></div>
-            </div>
-            <div class="apx">
-              <input type="checkbox" data-ap checked>
-              <div class="g">
-                <div class="h"><span class="b b-b">New opportunity</span><span class="nm">Pacific CrossPay · Collection</span><span class="b b-n">Validated</span></div>
-                <div class="d">USD 260K estimated annual value · stage Qualified · owner JZ</div>
-              </div>
-              <div class="a"><button class="btn xs ghost" onclick="rejectRow(this)">Reject</button><button class="btn xs ghost">Edit</button></div>
-            </div>
-            <div class="apx">
-              <input type="checkbox" data-ap checked>
-              <div class="g">
-                <div class="h"><span class="b b-n">Follow-up task</span><span class="nm">Send China Payout proposal</span><span class="b b-n">Validated</span></div>
-                <div class="d">Due 11 Nov · linked to AtlasPay opportunity · also creates a Feishu task</div>
-              </div>
-              <div class="a"><button class="btn xs ghost" onclick="rejectRow(this)">Reject</button><button class="btn xs ghost">Edit</button></div>
-            </div>
-            <div class="apx">
-              <input type="checkbox" data-ap checked>
-              <div class="g">
-                <div class="h"><span class="b b-n">Follow-up task</span><span class="nm">Request UBO structure chart</span><span class="b b-n">Validated</span></div>
-                <div class="d">Due 13 Nov · Meridian Payments · blocks compliance stage</div>
-              </div>
-              <div class="a"><button class="btn xs ghost" onclick="rejectRow(this)">Reject</button><button class="btn xs ghost">Edit</button></div>
-            </div>
-            <div class="apx">
-              <input type="checkbox" data-ap checked>
-              <div class="g">
-                <div class="h"><span class="b b-v">Email draft</span><span class="nm">AtlasPay — post-SFF thank you + proposal</span><span class="b b-n">Validated</span></div>
-                <div class="d">Written from transcript + previous thread · saved as draft, never auto-sent</div>
-              </div>
-              <div class="a"><button class="btn xs ghost" onclick="openDraft('a1')">Open</button></div>
-            </div>
-            <div class="apx">
-              <input type="checkbox" data-ap>
-              <div class="g">
-                <div class="h"><span class="b b-v">Email draft</span><span class="nm">Meridian — compliance nudge</span><span class="b b-a">Needs review</span></div>
-                <div class="d">Missing one data point (UBO depth). Marked as a placeholder rather than guessed.</div>
-              </div>
-              <div class="a"><button class="btn xs ghost" onclick="openDraft('a2')">Open</button></div>
-            </div>
-            <div class="apx">
-              <input type="checkbox" data-ap>
-              <div class="g">
-                <div class="h"><span class="b b-r">Merge</span><span class="nm">Nimbus Pay — 2 duplicate records</span><span class="b b-a">Needs review</span></div>
-                <div class="d">Same domain, different legal name spelling. Merge keeps the older record ID and all source links.</div>
-              </div>
-              <div class="a"><button class="btn xs ghost">Preview</button></div>
-            </div>
-            <div class="apx">
-              <input type="checkbox" data-ap>
-              <div class="g">
-                <div class="h"><span class="b b-n">Source record</span><span class="nm">WhatsApp consent for Pacific CrossPay</span><span class="b b-a">Blocked</span></div>
-                <div class="d">Consent status is “unknown”. This record stays out of CRM until the customer confirms in writing.</div>
-              </div>
-              <div class="a"><button class="btn xs ghost">Set aside</button></div>
-            </div>
-          </div>
-          <div class="cb" style="border-top:1px solid var(--line2)">
-            <div class="hint"><svg class="ico"><use href="#i-shield"/></svg>Approved records update existing CRM entities — the engine matches on domain and contact identity first, so no isolated duplicates are created.</div>
-          </div>
-        </div>
-
         <div>
-          <div class="card">
-            <div class="ch"><h3>What approval does</h3></div>
-            <div class="cb" style="padding-top:4px">
-              <div class="rows">
-                <div class="row"><div class="g"><div class="t">Companies</div><div class="s">matched on domain, then merged into Company</div></div><div class="end"><span class="num" style="color:var(--ink3)">9</span></div></div>
-                <div class="row"><div class="g"><div class="t">Contacts</div><div class="s">matched on email, then name + company</div></div><div class="end"><span class="num" style="color:var(--ink3)">4</span></div></div>
-                <div class="row"><div class="g"><div class="t">Opportunities</div><div class="s">one per company per product, no auto-merge</div></div><div class="end"><span class="num" style="color:var(--ink3)">5</span></div></div>
-                <div class="row"><div class="g"><div class="t">Tasks</div><div class="s">also created in Feishu when integration is on</div></div><div class="end"><span class="num" style="color:var(--ink3)">26</span></div></div>
-                <div class="row"><div class="g"><div class="t">Email drafts</div><div class="s">saved to mailbox drafts, never sent</div></div><div class="end"><span class="num" style="color:var(--ink3)">12</span></div></div>
-              </div>
+          <div class="card" style="margin-bottom:14px">
+            <h2 style="margin-top:0">我的行程</h2>
+            <div class="kv">
+              <table class="kv">
+                <tr><td>航班</td><td>11/16 CA975 北京→新加坡 07:20–13:40</td></tr>
+                <tr><td>酒店</td><td>市中心商务酒店（距 Expo 地铁 12 分钟）</td></tr>
+                <tr><td>签证/证件</td><td>护照有效 · 名片 200 张 · 展商证已登记</td></tr>
+                <tr><td>时差提醒</td><td>新加坡 = 北京无时差，会议排 10:00 后即可</td></tr>
+              </table>
             </div>
           </div>
-          <div class="card mt">
-            <div class="ch"><h3>Audit trail</h3><div class="r">append-only</div></div>
-            <div class="cb" style="padding-top:4px">
-              <div class="tl">
-                <div class="it key"><div class="m">7 Nov 09:12 · Debrief engine</div><div class="b2">Generated <b>18 approval items</b> from 14 source records</div></div>
-                <div class="it"><div class="m">7 Nov 09:14 · Scoring</div><div class="b2">Fit scores computed for 32 companies; 3 flagged for manual review</div></div>
-                <div class="it"><div class="m">7 Nov 09:20 · Dedupe</div><div class="b2">3 duplicates merged, 1 pair escalated</div></div>
-                <div class="it"><div class="m">7 Nov 10:02 · BD</div><div class="b2">Jasmine opened the queue — <b>no approvals yet</b></div></div>
-              </div>
+          <div class="card">
+            <h2 style="margin-top:0">17 日上午展馆动线</h2>
+            <div class="route">
+              <div class="stop"><b>10:30 AtlasPay</b><span>B42 展位</span></div><span class="leg">步行 6 分钟 →</span>
+              <div class="stop"><b>11:15 Mekong Pay</b><span>C15 展位</span></div><span class="leg">步行 4 分钟 →</span>
+              <div class="stop"><b>11:50 Pacific CrossPay</b><span>D08 展位</span></div>
             </div>
+            <p style="font-size:12px;color:var(--sub);margin-top:8px">同片区集中拜访，不跨馆跑；午休 12:20–13:30，避开高峰。</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ---- reports ---- -->
-    <div class="pane" id="t-reports">
-      <div class="grid g3">
+    <div class="epane" id="p-ed" style="display:none">
+      <div class="grid g2e">
         <div class="card">
-          <div class="ch"><h3><svg class="ico sm" style="color:var(--brand-6)"><use href="#i-chart"/></svg>Executive event report</h3></div>
-          <div class="cb" style="font-size:12px;color:var(--ink2);line-height:1.7">
-            <div class="rows">
-              <div class="row"><div class="g"><div class="t">Event performance</div></div></div>
-              <div class="row"><div class="g"><div class="t">Lead statistics &amp; tier mix</div></div></div>
-              <div class="row"><div class="g"><div class="t">Strategic accounts</div></div></div>
-              <div class="row"><div class="g"><div class="t">Business opportunities &amp; value</div></div></div>
-              <div class="row"><div class="g"><div class="t">Market insights</div></div></div>
-              <div class="row"><div class="g"><div class="t">Recommended next steps</div></div></div>
-            </div>
-            <div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap">
-              <button class="btn sm ghost" onclick="exportNote('PDF')">PDF</button>
-              <button class="btn sm ghost" onclick="exportNote('Excel')">Excel</button>
-              <button class="btn sm sub" onclick="exportNote('Feishu doc')">Feishu doc</button>
-            </div>
-          </div>
+          <h2 style="margin-top:0">现场 30 秒记录一件事就够了</h2>
+          <div class="step"><div class="no">1</div><div class="bd"><b>拍名片</b><p>AI 识别公司、职位、邮箱，自动建档并去重，你不用手敲。</p></div></div>
+          <div class="step"><div class="no">2</div><div class="bd"><b>按下录音</b><p>会议自动转写；AI 挑出「对方要什么、卡点、下一步」，你专心聊天。</p></div></div>
+          <div class="step"><div class="no">3</div><div class="bd"><b>见面时瞄一眼</b><p>每个目标客户自动带出：上次聊了什么、答应过什么、注意什么文化礼仪。</p></div></div>
+          <div class="appr"><b>示范 · AtlasPay 会前小抄：</b>「上次 11/6 邮件：对方要 China Payout + T+0；注意：肯尼亚客户重视个人关系，报价先谈价值再谈费率。」</div>
         </div>
         <div class="card">
-          <div class="ch"><h3><svg class="ico sm" style="color:var(--brand-6)"><use href="#i-users"/></svg>BD follow-up report</h3></div>
-          <div class="cb" style="font-size:12px;color:var(--ink2);line-height:1.7">
-            <div class="rows">
-              <div class="row"><div class="g"><div class="t">Individual customer summaries</div></div><span class="b b-n">9</span></div>
-              <div class="row"><div class="g"><div class="t">Meeting notes</div></div><span class="b b-n">21</span></div>
-              <div class="row"><div class="g"><div class="t">Opportunity assessment</div></div><span class="b b-n">9</span></div>
-              <div class="row"><div class="g"><div class="t">Follow-up tasks</div></div><span class="b b-n">26</span></div>
-              <div class="row"><div class="g"><div class="t">Email status</div></div><span class="b b-a">12 drafts</span></div>
-            </div>
-            <div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap">
-              <button class="btn sm ghost" onclick="exportNote('PDF')">PDF</button>
-              <button class="btn sm ghost" onclick="exportNote('Excel')">Excel</button>
-              <button class="btn sm sub" onclick="exportNote('Feishu doc')">Feishu doc</button>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="ch"><h3><svg class="ico sm" style="color:var(--brand-6)"><use href="#i-db"/></svg>CRM data export</h3></div>
-          <div class="cb" style="font-size:12px;color:var(--ink2);line-height:1.7">
-            <div class="rows">
-              <div class="row"><div class="g"><div class="t">Companies</div></div><span class="b b-n">32</span></div>
-              <div class="row"><div class="g"><div class="t">Contacts</div></div><span class="b b-n">41</span></div>
-              <div class="row"><div class="g"><div class="t">Meetings</div></div><span class="b b-n">21</span></div>
-              <div class="row"><div class="g"><div class="t">Opportunities</div></div><span class="b b-n">9</span></div>
-              <div class="row"><div class="g"><div class="t">Tasks</div></div><span class="b b-n">26</span></div>
-            </div>
-            <div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap">
-              <button class="btn sm ghost" onclick="exportNote('CSV')">CSV</button>
-              <button class="btn sm ghost" onclick="exportNote('Excel')">Excel</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card mt">
-        <div class="ch"><h3>Generated artefacts</h3><div class="r">all exports are simulated in this prototype</div></div>
-        <div class="tw">
-          <table class="t">
-            <thead><tr><th>Artefact</th><th>Format</th><th>Scope</th><th>Status</th></tr></thead>
-            <tbody>
-              <tr><td>SFF2026-Executive-Report</td><td>PDF</td><td>Management summary, 6 pages</td><td><span class="b b-a">Simulated</span></td></tr>
-              <tr><td>SFF2026-BD-Followup</td><td>XLSX</td><td>9 accounts, 26 tasks</td><td><span class="b b-a">Simulated</span></td></tr>
-              <tr><td>SFF2026-CRM-Export</td><td>CSV</td><td>5 entity types</td><td><span class="b b-a">Simulated</span></td></tr>
-              <tr><td>飞书 · SFF 2026 复盘</td><td>Feishu doc</td><td>Requires Feishu integration</td><td><span class="b b-n">Not connected</span></td></tr>
-            </tbody>
+          <h2 style="margin-top:0">今天展会进度（演示）</h2>
+          <table>
+            <tr><th>时间</th><th>客户</th><th>现场记录</th><th>状态</th></tr>
+            <tr><td>10:30</td><td>AtlasPay Global</td><td>录音 32 分钟 · 承诺发方案</td><td><span class="pill p-g">已转写</span></td></tr>
+            <tr><td>11:15</td><td>Mekong Pay</td><td>名片 2 张 · 口头询价</td><td><span class="pill p-a">待补会议纪要</span></td></tr>
+            <tr><td>11:50</td><td>Pacific CrossPay</td><td>录音 18 分钟 · 要走廊报价</td><td><span class="pill p-g">已转写</span></td></tr>
+            <tr><td>14:00</td><td>路过的 3 家新 PSP</td><td>名片 3 张 · 未深聊</td><td><span class="pill p-n">自动建档</span></td></tr>
           </table>
         </div>
-        <div class="cb" style="border-top:1px solid var(--line2);padding:10px 16px">
-          <div class="hint"><svg class="ico"><use href="#i-warn"/></svg>Where an integration is unavailable the prototype says so instead of showing a fake success. Feishu document creation is stubbed, not executed.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- =============== 03b TRAVEL PLANNER =============== -->
-  <section class="page" id="v-travel" hidden>
-    <div class="ph">
-      <div>
-        <div class="back" onclick="go('event')"><svg class="ico sm"><use href="#i-arrow"/></svg> Event Intelligence</div>
-        <h1>Global Travel Planner</h1>
-        <div class="sub">Singapore · SFF 2026 · 3–7 Nov 2026 · AI 综合时区、天气、展馆动线与当地商务习惯排出的行程。</div>
-      </div>
-      <div class="acts">
-        <button class="btn ghost sm" onclick="toast('Calendar sync is stubbed in this prototype')"><svg class="ico sm"><use href="#i-cal"/></svg>Sync to calendar</button>
-        <button class="btn sm" onclick="feishuDoc()"><svg class="ico sm"><use href="#i-file"/></svg>Generate Feishu travel doc</button>
       </div>
     </div>
 
-    <div class="card">
-      <div class="cb" style="display:flex;gap:22px;flex-wrap:wrap;align-items:center">
-        <div><div class="note">City</div><div style="font-size:13px;font-weight:600">Singapore</div></div>
-        <div><div class="note">Dates</div><div style="font-size:13px;font-weight:600">3 – 7 Nov 2026</div></div>
-        <div><div class="note">Time zone</div><div style="font-size:13px;font-weight:600">UTC+8 · same as Beijing</div></div>
-        <div><div class="note">Weather</div><div style="font-size:13px;font-weight:600">31°C · thunderstorms most afternoons</div></div>
-        <div><div class="note">Currency</div><div style="font-size:13px;font-weight:600">SGD · 1 SGD ≈ 5.4 CNY</div></div>
-        <div style="margin-left:auto"><span class="b b-g">No public holiday in window</span></div>
-      </div>
-    </div>
-
-    <div class="grid g-32 mt">
-      <div class="card">
-        <div class="ch">
-          <h3>Daily itinerary</h3>
-          <div class="r">sorted by geography, not by calendar order</div>
-        </div>
-        <div class="cb">
-          <div style="font-size:11px;font-weight:600;letter-spacing:.05em;color:var(--ink4);text-transform:uppercase;margin-bottom:8px">Day 1 · 4 Nov · Expo Hall 3 (all day, no transfer)</div>
-          <div class="rows" style="margin-bottom:16px">
-            <div class="row">
-              <div class="end" style="margin:0;width:62px;flex-shrink:0;justify-content:flex-start"><span class="num" style="font-size:11.5px;font-weight:600">09:30</span></div>
-              <div class="g"><div class="t">AtlasPay Global · Booth 3F-21</div><div class="s">Opening meeting, CEO-level not required · 38 min · recorded</div></div>
-              <div class="end"><span class="b b-g">Done</span></div>
-            </div>
-            <div class="row">
-              <div class="end" style="margin:0;width:62px;flex-shrink:0;justify-content:flex-start"><span class="num" style="font-size:11.5px;font-weight:600">11:20</span></div>
-              <div class="g"><div class="t">Sable Financial · Booth 3F-08</div><div class="s">Walk 4 min · business card scanned · licence pack delivered</div></div>
-              <div class="end"><span class="b b-g">Done</span></div>
-            </div>
-            <div class="row">
-              <div class="end" style="margin:0;width:62px;flex-shrink:0;justify-content:flex-start"><span class="num" style="font-size:11.5px;font-weight:600">14:00</span></div>
-              <div class="g"><div class="t">Nimbus Pay · Booth 3E-14</div><div class="s">Same hall · PDF brochure collected · 22 min</div></div>
-              <div class="end"><span class="b b-g">Done</span></div>
-            </div>
-          </div>
-
-          <div style="font-size:11px;font-weight:600;letter-spacing:.05em;color:var(--ink4);text-transform:uppercase;margin-bottom:8px">Day 2 · 5 Nov · Marina Bay cluster (one transfer)</div>
-          <div class="rows" style="margin-bottom:16px">
-            <div class="row">
-              <div class="end" style="margin:0;width:62px;flex-shrink:0;justify-content:flex-start"><span class="num" style="font-size:11.5px;font-weight:600">12:40</span></div>
-              <div class="g"><div class="t">Transfer · Expo → Marina Bay</div><div class="s">MRT 34 min · use the ride to review the afternoon briefs</div></div>
-              <div class="end"><span class="b b-n">Transfer</span></div>
-            </div>
-            <div class="row">
-              <div class="end" style="margin:0;width:62px;flex-shrink:0;justify-content:flex-start"><span class="num" style="font-size:11.5px;font-weight:600">14:00</span></div>
-              <div class="g"><div class="t">Pacific CrossPay · Marina One office</div><div class="s">2 km from hotel · visa-free · bring corridor volume sheet</div></div>
-              <div class="end"><span class="b b-g">Done</span></div>
-            </div>
-            <div class="row">
-              <div class="end" style="margin:0;width:62px;flex-shrink:0;justify-content:flex-start"><span class="num" style="font-size:11.5px;font-weight:600">16:05</span></div>
-              <div class="g"><div class="t">Meridian Payments · Fullerton meeting room</div><div class="s">Walk 9 min · UBO discussion, compliance lead joining</div></div>
-              <div class="end"><span class="b b-g">Done</span></div>
-            </div>
-            <div class="row">
-              <div class="end" style="margin:0;width:62px;flex-shrink:0;justify-content:flex-start"><span class="num" style="font-size:11.5px;font-weight:600">19:30</span></div>
-              <div class="g"><div class="t">Dinner · AtlasPay + Harbour Remit</div><div class="s">400 m from hotel · no alcohol ordered at the table · business formal</div></div>
-              <div class="end"><span class="b b-n">Informal</span></div>
-            </div>
-          </div>
-
-          <div style="font-size:11px;font-weight:600;letter-spacing:.05em;color:var(--ink4);text-transform:uppercase;margin-bottom:8px">Day 3 · 6 Nov · Expo + departure</div>
-          <div class="rows">
-            <div class="row">
-              <div class="end" style="margin:0;width:62px;flex-shrink:0;justify-content:flex-start"><span class="num" style="font-size:11.5px;font-weight:600">09:00</span></div>
-              <div class="g"><div class="t">Harbour Remit · Booth 3G-03</div><div class="s">Feishu transcript captured · 2 opportunities identified</div></div>
-              <div class="end"><span class="b b-g">Done</span></div>
-            </div>
-            <div class="row">
-              <div class="end" style="margin:0;width:62px;flex-shrink:0;justify-content:flex-start"><span class="num" style="font-size:11.5px;font-weight:600">15:10</span></div>
-              <div class="g"><div class="t">Buffer · notes consolidation before flight</div><div class="s">2 recordings still un-transcribed at this point — uploaded from the lounge</div></div>
-              <div class="end"><span class="b b-n">Buffer</span></div>
-            </div>
-          </div>
-
-          <div class="divider"></div>
-          <div class="hint"><svg class="ico"><use href="#i-bulb"/></svg>Day 2 全天只做一次跨区转移：上午在 Expo 收尾，中午一次性进 Marina Bay，下午三场都在 2 km 内，晚餐步行可达。</div>
-        </div>
-      </div>
-
-      <div>
+    <div class="epane" id="p-ea" style="display:none">
+      <div class="grid g2">
         <div class="card">
-          <div class="ch"><h3>Local briefing</h3><div class="r">culture · etiquette</div></div>
-          <div class="cb" style="padding-top:6px">
-            <div class="rows">
-              <div class="row"><div class="g"><div class="t">English is the working language</div><div class="s">No interpreter needed; expect Singlish in casual chat.</div></div></div>
-              <div class="row"><div class="g"><div class="t">Business dress is formal</div><div class="s">Jacket for evening dinners; the expo floor runs warmer than the meeting rooms.</div></div></div>
-              <div class="row"><div class="g"><div class="t">Avoid 12:00–14:00 for internal calls</div><div class="s">Local lunch block; external guests will still take a meeting, but attention drops.</div></div></div>
-              <div class="row"><div class="g"><div class="t">Afternoon thunderstorms</div><div class="s">Build 15 min buffer for any outdoor transfer between 15:00 and 18:00.</div></div></div>
-            </div>
-          </div>
+          <h2 style="margin-top:0">展会结束当晚，AI 已经帮你做完这些</h2>
+          <div class="step"><div class="no">1</div><div class="bd"><b>汇总 21 场沟通</b><p>录音、名片、邮件、聊天记录自动归到每家公司名下。</p></div></div>
+          <div class="step"><div class="no">2</div><div class="bd"><b>排出客户优先级</b><p>9 家值得马上跟进（A 级 3 家），12 家观察，全部有理由。</p></div></div>
+          <div class="step"><div class="no">3</div><div class="bd"><b>生成跟进包</b><p>26 条待办、12 封英文邮件草稿、商机看板更新——都在等你确认。</p></div></div>
+          <div style="display:flex;gap:8px;margin-top:6px"><button class="btn" onclick="go('assistant')">去逐条确认</button><button class="btn ghost">导出复盘报告</button></div>
         </div>
-
-        <div class="card mt">
-          <div class="ch"><h3><svg class="ico sm" style="color:var(--brand-6)"><use href="#i-file"/></svg>Feishu travel doc</h3><div class="r">8 sections</div></div>
-          <div class="cb" style="padding-top:6px">
-            <div class="rows" style="font-size:11.5px">
-              <div class="row"><div class="g"><div class="t">Trip overview</div></div><span class="b b-g">Ready</span></div>
-              <div class="row"><div class="g"><div class="t">Exhibition agenda</div></div><span class="b b-g">Ready</span></div>
-              <div class="row"><div class="g"><div class="t">Target account list</div></div><span class="b b-g">Ready</span></div>
-              <div class="row"><div class="g"><div class="t">Meeting schedule</div></div><span class="b b-g">Ready</span></div>
-              <div class="row"><div class="g"><div class="t">Customer background</div></div><span class="b b-g">Ready</span></div>
-              <div class="row"><div class="g"><div class="t">Daily itinerary</div></div><span class="b b-g">Ready</span></div>
-              <div class="row"><div class="g"><div class="t">Meeting prep notes</div></div><span class="b b-a">2 missing</span></div>
-              <div class="row"><div class="g"><div class="t">Expense checklist</div></div><span class="b b-n">Template</span></div>
-            </div>
-            <button class="btn sm mt" style="width:100%;justify-content:center" onclick="feishuDoc()">Generate document</button>
-            <div class="hint mt-s"><svg class="ico"><use href="#i-warn"/></svg>Requires Feishu integration. In this prototype the button reports the integration as unavailable rather than claiming success.</div>
-          </div>
+        <div class="card">
+          <h2 style="margin-top:0">复核结果（AI 起草 · 你确认后才生效）</h2>
+          <table>
+            <tr><th>客户</th><th>AI 建议</th><th>你的决定</th></tr>
+            <tr><td>AtlasPay Global</td><td>新建商机 China Payout $480K</td><td><span class="pill p-a">待确认</span></td></tr>
+            <tr><td>Pacific CrossPay</td><td>发走廊报价邮件</td><td><span class="pill p-a">草稿已备</span></td></tr>
+            <tr><td>Harbour Remit</td><td>新建公司 + 首次触达</td><td><span class="pill p-g">已批准</span></td></tr>
+            <tr><td>重复名片 ×3</td><td>合并到已有公司</td><td><span class="pill p-g">已合并</span></td></tr>
+          </table>
+          <p style="font-size:12px;color:var(--sub);margin-top:10px">每一项都能看到依据（哪次会议、哪封邮件），不同意可以改，改完留痕。</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- =============== 04 CUSTOMER 360 =============== -->
-  <section class="page" id="v-account" hidden>
-    <div class="ph">
-      <div>
-        <div class="back" onclick="go('event')"><svg class="ico sm"><use href="#i-arrow"/></svg> Event Intelligence</div>
-        <h1>AtlasPay Global <span class="tier a">A</span> <span class="b b-g">Fit 94</span></h1>
-        <div class="sub">Kenya · PSP · B2B cross-border payments　—　这份档案由九源自动汇总，交接时不需要口述。</div>
-      </div>
-      <div class="acts">
-        <button class="btn ghost sm" onclick="openScore()">Why 94?</button>
-        <button class="btn ghost sm" onclick="openDraft('a1')"><svg class="ico sm"><use href="#i-mail"/></svg>Open draft</button>
-        <button class="btn sm" onclick="go('roadmap')"><svg class="ico sm"><use href="#i-gantt"/></svg>Deal roadmap</button>
+  <!-- ============ MY CUSTOMERS ============ -->
+  <section class="view" id="v-customers">
+    <div id="cust-list">
+      <h1>My Customers · 我的客户</h1>
+      <p class="sub">点开任何一家，看到它的全部沟通和下一步。</p>
+      <div class="tbl-wrap" style="margin-top:16px">
+        <table class="tbl-cust">
+          <tr><th>公司</th><th>国家</th><th>类型</th><th>联系人</th><th>商机阶段</th><th>最近沟通</th><th>下一步</th></tr>
+          <tr onclick="showCust()" style="cursor:pointer"><td><b>AtlasPay Global</b></td><td>肯尼亚</td><td>PSP</td><td>Daniel Otieno · CEO</td><td><span class="pill p-g">Proposal</span></td><td>11/14 会议</td><td>今天发 China Payout 方案</td></tr>
+          <tr><td><b>Meridian Payments</b></td><td>阿联酋</td><td>MSB</td><td>Sara Haddad · COO</td><td><span class="pill p-g">Negotiation</span></td><td>11/14 邮件</td><td>明天 14:00 会议</td></tr>
+          <tr><td><b>Pacific CrossPay</b></td><td>菲律宾</td><td>Remittance</td><td>Marco Reyes · Head of Ops</td><td><span class="pill p-b">Qualified</span></td><td>11/12 WhatsApp</td><td>SFF 展位见面</td></tr>
+          <tr><td><b>Harbour Remit</b></td><td>中国香港</td><td>MSO</td><td>—</td><td><span class="pill p-n">Lead</span></td><td>11/13 名片</td><td>首次触达</td></tr>
+          <tr><td><b>Sable Financial</b></td><td>英国</td><td>EMI</td><td>Emma Clarke · Compliance</td><td><span class="pill p-n">Meeting</span></td><td>11/10 邮件</td><td>等牌照问询回复</td></tr>
+        </table>
       </div>
     </div>
 
-    <div class="grid g-32">
-      <div class="card">
-        <div class="ch"><h3>Relationship timeline</h3><div class="r">6 sources · 11 events</div></div>
-        <div class="cb">
+    <div id="cust-detail" style="display:none">
+      <p style="margin-bottom:12px"><a href="javascript:backList()">← 返回客户列表</a></p>
+      <div class="cust-layout">
+        <div class="card">
+          <h2 style="margin-top:0">AtlasPay Global</h2>
+          <p style="font-size:12px;color:#9AA1AC">atlaspay.example</p>
+          <table class="kv" style="margin-top:10px">
+            <tr><td>国家 / 行业</td><td>肯尼亚 · 支付服务商</td></tr>
+            <tr><td>联系人</td><td>Daniel Otieno · CEO</td></tr>
+            <tr><td>负责人</td><td>我（Jasmine）</td></tr>
+            <tr><td>商机阶段</td><td>Proposal</td></tr>
+            <tr><td>预估年量</td><td>$480K</td></tr>
+            <tr><td>来源</td><td>SFF 展会 · 展位 B42</td></tr>
+          </table>
+          <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+            <button class="btn sm" onclick="alert('演示：在本页直接新建商机，客户、联系人、来源自动带过来')">+ 新建商机</button>
+            <button class="btn ghost sm" onclick="alert('演示：在本页直接建跟进任务，可设提醒')">+ 跟进任务</button>
+            <button class="btn ghost sm" onclick="alert('演示：AI 起草英文邮件，存草稿箱待你发送')">AI 写邮件</button>
+          </div>
+        </div>
+        <div class="card">
+          <h2 style="margin-top:0">沟通时间线</h2>
           <div class="tl">
-            <div class="it key">
-              <div class="m">
-                <span class="sic" style="background:var(--brand-50);color:var(--brand-7);width:16px;height:16px"><svg class="ico" style="width:9px;height:9px"><use href="#i-mic"/></svg></span>
-                6 Nov · Booth meeting · MTG-0042
-              </div>
-              <div class="b2">38 分钟。对方开场就问 <b>T+0 是否含周末</b>；我方给对公账户方案与 SAFE 说明。承诺 11 日发正式方案。</div>
-            </div>
-            <div class="it">
-              <div class="m">
-                <span class="sic" style="background:var(--violet-bg);color:var(--violet);width:16px;height:16px"><svg class="ico" style="width:9px;height:9px"><use href="#i-chat"/></svg></span>
-                5 Nov · WhatsApp
-              </div>
-              <div class="b2">会后互留，对方发了 2 条语音说明现有走廊的失败率痛点。</div>
-            </div>
-            <div class="it">
-              <div class="m">
-                <span class="sic" style="background:var(--line2);color:var(--ink3);width:16px;height:16px"><svg class="ico" style="width:9px;height:9px"><use href="#i-card"/></svg></span>
-                5 Nov · Business card
-              </div>
-              <div class="b2">Daniel Otieno · Head of Partnerships · 已建档为 Contact（待审批）。</div>
-            </div>
-            <div class="it">
-              <div class="m">
-                <span class="sic" style="background:var(--blue-bg);color:var(--blue);width:16px;height:16px"><svg class="ico" style="width:9px;height:9px"><use href="#i-mail"/></svg></span>
-                28 Oct · Email
-              </div>
-              <div class="b2">会前确认会面时间，附公司介绍 PDF（附件已存档，SRC-0012）。</div>
-            </div>
-            <div class="it">
-              <div class="m">
-                <span class="sic" style="background:var(--brand-50);color:var(--brand-7);width:16px;height:16px"><svg class="ico" style="width:9px;height:9px"><use href="#i-search"/></svg></span>
-                26 Oct · AI research
-              </div>
-              <div class="b2">识别为 Tier A 目标：持牌 PSP、14 条走廊、62% 量进入中国，无公开中国市场计划。</div>
-            </div>
+            <div class="ev"><span class="tm">11/14 · 会议（32 分钟）</span><b>SFF 展位会谈</b><p>对方确认要做中国供应商付款；要求 T+0；约定本周发方案。</p></div>
+            <div class="ev"><span class="tm">11/08 · WhatsApp</span><b>互换资料</b><p>发了公司介绍；对方问了个人结汇额度，已转合规同事。</p></div>
+            <div class="ev"><span class="tm">11/06 · 邮件</span><b>首次接洽</b><p>对方主动询价 China Payout，提到月采购付款约 $40 万。</p></div>
           </div>
         </div>
-      </div>
-
-      <div>
-        <div class="card">
-          <div class="ch"><h3>Company profile</h3><div class="r">verified 6 Nov</div></div>
-          <div class="cb" style="padding-top:6px">
-            <dl class="kv">
-              <dt>Legal name</dt><dd>AtlasPay Global Ltd (fictional)</dd>
-              <dt>HQ</dt><dd>Nairobi, Kenya</dd>
-              <dt>Licence</dt><dd>CBK PSP · PS-2019-0442</dd>
-              <dt>Business model</dt><dd>B2B collection + payout</dd>
-              <dt>Corridors</dt><dd>14 · EAC, China, UAE</dd>
-              <dt>China exposure</dt><dd>62% of volume into CN</dd>
-              <dt>Est. volume</dt><dd><span class="b b-n">Unconfirmed</span> 40–60M USD/mo</dd>
-              <dt>Owner</dt><dd>Jasmine Zhou</dd>
-            </dl>
-          </div>
-        </div>
-
-        <div class="card mt">
-          <div class="ch"><h3>Key contacts</h3><div class="r">3</div></div>
-          <div class="cb" style="padding-top:6px">
-            <div class="rows">
-              <div class="row"><div class="g"><div class="t">Daniel Otieno</div><div class="s">Head of Partnerships · decision influencer</div></div><span class="b b-g">Met</span></div>
-              <div class="row"><div class="g"><div class="t">Grace Wambui</div><div class="s">Finance Lead · raised settlement timing</div></div><span class="b b-n">Not met</span></div>
-              <div class="row"><div class="g"><div class="t">Peter Mwangi</div><div class="s">Compliance · owns UBO file</div></div><span class="b b-n">Not met</span></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card mt">
-          <div class="ch"><h3>Deal status</h3></div>
-          <div class="cb" style="padding-top:6px">
-            <div class="metrics">
-              <div class="m"><div class="mv">Proposal</div><div class="mk2">Stage</div></div>
-              <div class="m"><div class="mv num">$480K</div><div class="mk2">Est. annual</div></div>
-              <div class="m"><div class="mv num">14<span style="font-size:11px;color:var(--ink4)"> d</span></div><div class="mk2">Idle</div></div>
-            </div>
-            <div class="divider"></div>
-            <div class="pg" style="margin-bottom:5px"><i style="width:50%"></i></div>
-            <div class="note">Lead → Qualified → Meeting → <b style="color:var(--ink2)">Proposal</b> → Negotiation → Compliance → Integration → Live</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid g-32 mt">
-      <div class="card">
-        <div class="ch">
-          <h3><svg class="ico sm" style="color:var(--brand-6)"><use href="#i-spark"/></svg>AI relationship intelligence</h3>
-          <div class="r">answerable questions, not a paragraph</div>
-        </div>
-        <div class="cb">
-          <div class="rows">
-            <div class="row"><div class="g"><div class="t">最近一次谈了什么？</div><div class="s">China Payout 的 T+0 口径，尤其是周末是否到账；对方财务担心「周五发的钱周一才到」影响供应商关系。</div></div></div>
-            <div class="row"><div class="g"><div class="t">提过什么特殊要求？</div><div class="s">要求收款人预校验（beneficiary pre-validation），因为现有通道退汇率高。</div></div></div>
-            <div class="row"><div class="g"><div class="t">有什么未解决的问题？</div><div class="s">UBO 穿透层数未定；贸易背景材料清单未给。</div></div></div>
-            <div class="row"><div class="g"><div class="t">之前报过价吗？</div><div class="s"><span class="b b-n">No record</span> 现场按政策未报价，历史邮件也无价格信息。</div></div></div>
-            <div class="row"><div class="g"><div class="t">合规有未办事项吗？</div><div class="s">制裁名单初筛通过；还需 purpose code 与贸易单据样本。</div></div></div>
-            <div class="row"><div class="g"><div class="t">谁最有影响力？</div><div class="s">Daniel 是推动者，但 Grace（财务）是否决点。下一次会议应拉上 Grace。</div></div></div>
-            <div class="row"><div class="g"><div class="t">最大障碍是什么？</div><div class="s">不是价格，是「周末出款」写不写进合同。写进去就成，写不进去就停在 Proposal。</div></div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="ch"><h3><svg class="ico sm" style="color:var(--brand-6)"><use href="#i-bulb"/></svg>Talking points</h3><div class="r">for the next call</div></div>
-        <div class="cb" style="padding-top:6px">
-          <div class="rows">
-            <div class="row"><div class="g"><div class="s" style="color:var(--ink2);font-size:12px">① 开场先接上次的电话：他们财务提的「周五发、周一没到」——直接给书面 cut-off 表，不要口头保证。</div></div></div>
-            <div class="row"><div class="g"><div class="s" style="color:var(--ink2);font-size:12px">② 收益人预校验单独一页，说明退汇率与人工复核成本，这是他们愿意付溢价的地方。</div></div></div>
-            <div class="row"><div class="g"><div class="s" style="color:var(--ink2);font-size:12px">③ 主动提 UBO 穿透——先说我们要看到第几层，比被问出来更有利。</div></div></div>
-            <div class="row"><div class="g"><div class="s" style="color:var(--ink2);font-size:12px">④ 不要主动报价。现场政策一样适用：给区间不给点位，回公司出正式报价单。</div></div></div>
-          </div>
-          <div class="divider"></div>
-          <div style="display:flex;gap:6px;flex-wrap:wrap">
-            <button class="btn sm ghost" onclick="toast('Talking points copied (demo)')">Copy</button>
-            <button class="btn sm ghost" onclick="toast('Prep brief generated (simulated)')">Generate prep brief</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- =============== 05a PIPELINE =============== -->
-  <section class="page" id="v-pipeline" hidden>
-    <div class="ph">
-      <div>
-        <h1>Pipeline</h1>
-        <div class="sub">9 opportunities · $2.4M total · $860K weighted. 阶段可拖动（本原型只做视觉演示）。</div>
-      </div>
-      <div class="acts">
-        <div class="tabs" style="margin:0;border:none">
-          <button class="on"><svg class="ico sm"><use href="#i-kanban"/></svg>Kanban</button>
-          <button onclick="go('roadmap')"><svg class="ico sm"><use href="#i-gantt"/></svg>Gantt</button>
-        </div>
-        <button class="btn ghost sm" onclick="toast('Forecast export simulated')"><svg class="ico sm"><use href="#i-down"/></svg>Forecast</button>
-      </div>
-    </div>
-
-    <div style="overflow-x:auto;padding-bottom:6px">
-      <div class="kb" style="grid-template-columns:repeat(8,minmax(146px,1fr));gap:8px;min-width:1210px">
-        <div class="col">
-          <h4>Lead<span class="c">3</span></h4>
-          <div class="kc" onclick="openAccount('orinoco')"><div class="t">Orinoco Pay</div><div class="s">Colombia · PSP</div><div class="f"><span class="v">$120K</span><span class="b b-n">Tier C</span></div></div>
-          <div class="kc" onclick="openAccount('kestrel')"><div class="t">Kestrel Acquiring</div><div class="s">Poland · acquirer</div><div class="f"><span class="v">$90K</span><span class="b b-n">Tier C</span></div></div>
-          <div class="kc" onclick="openAccount('tanuki')"><div class="t">Tanuki Wallet</div><div class="s">Japan · wallet</div><div class="f"><span class="v">$60K</span><span class="b b-n">Tier C</span></div></div>
-        </div>
-        <div class="col">
-          <h4>Qualified<span class="c">2</span></h4>
-          <div class="kc" onclick="openAccount('pacific')"><div class="t">Pacific CrossPay</div><div class="s">Philippines · remittance</div><div class="f"><span class="v">$260K</span><span class="b b-g">A</span></div></div>
-          <div class="kc" onclick="openAccount('harbour')"><div class="t">Harbour Remit</div><div class="s">Hong Kong, China · MSO</div><div class="f"><span class="v">$180K</span><span class="b b-g">B</span></div></div>
-        </div>
-        <div class="col">
-          <h4>Meeting<span class="c">2</span></h4>
-          <div class="kc" onclick="openAccount('nimbus')"><div class="t">Nimbus Pay</div><div class="s">Nigeria · PSP</div><div class="f"><span class="v">$150K</span><span class="b b-g">B</span></div></div>
-          <div class="kc" onclick="openAccount('sable')"><div class="t">Sable Financial</div><div class="s">UK · EMI</div><div class="f"><span class="v">$110K</span><span class="b b-g">B</span></div></div>
-        </div>
-        <div class="col">
-          <h4>Proposal<span class="c">1</span></h4>
-          <div class="kc" onclick="openAccount('atlas')">
-            <div class="t">AtlasPay · China Payout</div><div class="s">Due 11 Nov · 2 days</div>
-            <div class="f"><span class="v">$480K</span><span class="b b-r">14d idle</span></div>
-          </div>
-        </div>
-        <div class="col">
-          <h4>Negotiation<span class="c">1</span></h4>
-          <div class="kc" onclick="openAccount('meridian')">
-            <div class="t">Meridian · Payout + VA</div><div class="s">Blocked: UBO depth</div>
-            <div class="f"><span class="v">$620K</span><span class="b b-a">9d idle</span></div>
-          </div>
-        </div>
-        <div class="col">
-          <h4>Compliance<span class="c">0</span></h4>
-          <div class="empty" style="padding:14px 6px;font-size:10.5px">—</div>
-        </div>
-        <div class="col">
-          <h4>Integration<span class="c">0</span></h4>
-          <div class="empty" style="padding:14px 6px;font-size:10.5px">—</div>
-        </div>
-        <div class="col">
-          <h4>Live<span class="c">0</span></h4>
-          <div class="empty" style="padding:14px 6px;font-size:10.5px">No deals live yet</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card mt">
-      <div class="ch"><h3>Stage discipline</h3><div class="r">what the AI enforces</div></div>
-      <div class="cb">
-        <div class="grid g3" style="gap:14px">
-          <div class="hint"><svg class="ico"><use href="#i-clock"/></svg><span><b style="color:var(--ink2)">14-day silent alarm.</b> A deal that has not moved in 14 days is flagged with the specific blocking field, not a generic reminder.</span></div>
-          <div class="hint"><svg class="ico"><use href="#i-shield"/></svg><span><b style="color:var(--ink2)">No stage-skipping.</b> Compliance cannot be bypassed; the button is disabled rather than hidden, so the reason is visible.</span></div>
-          <div class="hint"><svg class="ico"><use href="#i-warn"/></svg><span><b style="color:var(--ink2)">Human owns the forecast.</b> AI proposes the stage change, the BD confirms it. Nothing auto-advances overnight.</span></div>
+        <div class="card insight">
+          <h2 style="margin-top:0">AI 客户洞察</h2>
+          <p><b>这家客户做什么：</b>肯尼亚本地 PSP，服务东非 B2B 进口商，常年从中国采购。</p>
+          <p><b>收款需求：</b>收肯尼亚先令 / 美元 → 货到中国供应商需要付人民币。</p>
+          <table class="kv">
+            <tr><td>收款国 / 币种</td><td>肯尼亚 · KES / USD</td></tr>
+            <tr><td>付款国 / 币种</td><td>中国 · CNY</td></tr>
+            <tr><td>企业 / 个人</td><td>企业对公为主</td></tr>
+            <tr><td>付款用途</td><td>货物贸易 · 供应链采购</td></tr>
+            <tr><td>预估月交易量</td><td>$400K（客户自报，待核实）</td></tr>
+          </table>
+          <p style="margin-top:10px"><b>痛点：</b>现行渠道 T+3 且周末不到账，旺季压货时资金紧。</p>
+          <p><b>建议方案：</b>对公账户 China Payout + T+0 结算，报价先讲「旺季不断货」再讲费率。</p>
+          <p><b>下一步：</b>今天发方案，抄对方财务总监。</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- =============== 05b ROADMAP =============== -->
-  <section class="page" id="v-roadmap" hidden>
-    <div class="ph">
-      <div>
-        <div class="back" onclick="go('pipeline')"><svg class="ico sm"><use href="#i-arrow"/></svg> Pipeline</div>
-        <h1>Deal Roadmap <span class="b b-b">AtlasPay · China Payout</span></h1>
-        <div class="sub">45 天执行计划，由复盘结论自动生成。每一条都能改负责人、改日期、加依赖。</div>
-      </div>
-      <div class="acts">
-        <button class="btn ghost sm" onclick="toast('Task edits are local to this prototype')"><svg class="ico sm"><use href="#i-edit"/></svg>Edit plan</button>
-        <button class="btn ghost sm" onclick="toast('Feishu task sync unavailable in prototype')"><svg class="ico sm"><use href="#i-layers"/></svg>Push to Feishu</button>
-        <button class="btn sm" onclick="toast('Plan approved (simulated)')"><svg class="ico sm"><use href="#i-check"/></svg>Approve plan</button>
-      </div>
+  <!-- ============ MY PIPELINE ============ -->
+  <section class="view" id="v-pipeline">
+    <h1>My Pipeline · 我的商机</h1>
+    <p class="sub">9 个在谈商机 · 预估总额 $2.4M · 点卡片看详情，拖动即改阶段（演示）。</p>
+    <div class="kanban" style="margin-top:16px">
+      <div class="kcol"><h4>Lead <span>2</span></h4><div class="kcard"><b>Harbour Remit</b><div class="m">Collection + Payout · 中国香港</div><div class="due">首次触达 · 11/17</div></div><div class="kcard"><b>Mekong Pay</b><div class="m">Payout · 越南</div><div class="due">SFF 现场约见</div></div></div>
+      <div class="kcol"><h4>Qualified <span>2</span></h4><div class="kcard"><b>Pacific CrossPay</b><div class="m">Collection · $440K</div><div class="due">11/17 展位见面</div></div><div class="kcard"><b>Sable Financial</b><div class="m">Collection · 英国</div><div class="due">等牌照回复 · 11/20</div></div></div>
+      <div class="kcol"><h4>Meeting <span>2</span></h4><div class="kcard"><b>Nimbus Pay</b><div class="m">Collection · 尼日利亚</div><div class="due">LinkedIn 触达 · 今天</div></div><div class="kcard"><b>Orinoco Pay</b><div class="m">Payout · 哥伦比亚</div><div class="due">观察中</div></div></div>
+      <div class="kcol"><h4>Proposal <span>2</span></h4><div class="kcard" style="border-color:var(--g)"><b>AtlasPay · China Payout</b><div class="m">$480K · 肯尼亚</div><div class="due">今天发方案（已拖 2 天）</div></div><div class="kcard"><b>Tanuki Wallet</b><div class="m">Collection · 日本</div><div class="due">11/22 回访</div></div></div>
+      <div class="kcol"><h4>Negotiation <span>2</span></h4><div class="kcard"><b>Meridian · VA 开户</b><div class="m">$820K · 阿联酋</div><div class="due">明天 14:00 会议</div></div><div class="kcard"><b>Lion City Settle</b><div class="m">$260K · 新加坡</div><div class="due">11/25 报价</div></div></div>
+      <div class="kcol"><h4>合规 / 上线 <span>1</span></h4><div class="kcard"><b>伙伴 A · 渠道合作</b><div class="m">已生效</div><div class="due">11/30 致谢引荐人</div></div></div>
     </div>
-
-    <div class="card">
-      <div class="ch"><h3>Execution timeline</h3><div class="r">D1 = 8 Nov 2026 · D45 = 22 Dec 2026</div></div>
-      <div class="cb">
-        <div class="gt-wrap">
-          <div class="gt">
-            <div class="gh"><span>D1</span><span>D5</span><span>D10</span><span>D15</span><span>D20</span><span>D25</span><span>D30</span><span>D35</span><span>D40</span><span>D45</span></div>
-
-            <div class="gt-row">
-              <div class="lbl">Discovery<div class="s2">business &amp; payment needs</div></div>
-              <div class="gt-track"><div class="gt-bar done" style="left:0%;width:6.5%">D1–3</div></div>
-            </div>
-            <div class="gt-row">
-              <div class="lbl">Engagement<div class="s2">follow-up email + call</div></div>
-              <div class="gt-track"><div class="gt-bar" style="left:4.4%;width:6.6%">D2–4</div></div>
-            </div>
-            <div class="gt-row">
-              <div class="lbl">Solution<div class="s2">China Payout proposal</div></div>
-              <div class="gt-track"><div class="gt-bar" style="left:8.8%;width:8.8%">D5–8</div></div>
-            </div>
-            <div class="gt-row">
-              <div class="lbl">Commercial<div class="s2">pricing &amp; terms</div></div>
-              <div class="gt-track"><div class="gt-bar warn" style="left:15.5%;width:8.9%">D8–11</div></div>
-            </div>
-            <div class="gt-row">
-              <div class="lbl">Compliance<div class="s2">KYB · UBO · purpose code</div></div>
-              <div class="gt-track"><div class="gt-bar plan" style="left:24.4%;width:17.8%">D12–20</div></div>
-            </div>
-            <div class="gt-row">
-              <div class="lbl">Integration<div class="s2">API sandbox · test payout</div></div>
-              <div class="gt-track"><div class="gt-bar plan" style="left:42.2%;width:26.6%">D20–32</div></div>
-            </div>
-            <div class="gt-row">
-              <div class="lbl">Pilot<div class="s2">first live transaction</div></div>
-              <div class="gt-track"><div class="gt-bar plan" style="left:68.8%;width:13.4%">D32–38</div></div>
-            </div>
-            <div class="gt-row">
-              <div class="lbl">Go live<div class="s2">full volume migration</div></div>
-              <div class="gt-track"><div class="gt-ms" style="left:86.6%" title="D40"></div><div class="gt-bar plan" style="left:88.5%;width:11%">D40–45</div></div>
-            </div>
-          </div>
-        </div>
-        <div class="divider"></div>
-        <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:10.5px;color:var(--ink4)">
-          <span><span class="dot" style="background:#9FC4B2"></span> done</span>
-          <span><span class="dot" style="background:var(--brand)"></span> active</span>
-          <span><span class="dot" style="background:#D9A451"></span> blocked</span>
-          <span><span class="dot" style="background:var(--brand-50);border:1px solid var(--brand-100)"></span> planned</span>
-          <span><span class="dot" style="background:var(--brand);transform:rotate(45deg);border-radius:0"></span> milestone</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="card mt">
-      <div class="ch"><h3>Tasks</h3><div class="r">8 shown of 26 generated</div></div>
-      <div class="tw">
-        <table class="t">
-          <thead><tr><th>Task</th><th>Phase</th><th>Owner</th><th>Due</th><th>Depends on</th><th>Status</th></tr></thead>
-          <tbody>
-            <tr><td>Collect payment-flow details</td><td>Discovery</td><td>JZ</td><td class="num">D3</td><td>—</td><td><span class="b b-g">Done</span></td></tr>
-            <tr><td>Send post-SFF thank-you + proposal</td><td>Engagement</td><td>JZ</td><td class="num">D4</td><td>Discovery</td><td><span class="b b-a">Draft ready</span></td></tr>
-            <tr><td>Walk CFO through cut-off policy</td><td>Solution</td><td>JZ</td><td class="num">D8</td><td>Proposal</td><td><span class="b b-n">Planned</span></td></tr>
-            <tr><td>Issue formal pricing sheet</td><td>Commercial</td><td>Pricing desk</td><td class="num">D8</td><td>Solution</td><td><span class="b b-n">Planned</span></td></tr>
-            <tr><td>KYB document collection</td><td>Compliance</td><td>Compliance</td><td class="num">D20</td><td>Commercial</td><td><span class="b b-n">Planned</span></td></tr>
-            <tr><td>UBO structure review</td><td>Compliance</td><td>Compliance</td><td class="num">D18</td><td>KYB</td><td><span class="b b-n">Planned</span></td></tr>
-            <tr><td>Sandbox payout test</td><td>Integration</td><td>Tech</td><td class="num">D30</td><td>Compliance</td><td><span class="b b-n">Planned</span></td></tr>
-            <tr><td>First live transaction</td><td>Pilot</td><td>JZ</td><td class="num">D38</td><td>Sandbox</td><td><span class="b b-n">Planned</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="cb" style="border-top:1px solid var(--line2);padding:10px 16px">
-        <div class="hint"><svg class="ico"><use href="#i-warn"/></svg>Dates are AI-proposed from comparable deals and can be edited before approval. Nothing is pushed to Feishu until you approve.</div>
-      </div>
-    </div>
+    <div style="margin-top:14px"><button class="btn ghost" onclick="alert('演示：这里切换到 45 天成交路线图（甘特视图），日常用看板就够了')">切换甘特 / 路线图视图</button></div>
   </section>
 
-  <!-- =============== 06a AI WORKFORCE =============== -->
-  <section class="page" id="v-agents" hidden>
-    <div class="ph">
-      <div>
-        <h1>AI Workforce</h1>
-        <div class="sub">六个专职 Agent。每个都有明确职责、当前动作、产出和人工审批点。</div>
-      </div>
-      <div class="acts">
-        <button class="btn ghost sm" onclick="openRail()">Activity log</button>
-      </div>
+  <!-- ============ AI ASSISTANT ============ -->
+  <section class="view" id="v-assistant">
+    <h1>AI Assistant · 跟 AI 说你想做的事</h1>
+    <p class="sub">不用记功能在哪个菜单。AI 做完会给你结果，要写进 CRM、发邮件的事，都会先给你确认。</p>
+    <div class="chat" style="margin-top:16px">
+      <div class="msg me"><div class="who">我</div><div class="bubble">下周去新加坡 SFF。帮我找 20 家有中国供应商付款需求的 PSP，提前研究、安排会议。</div></div>
+      <div class="msg ai"><div class="who">AI</div><div class="bubble">
+        好，已安排。我从 340 家参展商里筛出 <b>20 家有中国付款需求信号</b> 的 PSP：
+        <ul>
+          <li><b>12 家证据明确</b>：官网或公开资料提到中国供应商 / 进口付款（如 AtlasPay、Mekong Pay）</li>
+          <li><b>8 家信号较强</b>：亚非进口商客群为主，需要你现场确认</li>
+          <li>其中 <b>3 家你已有联系</b>，我按「未联系 → 待确认 → 已约」排好了触达顺序</li>
+        </ul>
+        名单已放进 <a href="javascript:go('event')">Events &amp; Travel · 展前</a>，每家附一段「为什么约」。</div></div>
+      <div class="msg me"><div class="who">我</div><div class="bubble">帮我把 20 家的约见邮件都准备好，还有我的行程。</div></div>
+      <div class="msg ai"><div class="who">AI</div><div class="bubble">
+        完成。两个东西都在 Events &amp; Travel 里：
+        <ul>
+          <li><b>20 封英文约见邮件</b>：每封都提到对方的具体业务（不是群发模板），存草稿箱等你 review，不会自动发送</li>
+          <li><b>行程</b>：11/16 航班 + 酒店 + 按地理 clustered 的展馆动线，确认后写入你的日历（不会通知任何人）</li>
+        </ul>
+        <div class="appr"><b>需要你确认：</b>邮件发送前逐封 review；日历写入是私人的，无参会人。</div>
+      </div></div>
+      <div class="msg me"><div class="who">我</div><div class="bubble">展会结束后我要快速拿到跟进计划。</div></div>
+      <div class="msg ai"><div class="who">AI</div><div class="bubble">
+        不用你开口，展后当晚我会自动做四件事：<b>汇总沟通 → 客户排序 → 生成 26 条待办和 12 封邮件草稿 → 更新看板</b>。
+        你只需要在 <a href="javascript:go('event')">展后页签</a> 里逐条点「批准 / 修改 / 拒绝」，每条都附依据。
+      </div></div>
     </div>
-
-    <div class="grid g3">
-      <div class="ag">
-        <div class="ah"><div class="ic2"><svg class="ico"><use href="#i-target"/></svg></div><div><b>AI Prospecting Agent</b><small>global lead generation</small></div><div style="margin-left:auto"><span class="b b-b"><span class="dot" style="background:var(--blue)"></span>Running</span></div></div>
-        <div class="st">Scanning 214 MENA companies for China Payout signals — licence changes, corridor launches, hiring for China ops.</div>
-        <div class="out">8 new ICP-matched leads · 2 with a fresh licence event this month</div>
-        <div class="af"><span class="note">68% complete</span><div class="pg" style="flex:1"><i style="width:68%"></i></div></div>
-      </div>
-
-      <div class="ag">
-        <div class="ah"><div class="ic2"><svg class="ico"><use href="#i-search"/></svg></div><div><b>AI Account Researcher</b><small>pre-meeting intelligence</small></div><div style="margin-left:auto"><span class="b b-g"><span class="dot" style="background:var(--brand)"></span>Completed</span></div></div>
-        <div class="st">Researched all 32 SFF companies: licence, corridors, China exposure, decision makers.</div>
-        <div class="out">9 scored A/B · 3 flagged as “no public China footprint” and downgraded</div>
-        <div class="af"><span class="note">finished 07:40</span><button class="btn xs ghost" style="margin-left:auto" onclick="go('event');setTab('event','t-accounts')">View</button></div>
-      </div>
-
-      <div class="ag">
-        <div class="ah"><div class="ic2"><svg class="ico"><use href="#i-plane"/></svg></div><div><b>AI Travel Planner</b><small>itinerary &amp; logistics</small></div><div style="margin-left:auto"><span class="b b-n">Idle</span></div></div>
-        <div class="st">Last built: Singapore 4–6 Nov. Next draft ready for Money20/20 Asia (Mar 2027).</div>
-        <div class="out">6 target accounts within 2 km of Marina Bay · 1 transfer per day</div>
-        <div class="af"><span class="note">manual trigger</span><button class="btn xs ghost" style="margin-left:auto" onclick="go('travel')">Open</button></div>
-      </div>
-
-      <div class="ag">
-        <div class="ah"><div class="ic2"><svg class="ico"><use href="#i-mic"/></svg></div><div><b>AI Meeting Assistant</b><small>capture &amp; extract</small></div><div style="margin-left:auto"><span class="b b-b"><span class="dot" style="background:var(--blue)"></span>Running</span></div></div>
-        <div class="st">Transcribing 2 remaining recordings (SRC-0012, SRC-0013). Both are offline-safe and will sync when connected.</div>
-        <div class="out">19 of 21 interactions extracted · 2 pending</div>
-        <div class="af"><span class="note">ETA 4 min</span><div class="pg" style="flex:1"><i style="width:88%"></i></div></div>
-      </div>
-
-      <div class="ag">
-        <div class="ah"><div class="ic2"><svg class="ico"><use href="#i-layers"/></svg></div><div><b>AI Event Debrief Agent</b><small>consolidation &amp; scoring</small></div><div style="margin-left:auto"><span class="b b-a"><span class="dot" style="background:var(--amber)"></span>Needs approval</span></div></div>
-        <div class="st">18 records staged for CRM write-back. Waiting on a human decision — will not write anything by itself.</div>
-        <div class="out">9 companies · 4 contacts · 5 opportunities · 26 tasks · 12 drafts</div>
-        <div class="af"><span class="note">blocked on BD</span><button class="btn xs sub" style="margin-left:auto" onclick="go('event');setTab('event','t-actions')">Review</button></div>
-      </div>
-
-      <div class="ag">
-        <div class="ah"><div class="ic2"><svg class="ico"><use href="#i-send"/></svg></div><div><b>AI Follow-up Agent</b><small>drafting, never sending</small></div><div style="margin-left:auto"><span class="b b-a"><span class="dot" style="background:var(--amber)"></span>Waiting</span></div></div>
-        <div class="st">12 drafts written from transcripts and prior threads. Sending is deliberately out of scope.</div>
-        <div class="out">12 drafts · 0 sent · 2 marked “needs review” for missing data</div>
-        <div class="af"><span class="note">human sends</span><button class="btn xs ghost" style="margin-left:auto" onclick="openDraft('a1')">Open draft</button></div>
-      </div>
+    <div class="chips" style="margin-top:16px">
+      <span class="chip">把 AtlasPay 的沟通汇总成一段话</span>
+      <span class="chip">给 Pacific CrossPay 写封英文跟进邮件</span>
+      <span class="chip">我明天两个会分别该注意什么？</span>
+      <span class="chip">最近哪家商机拖太久了？</span>
     </div>
-
-    <div class="card mt">
-      <div class="ch"><h3>Recent activity</h3><div class="r">last 24 h</div></div>
-      <div class="tw">
-        <table class="t">
-          <thead><tr><th>Time</th><th>Agent</th><th>Action</th><th>Result</th><th>Status</th></tr></thead>
-          <tbody>
-            <tr><td class="num">09:41</td><td>Follow-up Agent</td><td>Drafted 3 emails for tier-A accounts</td><td>Saved as drafts</td><td><span class="b b-a">Awaiting review</span></td></tr>
-            <tr><td class="num">09:12</td><td>Debrief Agent</td><td>Consolidated 14 sources into 18 approval items</td><td>Queue updated</td><td><span class="b b-a">Awaiting review</span></td></tr>
-            <tr><td class="num">08:50</td><td>Meeting Assistant</td><td>Transcribed SRC-0011 (licence pack call)</td><td>Added payment flow fields</td><td><span class="b b-g">Completed</span></td></tr>
-            <tr><td class="num">07:40</td><td>Account Researcher</td><td>Researched 32 companies</td><td>9 scored A/B</td><td><span class="b b-g">Completed</span></td></tr>
-            <tr><td class="num">02:15</td><td>Prospecting Agent</td><td>Scheduled MENA scan</td><td>214 companies queued</td><td><span class="b b-b">Running</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <div class="composer"><span>问 AI：帮我准备明天 Meridian 的会</span><button class="btn sm" onclick="alert('演示：输入指令后，AI 在后台调用检索、写稿、排期能力，结果回到这里')">发送</button></div>
+    <div class="note" style="margin-top:12px">AI 可以：检索客户、读沟通记录、起草邮件、排行程、写任务。<b>AI 不会</b>：未经你确认就发邮件、改 CRM、承诺价格。</div>
   </section>
 
-  <!-- =============== 06b INTEGRATIONS =============== -->
-  <section class="page" id="v-integrations" hidden>
-    <div class="ph">
-      <div>
-        <h1>Integrations</h1>
-        <div class="sub">全部只读接入；凭证只存在本机或环境变量。缺失的来源会明确标出来，而不是假装有数据。</div>
-      </div>
-      <div class="acts">
-        <button class="btn ghost sm" onclick="toast('Re-scan is simulated')"><svg class="ico sm"><use href="#i-refresh"/></svg>Re-scan sources</button>
-      </div>
-    </div>
-
-    <div class="grid g3">
-      <div class="card pad">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-          <div class="sic" style="background:var(--blue-bg);color:var(--blue);width:24px;height:24px"><svg class="ico"><use href="#i-cal"/></svg></div>
-          <b style="font-size:12.5px">Feishu · calendar / IM / tasks</b>
-          <span class="b b-g" style="margin-left:auto">Connected</span>
-        </div>
-        <div class="note">出差期间日历是最高优先级事实源：现场手记的短事件＝实际会面清单。task 与 IM 按时间窗正序拉取。</div>
-        <div class="divider"></div>
-        <div class="note">Last sync 09:40 · 26 events · 4 groups · 11 tasks</div>
-      </div>
-
-      <div class="card pad">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-          <div class="sic" style="background:var(--blue-bg);color:var(--blue);width:24px;height:24px"><svg class="ico"><use href="#i-mail"/></svg></div>
-          <b style="font-size:12.5px">Enterprise mailbox</b>
-          <span class="b b-g" style="margin-left:auto">Connected</span>
-        </div>
-        <div class="note">IMAP 粗筛 + 本地精筛；.ics 附件为日程权威时间源。草稿箱可写，发信动作不代执行。</div>
-        <div class="divider"></div>
-        <div class="note">18 threads · 12 drafts saved · 0 sent by AI</div>
-      </div>
-
-      <div class="card pad">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-          <div class="sic" style="background:var(--violet-bg);color:var(--violet);width:24px;height:24px"><svg class="ico"><use href="#i-chat"/></svg></div>
-          <b style="font-size:12.5px">WhatsApp desktop</b>
-          <span class="b b-a" style="margin-left:auto">Needs permission</span>
-        </div>
-        <div class="note">本地 sqlite 只读解析。缺磁盘权限时该来源标 !!，不阻断其他八个源。</div>
-        <div class="divider"></div>
-        <div class="note">0 synced · consent status unknown for 1 record</div>
-      </div>
-
-      <div class="card pad">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-          <div class="sic" style="background:var(--brand-50);color:var(--brand-7);width:24px;height:24px"><svg class="ico"><use href="#i-flag"/></svg></div>
-          <b style="font-size:12.5px">Event app · SFF 2026</b>
-          <span class="b b-g" style="margin-left:auto">Connected</span>
-        </div>
-        <div class="note">Messages 会话一次性抓全，原文按浏览器时区换算后回填到日历备注。</div>
-        <div class="divider"></div>
-        <div class="note">21 conversations · 3 invitations expired</div>
-      </div>
-
-      <div class="card pad">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-          <div class="sic" style="background:var(--line2);color:var(--ink3);width:24px;height:24px"><svg class="ico"><use href="#i-db"/></svg></div>
-          <b style="font-size:12.5px">CRM database</b>
-          <span class="b b-n" style="margin-left:auto">Internal · mock</span>
-        </div>
-        <div class="note">规范化实体：Event / Company / Contact / SourceRecord / Meeting / Opportunity / Task / EmailDraft。</div>
-        <div class="divider"></div>
-        <div class="note">Write-back only after approval · full audit log retained</div>
-      </div>
-
-      <div class="card pad">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-          <div class="sic" style="background:var(--brand-50);color:var(--brand-7);width:24px;height:24px"><svg class="ico"><use href="#i-shield"/></svg></div>
-          <b style="font-size:12.5px">Compliance layer</b>
-          <span class="b b-v" style="margin-left:auto">Built-in</span>
-        </div>
-        <div class="note">制裁与负面初筛；L1 自用写真名、L2 外发用代称；25 项敏感词外发自检。</div>
-        <div class="divider"></div>
-        <div class="note">32 companies screened · 1 escalated</div>
-      </div>
-    </div>
-
-    <div class="card mt">
-      <div class="ch"><h3><svg class="ico sm" style="color:var(--brand-6)"><use href="#i-book"/></svg>AI knowledge base</h3><div class="r">what the agents read from</div></div>
-      <div class="tw">
-        <table class="t">
-          <thead><tr><th>Collection</th><th>Contents</th><th class="r">Items</th><th>Updated</th></tr></thead>
-          <tbody>
-            <tr><td>China Payout</td><td>Cut-off policy, corridor list, beneficiary rules</td><td class="r num">24</td><td class="num">2 Nov</td></tr>
-            <tr><td>Global collection</td><td>Local rails per market, settlement windows</td><td class="r num">18</td><td class="num">28 Oct</td></tr>
-            <tr><td>Virtual accounts</td><td>Currency coverage, onboarding checklist</td><td class="r num">12</td><td class="num">28 Oct</td></tr>
-            <tr><td>Compliance pack</td><td>Licences, AML process, data boundary</td><td class="r num">31</td><td class="num">4 Nov</td></tr>
-            <tr><td>Case library</td><td>Anonymised regional references</td><td class="r num">6</td><td class="num b-a">thin — 6 only</td></tr>
-            <tr><td>Sales playbook</td><td>Objection handling, pricing guardrails</td><td class="r num">15</td><td class="num">30 Oct</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="cb" style="border-top:1px solid var(--line2);padding:10px 16px">
-        <div class="hint"><svg class="ico"><use href="#i-warn"/></svg>Case library is the weakest collection — this is the same gap the SFF insights flagged. Six anonymised references is not enough for a tier-A conversation.</div>
-      </div>
-    </div>
-  </section>
-
-  </div><!-- /content -->
-</main>
-</div><!-- /app -->
-
-<div class="mask" id="mask" onclick="closeAll()"></div>
-
-<aside class="drawer" id="drawer">
-  <div class="dh">
-    <div>
-      <div class="t" id="dTitle">Detail</div>
-      <div class="s" id="dSub"></div>
-    </div>
-    <button class="x" onclick="closeAll()"><svg class="ico"><use href="#i-x"/></svg></button>
+  <div class="footer">YeeSales AI · YEE AI 智能大赛 2.0 参赛原型 · 界面为演示，全部客户为代称或虚构示例、数据模拟 · 邮件不自动发送、日历写入无参会人</div>
   </div>
-  <div class="db" id="dBody"></div>
-  <div class="df" id="dFoot"></div>
-</aside>
-
-<aside class="rail" id="rail">
-  <div class="rh">
-    <svg class="ico" style="color:var(--brand-6)"><use href="#i-bolt"/></svg>
-    <b>AI Activity Center</b>
-    <button class="x" style="margin-left:auto;color:var(--ink4)" onclick="closeRail()"><svg class="ico"><use href="#i-x"/></svg></button>
-  </div>
-  <div class="rb" id="railBody"></div>
-  <div style="padding:11px 16px;border-top:1px solid var(--line);background:var(--bg)">
-    <div class="note">5 agents active · 2 waiting on your approval · 0 actions executed without a human</div>
-  </div>
-</aside>
-
-<div class="toast" id="toast"><svg class="ico sm"><use href="#i-check"/></svg><span id="toastTxt"></span></div>
+</div>
 
 <script>
-/* ---------------- routing ---------------- */
-const TITLES={cockpit:'AI Sales Cockpit',leads:'Lead Generation',event:'Event Intelligence',travel:'Travel Planner',account:'Customer 360',pipeline:'Pipeline',roadmap:'Deal Roadmap',agents:'AI Workforce',integrations:'Integrations'};
+const titles={home:'Home',find:'Find Customers',event:'Events & Travel',customers:'My Customers',pipeline:'My Pipeline',assistant:'AI Assistant'};
 function go(v){
-  const a=document.querySelector('#nav a[data-v="'+v+'"]'); if(!a) return;
   document.querySelectorAll('#nav a').forEach(x=>x.classList.remove('on'));
-  a.classList.add('on');
-  document.querySelectorAll('.page').forEach(s=>s.hidden=true);
-  const el=document.getElementById('v-'+v); if(el) el.hidden=false;
-  document.getElementById('tb-title').textContent=TITLES[v]||'';
-  window.scrollTo(0,0);
+  const a=document.querySelector('#nav a[data-v="'+v+'"]'); if(a)a.classList.add('on');
+  document.querySelectorAll('.view').forEach(x=>x.classList.remove('on'));
+  document.getElementById('v-'+v).classList.add('on');
+  document.getElementById('crumb-v').textContent=titles[v]||v;
+  document.querySelector('.main').scrollTop=0;
   history.replaceState(null,'','#'+v);
-  document.getElementById('side').classList.remove('open');
-  closeAll();
 }
 document.querySelectorAll('#nav a').forEach(a=>a.onclick=()=>go(a.dataset.v));
-window.addEventListener('hashchange',()=>{const v=location.hash.replace('#','');if(v)go(v);});
-
-/* ---------------- tabs ---------------- */
-function setTab(group,paneId){
-  const box=document.getElementById('tabs-'+group); if(!box) return;
-  box.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.pane===paneId));
-  const scope=box.parentElement;
-  scope.querySelectorAll(':scope > .pane').forEach(p=>p.classList.toggle('on',p.id===paneId));
-}
-document.querySelectorAll('.tabs').forEach(box=>{
-  if(!box.id) return;
-  box.querySelectorAll('button').forEach(b=>b.onclick=()=>setTab(box.id.replace('tabs-',''),b.dataset.pane));
+// event tabs
+document.querySelectorAll('.etabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.etabs button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  document.querySelectorAll('.epane').forEach(p=>p.style.display='none');
+  document.getElementById('p-'+b.dataset.p).style.display='block';
 });
-
-/* ---------------- toast ---------------- */
-let tT;
-function toast(msg){
-  const el=document.getElementById('toast');
-  document.getElementById('toastTxt').textContent=msg;
-  el.classList.add('show');
-  clearTimeout(tT); tT=setTimeout(()=>el.classList.remove('show'),2400);
-}
-
-/* ---------------- rail ---------------- */
-const ACTIVITY=[
-  ['Prospecting Agent','Running','Scanning 214 MENA companies for China Payout signals','68% · 09:41','i-target'],
-  ['Meeting Assistant','Running','Transcribing SRC-0012 and SRC-0013','88% · 09:38','i-mic'],
-  ['Debrief Agent','Needs approval','18 CRM records staged for write-back','09:12','i-layers'],
-  ['Follow-up Agent','Waiting','12 drafts written, none sent','09:41','i-send'],
-  ['Account Researcher','Completed','Researched 32 SFF companies, scored 9 as A/B','07:40','i-search'],
-  ['Travel Planner','Idle','Singapore itinerary archived; Money20/20 Asia draft ready','—','i-plane'],
-];
-function renderRail(){
-  document.getElementById('railBody').innerHTML=ACTIVITY.map(a=>{
-    const cls=a[1]==='Running'?'b-b':a[1]==='Completed'?'b-g':a[1]==='Needs approval'?'b-a':'b-n';
-    return `<div class="ri"><div class="ic3"><svg class="ico sm"><use href="#${a[4]}"/></svg></div>
-      <div class="g"><div class="tt">${a[0]} <span class="b ${cls}" style="margin-left:4px">${a[1]}</span></div>
-      <div class="dd">${a[2]}</div><div class="tm2">${a[3]}</div></div></div>`;
-  }).join('');
-}
-function openRail(){ renderRail(); document.getElementById('mask').style.display='block'; document.getElementById('rail').classList.add('open'); }
-function closeRail(){ document.getElementById('rail').classList.remove('open'); document.getElementById('mask').style.display='none'; }
-function closeAll(){ closeRail(); document.getElementById('drawer').classList.remove('open'); document.getElementById('mask').style.display='none'; }
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeAll(); });
-
-/* ---------------- drawer ---------------- */
-function drawer(title,sub,body,foot){
-  document.getElementById('dTitle').textContent=title;
-  document.getElementById('dSub').textContent=sub||'';
-  document.getElementById('dBody').innerHTML=body;
-  document.getElementById('dFoot').innerHTML=foot||'';
-  document.getElementById('dFoot').style.display=foot?'flex':'none';
-  document.getElementById('mask').style.display='block';
-  document.getElementById('drawer').classList.add('open');
-}
-
-const ACC={
-  atlas:{n:'AtlasPay Global',c:'Kenya · PSP · fictional',f:[['Fit score','94 / 100 · Tier A'],['Stage','Proposal · 14 days idle'],['Opportunity','China Payout · $480K'],['Contacts','Daniel Otieno (influencer) · Grace Wambui (blocker)'],['Open items','Weekend cut-off policy in writing · UBO depth'],['Next action','Send proposal by 11 Nov']],a:'周末出款的书面口径是唯一堵点。财务 Grace 是否决点，下一次会议必须拉上她。'},
-  meridian:{n:'Meridian Payments',c:'UAE · MSB · fictional',f:[['Fit score','88 / 100 · Tier A'],['Stage','Negotiation · 9 days idle'],['Opportunity','Payout + VA · $620K'],['Contacts','CEO (met) · Compliance lead (not met)'],['Open items','UBO disclosure depth'],['Next action','Request UBO structure chart by 13 Nov']],a:'卡在一个字段上。合规已经明确要穿透到最终受益人，对方内部还没定层数——这个必须本周推。'},
-  pacific:{n:'Pacific CrossPay',c:'Philippines · remittance · fictional',f:[['Fit score','86 / 100 · Tier A'],['Stage','Qualified'],['Opportunity','Collection · $260K'],['Open items','WhatsApp consent · corridor volume'],['Next action','Confirm PHP→CNY corridor scope']],a:'量不大但要求快。他们最关心失败率，我们目前没有可引用数据，这是丢分点。'},
-  nimbus:{n:'Nimbus Pay',c:'Nigeria · PSP · fictional',f:[['Fit score','79 / 100 · Tier B'],['Stage','Meeting'],['Opportunity','Collection · $150K'],['Open items','Duplicate record merge'],['Next action','Send meeting recap']],a:'两条记录需要合并，合并后保留较早的 ID 与全部来源链接。'},
-  harbour:{n:'Harbour Remit',c:'Hong Kong, China · MSO · fictional',f:[['Fit score','74 / 100 · Tier B'],['Stage','Qualified'],['Opportunity','Virtual account · $180K'],['Next action','Intro to risk team']],a:'香港 MSO，做 VA 顺理成章。风险团队认识一下比讲产品更有用。'},
-  sable:{n:'Sable Financial',c:'United Kingdom · EMI · fictional',f:[['Fit score','71 / 100 · Tier B'],['Stage','Meeting'],['Opportunity','Payout · $110K'],['Open items','Second call not yet booked'],['Next action','Book follow-up call']],a:'合规资料递过去之后态度明显松动，说明先给合规再谈商务这条路径是对的。'},
-  kestrel:{n:'Kestrel Acquiring',c:'Poland · acquirer · fictional',f:[['Fit score','63 / 100 · Tier C'],['Stage','Lead'],['Opportunity','Collection · $90K'],['Next action','Qualify ICP fit']],a:'收单机构，对华出款需求不明显，先确认是否有跨境付款场景再投入。'},
-  orinoco:{n:'Orinoco Pay',c:'Colombia · PSP · fictional',f:[['Fit score','58 / 100 · Tier C'],['Stage','Lead'],['Opportunity','Payout · $120K'],['Next action','Nurture sequence']],a:'拉美走廊目前不是重点，放进长期培育名单。'},
-  tanuki:{n:'Tanuki Wallet',c:'Japan · wallet · fictional',f:[['Fit score','52 / 100 · Tier C'],['Stage','Lead'],['Opportunity','Collection · $60K'],['Next action','Nurture sequence']],a:'C 端钱包，与我们的 B 端定位偏离，不投入人力。'}
-};
-function openAccount(id){
-  const a=ACC[id]; if(!a) return;
-  const body=`<dl class="kv">${a.f.map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('')}</dl>
-    <div style="margin-top:14px;padding:10px 12px;background:var(--brand-50);border:1px solid var(--brand-100);border-radius:7px">
-      <div style="font-size:10px;font-weight:600;letter-spacing:.06em;color:var(--brand-7);text-transform:uppercase;margin-bottom:3px">AI read</div>
-      <div style="font-size:12px;color:var(--ink2);line-height:1.65">${a.a}</div>
-    </div>
-    <div class="hint" style="margin-top:14px"><svg class="ico"><use href="#i-shield"/></svg>Fictional demo record. Real names and commercial terms would live only in the L1 internal version.</div>`;
-  drawer(a.n,a.c,body,
-    `<button class="btn sm" onclick="toast('Opening full profile (demo)')">Open full profile</button>
-     <button class="btn sm ghost" onclick="openDraft('a1')">Draft email</button>
-     <button class="btn sm ghost" onclick="closeAll();go('roadmap')">Roadmap</button>`);
-}
-
-function openScore(){
-  const dims=[
-    ['Strategic Fit',25,24,'持牌 PSP、14 条走廊、与我们的 B2B 定位完全重合'],
-    ['China Payout Demand',25,25,'62% 的量进入中国，且现场主动提对华付款'],
-    ['Transaction Potential',20,18,'自报 40–60M USD/月，口径未经核实，按中位打折'],
-    ['Licence & Compliance',15,13,'CBK 牌照有效，但 UBO 层数未确认'],
-    ['Engagement & Intent',15,14,'CEO 级不到场，但主动约了二轮'],
-  ];
-  const rows=dims.map(d=>`<div style="margin-bottom:11px">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
-        <span style="font-size:12px;font-weight:600">${d[0]}</span>
-        <span class="note">${d[1]}%</span>
-        <span style="margin-left:auto;font-size:12px;font-weight:650;white-space:nowrap" class="num">${d[2]}<span style="color:var(--ink4);font-weight:400"> / ${d[1]}</span></span>
-      </div>
-      <div class="pg" style="margin-bottom:4px"><i style="width:${d[2]/d[1]*100}%"></i></div>
-      <div class="note">${d[3]}</div>
-    </div>`).join('');
-  drawer('Fit score model','AtlasPay Global · 94 / 100',`
-    <div class="note" style="margin-bottom:12px">五项加权，每一项都能看到依据。BD 可以改分数，改完会记一条 override 日志。</div>
-    ${rows}
-    <div class="divider"></div>
-    <div style="display:flex;align-items:baseline;gap:8px">
-      <span style="font-size:22px;font-weight:650" class="num">94</span>
-      <span class="note">/ 100 · Tier A · 3 项满分，2 项因信息缺失扣分</span>
-    </div>
-    <div class="hint" style="margin-top:12px"><svg class="ico"><use href="#i-warn"/></svg>扣分不是模型不准，而是信息不全。补齐 UBO 与真实量级后会自动重算。</div>`,
-    `<button class="btn sm ghost" onclick="toast('Score override logged (demo)')">Override score</button>
-     <button class="btn sm" onclick="closeAll()">Done</button>`);
-}
-
-function openSource(id){
-  drawer('Source record',id+' · captured 6 Nov',`
-    <dl class="kv">
-      <dt>Type</dt><dd>Voice recording · 38 min</dd>
-      <dt>Captured</dt><dd>6 Nov 2026 14:22 SGT</dd>
-      <dt>Owner</dt><dd>Jasmine Zhou</dd>
-      <dt>Linked company</dt><dd>AtlasPay Global</dd>
-      <dt>Linked contact</dt><dd>Daniel Otieno</dd>
-      <dt>Linked meeting</dt><dd>MTG-0042</dd>
-      <dt>Processing</dt><dd><span class="b b-g">Transcribed</span></dd>
-      <dt>Consent</dt><dd><span class="b b-g">Recorded with verbal consent</span></dd>
-    </dl>
-    <div class="divider"></div>
-    <div style="font-size:10px;font-weight:600;letter-spacing:.06em;color:var(--ink4);text-transform:uppercase;margin-bottom:6px">Transcript excerpt</div>
-    <div style="font-size:12px;color:var(--ink2);line-height:1.75;background:var(--line2);padding:11px 12px;border-radius:7px">
-      “Our finance team's real problem is Friday. If we collect on Friday and it lands Monday, our suppliers in Guangzhou think we disappeared. So when you say T+0 — does that include the weekend?”
-    </div>
-    <div class="hint" style="margin-top:12px"><svg class="ico"><use href="#i-shield"/></svg>Raw recordings are not stored beyond processing; only the transcript and extracted fields are retained.</div>`,
-    `<button class="btn sm ghost" onclick="toast('Transcript download simulated')">Download transcript</button>
-     <button class="btn sm" onclick="closeAll()">Close</button>`);
-}
-
-const DRAFTS={
-  a1:{t:'Re: China Payout — proposal and cut-off policy',to:'Daniel Otieno · AtlasPay Global',st:['b-g','Draft · not sent'],body:`Hi Daniel,
-
-Great meeting you at Booth 3F-21 on Friday. Thanks for being direct about the Friday-to-Monday problem — that framed the whole conversation for me.
-
-Attached is the formal proposal. Two things I want to flag, because they are exactly what Grace raised:
-
-1. T+0 including weekends. Page 3 has the cut-off table by corridor, with the exact local cut-off times. No verbal promise — it is written down.
-2. Beneficiary pre-validation. Page 5 covers the rejection-rate logic and what happens when a name does not match.
-
-I have not included pricing. We do not quote at the booth and I would rather put a proper sheet in front of you than a number I would have to walk back.
-
-Could we get 30 minutes with Grace next week? Tuesday or Thursday, your morning works for Singapore.
-
-Best regards,
-Jasmine Zhou
-Strategic Partnership Director, Overseas Subsidiary Department
-YEEPAY`},
-  a2:{t:'Meridian — UBO structure before we can progress',to:'Meridian Payments · Compliance',st:['b-a','Needs review · 1 missing field'],body:`Dear [Name],
-
-Following our conversation at Fullerton, our compliance team has one open item before the file can move forward: the ownership structure down to ultimate beneficial owners.
-
-Could you share the structure chart? If the group uses a holding layer, we need the layer above it as well — I would rather ask once, clearly, than come back three times.
-
-[待补：对方在会面中提到的中间层名称，录音 16:40 处，需人工核对]
-
-Once that is in, I expect KYB to take about eight working days.
-
-Best regards,
-Jasmine Zhou
-YEEPAY`}
-};
-function openDraft(k){
-  const d=DRAFTS[k]; if(!d) return;
-  drawer('Email draft',d.to,`
-    <div style="display:flex;align-items:center;gap:6px;margin-bottom:10px">
-      <span class="b ${d.st[0]}">${d.st[1]}</span>
-      <span class="note">written by AI · sending is always a human action</span>
-    </div>
-    <div style="font-size:13px;font-weight:600;line-height:1.5;margin-bottom:12px">${d.t}</div>
-    <div style="font-size:12.2px;line-height:1.85;white-space:pre-wrap;color:var(--ink2);background:var(--line2);padding:14px;border-radius:8px">${d.body}</div>
-    <div class="divider"></div>
-    <div style="font-size:10px;font-weight:600;letter-spacing:.06em;color:var(--ink4);text-transform:uppercase;margin-bottom:6px">Written from</div>
-    <div class="rows">
-      <div class="row"><div class="g"><div class="t">MTG-0042 transcript</div><div class="s">the Friday-to-Monday complaint, verbatim</div></div></div>
-      <div class="row"><div class="g"><div class="t">SRC-0012 email thread</div><div class="s">prior contact, tone matched to their style</div></div></div>
-      <div class="row"><div class="g"><div class="t">Knowledge base · China Payout</div><div class="s">cut-off table and pre-validation rules</div></div></div>
-    </div>`,
-    `<button class="btn sm" onclick="toast('Saved to mailbox drafts (simulated)')">Save as draft</button>
-     <button class="btn sm ghost" onclick="toast('Copied to clipboard')">Copy</button>
-     <button class="btn sm ghost" onclick="closeAll()">Close</button>`);
-}
-
-/* ---------------- approvals ---------------- */
-function updateApCount(){
-  const done=document.querySelectorAll('.apx.done').length;
-  const left=18-done;
-  document.getElementById('apCount').textContent=left+' pending';
-  const t=document.querySelector('#tabs-event button[data-pane="t-actions"] .b');
-  if(t) t.textContent=left;
-}
-function approve(el){
-  const row=el.closest('.apx');
-  if(row.dataset.st) return;
-  row.dataset.st='approved';
-  row.classList.add('done');
-  const h=row.querySelector('.h');
-  const b=document.createElement('span'); b.className='b b-g'; b.textContent='Approved';
-  h.appendChild(b);
-  row.querySelectorAll('button').forEach(x=>x.disabled=true);
-  updateApCount();
-}
-function rejectRow(btn){
-  const row=btn.closest('.apx');
-  if(row.dataset.st) return;
-  row.dataset.st='rejected';
-  row.classList.add('done');
-  row.style.opacity='.55';
-  const h=row.querySelector('.h');
-  const b=document.createElement('span'); b.className='b b-r'; b.textContent='Rejected';
-  h.appendChild(b);
-  row.querySelectorAll('button').forEach(x=>x.disabled=true);
-  updateApCount();
-  toast('Record rejected — it will not be written to CRM');
-}
-function approveSelected(){
-  let n=0;
-  document.querySelectorAll('[data-ap]').forEach(cb=>{
-    if(cb.checked && !cb.closest('.apx').classList.contains('done')){ approve(cb); n++; }
-  });
-  toast(n? n+' records approved — queued for CRM write-back (simulated)' : 'Nothing selected');
-}
-function approveAll(){
-  let n=0;
-  document.querySelectorAll('[data-ap]').forEach(cb=>{
-    const row=cb.closest('.apx');
-    if(row.classList.contains('done')) return;
-    if(row.querySelector('.b-a')||row.querySelector('.b-r')) return;
-    approve(cb); n++;
-  });
-  toast(n+' validated records approved. 4 still need your decision (simulated).');
-}
-
-/* ---------------- misc actions ---------------- */
-function runDebrief(){ toast('Re-running debrief on 14 sources… (simulated)'); setTimeout(()=>toast('Debrief refreshed — 18 items still pending approval'),1400); }
-function feishuDoc(){ toast('Feishu integration not connected in this prototype — no document was created'); }
-function exportNote(f){ toast('Export as '+f+' — simulated in this prototype, no file is written'); }
-
-/* ---------------- init bars ---------------- */
-(function(){
-  const tiers=[['Tier A · strategic',3],['Tier B · high potential',6],['Tier C · nurture',23]];
-  const tb=document.getElementById('tierBars');
-  if(tb) tb.innerHTML=tiers.map(t=>`<div style="margin-bottom:9px">
-      <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">
-        <span style="font-size:11.5px">${t[0]}</span><span class="note" style="margin-left:auto">${t[1]}</span>
-      </div>
-      <div class="pg"><i style="width:${t[1]/32*100}%"></i></div></div>`).join('') +
-    `<div class="note" style="margin-top:2px">32 companies · 9 qualified · 3 at Tier A</div>`;
-
-  const prods=[['China Payout',5],['Global collection',3],['Virtual account',2]];
-  const pb=document.getElementById('prodBars');
-  if(pb) pb.innerHTML=prods.map(p=>`<div style="margin-bottom:9px">
-      <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">
-        <span style="font-size:11.5px">${p[0]}</span><span class="note" style="margin-left:auto">${p[1]}</span>
-      </div>
-      <div class="pg"><i style="width:${p[1]/9*100}%"></i></div></div>`).join('');
-
-  const fun=[['Proposal',1,480],['Negotiation',1,620],['Meeting',2,260],['Qualified',2,440],['Lead',3,270]];
-  const fn=document.getElementById('funnel');
-  if(fn) fn.innerHTML=fun.map(f=>`<div style="display:grid;grid-template-columns:86px 1fr 62px;align-items:center;gap:9px;margin-bottom:8px">
-      <span style="font-size:11.5px;color:var(--ink2)">${f[0]}</span>
-      <div class="pg"><i style="width:${f[2]/700*100}%"></i></div>
-      <span class="num" style="font-size:11px;color:var(--ink3);text-align:right">$${f[2]}K</span></div>`).join('');
-
-  const ca=document.getElementById('cockpitAgents');
-  if(ca) ca.innerHTML=ACTIVITY.slice(0,5).map(a=>{
-    const cls=a[1]==='Running'?'b-b':a[1]==='Completed'?'b-g':a[1]==='Needs approval'?'b-a':'b-n';
-    return `<div class="row"><div class="g"><div class="t">${a[0]}</div><div class="s">${a[2]}</div></div>
-      <div class="end"><span class="b ${cls}">${a[1]}</span></div></div>`;
-  }).join('');
-})();
-
-/* ---------------- command bar ---------------- */
-document.getElementById('cmdInput').addEventListener('keydown',e=>{
-  if(e.key==='Enter' && e.target.value.trim()){
-    const q=e.target.value.trim();
-    e.target.value='';
-    toast('AI command received — “'+q+'” (simulated)');
-    ACTIVITY.unshift(['Command Center','Running',q,'just now','i-spark']);
-    if(document.getElementById('rail').classList.contains('open')) renderRail();
-  }
-});
-document.addEventListener('keydown',e=>{
-  if((e.metaKey||e.ctrlKey)&&e.key==='k'){ e.preventDefault(); document.getElementById('cmdInput').focus(); }
-});
-
-/* ---------------- boot ---------------- */
-(function(){
-  const v=(location.hash||'').replace('#','');
-  if(v && TITLES[v]) go(v);
-  updateApCount();
-})();
+// customers detail
+function showCust(){document.getElementById('cust-list').style.display='none';document.getElementById('cust-detail').style.display='block';}
+function backList(){document.getElementById('cust-detail').style.display='none';document.getElementById('cust-list').style.display='block';}
+// deep link
+function init(){const h=(location.hash||'').replace('#',''); if(titles[h])go(h); if(h==='cust'){go('customers');showCust();}}
+window.addEventListener('hashchange',init); init();
 </script>
-
-
-
-
-
+<div style="position:fixed;left:12px;bottom:56px;z-index:99;background:#fff;border:1px solid #E5E8EC;border-radius:8px;padding:6px 10px;font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,.06)">
+  <a href="index.html" style="color:#00864A;text-decoration:none">返回作品导览</a> ·
+  <a href="proposal.html" style="color:#00864A;text-decoration:none">作品说明</a>
+</div>
+<div style="position:fixed;left:12px;bottom:56px;z-index:99;background:#fff;border:1px solid #E5E8EC;border-radius:8px;padding:6px 10px;font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,.06)">
+  <a href="index.html" style="color:#00864A;text-decoration:none">返回作品导览</a> ·
+  <a href="proposal.html" style="color:#00864A;text-decoration:none">作品说明</a>
+</div>
 </body>
 </html>
