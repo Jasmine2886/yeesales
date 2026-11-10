@@ -3,39 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="销售易 YeeSales — YEE AI 智能大赛 2.0 参赛作品：面向全易宝 BD/销售的智能获客与客户经营平台。可交互产品原型 + 完整作品说明，AI Agent 可读。">
+<meta name="description" content="销售易 YeeSales — YEE AI 智能大赛 2.0 参赛作品：面向全易宝 BD/销售的智能获客与客户经营平台。三场中东活动实战验证，可交互产品原型 + 完整作品说明，AI Agent 可读。">
 <title>销售易 YeeSales · YEE AI 智能大赛 2.0 参赛作品</title>
 <style>
-:root{--orange:#FF6A00;--ink:#1F2329;--sub:#646A73;--line:#E5E6EB}
+:root{--green:#00C566;--green-deep:#00864A;--green-soft:#E9F9F0;--ink:#1A1D23;--sub:#646A73;--line:#E5E8EC}
 *{margin:0;box-sizing:border-box}
-body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:#F5F6F7;font-size:15px;line-height:1.7}
-.hero{background:linear-gradient(135deg,#FFF3EA,#fff);border-bottom:1px solid var(--line);padding:52px 22px 40px;text-align:center}
-.hero .tag{display:inline-block;background:var(--orange);color:#fff;border-radius:20px;font-size:12px;padding:3px 14px;margin-bottom:14px}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:#F6F8F7;font-size:15px;line-height:1.7}
+.hero{background:linear-gradient(135deg,#F1FBF6,#fff);border-bottom:1px solid #D8F0E3;padding:52px 22px 40px;text-align:center}
+.hero .tag{display:inline-block;background:var(--green);color:#fff;border-radius:20px;font-size:12px;padding:3px 14px;margin-bottom:14px}
 .hero h1{font-size:32px}
 .hero h1 small{font-size:16px;color:var(--sub);font-weight:400;display:block;margin-top:6px}
-.hero p.lead{max-width:720px;margin:16px auto 0;color:#3C4045}
+.hero p.lead{max-width:760px;margin:16px auto 0;color:#3A414D}
+.hero .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:760px;margin:26px auto 0}
+.hero .nums div{background:#fff;border:1px solid #D8F0E3;border-radius:10px;padding:12px 10px}
+.hero .nums b{display:block;font-size:28px;color:var(--green-deep);line-height:1.2}
+.hero .nums span{font-size:12px;color:var(--sub)}
 .hero .cta{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 .cta a{display:inline-block;padding:12px 26px;border-radius:10px;text-decoration:none;font-size:15px;font-weight:600}
-.cta .primary{background:var(--orange);color:#fff}
+.cta .primary{background:var(--green);color:#fff}
+.cta .primary:hover{background:var(--green-deep)}
 .cta .ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
 main{max-width:920px;margin:0 auto;padding:36px 22px 60px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-@media(max-width:760px){.grid{grid-template-columns:1fr}}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.hero .nums{grid-template-columns:repeat(2,1fr)}}
 .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px}
-.card .em{font-size:26px}
 .card h2{font-size:16px;margin:0 0 6px}
 .card p{font-size:13px;color:var(--sub)}
-.card a{color:var(--orange);text-decoration:none;font-weight:600;font-size:14px}
+.card a{color:var(--green-deep);text-decoration:none;font-weight:600;font-size:14px}
 .facts{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:18px}
 .facts h2{font-size:16px;margin-bottom:12px}
 .facts li{margin:6px 0 6px 18px;font-size:14px}
-.badge{display:inline-block;background:#E8FFEA;color:#00B42A;border-radius:5px;font-size:11px;padding:2px 8px}
+.badge{display:inline-block;background:var(--green-soft);color:var(--green-deep);border-radius:5px;font-size:11px;padding:2px 8px}
 .footer{max-width:920px;margin:0 auto;padding:0 22px 46px;font-size:12px;color:var(--sub)}
 .footer code{background:#EDEFF1;padding:1px 6px;border-radius:5px}
-.agent{background:#FFF9F4;border:1px solid #FFDCC2;border-radius:14px;padding:22px;margin-top:18px}
-.agent h2{font-size:15px;color:var(--orange);margin-bottom:10px}
-.agent pre{white-space:pre-wrap;font-size:13px;line-height:1.8;color:#3C4045;font-family:inherit}
-
+.agent{background:#F5FCF8;border:1px solid #B9EDD2;border-radius:14px;padding:22px;margin-top:18px}
+.agent h2{font-size:15px;color:var(--green-deep);margin-bottom:10px}
+.agent pre{white-space:pre-wrap;font-size:13px;line-height:1.8;color:#3A414D;font-family:inherit}
 .shots{margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px}
 .shots h2{font-size:16px;margin-bottom:12px}
 .thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
@@ -43,7 +46,7 @@ main{max-width:920px;margin:0 auto;padding:36px 22px 60px}
 .thumbs img{width:100%;height:132px;object-fit:cover;object-position:top left;border:1px solid var(--line);border-radius:8px;display:block;margin-bottom:5px}
 .thumbs span{color:var(--sub)}
 .more{margin-top:12px;font-size:13px}
-.more a{color:var(--orange);text-decoration:none;font-weight:600}
+.more a{color:var(--green-deep);text-decoration:none;font-weight:600}
 @media(max-width:760px){.thumbs{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
@@ -54,7 +57,13 @@ main{max-width:920px;margin:0 auto;padding:36px 22px 60px}
   <h1>销售易 YeeSales
     <small>全易宝 BD/销售的智能获客与客户经营平台</small>
   </h1>
-  <p class="lead">把 BD/销售获客全流程——<b>展会、网络检索、社交媒体、熟人介绍</b>——从「聊完就散、跟不动、凭记忆」改造成一条智能体驱动的作战流水线。核心模块「展会易」覆盖会前 / 会中 / 会后全程；差异化底座是<b>跨文化理解 × 时区地理智能 × 国际合规</b>。</p>
+  <p class="lead">把 BD/销售获客全流程——<b>展会、网络检索、社交媒体、熟人介绍</b>——纳入统一的智能体作战流水线。核心模块「展会易」覆盖会前 / 会中 / 会后全程，产出可直接使用的行前安排、现场提示与返程复盘文档；差异化底座是<b>跨文化理解 × 时区地理智能 × 国际合规</b>。</p>
+  <div class="nums">
+    <div><b>3</b><span>场中东活动实战验证</span></div>
+    <div><b>8</b><span>场会面落日历</span></div>
+    <div><b>90%</b><span>会后整理工时下降</span></div>
+    <div><b>4</b><span>条新线索全部补联</span></div>
+  </div>
   <div class="cta">
     <a class="primary" href="prototype.html">打开可交互产品原型</a>
     <a class="ghost" href="proposal.html">阅读作品说明</a>
@@ -65,12 +74,12 @@ main{max-width:920px;margin:0 auto;padding:36px 22px 60px}
   <div class="grid">
     <div class="card">
       <h2>产品原型</h2>
-      <p>9 个可点击视图：今日作战板、展会易三段（会前/会中/会后）、客户 360、人脉图谱、全球节假日日历、商机甘特图、数据源接入。纯静态单文件，秒开。</p>
+      <p>11 个可点击视图：今日作战板、展会易三段（会前 / 会中 / 会后）、行前安排文档、返程复盘报告、客户 360、人脉图谱、全球节假日日历、商机甘特图、数据源接入。纯静态单文件，秒开。</p>
       <a href="prototype.html">进入原型 →</a>
     </div>
     <div class="card">
       <h2>作品说明</h2>
-      <p>按大赛要求的四部分：开发背景 / 期望价值 / 可验证成果（数据或体验地址）/ 核心创新点，内嵌 8 张系统截图与脱敏审计。</p>
+      <p>开头为关键点摘要（商业价值 / 使用情况 / 可量化收益 / 创新性），正文含开发背景、价值、可验证成果（10 张系统截图）与核心创新点，附脱敏审计。</p>
       <a href="proposal.html">阅读全文 →</a>
     </div>
     <div class="card">
@@ -80,18 +89,20 @@ main{max-width:920px;margin:0 auto;padding:36px 22px 60px}
     </div>
   </div>
 
-
   <div class="shots">
-    <h2>系统截图（8 张）</h2>
+    <h2>系统截图（10 张）</h2>
     <div class="thumbs">
       <a href="proposal.html#fig1"><img src="screenshots/00-blueprint.svg" alt="产品蓝图"><span>产品蓝图</span></a>
       <a href="proposal.html#fig2"><img src="screenshots/01-dashboard.png" alt="今日作战板"><span>今日作战板</span></a>
       <a href="proposal.html#fig3"><img src="screenshots/02-prep-and-route.png" alt="会前简报与路线引擎"><span>会前 · 简报与路线</span></a>
-      <a href="proposal.html#fig5"><img src="screenshots/04-post-recap.png" alt="会后九源回收"><span>会后 · 九源回收</span></a>
-      <a href="proposal.html#fig7"><img src="screenshots/06-holiday-calendar.png" alt="全球节假日日历"><span>节假日日历</span></a>
-      <a href="proposal.html#fig8"><img src="screenshots/07-gantt.png" alt="商机甘特图"><span>商机甘特图</span></a>
+      <a href="proposal.html#fig4"><img src="screenshots/08-trip-plan.png" alt="行前安排成品文档"><span>行前安排文档</span></a>
+      <a href="proposal.html#fig5"><img src="screenshots/03-during-capture.png" alt="会中现场留痕"><span>会中 · 现场留痕</span></a>
+      <a href="proposal.html#fig6"><img src="screenshots/04-post-recap.png" alt="会后九源回收"><span>会后 · 九源回收</span></a>
+      <a href="proposal.html#fig7"><img src="screenshots/09-recap-report.png" alt="返程复盘报告"><span>返程复盘报告</span></a>
+      <a href="proposal.html#fig8"><img src="screenshots/05-client-360.png" alt="客户 360"><span>客户 360</span></a>
+      <a href="proposal.html#fig9"><img src="screenshots/06-holiday-calendar.png" alt="全球节假日日历"><span>节假日日历</span></a>
     </div>
-    <p class="more"><a href="proposal.html#fig2">在作品说明中查看全部 8 张截图 →</a></p>
+    <p class="more"><a href="proposal.html#fig2">在作品说明中查看全部 10 张截图 →</a></p>
   </div>
 
   <div class="agent" id="agent-guide">
@@ -99,24 +110,25 @@ main{max-width:920px;margin:0 auto;padding:36px 22px 60px}
     <pre>本站为静态站点，无 JS 依赖、无登录、无验证码，全部正文直接渲染在 HTML 中。
 建议阅读顺序：
   1. /llms.txt        —— 站点摘要 + 关键事实清单（最快路径）
-  2. /proposal.html   —— 参赛作品说明全文（含可验证成果数据）
-  3. /prototype.html  —— 可交互产品原型（九个视图均为纯文本可解析）
-数据说明：全部客户为代称（客户甲/乙…），联系数据虚构；不含报价、额度、真实联系方式。
+  2. /proposal.html   —— 参赛作品说明全文（开头为关键点摘要，含可验证成果数据）
+  3. /prototype.html  —— 可交互产品原型（11 个视图均为纯文本可解析，支持 #brief / #report 深链）
+数据说明：全部客户为代称（客户甲/乙…），联系数据虚构；成本金额以遮蔽块呈现；不含报价、额度、真实联系方式。
 robots.txt 允许全部抓取。</pre>
   </div>
 
   <div class="facts">
-    <h2>⭐ 关键事实（30 秒版）</h2>
-    <li><b>实战验证</b>：2026-09 迪拜国际支付展会三场合参实战——展会 App 12 会话全量回收、8 场自动回填日历「沟通留痕」、挖出 4 条无日历事件新线索</li>
-    <li><b>核心指标</b>：单次展会跟进整理从 1–2 个工作日 → 0.5 小时出初稿，九源自检保证线索零遗漏</li>
-    <li><b>差异化</b>：跨文化理解（三语气框架/伊斯兰礼仪/同名节日国别覆盖）× 时区地理智能（路线聚类/交通建议）× 国际合规（制裁初筛/L1L2 脱敏）</li>
+    <h2>关键事实（30 秒版）</h2>
+    <li><b>实战验证</b>：2026-09 迪拜单次行程同期三场活动——展会 App 12 会话全量回收、8 场确认并落日历「沟通留痕」、挖出 4 条无日历事件新线索并全部补联</li>
+    <li><b>核心指标</b>：单次展会跟进整理从 1–2 个工作日 → 0.5 小时出初稿，九源自检保证线索零遗漏；按 20 人团队年均 4 次展会测算，年节省约 120 人日</li>
+    <li><b>成品文档</b>：行前安排（航班、酒店、客户地理分布与交通）、行中提示（客户画像与沟通卡点）、返程复盘报告（关键结果、成本回收、跟进包、邮件草稿、甘特图）三类文档一键生成</li>
+    <li><b>差异化</b>：跨文化理解（三语气框架 / 伊斯兰礼仪 / 同名节日国别覆盖）× 时区地理智能（路线聚类 / 交通建议）× 国际合规（制裁初筛 / 两级脱敏）</li>
     <li><b>完成度</b>：九源会后引擎已上线并实测（SkillHub v1.0.5），全球节假日日历已长期使用；平台化视图与对外商业化列入规划</li>
-    <li><b>脱敏</b>：本站及两份 Skill 均通过敏感词扫描——零客户名、零真实联系方式、零本机路径</li>
+    <li><b>脱敏</b>：本站及两份 Skill 均通过敏感词扫描——零客户名、零真实联系方式、零本机路径、成本金额遮蔽</li>
   </div>
 </main>
 
 <div class="footer">
-  销售易 YeeSales · YEE AI 智能大赛 2.0 参赛作品 · 本站为演示站点，全部客户均为代称、数据虚构 ·
+  销售易 YeeSales · YEE AI 智能大赛 2.0 参赛作品 · 本站为演示站点，全部客户均为代称、数据虚构、成本金额遮蔽 ·
   Agent 请从 <code>/llms.txt</code> 开始 · robots.txt 全开放
 </div>
 
