@@ -1,79 +1,81 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="640" viewBox="0 0 1240 640">
-<rect width="1240" height="640" fill="#FFFFFF"/>
-<text x="64" y="50" font-family="PingFang SC,Helvetica Neue,Arial" font-size="25" font-weight="700" fill="#12181F">v0.7 → v0.8：视图从 9 个收到 6 个，能力一项没少</text>
-<text x="64" y="80" font-family="PingFang SC,Helvetica Neue,Arial" font-size="14" fill="#6B7480">左边是原来按系统能力切的 9 个视图，右边是现在按 BD 动作切的 6 个入口。改的是入口，不是功能。</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="700" viewBox="0 0 1240 700">
+<rect width="1240" height="700" fill="#FFFFFF"/>
+<text x="64" y="50" font-family="PingFang SC,Helvetica Neue,Arial" font-size="25" font-weight="700" fill="#12181F">v0.7 → v0.8 → v0.9：入口没再变，变的是每个动作能不能走完</text>
+<text x="64" y="80" font-family="PingFang SC,Helvetica Neue,Arial" font-size="14" fill="#6B7480">v0.8 把 9 个系统视图收敛成 6 个工作入口；v0.9 不再加功能，把 8 处交互断点补成闭环。</text>
 <line x1="64" y1="102" x2="1176" y2="102" stroke="#EAEDF1"/>
-<text x="64" y="130" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12" font-weight="700" fill="#9AA1AC" letter-spacing="1">v0.7　按系统能力组织</text>
-<text x="660" y="130" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12" font-weight="700" fill="#00A85A" letter-spacing="1">v0.8　按 BD 工作动作组织</text>
-<rect x="64" y="148" width="400" height="36" rx="8" fill="#FAFBFC" stroke="#E7EAEF"/>
-<text x="80" y="165" font-family="Helvetica Neue,PingFang SC,Arial" font-size="13" fill="#5B6572">AI Sales Cockpit</text>
-<text x="80" y="178" font-family="PingFang SC,Arial" font-size="11.5" fill="#A2A9B4">销售驾驶舱</text>
-<rect x="64" y="190" width="400" height="36" rx="8" fill="#FAFBFC" stroke="#E7EAEF"/>
-<text x="80" y="207" font-family="Helvetica Neue,PingFang SC,Arial" font-size="13" fill="#5B6572">Lead Generation</text>
-<text x="80" y="220" font-family="PingFang SC,Arial" font-size="11.5" fill="#A2A9B4">线索生成</text>
-<rect x="64" y="232" width="400" height="36" rx="8" fill="#FAFBFC" stroke="#E7EAEF"/>
-<text x="80" y="249" font-family="Helvetica Neue,PingFang SC,Arial" font-size="13" fill="#5B6572">Event Intelligence</text>
-<text x="80" y="262" font-family="PingFang SC,Arial" font-size="11.5" fill="#A2A9B4">展会情报</text>
-<rect x="64" y="274" width="400" height="36" rx="8" fill="#FAFBFC" stroke="#E7EAEF"/>
-<text x="80" y="291" font-family="Helvetica Neue,PingFang SC,Arial" font-size="13" fill="#5B6572">Travel Planner</text>
-<text x="80" y="304" font-family="PingFang SC,Arial" font-size="11.5" fill="#A2A9B4">行程规划</text>
-<rect x="64" y="316" width="400" height="36" rx="8" fill="#FAFBFC" stroke="#E7EAEF"/>
-<text x="80" y="333" font-family="Helvetica Neue,PingFang SC,Arial" font-size="13" fill="#5B6572">Customer 360</text>
-<text x="80" y="346" font-family="PingFang SC,Arial" font-size="11.5" fill="#A2A9B4">客户全景</text>
-<rect x="64" y="358" width="400" height="36" rx="8" fill="#FAFBFC" stroke="#E7EAEF"/>
-<text x="80" y="375" font-family="Helvetica Neue,PingFang SC,Arial" font-size="13" fill="#5B6572">Pipeline</text>
-<text x="80" y="388" font-family="PingFang SC,Arial" font-size="11.5" fill="#A2A9B4">商机看板</text>
-<rect x="64" y="400" width="400" height="36" rx="8" fill="#FAFBFC" stroke="#E7EAEF"/>
-<text x="80" y="417" font-family="Helvetica Neue,PingFang SC,Arial" font-size="13" fill="#5B6572">Deal Roadmap</text>
-<text x="80" y="430" font-family="PingFang SC,Arial" font-size="11.5" fill="#A2A9B4">成交路线图</text>
-<rect x="64" y="442" width="400" height="36" rx="8" fill="#FAFBFC" stroke="#E7EAEF"/>
-<text x="80" y="459" font-family="Helvetica Neue,PingFang SC,Arial" font-size="13" fill="#5B6572">AI Workforce</text>
-<text x="80" y="472" font-family="PingFang SC,Arial" font-size="11.5" fill="#A2A9B4">AI 工作台</text>
-<rect x="64" y="484" width="400" height="36" rx="8" fill="#FAFBFC" stroke="#E7EAEF"/>
-<text x="80" y="501" font-family="Helvetica Neue,PingFang SC,Arial" font-size="13" fill="#5B6572">Integrations</text>
-<text x="80" y="514" font-family="PingFang SC,Arial" font-size="11.5" fill="#A2A9B4">集成与审批</text>
-<rect x="660" y="148" width="420" height="36" rx="9" fill="#F4FBF7" stroke="#BFE6D0"/>
-<rect x="660" y="156" width="4" height="20" rx="2" fill="#00A85A"/>
-<text x="682" y="164.0" font-family="PingFang SC,Helvetica Neue,Arial" font-size="15" font-weight="700" fill="#12181F">Home 工作台</text>
-<text x="682" y="182.0" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12" fill="#5B6572">今天该做什么</text>
-<rect x="660" y="196" width="420" height="36" rx="9" fill="#F4FBF7" stroke="#BFE6D0"/>
-<rect x="660" y="204" width="4" height="20" rx="2" fill="#00A85A"/>
-<text x="682" y="212.0" font-family="PingFang SC,Helvetica Neue,Arial" font-size="15" font-weight="700" fill="#12181F">Find Customers</text>
-<text x="682" y="230.0" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12" fill="#5B6572">我要开发哪些客户</text>
-<rect x="660" y="244" width="420" height="78" rx="9" fill="#F4FBF7" stroke="#BFE6D0"/>
-<rect x="660" y="252" width="4" height="62" rx="2" fill="#00A85A"/>
-<text x="682" y="281.0" font-family="PingFang SC,Helvetica Neue,Arial" font-size="15" font-weight="700" fill="#12181F">Events &amp; Travel</text>
-<text x="682" y="299.0" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12" fill="#5B6572">展会与拜访怎么安排</text>
-<rect x="660" y="334" width="420" height="36" rx="9" fill="#F4FBF7" stroke="#BFE6D0"/>
-<rect x="660" y="342" width="4" height="20" rx="2" fill="#00A85A"/>
-<text x="682" y="350.0" font-family="PingFang SC,Helvetica Neue,Arial" font-size="15" font-weight="700" fill="#12181F">My Customers</text>
-<text x="682" y="368.0" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12" fill="#5B6572">这家客户聊到哪一步</text>
-<rect x="660" y="382" width="420" height="78" rx="9" fill="#F4FBF7" stroke="#BFE6D0"/>
-<rect x="660" y="390" width="4" height="62" rx="2" fill="#00A85A"/>
-<text x="682" y="419.0" font-family="PingFang SC,Helvetica Neue,Arial" font-size="15" font-weight="700" fill="#12181F">My Pipeline</text>
-<text x="682" y="437.0" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12" fill="#5B6572">单子卡在哪</text>
-<rect x="660" y="472" width="420" height="78" rx="9" fill="#F4FBF7" stroke="#BFE6D0"/>
-<rect x="660" y="480" width="4" height="62" rx="2" fill="#00A85A"/>
-<text x="682" y="509.0" font-family="PingFang SC,Helvetica Neue,Arial" font-size="15" font-weight="700" fill="#12181F">AI Assistant</text>
-<text x="682" y="527.0" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12" fill="#5B6572">直接说想做什么</text>
-<path d="M464 166.0 C562.0 166.0 562.0 166.0 660 166.0" fill="none" stroke="#CFEBD9" stroke-width="1.4"/>
-<circle cx="464" cy="166.0" r="2.6" fill="#9FD9B9"/>
-<path d="M464 208.0 C562.0 208.0 562.0 214.0 660 214.0" fill="none" stroke="#CFEBD9" stroke-width="1.4"/>
-<circle cx="464" cy="208.0" r="2.6" fill="#9FD9B9"/>
-<path d="M464 250.0 C562.0 250.0 562.0 283.0 660 283.0" fill="none" stroke="#CFEBD9" stroke-width="1.4"/>
-<circle cx="464" cy="250.0" r="2.6" fill="#9FD9B9"/>
-<path d="M464 292.0 C562.0 292.0 562.0 283.0 660 283.0" fill="none" stroke="#CFEBD9" stroke-width="1.4"/>
-<circle cx="464" cy="292.0" r="2.6" fill="#9FD9B9"/>
-<path d="M464 334.0 C562.0 334.0 562.0 352.0 660 352.0" fill="none" stroke="#CFEBD9" stroke-width="1.4"/>
-<circle cx="464" cy="334.0" r="2.6" fill="#9FD9B9"/>
-<path d="M464 376.0 C562.0 376.0 562.0 421.0 660 421.0" fill="none" stroke="#CFEBD9" stroke-width="1.4"/>
-<circle cx="464" cy="376.0" r="2.6" fill="#9FD9B9"/>
-<path d="M464 418.0 C562.0 418.0 562.0 421.0 660 421.0" fill="none" stroke="#CFEBD9" stroke-width="1.4"/>
-<circle cx="464" cy="418.0" r="2.6" fill="#9FD9B9"/>
-<path d="M464 460.0 C562.0 460.0 562.0 511.0 660 511.0" fill="none" stroke="#CFEBD9" stroke-width="1.4"/>
-<circle cx="464" cy="460.0" r="2.6" fill="#9FD9B9"/>
-<path d="M464 502.0 C562.0 502.0 562.0 511.0 660 511.0" fill="none" stroke="#CFEBD9" stroke-width="1.4"/>
-<circle cx="464" cy="502.0" r="2.6" fill="#9FD9B9"/>
-<rect x="64" y="572" width="1112" height="44" rx="10" fill="#F2FAF5" stroke="#CFEBD9"/>
-<text x="84" y="599" font-family="PingFang SC,Helvetica Neue,Arial" font-size="13.5" fill="#2A313A">合并的是入口，不是能力：审批、审计、Agent 调度仍在后台运行，只在需要人点头时才出现在界面上。</text>
+<text x="64" y="132" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12" font-weight="700" fill="#9AA1AC" letter-spacing="1">v0.7　按系统能力组织　9 个视图</text>
+<rect x="64" y="150" width="300" height="32" rx="7" fill="#FAFBFC" stroke="#E7EAEF"/>
+<text x="80" y="171" font-family="Helvetica Neue,Arial" font-size="12.5" fill="#7A828E">AI Sales Cockpit</text>
+<rect x="64" y="192" width="300" height="32" rx="7" fill="#FAFBFC" stroke="#E7EAEF"/>
+<text x="80" y="213" font-family="Helvetica Neue,Arial" font-size="12.5" fill="#7A828E">Lead Generation</text>
+<rect x="64" y="234" width="300" height="32" rx="7" fill="#FAFBFC" stroke="#E7EAEF"/>
+<text x="80" y="255" font-family="Helvetica Neue,Arial" font-size="12.5" fill="#7A828E">Event Intelligence</text>
+<rect x="64" y="276" width="300" height="32" rx="7" fill="#FAFBFC" stroke="#E7EAEF"/>
+<text x="80" y="297" font-family="Helvetica Neue,Arial" font-size="12.5" fill="#7A828E">Travel Planner</text>
+<rect x="64" y="318" width="300" height="32" rx="7" fill="#FAFBFC" stroke="#E7EAEF"/>
+<text x="80" y="339" font-family="Helvetica Neue,Arial" font-size="12.5" fill="#7A828E">Customer 360</text>
+<rect x="64" y="360" width="300" height="32" rx="7" fill="#FAFBFC" stroke="#E7EAEF"/>
+<text x="80" y="381" font-family="Helvetica Neue,Arial" font-size="12.5" fill="#7A828E">Pipeline</text>
+<rect x="64" y="402" width="300" height="32" rx="7" fill="#FAFBFC" stroke="#E7EAEF"/>
+<text x="80" y="423" font-family="Helvetica Neue,Arial" font-size="12.5" fill="#7A828E">Deal Roadmap</text>
+<rect x="64" y="444" width="300" height="32" rx="7" fill="#FAFBFC" stroke="#E7EAEF"/>
+<text x="80" y="465" font-family="Helvetica Neue,Arial" font-size="12.5" fill="#7A828E">AI Workforce</text>
+<rect x="64" y="486" width="300" height="32" rx="7" fill="#FAFBFC" stroke="#E7EAEF"/>
+<text x="80" y="507" font-family="Helvetica Neue,Arial" font-size="12.5" fill="#7A828E">Integrations</text>
+<path d="M384 320 h42" stroke="#C9CFD8" stroke-width="1.5"/><path d="M421 315 l7 5 l-7 5" fill="none" stroke="#C9CFD8" stroke-width="1.5"/>
+<text x="452" y="132" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12" font-weight="700" fill="#00A85A" letter-spacing="1">v0.8　按 BD 工作动作组织　6 个入口</text>
+<rect x="452" y="150" width="320" height="32" rx="7" fill="#F4FBF7" stroke="#BFE6D0"/>
+<rect x="452" y="157" width="3" height="18" rx="1.5" fill="#00A85A"/>
+<text x="468" y="164" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12.5" font-weight="700" fill="#12181F">Home 工作台</text>
+<text x="468" y="177" font-family="PingFang SC,Helvetica Neue,Arial" font-size="10.5" fill="#7A828E">今天该做什么</text>
+<rect x="452" y="192" width="320" height="32" rx="7" fill="#F4FBF7" stroke="#BFE6D0"/>
+<rect x="452" y="199" width="3" height="18" rx="1.5" fill="#00A85A"/>
+<text x="468" y="206" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12.5" font-weight="700" fill="#12181F">Find Customers</text>
+<text x="468" y="219" font-family="PingFang SC,Helvetica Neue,Arial" font-size="10.5" fill="#7A828E">开发哪些客户</text>
+<rect x="452" y="234" width="320" height="32" rx="7" fill="#F4FBF7" stroke="#BFE6D0"/>
+<rect x="452" y="241" width="3" height="18" rx="1.5" fill="#00A85A"/>
+<text x="468" y="248" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12.5" font-weight="700" fill="#12181F">Events &amp; Travel</text>
+<text x="468" y="261" font-family="PingFang SC,Helvetica Neue,Arial" font-size="10.5" fill="#7A828E">展会与拜访怎么排</text>
+<rect x="452" y="276" width="320" height="32" rx="7" fill="#F4FBF7" stroke="#BFE6D0"/>
+<rect x="452" y="283" width="3" height="18" rx="1.5" fill="#00A85A"/>
+<text x="468" y="290" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12.5" font-weight="700" fill="#12181F">My Customers</text>
+<text x="468" y="303" font-family="PingFang SC,Helvetica Neue,Arial" font-size="10.5" fill="#7A828E">这家客户聊到哪</text>
+<rect x="452" y="318" width="320" height="32" rx="7" fill="#F4FBF7" stroke="#BFE6D0"/>
+<rect x="452" y="325" width="3" height="18" rx="1.5" fill="#00A85A"/>
+<text x="468" y="332" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12.5" font-weight="700" fill="#12181F">My Pipeline</text>
+<text x="468" y="345" font-family="PingFang SC,Helvetica Neue,Arial" font-size="10.5" fill="#7A828E">单子卡在哪</text>
+<rect x="452" y="360" width="320" height="32" rx="7" fill="#F4FBF7" stroke="#BFE6D0"/>
+<rect x="452" y="367" width="3" height="18" rx="1.5" fill="#00A85A"/>
+<text x="468" y="374" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12.5" font-weight="700" fill="#12181F">AI Assistant</text>
+<text x="468" y="387" font-family="PingFang SC,Helvetica Neue,Arial" font-size="10.5" fill="#7A828E">直接跟它说</text>
+<path d="M792 320 h42" stroke="#C9CFD8" stroke-width="1.5"/><path d="M829 315 l7 5 l-7 5" fill="none" stroke="#C9CFD8" stroke-width="1.5"/>
+<text x="860" y="132" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12" font-weight="700" fill="#00A85A" letter-spacing="1">v0.9　入口不变，补 8 处闭环</text>
+<rect x="860" y="150" width="316" height="32" rx="7" fill="#FFFFFF" stroke="#DCE6DF"/>
+<circle cx="879" cy="166" r="4.5" fill="#00A85A"/>
+<text x="893" y="170" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12" fill="#2A313A">看板卡片可点开商机详情</text>
+<rect x="860" y="192" width="316" height="32" rx="7" fill="#FFFFFF" stroke="#DCE6DF"/>
+<circle cx="879" cy="208" r="4.5" fill="#00A85A"/>
+<text x="893" y="212" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12" fill="#2A313A">客户行可进 Customer 360</text>
+<rect x="860" y="234" width="316" height="32" rx="7" fill="#FFFFFF" stroke="#DCE6DF"/>
+<circle cx="879" cy="250" r="4.5" fill="#00A85A"/>
+<text x="893" y="254" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12" fill="#2A313A">阶段改动由 AI 建议、人确认</text>
+<rect x="860" y="276" width="316" height="32" rx="7" fill="#FFFFFF" stroke="#DCE6DF"/>
+<circle cx="879" cy="292" r="4.5" fill="#00A85A"/>
+<text x="893" y="296" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12" fill="#2A313A">AI 助手可自由输入并得结果</text>
+<rect x="860" y="318" width="316" height="32" rx="7" fill="#FFFFFF" stroke="#DCE6DF"/>
+<circle cx="879" cy="334" r="4.5" fill="#00A85A"/>
+<text x="893" y="338" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12" fill="#2A313A">20 家名单可查看全部并可筛选</text>
+<rect x="860" y="360" width="316" height="32" rx="7" fill="#FFFFFF" stroke="#DCE6DF"/>
+<circle cx="879" cy="376" r="4.5" fill="#00A85A"/>
+<text x="893" y="380" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12" fill="#2A313A">邮件草稿可打开、编辑、确认</text>
+<rect x="860" y="402" width="316" height="32" rx="7" fill="#FFFFFF" stroke="#DCE6DF"/>
+<circle cx="879" cy="418" r="4.5" fill="#00A85A"/>
+<text x="893" y="422" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12" fill="#2A313A">展会三段可连续切换不丢上下文</text>
+<rect x="860" y="444" width="316" height="32" rx="7" fill="#FFFFFF" stroke="#DCE6DF"/>
+<circle cx="879" cy="460" r="4.5" fill="#00A85A"/>
+<text x="893" y="464" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12" fill="#2A313A">关键动作有 toast 与演示提示</text>
+<line x1="64" y1="560" x2="1176" y2="560" stroke="#EAEDF1"/>
+<rect x="64" y="582" width="1112" height="66" rx="10" fill="#F7FAF8" stroke="#E3EDE7"/>
+<text x="84" y="608" font-family="PingFang SC,Helvetica Neue,Arial" font-size="13" font-weight="700" fill="#12181F">变的是三件事：能点进去、能改、能拿到反馈。</text>
+<text x="84" y="630" font-family="PingFang SC,Helvetica Neue,Arial" font-size="12" fill="#5B6572">功能数量没有增加，页面数仍是 6 个入口加 1 个客户详情；v0.9 的目标是让 BD 一次走完，不用回头找。</text>
 </svg>
