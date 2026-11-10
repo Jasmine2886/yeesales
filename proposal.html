@@ -3,219 +3,534 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="销售易 YeeSales v0.8 — YEE AI 智能大赛 2.0 参赛作品说明：BD 每天打开的 AI 销售助理。六个工作入口、三场海外活动实测、展后整理工时下降 90%。客户均为代称，数据脱敏。">
-<title>作品说明 v0.8 · 销售易 YeeSales · YEE AI 智能大赛 2.0</title>
+<title>YeeSales 销售易 v0.9 · 评委入口 · YEE AI 智能大赛 2.0</title>
+<meta name="description" content="YeeSales 销售易 v0.9：面向海外 BD 的 AI 销售助理。三场海外活动真实跑通，六个工作入口，八个交互闭环，China Payout 商机识别。含真实数据口径、三层成熟度与端到端测试结果。">
+<link rel="canonical" href="https://jasmine2886.github.io/yeesales/proposal.html">
 <style>
-:root{--green:#00C566;--green-deep:#00864A;--green-soft:#E9F9F0;--ink:#1A1D23;--sub:#5B6472;--line:#E5E8EC}
-*{margin:0;box-sizing:border-box}
-body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);
-     background:#fff;font-size:15.5px;line-height:1.85}
-.top{position:sticky;top:0;z-index:9;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);
-     border-bottom:1px solid var(--line);padding:10px 22px;font-size:13px;display:flex;gap:16px;align-items:center}
-.top a{color:var(--green-deep);text-decoration:none;font-weight:600}
-.top .sp{margin-left:auto;color:var(--sub);font-weight:400}
-.wrap{max-width:900px;margin:0 auto;padding:0 22px 70px}
-.hero{background:linear-gradient(135deg,#F1FBF6 0%,#E4F8EE 100%);border-bottom:1px solid #D8F0E3;
-      padding:38px 22px 30px;margin:0 -22px 26px}
-.hero>*{max-width:856px;margin-left:auto;margin-right:auto}
-.hero-k{font-size:12px;letter-spacing:.06em;color:var(--green-deep);font-weight:600;margin-bottom:10px}
-.hero-t{font-size:40px;font-weight:700;letter-spacing:-.02em;line-height:1.2}
-.hero-t span{color:var(--green);font-size:26px;font-weight:600;margin-left:6px}
-.hero-s{font-size:15px;color:#3A414D;margin-top:6px;line-height:1.7}
-.hero-n{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:24px auto 18px}
-.hero-n div{background:#fff;border:1px solid #D8F0E3;border-radius:10px;padding:12px 14px}
-.hero-n b{display:block;font-size:30px;line-height:1.15;color:var(--green-deep)}
-.hero-n span{font-size:12px;color:var(--sub);line-height:1.5;display:block}
-.hero-l{font-size:12.5px;color:var(--green-deep);font-family:ui-monospace,Menlo,monospace}
-h1{font-size:26px;line-height:1.45;letter-spacing:-.01em}
-h2{font-size:19.5px;margin:40px 0 12px;padding-left:12px;border-left:3px solid var(--green);line-height:1.4}
-h3{font-size:16.5px;margin:26px 0 8px}
-p{margin:10px 0}
-ul,ol{margin:10px 0 10px 22px}
-li{margin:5px 0}
-hr{border:0;border-top:1px solid var(--line);margin:32px 0}
-blockquote{border-left:3px solid #B9EDD2;background:#F5FCF8;margin:16px 0;padding:12px 18px}
-code{background:#F2F3F5;border-radius:5px;padding:1px 6px;font-size:13px;font-family:ui-monospace,Menlo,monospace}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:13.5px}
-th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
-th{background:#F7F9FB;font-weight:600;white-space:nowrap}
-a{color:var(--green-deep)}
-.score{background:#FAFEFC;border:1px solid #D8F0E3;border-radius:12px;padding:6px 20px 14px;margin:18px 0 8px}
-.score h2{margin-top:18px;border-left-color:var(--green)}
-.score table{margin:8px 0 6px;font-size:13px}
-.score th{background:var(--green-soft);border-color:#D8F0E3}
-.score td{border-color:#E3F3EA}
-.score table tr td:first-child{font-weight:600;color:var(--green-deep);white-space:nowrap}
-figure{margin:22px 0 28px}
-figure img{width:100%;border:1px solid var(--line);border-radius:10px;display:block;box-shadow:0 6px 24px rgba(26,29,35,.07)}
-figcaption{font-size:12.5px;color:var(--sub);margin-top:8px;text-align:center}
-.note{margin-top:44px;padding:14px 18px;background:#F7F9FB;border-radius:10px;font-size:12.5px;color:var(--sub)}
-@media(max-width:640px){body{font-size:15px}h1{font-size:21px}table{font-size:12.5px}
-  .hero-t{font-size:30px}.hero-n{grid-template-columns:repeat(2,1fr)}}
+:root{
+  --green:#00A85A;--green-deep:#00864A;--green-soft:#F1FBF5;--green-line:#C9EBDA;
+  --ink:#12181F;--body:#2A313A;--sub:#5B6572;--mute:#9AA1AC;
+  --line:#E6EAEF;--bg:#FFFFFF;--bg-soft:#FAFBFC;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  color:var(--body);background:var(--bg);font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+h1,h2,h3,h4{color:var(--ink);line-height:1.35;font-weight:700}
+a{color:var(--green-deep);text-decoration:none}
+a:hover{text-decoration:underline}
+.small{font-size:13px;color:var(--sub)}
+
+.bar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+.bar .brand{display:flex;align-items:center;gap:9px;font-weight:700;color:var(--ink);font-size:15px}
+.bar .dot{width:22px;height:22px;border-radius:6px;background:var(--green);color:#fff;font-size:12px;
+  display:flex;align-items:center;justify-content:center;font-weight:700}
+.bar nav{display:flex;gap:20px;font-size:13.5px}
+.bar nav a{color:var(--sub)}
+.bar nav a:hover{color:var(--green-deep);text-decoration:none}
+@media(max-width:820px){.bar nav{display:none}}
+
+.hero{padding:64px 0 44px;background:linear-gradient(180deg,#F7FDF9 0%,#FFFFFF 100%);border-bottom:1px solid var(--line)}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;color:var(--green-deep);background:var(--green-soft);
+  border:1px solid var(--green-line);border-radius:999px;padding:4px 13px;letter-spacing:.3px}
+.hero h1{font-size:44px;letter-spacing:-.5px;margin:20px 0 0}
+.hero h1 em{font-style:normal;color:var(--green-deep)}
+.hero .lead{font-size:18px;color:var(--body);max-width:820px;margin-top:16px}
+.hero .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:34px}
+.hero .kpi div{border:1px solid var(--line);border-radius:12px;padding:16px 16px 14px;background:#fff}
+.hero .kpi b{display:block;font-size:30px;color:var(--ink);letter-spacing:-.5px;line-height:1.2}
+.hero .kpi b i{font-style:normal;font-size:15px;color:var(--sub);font-weight:600;margin-left:2px}
+.hero .kpi span{font-size:12.5px;color:var(--sub);display:block;margin-top:6px}
+.hero .cta{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+.btn{display:inline-block;padding:11px 22px;border-radius:9px;font-size:14.5px;font-weight:600;border:1px solid transparent}
+.btn.p{background:var(--green);color:#fff}
+.btn.p:hover{background:var(--green-deep);text-decoration:none}
+.btn.g{background:#fff;color:var(--ink);border-color:#D7DDE4}
+.btn.g:hover{border-color:var(--green);color:var(--green-deep);text-decoration:none}
+@media(max-width:820px){.hero h1{font-size:32px}.hero .kpi{grid-template-columns:repeat(2,1fr)}.hero .lead{font-size:16px}}
+
+.sec{padding:64px 0;border-bottom:1px solid var(--line)}
+.sec:nth-child(even){background:var(--bg-soft)}
+.num{font-size:12px;font-weight:700;color:var(--green);letter-spacing:1.6px}
+.sec h2{font-size:28px;margin:8px 0 6px;letter-spacing:-.3px}
+.sec .sub{font-size:15.5px;color:var(--sub);max-width:840px;margin-bottom:28px}
+h3{font-size:18px;margin:34px 0 12px}
+h4{font-size:15px;margin:22px 0 8px}
+p{margin:12px 0}
+ul,ol{margin:12px 0 12px 22px}
+li{margin:6px 0}
+
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{border:1px solid var(--line);border-radius:12px;padding:20px;background:#fff}
+.card .t{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.card .d{font-size:13.5px;color:var(--sub);line-height:1.7}
+.card .k{font-size:12px;color:var(--green-deep);font-weight:700;margin-top:10px;display:block}
+@media(max-width:820px){.cards{grid-template-columns:1fr}}
+
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px;background:#fff}
+th,td{border:1px solid var(--line);padding:11px 13px;text-align:left;vertical-align:top}
+th{background:#F5F8F6;font-weight:700;color:var(--ink);font-size:13px}
+td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
+.tbl-scroll{overflow-x:auto}
+@media(max-width:820px){table{font-size:13px}th,td{padding:9px 10px}}
+
+figure{margin:24px 0}
+figure img{width:100%;border:1px solid var(--line);border-radius:10px;display:block;background:#fff}
+figcaption{font-size:12.5px;color:var(--mute);margin-top:9px;line-height:1.6}
+.demo-flag{display:inline-block;font-size:11px;font-weight:700;color:#8A5A00;background:#FFF6E5;
+  border:1px solid #F5DFB8;border-radius:6px;padding:2px 8px;margin-left:8px;vertical-align:1px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:820px){.two{grid-template-columns:1fr}}
+
+.note{border-left:3px solid var(--green);background:var(--green-soft);border-radius:0 10px 10px 0;
+  padding:16px 20px;margin:22px 0;font-size:14.5px}
+.note b{color:var(--ink)}
+.quote{border-left:3px solid #D7DDE4;padding:4px 0 4px 18px;color:var(--sub);font-size:15px;margin:18px 0}
+
+.layer{display:grid;grid-template-columns:96px 1fr;gap:20px;border:1px solid var(--line);border-radius:12px;
+  padding:20px;background:#fff;margin-bottom:14px;align-items:start}
+.layer .tag{font-size:22px;font-weight:800;letter-spacing:-.5px}
+.layer.l1 .tag{color:var(--green-deep)}
+.layer.l2 .tag{color:#2F6BD8}
+.layer.l3 .tag{color:#8A929E}
+.layer .h{font-size:15px;font-weight:700;color:var(--ink)}
+.layer .b{font-size:13.5px;color:var(--sub);margin-top:4px}
+.layer .chips{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:2px 10px;background:#fff;color:var(--body)}
+@media(max-width:820px){.layer{grid-template-columns:1fr;gap:8px}}
+
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.gal a{display:block;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
+.gal a:hover{border-color:var(--green)}
+.gal img{width:100%;height:150px;object-fit:cover;object-position:top left;display:block}
+.gal span{display:block;font-size:12px;color:var(--sub);padding:8px 10px}
+@media(max-width:820px){.gal{grid-template-columns:repeat(2,1fr)}}
+
+.road{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+.road .r{border:1px solid var(--line);border-radius:12px;padding:20px;background:#fff;position:relative}
+.road .r:before{content:"";position:absolute;left:20px;top:0;width:28px;height:3px;border-radius:0 0 3px 3px;background:var(--green)}
+.road .p{font-size:12px;color:var(--mute);font-weight:700;letter-spacing:.5px}
+.road .h{font-size:15.5px;font-weight:700;margin-top:6px}
+.road .d{font-size:13.5px;color:var(--sub);margin-top:8px}
+.road .s{display:inline-block;margin-top:12px;font-size:11.5px;font-weight:700;border-radius:6px;padding:2px 8px;
+  background:var(--green-soft);color:var(--green-deep);border:1px solid var(--green-line)}
+.road .s.wait{background:#F4F6F8;color:#6B7480;border-color:#E2E6EB}
+@media(max-width:820px){.road{grid-template-columns:1fr}}
+
+.final{background:linear-gradient(135deg,#F3FCF7,#fff);border:1px solid var(--green-line);border-radius:16px;padding:34px}
+.final h2{font-size:24px}
+.final .links{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+footer{padding:36px 0 60px;font-size:12.5px;color:var(--mute)}
+footer code{background:#F1F3F5;padding:1px 6px;border-radius:5px;font-size:12px}
 </style>
 </head>
 <body>
-<div class="top">
-  <a href="index.html">返回作品导览</a>
-  <a href="prototype.html">打开产品原型</a>
-  <a href="#fig3">看界面截图</a>
-  <span class="sp">客户均为代称 · 数据已脱敏</span>
-</div>
 
-<div class="hero">
-  <div class="hero-k">YEE AI 智能大赛 2.0 · 方向 1 内部提效 · 可平移方向 2 对外赋能</div>
-  <div class="hero-t">销售易 <span>YeeSales</span></div>
-  <div class="hero-s">BD 每天打开的 AI 销售助理：你负责见人，找客户、理行程、写邮件、出跟进计划交给它</div>
-  <div class="hero-n">
-    <div><b>6</b><span>个工作入口，对应 BD 的动作</span></div>
-    <div><b>3</b><span>场海外活动跑通闭环</span></div>
-    <div><b>8</b><span>场现场会面落进日历</span></div>
-    <div><b>90%</b><span>展后整理工时下降</span></div>
+<div class="bar">
+  <div class="wrap">
+    <div class="brand"><span class="dot">Y</span> YeeSales 销售易 <span class="small" style="margin-left:6px">v0.9</span></div>
+    <nav>
+      <a href="#problem">问题</a>
+      <a href="#solution">方案</a>
+      <a href="#workflow">流程</a>
+      <a href="#validation">真实验证</a>
+      <a href="#innovation">创新</a>
+      <a href="#demo">界面</a>
+      <a href="#maturity">成熟度</a>
+      <a href="#roadmap">路线</a>
+    </nav>
   </div>
-  <div class="hero-l">外网体验：https://jasmine2886.github.io/yeesales/</div>
 </div>
 
-<div class="wrap">
-<p>产品导览：<a href="https://jasmine2886.github.io/yeesales/">https://jasmine2886.github.io/yeesales/</a> 可交互原型：<a href="https://jasmine2886.github.io/yeesales/prototype.html">https://jasmine2886.github.io/yeesales/prototype.html</a></p>
-<hr>
-<div class="score"><h2>关键点摘要</h2>
-<p><b>一句话：把复杂性留给 AI，把简单的工作界面留给销售。</b></p>
-<table><thead><tr><th>评分维度</th><th>结论</th><th>关键证据</th></tr></thead><tbody><tr><td>价值看得见</td><td>解决的是 BD 每天真实发生的三件事：找客户、见客户、跟进客户。不是给管理层看的报表系统</td><td>六个入口全部对应 BD 的工作动作；默认首页第一屏回答「今天该做什么」（图 3）</td></tr><tr><td>落地跑得通</td><td>已在 3 场海外活动跑通完整闭环，从行前筛名单到展后出跟进包，全程有交付物</td><td>34 家目标名单、14 场展会约见、8 场现场会面、26 条待办、8 场日历留痕（第 6 节）</td></tr><tr><td>拓展做得广</td><td>能力与行业无关，只与「参展 + 海外客户 + 跨境付款」有关；已设计内部自用、区域复制、对外产品化三段路径</td><td>第 7 节；能力层与客户层解耦，换一个国家、换一个展会不改结构</td></tr><tr><td>创新性</td><td>不是给 CRM 加一个聊天框，而是把 CRM 从「记录系统」改成「执行系统」：AI 做事，人只做批准</td><td>图 2 的三段式分工；第 4.6 节的信任机制</td></tr></tbody></table>
-<p><b>三个数字：6 个工作场景、3 场海外活动实测、展后整理工时下降约 90%。</b></p>
-<p><b>这次改版做了什么：</b> v0.7 的能力一项没丢，但把界面从「9 个视图的系统后台」收回成「6 个工作入口的销售工具」。首页不再显示 Agent 运行日志和审批队列，专业术语从界面上消失，BD 不需要先理解系统结构才能开始工作。</p>
-</div><hr>
-<h2>一、开发背景</h2>
-<h3>1.1 一个海外 BD 的一年是怎么过的</h3>
-<p>海外 BD 的工作节奏由外部事件驱动，不由内部流程驱动。一年里大致是三件事在循环：</p>
-<ul><li><b>找客户。</b> 展会参展商名单、LinkedIn、行业群、老客户转介绍。名单动辄三五百家，判断哪家值得聊，靠人肉翻官网。</li><li><b>见客户。</b> 一年 3 到 5 次出国，一次 7 到 10 天。行前要排会议、订机酒、算时差、准备每个客户的谈话要点；现场一天见 4 到 6 家，名片、录音、WhatsApp、邮件同时产生。</li><li><b>跟进客户。</b> 回国后一周内是黄金窗口。要把现场记录整理成跟进表、写英文邮件、建任务、更新商机阶段。</li></ul>
-<h3>1.2 现有工具的断点</h3>
-<p>三个断点，每个都直接吃掉成单率。</p>
-<p><b>获客断点：从名单到判断，全靠人肉。</b> 340 家参展商，逐家看官网判断「有没有中国供应商付款需求」，一个熟练 BD 要两天。两天之后，热度已经过去了。</p>
-<p><b>过程断点：展会现场的信息是碎的。</b> 名片在口袋，录音在手机，约定在 WhatsApp，报价在邮件。回到酒店想复盘，得先把四个地方翻一遍。</p>
-<p><b>沉淀断点：CRM 只在周报前被打开。</b> 传统 CRM 要求 BD 在见完客户后主动填七个字段。结果是能拖就拖，等填的时候已经记不清对方原话。CRM 变成了给主管看的台账，不是给 BD 用的工具。</p>
-<h3>1.3 从 v0.7 退回 v0.2 的一次重构</h3>
-<p>v0.7 把能力做全了：9 个视图、AI Agent 活动中心、审批队列、审计日志、Event Intelligence 五页签。功能评审能过，但拿给一线 BD 用会出问题：</p>
-<ul><li>打开首页先看到的是系统在跑什么，不是自己今天要做什么；</li><li>想约一个客户，要先判断该进哪个模块；</li><li>「Event Intelligence」「Agent Activity」「Fit Score」这类词，需要先解释一遍才能用。</li></ul>
-<p>v0.8 的判断是：<b>能力继续留，界面必须退回销售视角。</b> 于是把 9 个视图合并成 6 个工作入口，把 Agent、审批、审计这些内部机制收进后台，只在需要人点头的时候露出来。</p>
-<figure id="fig1"><img src="screenshots/10-version-map.png" alt="图 1　v0.7 到 v0.8：9 个视图收敛为 6 个入口，能力未减"><figcaption>图 1　v0.7 到 v0.8：9 个视图收敛为 6 个入口，能力未减</figcaption></figure>
-<p>合并的是入口，不是能力。审批、审计、Agent 调度仍在后台运行，只在需要人点头时才出现。</p>
-<hr>
-<h2>二、产品定位与信息架构</h2>
-<h3>2.1 定位</h3>
-<p><b>YeeSales 不是一个功能更多的 CRM，而是一个懂国际支付、懂海外客户、懂跨文化商务的 AI 销售助理。</b></p>
-<p>BD 打开它，应该感觉像坐下之后旁边有人递上一张纸：今天先打这三个电话，明天那个会要谈这三点，展会上见的九家里这一家最该先跟。</p>
-<h3>2.2 六个入口，对应六个工作动作</h3>
-<p>导航不按技术模块切，按 BD 一天里会做的动作切。</p>
-<table><thead><tr><th>入口</th><th>BD 想解决的问题</th><th>AI 在背后做什么</th></tr></thead><tbody><tr><td>Home 工作台</td><td>今天该干什么</td><td>从商机、会议、沟通记录里排出今日优先级，每条给一句理由</td></tr><tr><td>Find Customers 智能获客</td><td>我该开发哪些客户</td><td>四路获客（展会、检索、社媒、转介绍），自动做初筛和排序</td></tr><tr><td>Events &amp; Travel 展会与拜访</td><td>这趟出去怎么安排、回来怎么收</td><td>行前筛名单排行程，现场建档转写，展后出跟进包</td></tr><tr><td>My Customers 我的客户</td><td>这家客户聊到哪一步了</td><td>把邮件、会议、WhatsApp、名片汇成一条时间线，提炼业务需求</td></tr><tr><td>My Pipeline 我的商机</td><td>哪些单子在推进、卡在哪</td><td>阶段自动前移，拖太久的单子主动提醒</td></tr><tr><td>AI Assistant 销售助手</td><td>有件事想让它直接做</td><td>一个对话框接住所有指令，后台自己调能力</td></tr></tbody></table>
-<h3>2.3 四条设计原则</h3>
-<ol><li><b>按场景组织，不按模块组织。</b> 用户不需要知道数据从哪来，只需要选「我想通过展会找客户」还是「我想在 LinkedIn 上找」。</li><li><b>默认页回答一个问题：今天做什么。</b> 首页不做数据大屏，只做优先级列表，每条都带操作按钮。</li><li><b>AI 藏在动作后面，不站在界面前面。</b> 界面上没有「Agent 正在运行」，只有「3 条跟进草稿等你确认」。</li><li><b>专业术语不出现在界面。</b> 「AI Fit Score」在界面上就是「中国付款潜力：高」；「Normalized Entity」在界面上就是「重复名片已合并」。</li></ol>
-<h3>2.4 一张图看清分工</h3>
-<figure id="fig2"><img src="screenshots/00-blueprint.png" alt="图 2　一个 BD 的 SFF 一周：三个阶段，12 个动作，9 个由 AI 做完，3 个必须人点头"><figcaption>图 2　一个 BD 的 SFF 一周：三个阶段，12 个动作，9 个由 AI 做完，3 个必须人点头</figcaption></figure>
-<p>图 2 是这次改版的全部主张：AI 承担所有准备工作，人保留三个决定权——发不发、改不改、报什么价。</p>
-<hr>
-<h2>三、一个 BD 的 SFF 一周</h2>
-<p>这一节按真实任务顺序走一遍。任务来自本次用户测试，原话是：</p>
-<blockquote><p>我下周要去新加坡参加 SFF 展会。我想找到 20 家有中国供应商付款需求的 PSP，提前研究客户、安排会议。展会结束后，我希望系统自动整理会议内容、生成客户跟进计划，并帮我准备英文邮件。</p></blockquote>
-<h3>3.1 打开系统：先看到今天，不是看到系统</h3>
-<figure id="fig3"><img src="screenshots/01-home.png" alt="图 3　Home 工作台：今日优先级、本周会议、在谈商机、待确认草稿"><figcaption>图 3　Home 工作台：今日优先级、本周会议、在谈商机、待确认草稿</figcaption></figure>
-<p>登录后第一屏是四块内容：6 条今日待办（2 条今天到期）、3 场本周会议、9 个在谈商机、2 份 AI 草稿待确认。每条待办右侧直接是动作按钮，不需要再去别的页面找。</p>
-<p>第一条就是「跟进 AtlasPay Global，2 天前刚开完会，会上答应的方案还没发」。这是系统从会议记录里自己算出来的，不是 BD 填的。</p>
-<h3>3.2 找那 20 家：选一条获客路径</h3>
-<figure id="fig4"><img src="screenshots/02-find.png" alt="图 4　Find Customers：四路获客入口 + 线索表，按中国付款潜力排序"><figcaption>图 4　Find Customers：四路获客入口 + 线索表，按中国付款潜力排序</figcaption></figure>
-<p>四张卡片对应四种获客方式。选「展会与活动」，系统直接给出 SFF 2026 的 20 家目标 PSP，按中国付款潜力排序，先展示最值得约的 7 家，右上角可以展开全部。</p>
-<p>表里每一列都是 BD 的判断依据：公司、国家、业务类型、机会类型、中国付款潜力、AI 建议、下一步。潜力列不只是给一个「高」，后面跟着理由——「有对非采购付款需求」「中港汇款走廊」「PHP→CNY 走账」。</p>
-<p>页面下方有一行小字：中国付款潜力由 AI 依据公开业务信息推断，标注为推断的数值需要确认后才写入 CRM。<b>推断和数据分开标注，这是能不能被信用的前提。</b></p>
-<h3>3.3 出发前：把会议、机票、动线一次排完</h3>
-<figure id="fig5"><img src="screenshots/03-event-before.png" alt="图 5　Events &amp; Travel 展前：目标名单、行程、展馆动线"><figcaption>图 5　Events &amp; Travel 展前：目标名单、行程、展馆动线</figcaption></figure>
-<p>展前页只有三块：要见谁（已约 11/17、待确认、按优先级排）、我的行程（航班、酒店、签证、时差）、展馆动线（10:30 AtlasPay B42 → 11:50 Pacific CrossPay D08，步行 4 分钟，同片区集中拜访）。</p>
-<p>行程下面有一句：新加坡与北京无时差，会议排 10:00 后即可。跨时区排期是海外 BD 最常见的失误来源，这类判断应该由系统给出，而不是靠人记。</p>
-<p>点「一键生成约见邮件」，20 封英文邮件写好存进草稿箱，逐封可改，不会自动发出。</p>
-<h3>3.4 现场：拍一张名片，记一段音</h3>
-<figure id="fig6"><img src="screenshots/04-event-during.png" alt="图 6　Events &amp; Travel 展中：三件事就够，名片、录音、小抄"><figcaption>图 6　Events &amp; Travel 展中：三件事就够，名片、录音、小抄</figcaption></figure>
-<p>现场页刻意只留三个动作：</p>
-<ol><li><b>拍名片</b>——自动识别公司、职位、邮箱，重复的自动合并，不用手工建客户。</li><li><b>按下录音</b>——会后自动转写，提炼出对方要什么、卡在哪、下一步做什么。</li><li><b>见面前瞄一眼</b>——每个目标客户自动带出上次沟通：6 封邮件、对方要 China Payout + T+0、注意肯尼亚客户重个人关系、报价先谈价值再谈费率。</li></ol>
-<p>右侧是当天进度：谁见了、录音多长、名片几张、哪些还没聊。一天见六家，回酒店不用靠记忆复盘。</p>
-<h3>3.5 当晚：AI 出跟进包，人只做批准</h3>
-<figure id="fig7"><img src="screenshots/05-event-after.png" alt="图 7　Events &amp; Travel 展后：汇总、排序、跟进包、逐条复核"><figcaption>图 7　Events &amp; Travel 展后：汇总、排序、跟进包、逐条复核</figcaption></figure>
-<p>展后页把工作压缩成一句话：<b>汇总 21 场沟通、排出客户优先级、生成 26 条待办和 12 封邮件草稿、看板阶段前移，全部等你确认。</b></p>
-<p>右侧是复核表：每一条 AI 建议后面都有「你的决定」——待确认、已批准、已合并。不同意的可以改，改完留痕。页脚写着一句：每一项都能看到依据，哪次会议、哪封邮件。</p>
-<p>这一步是整套设计里最关键的地方：<b>AI 不替人做决定，只把决定成本降到最低。</b> 26 条待办如果让人从零写，是半天；逐条点批准，是十分钟。</p>
-<h3>3.6 客户页：所有信息在一屏，商机就地创建</h3>
-<figure id="fig8"><img src="screenshots/07-customer360.png" alt="图 8　Customer 360：基本资料、沟通时间线、AI 客户洞察"><figcaption>图 8　Customer 360：基本资料、沟通时间线、AI 客户洞察</figcaption></figure>
-<p>点开 AtlasPay Global，三栏并排：</p>
-<ul><li><b>左栏</b>：公司、国家、联系人、负责人、商机阶段、预估年量、来源。</li><li><b>中栏</b>：沟通时间线。11/14 会议 32 分钟、11/08 WhatsApp、11/06 首封邮件，每条都有结论。</li><li><b>右栏</b>：AI 客户洞察。这家客户做什么、收款和付款分别在哪、企业还是个人、什么用途、预估月交易量（标注客户自报待核实）、痛点、建议方案、下一步。</li></ul>
-<p>支付业务字段全部用业务语言：收款国/币种、付款国/币种、企业/个人、付款用途、预估月交易量。没有一条内部字段名，没有一条评分公式。</p>
-<p>左下角三个按钮：新建商机、跟进任务、AI 写邮件。<b>在客户页就能建商机和跟进，不用跳去别的模块。</b></p>
-<h3>3.7 商机推进：默认看板，甘特图收在二级</h3>
-<figure id="fig9"><img src="screenshots/08-pipeline.png" alt="图 9　My Pipeline：八阶段看板，卡片只放关键信息"><figcaption>图 9　My Pipeline：八阶段看板，卡片只放关键信息</figcaption></figure>
-<p>商机默认是看板视图，阶段从 Lead 到 Live。每张卡片只有四行：客户与商机名、业务类型与金额、下一步、时间。拖一下就改阶段。</p>
-<p>甘特图和成交路线图放到「切换视图」按钮里，日常不需要打开——这是 v0.7 的主要问题之一：为了展示能力，把不常用的视图放在了一级入口。</p>
-<h3>3.8 不想找菜单的时候，直接跟它说</h3>
-<figure id="fig10"><img src="screenshots/09-assistant.png" alt="图 10　AI Assistant：一个对话框接住所有指令"><figcaption>图 10　AI Assistant：一个对话框接住所有指令</figcaption></figure>
-<p>对话框里可以直接说：帮我找 20 家有中国供应商付款需求的 PSP；帮我把 20 家约见邮件准备好；展会结束后我要快速拿到跟进计划。</p>
-<p>AI 回的是结果和下一步，不是「正在调用某 Agent」。界面上没有 Agent 分工、没有任务队列、没有审计日志。</p>
-<p>底部一行是边界：AI 可以检索客户、读沟通记录、起草邮件、排行程、写任务；<b>AI 不会未经确认就发邮件、改 CRM、承诺价格。</b></p>
-<hr>
-<h2>四、关键能力说明</h2>
-<h3>4.1 智能获客：四条路径，一个结果</h3>
-<p>展会与活动、网络检索、LinkedIn 与社媒、转介绍，四条路径产出的都是同一张线索表。用户在意的不是数据源，是「这家值不值得约」。所以每条线索都给三样东西：为什么值得约、中国付款潜力、下一步动作。</p>
-<h3>4.2 展会与拜访：行前、行中、行后</h3>
-<p>这是 YeeSales 最有辨识度的场景，也是唯一一个把「出差」当成完整业务流程处理的产品设计。行前解决「见谁、怎么排」，行中解决「怎么记」，行后解决「怎么跟」。三段式不只是页签，是三个不同的工作状态。</p>
-<h3>4.3 客户 360：一屏之内回答四个问题</h3>
-<p>这家客户是谁、我们聊过什么、他到底要什么、下一步该做什么。前三个问题靠数据和 AI 提炼，第四个问题靠人判断。三栏布局就是按这四个问题的顺序排的。</p>
-<h3>4.4 商机：看板为主，路线图为辅</h3>
-<p>八个阶段与真实跨境支付成交路径一致：Lead、Qualified、Meeting、Proposal、Negotiation、Compliance、Integration、Live。合规和集成两个阶段是支付行业特有的，必须显式存在，否则商机会在「以为快成了」的阶段卡三个月。</p>
-<h3>4.5 AI 助手：一个入口收所有指令</h3>
-<p>不要求用户理解 AI 有几个 Agent、各管什么。用户说目标，系统拆步骤。</p>
-<h3>4.6 信任机制：让 AI 的输出可以被核对</h3>
-<p>这一层不放在界面前面，但必须有。</p>
-<ul><li><b>信息三态</b>：确认、AI 推断、缺失。推断值用不同颜色标出，写进 CRM 前必须人工确认。</li><li><b>人工审批</b>：发邮件、改阶段、建客户、承诺价格，四类动作必须人点头。</li><li><b>只追加日志</b>：AI 改过的每一条都留痕，可以追溯是依据哪次会议、哪封邮件。</li><li><b>可覆写</b>：AI 给的排序和分级，人可以改，改完记录理由。</li></ul>
-<p>这四条决定了 BD 敢不敢用。一个不敢信的 AI，比没有 AI 更麻烦。</p>
-<hr>
-<h2>五、BD 用户测试</h2>
-<h3>5.1 测试方法</h3>
-<p>不给任何培训、不给说明书，只给一段任务，看能不能自己走完。</p>
-<p>任务：下周去新加坡参加 SFF，找 20 家有中国供应商付款需求的 PSP，提前研究客户、安排会议；展会后自动整理会议内容、生成跟进计划、准备英文邮件。</p>
-<p>判定标准：如果一个 BD 需要有人教他怎么用，产品就还没做到位。走查围绕五个问题：</p>
-<ol><li>能不能很快找到入口？</li><li>知不知道下一步点什么？</li><li>需不需要理解 AI Agent、Event Intelligence 这类术语？</li><li>能不能在一个连贯流程里完成任务？</li><li>能不能在客户详情里直接创建商机和跟进？</li></ol>
-<h3>5.2 走查结果</h3>
-<table><thead><tr><th>检查项</th><th>结论</th><th>证据</th><th>走查中发现的问题</th></tr></thead><tbody><tr><td>找到入口</td><td>通过</td><td>首屏第一条待办就是「跟进 AtlasPay」；展会任务在导航第三项，名称即动作</td><td>初始版本首页只列了待办，没有「我要去某个展会」的起点，已补</td></tr><tr><td>知道下一步</td><td>基本通过</td><td>每条待办右侧有按钮；展前页有「一键生成约见邮件」；展后页有「去逐条确认」</td><td>线索页原只显示 7 家，找不到「另外 13 家在哪」，已加「查看全部 20 家」</td></tr><tr><td>是否需要术语</td><td>不需要</td><td>界面上没有 Agent、Event Intelligence、Fit Score；对应位置写的是「中国付款潜力」「AI 建议」「下一步」</td><td>无</td></tr><tr><td>流程连贯性</td><td>通过</td><td>找客户 → 展前 → 展中 → 展后 → 客户页 → 商机，六步不跳页、不换系统</td><td>展中页信息偏少，已补当天进度表</td></tr><tr><td>客户页直接建商机</td><td>通过</td><td>客户页左下三个按钮：新建商机、跟进任务、AI 写邮件</td><td>原为一个合并按钮「新建商机/任务/邮件」，动作不清晰，已拆成三个</td></tr></tbody></table>
-<h3>5.3 走查后修复的四件事</h3>
-<ol><li><b>线索页补出口。</b> 加「20 家目标客户 / 查看全部 20 家 / AI 批量约会议」，解决「20 家只看到 7 家」的困惑。</li><li><b>客户页动作拆分。</b> 一个按钮变三个，每个按钮对应一个明确结果。</li><li><b>助手页补输入框。</b> 原来只有预设对话和快捷问句，无法自己提问；补了输入框和发送按钮。</li><li><b>看板列宽。</b> 八阶段在窄屏下最后一列被裁切，改为六等分自适应。</li></ol>
-<h3>5.4 结论</h3>
-<p><b>不需要教学。</b> 一个没用过这套系统的 BD，从首页到出跟进计划，全程不需要解释「什么是 Agent」。唯一需要适应的是展前页的「一键生成约见邮件」，按钮文案已经直接说明结果，不再描述技术。</p>
-<p>已知不足，留待下一版：看板卡片暂不能点开客户详情；移动端只做了基础自适应，现场用手机拍照建档的体验还需要单独设计。</p>
-<hr>
-<h2>六、可验证成果</h2>
-<h3>6.1 三场海外活动跑通闭环</h3>
-<p>2026 年 9 月，作者以中东三场活动为真实场景，用同一套流程跑完了行前、行中、行后。</p>
-<table><thead><tr><th>环节</th><th>产出</th><th>说明</th></tr></thead><tbody><tr><td>行前筛选</td><td>34 家目标客户、3 天拜访动线</td><td>从展商名单与公开资料中筛出，按中国付款需求排序</td></tr><tr><td>现场约见</td><td>展会 App 内 14 场约见，其中 4 场确认、10 场待定</td><td>确认场次全部落进日历，含展位号与谈话要点</td></tr><tr><td>现场会面</td><td>8 场实际会面</td><td>每场会议记录、对方诉求、下一步动作</td></tr><tr><td>展后沉淀</td><td>12 个展商会话归档、8 场日历补全沟通留痕、跟进表 1 份</td><td>每条线索可追溯到具体对话</td></tr><tr><td>任务落地</td><td>26 条待办写入任务系统</td><td>含负责人、截止日、关联客户</td></tr></tbody></table>
-<h3>6.2 工时对比</h3>
-<table><thead><tr><th>动作</th><th>手工</th><th>用 YeeSales</th><th>变化</th></tr></thead><tbody><tr><td>单场会面整理成跟进记录</td><td>约 25 分钟</td><td>约 3 分钟（校对为主）</td><td>下降约 88%</td></tr><tr><td>20 封英文跟进邮件</td><td>约 4 小时</td><td>约 25 分钟（逐封 review）</td><td>下降约 90%</td></tr><tr><td>展后一周的跟进计划</td><td>半天到一天</td><td>约 30 分钟</td><td>下降约 90%</td></tr><tr><td>单个客户背景研究</td><td>20 到 30 分钟</td><td>2 分钟</td><td>下降约 90%</td></tr></tbody></table>
-<h3>6.3 现在能跑的与下一步</h3>
-<p><b>现在能跑：</b> 展会三段式、四路获客、客户 360、商机看板、AI 助手、审批与留痕。原型中的界面与交互均为可点击状态。</p>
-<p><b>下一步：</b> 接入企业邮箱与日历的正式写权限；名片 OCR 换正式服务；商机阶段预测；移动端现场模式。</p>
-<p><b>说明：</b> 原型内所有客户名称均为代称或虚构示例，金额与交易量为演示数据；真实业务数据见 6.1，未在原型中展示。</p>
-<hr>
-<h2>七、商业化路径</h2>
-<h3>7.1 第一段：内部自用（已跑通）</h3>
-<p>作者本人使用，覆盖三场海外活动。产出物可直接复用：跟进表模板、邮件话术、行程模板、复盘报告结构。</p>
-<h3>7.2 第二段：区域与团队复制</h3>
-<p>同一套流程可以复制给所有需要出国的 BD。差异化不在流程，在本地知识：各国付款习惯、节假日与斋月、时差与工作日、签证与航线。这部分已经沉淀为独立的节假日与跨文化日历能力，换区域时替换知识包即可。</p>
-<h3>7.3 第三段：对外产品化</h3>
-<p>目标客户是同样做跨境生意的中小支付机构、汇款公司、外贸服务商——他们有销售团队、有展会预算、没有能力自建 AI 销售系统。产品形态按席位订阅，展会期间可按活动加购。</p>
-<p>定价逻辑不按「AI 调用次数」，按「省下的 BD 工时 + 提升的会面转化」计价，这与买方的决策语言一致。</p>
-<hr>
-<h2>八、创新点</h2>
-<ol><li><b>把 CRM 从记录系统改成执行系统。</b> 传统 CRM 记录人做过什么，YeeSales 直接把人要做的事做掉，人只做批准。</li><li><b>展会三段式建模。</b> 行前、行中、行后是三个不同的工作状态，不是三个页签。市面上多数工具只做「展后名单导入」。</li><li><b>界面按工作场景组织，技术能力全部下沉。</b> Agent、审批、审计不出现在导航里，只在需要人点头时出现。</li><li><b>支付业务语言化。</b> 收款国、付款国、币种、企业个人、付款用途、预估月量，取代内部字段与评分公式。</li><li><b>可核对的 AI。</b> 三态信息 + 人工审批 + 只追加日志 + 可覆写，让 BD 敢用、主管敢批。</li></ol>
-<hr>
-<h2>九、链接、脱敏与附录</h2>
-<p><b>产品导览：</b> <a href="https://jasmine2886.github.io/yeesales/">https://jasmine2886.github.io/yeesales/</a> <b>可交互原型：</b> <a href="https://jasmine2886.github.io/yeesales/prototype.html">https://jasmine2886.github.io/yeesales/prototype.html</a> <b>源码仓库：</b> <a href="https://github.com/Jasmine2886/yeesales">https://github.com/Jasmine2886/yeesales</a></p>
-<p><b>脱敏声明：</b> 本文档与原型中出现的客户名称均为代称或虚构示例；不含真实联系人姓名、电话、邮箱、费率、额度与报价；截图中的金额与交易量为演示数据。</p>
-<h3>附录　图目录</h3>
-<table><thead><tr><th>图</th><th>内容</th></tr></thead><tbody><tr><td>图 1</td><td>v0.7 到 v0.8：9 个视图收敛为 6 个入口</td></tr><tr><td>图 2</td><td>一个 BD 的 SFF 一周：三段式分工</td></tr><tr><td>图 3</td><td>Home 工作台：今日优先级</td></tr><tr><td>图 4</td><td>Find Customers：四路获客与线索表</td></tr><tr><td>图 5</td><td>Events &amp; Travel 展前：名单、行程、动线</td></tr><tr><td>图 6</td><td>Events &amp; Travel 展中：名片、录音、小抄</td></tr><tr><td>图 7</td><td>Events &amp; Travel 展后：跟进包与复核</td></tr><tr><td>图 8</td><td>Customer 360：资料、时间线、AI 洞察</td></tr><tr><td>图 9</td><td>My Pipeline：八阶段看板</td></tr><tr><td>图 10</td><td>AI Assistant：对话式完成任务</td></tr></tbody></table>
-<div class="note">本文档为销售易 YeeSales 参赛作品说明的网页镜像，权威版本为公司飞书文档。
-客户名称均为代称；报价、额度与联系方式不在本文档中出现；界面截图为原型演示数据，真实使用页面按同一规则遮蔽敏感字段。</div>
-</div>
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">YEE AI 智能大赛 2.0　方向一　内部提效</span>
+    <h1>把复杂性留给 AI，<br>把简单的工作界面留给<em>销售</em></h1>
+    <p class="lead">
+      YeeSales 是易宝国际业务部一线 BD 每天打开的 AI 销售助理。它不做更多功能，只做三件事：
+      出发前把该见的人找出来，现场把说过的话记成支付结构，回来后把跟进与邮件准备好。
+      已在中东三场海外活动跑完真实闭环，本页给出可核对的口径，以及可以点开的原型。
+    </p>
+    <div class="kpi">
+      <div><b>3<i>场</i></b><span>海外活动跑通行前 / 现场 / 展后</span></div>
+      <div><b>14<i>场</i></b><span>展会 App 内发起的约见</span></div>
+      <div><b>80<i>%</i></b><span>展后整理工时下降（含校对）</span></div>
+      <div><b>26<i>项</i></b><span>端到端交互断言全部通过</span></div>
+    </div>
+    <div class="cta">
+      <a class="btn p" href="prototype.html">打开可交互原型</a>
+      <a class="btn g" href="#validation">先看真实数据口径</a>
+      <a class="btn g" href="https://github.com/Jasmine2886/yeesales">源码仓库</a>
+    </div>
+    <p class="small" style="margin-top:18px">原型为演示环境，客户名称均为代称，金额与交易量为构造数据，页面固定标注 Simulated data。</p>
+  </div>
+</header>
+
+<section class="sec" id="problem">
+  <div class="wrap">
+    <div class="num">01　PROBLEM</div>
+    <h2>海外 BD 的时间，大半花在「整理谈过什么」</h2>
+    <p class="sub">找客户、见客户、跟进客户，一年循环三轮。判断不难，整理很重——三个断点每个都直接吃掉成单率。</p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="t">获客断点：从名单到判断全靠人肉</div>
+        <div class="d">几百家参展商，逐家看官网判断「有没有中国供应商付款需求」。一个熟练 BD 要两天，两天后热度已经过去。</div>
+        <span class="k">代价：错过窗口期</span>
+      </div>
+      <div class="card">
+        <div class="t">过程断点：现场信息是碎的</div>
+        <div class="d">名片在口袋，录音在手机，约定在 WhatsApp，报价在邮件。回酒店复盘要先翻四个地方，第二天见客户已记不清上次承诺。</div>
+        <span class="k">代价：重复提问、承诺失焦</span>
+      </div>
+      <div class="card">
+        <div class="t">沉淀断点：CRM 只在周报前打开</div>
+        <div class="d">传统 CRM 要求见完客户主动填七个字段。能拖就拖，填的时候原话已忘。CRM 成了给主管看的台账。</div>
+        <span class="k">代价：商机信息失真</span>
+      </div>
+    </div>
+
+    <h3>已有工具为什么没解决</h3>
+    <div class="tbl-scroll">
+    <table>
+      <tr><th style="width:22%">工具</th><th>它擅长</th><th>它缺的</th></tr>
+      <tr><td>传统 CRM</td><td>记录字段、出报表、给管理层看漏斗</td><td>不管资料从哪来，要求人先填；对一线是负担</td></tr>
+      <tr><td>通用会议助手</td><td>转写、摘要、提取待办</td><td>不懂支付业务：读不出收款国、付款币种、结算时效，给不出商机判断</td></tr>
+      <tr><td>通用大模型</td><td>写作与问答</td><td>没有客户上下文、没有工作流、不能落到日历与任务</td></tr>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="solution">
+  <div class="wrap">
+    <div class="num">02　SOLUTION</div>
+    <h2>六个入口，对应 BD 一天里会做的六个动作</h2>
+    <p class="sub">导航不按技术模块切。用户不需要知道数据从哪来，只需要选「我想做什么」。</p>
+
+    <div class="tbl-scroll">
+    <table>
+      <tr><th style="width:26%">入口</th><th style="width:34%">BD 想解决的问题</th><th>AI 在背后做什么</th></tr>
+      <tr><td><b>Home 工作台</b></td><td>今天该干什么</td><td>排出今日优先级，每条附一句理由和一个可直接点的动作</td></tr>
+      <tr><td><b>Find Customers</b></td><td>我该开发哪些客户</td><td>四路获客（展会 / 检索 / 社媒 / 转介绍），初筛、排序、标来源与可信度</td></tr>
+      <tr><td><b>Events &amp; Travel</b></td><td>这趟怎么安排，回来怎么收</td><td>行前筛名单排行程，现场建档转写，展后出跟进包</td></tr>
+      <tr><td><b>My Customers</b></td><td>这家聊到哪一步了</td><td>邮件、会议、WhatsApp、名片汇成一条时间线，提炼支付需求</td></tr>
+      <tr><td><b>My Pipeline</b></td><td>哪些单在推进、卡在哪</td><td>识别停滞信号，提出阶段更新建议，等人确认</td></tr>
+      <tr><td><b>AI Assistant</b></td><td>有件事想让它直接做</td><td>一个对话框接住所有指令，回答里带可直接点的下一步</td></tr>
+    </table>
+    </div>
+
+    <h3>人机边界：AI 建议，人批准</h3>
+    <div class="note">
+      <b>AI 完成全部准备工作，并把结论摆成一个可批准的选项；所有对外生效的动作，必须由人点一下。</b><br>
+      AI 不会未经确认就发邮件、改 CRM、承诺价格。这句话既印在原型界面上，也决定了 BD 敢不敢用。
+    </div>
+    <div class="tbl-scroll">
+    <table>
+      <tr><th>动作</th><th>AI 做什么</th><th>人做什么</th></tr>
+      <tr><td>检索与排序客户</td><td>查公开资料、算潜力、写「为什么约」</td><td>决定约哪几家</td></tr>
+      <tr><td>写会议纪要</td><td>转写、抽七个支付字段、判断商机类型</td><td>校对错漏、补充现场判断</td></tr>
+      <tr><td>起草英文邮件</td><td>按对方业务与上次沟通写初稿</td><td>逐封读、改、确认（演示环境不发送）</td></tr>
+      <tr><td>更新商机阶段</td><td>识别停滞，建议下一阶段与理由</td><td>选阶段、点确认后才写入</td></tr>
+      <tr><td>写日历与任务</td><td>生成行程与待办草案</td><td>确认后写入，且不含参会人</td></tr>
+      <tr><td>报价与账期</td><td>不参与</td><td>全部由人决定</td></tr>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="workflow">
+  <div class="wrap">
+    <div class="num">03　WORKFLOW</div>
+    <h2>一个 BD 的 SFF 一周：三段连续，不换系统</h2>
+    <p class="sub">行前、行中、行后是三种工作状态，不是三个页签。三段之间上下文不丢，这是多数展会工具没做的一段。</p>
+
+    <figure>
+      <img src="screenshots/00-blueprint.png" alt="一个 BD 的 SFF 一周：三个阶段、12 个动作的分工示意">
+      <figcaption>三个阶段、12 个动作：9 个由 AI 完成准备，3 个必须人点头——发不发、改不改、报什么价。</figcaption>
+    </figure>
+
+    <h3>行前 7 天：把要见的人定下来</h3>
+    <figure>
+      <img src="screenshots/03-event-before.png" alt="Events &amp; Travel 展前：目标名单、约见状态、航班酒店与展馆动线">
+      <figcaption>行前页回答三个问题：见谁、怎么去、当天怎么走。名单按「为什么约」排序，未约的一键生成英文约见邮件（存草稿，不发送）。<span class="demo-flag">演示数据</span></figcaption>
+    </figure>
+
+    <h3>现场 3 天：一张名片进来，一段结构化的记录出去</h3>
+    <figure>
+      <img src="screenshots/04-event-during.png" alt="Events &amp; Travel 展中：当天进度、名片建档、会议纪要的支付业务结构化提取">
+      <figcaption>现场只做两件事：拍名片、记笔记。系统按支付业务语言落字段，而不是通用会议的「议题 / 结论 / 待办」。<span class="demo-flag">演示数据</span></figcaption>
+    </figure>
+
+    <h3>展后 7 天：跟进包出来，人只做批准</h3>
+    <figure>
+      <img src="screenshots/05-event-after.png" alt="Events &amp; Travel 展后：跟进包、待确认条目、邮件草稿与任务建议">
+      <figcaption>待办、英文邮件草稿、商机阶段建议、资料补全项一次性给出，全部标「待确认」，逐条批准后才生效。<span class="demo-flag">演示数据</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec" id="validation">
+  <div class="wrap">
+    <div class="num">04　REAL-WORLD VALIDATION</div>
+    <h2>真实跑过的数据，以及它们各自的口径</h2>
+    <p class="sub">这张表是这份作品的地基。每个数字都写了统计口径与证据来源，口径不同就不合并。</p>
+
+    <div class="tbl-scroll">
+    <table>
+      <tr><th style="width:19%">指标</th><th class="n" style="width:9%">数值</th><th style="width:40%">统计口径</th><th>证据</th><th class="n" style="width:6%">层级</th></tr>
+      <tr><td>海外活动</td><td class="n">3 场</td><td>2026 年 9 月迪拜同期三场：Leaders in Payments（9/22）、Seamless Middle East（9/23–24）、Forex Expo Dubai（9/23）</td><td>日历、参会确认信、现场记录</td><td class="n">L1</td></tr>
+      <tr><td>会前目标名单</td><td class="n">34 家</td><td>展前从展商名录与公开资料筛出的目标公司数</td><td>目标名单文件、作战计划</td><td class="n">L1</td></tr>
+      <tr><td>展会 App 约见</td><td class="n">14 场</td><td>App 内 meeting request 总数：4 场已确认、10 场待定；会期中追加确认 3 场，确认数到 7 场</td><td>App 后台截图与导出</td><td class="n">L1</td></tr>
+      <tr><td>约见日历留痕</td><td class="n">8 场</td><td>已有日历事件的约见，逐条补录 App 内沟通原文。含按时见到、改期、未见到三种结果</td><td>8 条日历事件描述</td><td class="n">L1</td></tr>
+      <tr><td>会话归档</td><td class="n">12 个</td><td>展会 App 内 12 个会话的完整对话原文与中文小结</td><td>会话导出文档</td><td class="n">L1</td></tr>
+      <tr><td>展后跟进待办</td><td class="n">26 条</td><td>跟进清单条目数；同期写入任务系统并可检索的为 2 条 PSP 任务</td><td>跟进表、任务系统</td><td class="n">L1</td></tr>
+      <tr><td>SFF 目标 PSP</td><td class="n">20 家</td><td>原型演示场景的构造名单，用于演示筛选与排序</td><td>prototype.html</td><td class="n">L2</td></tr>
+      <tr><td>场景内沟通 / 草稿</td><td class="n">21 / 12</td><td>演示场景内的沟通记录与 AI 邮件草稿数</td><td>prototype.html</td><td class="n">L2</td></tr>
+    </table>
+    </div>
+
+    <h3>三个不能混用的口径</h3>
+    <ol>
+      <li><b>14 场约见不是 14 场会面。</b>14 是 App 内发起的约见请求，其中 4 场当场确认、10 场待定，会期中又追加确认 3 场。</li>
+      <li><b>8 场留痕不是 8 场现场见面。</b>8 指「已有日历事件、且补录了沟通原文」的约见数，包含见到、改期、未见到只留记录三种结果。真正现场见面的场次未逐场核验，因此不单独给数字。</li>
+      <li><b>26 条待办不等于 26 条已写入任务系统。</b>26 是清单条目；同期在任务系统中可检索到的 PSP 相关任务为 2 条，其余在跟进表内跟踪。</li>
+    </ol>
+    <p class="small">上一版曾把 8 写成「8 场现场会面」、把 26 写成「26 条写入任务系统」，属于口径不严，本版已更正。另有一处「340 家参展商」与「34 家目标客户」并非同一口径，为避免混淆已停用 340 这个数字。</p>
+
+    <h3>工时节省怎么算</h3>
+    <div class="tbl-scroll">
+    <table>
+      <tr><th style="width:24%">任务</th><th style="width:20%">手工基准</th><th style="width:26%">使用后（含校对）</th><th class="n">变化</th><th>依据类型</th></tr>
+      <tr><td>单场会面 → 结构化纪要</td><td>20–25 分钟</td><td>约 3 分钟（生成 40 秒 + 校对 2 分钟）</td><td class="n">−85% 至 −88%</td><td>效率测算，8 场笔记复测</td></tr>
+      <tr><td>展后一周跟进计划</td><td>约 4 小时</td><td>约 30 分钟（生成 8 分钟 + 校对 22 分钟）</td><td class="n">−88%</td><td>效率测算</td></tr>
+      <tr><td>单封英文跟进邮件</td><td>约 15 分钟</td><td>约 5 分钟（草稿 1 分钟 + 改写 4 分钟）</td><td class="n">−67%</td><td>实际测量，3 封计时</td></tr>
+      <tr><td>单家客户背景研究</td><td>约 25 分钟</td><td>约 8 分钟（摘要 3 分钟 + 复核 5 分钟）</td><td class="n">−68%</td><td>效率测算</td></tr>
+    </table>
+    </div>
+    <p class="small">
+      整体口径：整理类工作加权下降约 80%（含人工校对）；上一版的「约 90%」只对应单场纪要一项。
+      局限：未做对照组实验，手工基准取自 2026 年上半年同类任务记录，样本约 10 次，只代表个人操作水平。
+    </p>
+  </div>
+</section>
+
+<section class="sec" id="innovation">
+  <div class="wrap">
+    <div class="num">05　INNOVATION</div>
+    <h2>差异化不在摘要，在把一段对话读成支付结构</h2>
+    <p class="sub">通用会议助手只会写「客户希望降低跨境支付成本、提升到账速度」。这句话没错，但不指向任何可卖的产品。</p>
+
+    <div class="two">
+      <div>
+        <h4>现场原话（代称客户）</h4>
+        <p class="quote">我们在肯尼亚做本地收款，客户主要是进口商，货从中国来，每月大概四十万美元，现在通过 SWIFT 付人民币给供应商，一般三天到，周末不到账，旺季资金压得比较紧。</p>
+      </div>
+      <div>
+        <h4>YeeSales 的输出</h4>
+        <p>客户在肯尼亚有本地 KES / USD 收款能力，服务 B2B 进口商；存在向中国大陆供应商支付 CNY 的需求，月量约 40 万美元；现走 SWIFT 代理行，T+3 且周末不到账，旺季有资金周转压力。<b>判断：China Payout 机会（高），切口为 T+0 人民币付款与周末结算。</b></p>
+      </div>
+    </div>
+
+    <h3>七个字段的支付画像</h3>
+    <div class="tbl-scroll">
+    <table>
+      <tr><th style="width:26%">字段</th><th style="width:38%">为什么需要</th><th>示例</th></tr>
+      <tr><td>收款国家 / 币种</td><td>决定本地清算网络与牌照要求</td><td>肯尼亚 · KES / USD</td></tr>
+      <tr><td>付款国家 / 币种</td><td>决定是否有 China Payout 空间</td><td>中国大陆 · CNY</td></tr>
+      <tr><td>付款对象</td><td>企业付款与个人付款是两条产品线</td><td>企业（供应商）</td></tr>
+      <tr><td>付款用途</td><td>贸易货款、服务费、佣金，合规要求不同</td><td>进口货款</td></tr>
+      <tr><td>预估月交易量</td><td>决定报价区间与是否定制</td><td>约 40 万美元</td></tr>
+      <tr><td>结算时效要求</td><td>T+0 与 T+3 是不同方案</td><td>T+0，要求周末可用</td></tr>
+      <tr><td>现有通道</td><td>判断替换成本与迁移路径</td><td>SWIFT 代理行</td></tr>
+    </table>
+    </div>
+    <p>七项凑齐，商机类型基本就定了：收款为主是 Collection，付款为主是 Payout，两头都有是 Collection + Payout，付款指向中国大陆即 China Payout。</p>
+
+    <h3>每条判断都能追到出处</h3>
+    <p>字段旁固定跟一个来源标签，三种：<b>客户自述</b>（原话，可直接引用为承诺依据）、<b>公开资料</b>（官网与监管名录，进系统但标待确认）、<b>AI 推断</b>（推导结论，必须人工确认后才写入）。BD 可以改任何字段，改完记录修改人与理由。</p>
+
+    <h3>适用范围说清楚，不夸大</h3>
+    <ul>
+      <li><b>工作流通用</b>：任何做海外 B2B 销售的团队都有「展前筛名单、现场记录、展后跟进」三段。</li>
+      <li><b>判断垂直</b>：当前只做了国际支付一个知识包——PSP、MSB、EMI、汇款、跨境收付款、China Payout、合规与牌照。换成跨境电商或 SaaS，工作流可复用，判断层要重做。</li>
+      <li>因此商业化路径先说「复制给支付同业，再扩行业」，不承诺一键跨行业。</li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec" id="demo">
+  <div class="wrap">
+    <div class="num">06　PRODUCT DEMO</div>
+    <h2>三张主图，看完就知道它每天怎么被用</h2>
+    <p class="sub">以下全部可在原型中点击操作。客户为代称，金额与交易量为构造数据，页面右上角固定标注 Simulated data。</p>
+
+    <h3>一、早上打开它，先看到今天做什么</h3>
+    <figure>
+      <img src="screenshots/01-home.png" alt="YeeSales Home 工作台">
+      <figcaption>四块内容：今日待办、本周会议、在谈商机、待确认草稿。每条待办右侧都有按钮，直接跳到能动手的地方。<span class="demo-flag">演示数据</span></figcaption>
+    </figure>
+
+    <h3>二、出发前，名单能看全也能筛</h3>
+    <figure>
+      <img src="screenshots/02-find.png" alt="YeeSales Find Customers 名单">
+      <figcaption>20 家目标客户，默认给优先 7 家、一键展开全部，国家与潜力可叠加筛选，计数实时更新。<span class="demo-flag">演示数据</span></figcaption>
+    </figure>
+
+    <h3>三、点开一家客户，一屏回答四个问题</h3>
+    <figure>
+      <img src="screenshots/07-customer360.png" alt="YeeSales Customer 360">
+      <figcaption>左栏支付业务字段、中栏沟通时间线、右栏 AI 洞察；每个字段标来源；左下三个按钮彼此独立：新建商机、跟进任务、AI 写邮件。<span class="demo-flag">演示数据</span></figcaption>
+    </figure>
+
+    <h3>其余界面：证明深度，也证明能点</h3>
+    <div class="gal">
+      <a href="prototype.html#pipeline"><img src="screenshots/08-pipeline.png" alt="商机看板"><span>My Pipeline · 八阶段看板，停滞单标红</span></a>
+      <a href="prototype.html#pipeline"><img src="screenshots/11-deal.png" alt="商机详情"><span>商机详情 · AI 建议阶段，人确认</span></a>
+      <a href="prototype.html#assistant"><img src="screenshots/09-assistant.png" alt="AI 助手"><span>AI Assistant · 输入即得结论与按钮</span></a>
+      <a href="prototype.html#drafts"><img src="screenshots/12-drafts.png" alt="邮件草稿箱"><span>草稿箱 · 可编辑、确认、放弃</span></a>
+      <a href="prototype.html#event"><img src="screenshots/03-event-before.png" alt="展前页"><span>展前 · 名单、行程、动线</span></a>
+      <a href="prototype.html#event"><img src="screenshots/04-event-during.png" alt="展中页"><span>展中 · 支付结构提取</span></a>
+    </div>
+
+    <h3>端到端测试：26 项断言，17 次点击走完六步</h3>
+    <p>在无头浏览器里按 BD 的真实操作顺序驱动原型，逐步断言状态变化，不靠人工目测。首轮有 2 项不通过，排查为测试选择器与实际 DOM 不一致，非产品缺陷；修正断言后复测全部通过。</p>
+    <div class="tbl-scroll">
+    <table>
+      <tr><th style="width:9%">步骤</th><th style="width:39%">动作</th><th style="width:40%">结果</th><th class="n">点击</th></tr>
+      <tr><td>S1</td><td>打开首页</td><td>通过：四块内容齐全</td><td class="n">0</td></tr>
+      <tr><td>S2–S3</td><td>进入 Find，展开全部 20 家</td><td>通过：默认 7 家，展开 20 家，按钮文案切换</td><td class="n">2</td></tr>
+      <tr><td>S4</td><td>按国家 / 潜力筛选</td><td>通过：肯尼亚 1 家、潜力高 8 家，计数同步</td><td class="n">2</td></tr>
+      <tr><td>S5–S6</td><td>批量约会议，编辑并确认草稿</td><td>通过：3 封草稿，就地编辑，确认后 toast</td><td class="n">3</td></tr>
+      <tr><td>S7</td><td>客户列表 → Customer 360</td><td>通过：三栏、11 处来源标签、三个独立动作</td><td class="n">2</td></tr>
+      <tr><td>S8</td><td>看板卡片 → 改阶段 → 确认</td><td>通过：11 张卡片、阶段下拉、确认反馈</td><td class="n">3</td></tr>
+      <tr><td>S9</td><td>展会三段连续切换</td><td>通过：展前 / 展中 / 展后，上下文不丢</td><td class="n">4</td></tr>
+      <tr><td>S10–S11</td><td>AI 助手输入发送，深链直达</td><td>通过：返回名单规模与按钮；#cust / #drafts 可直达</td><td class="n">2</td></tr>
+    </table>
+    </div>
+    <p class="small">完整走查记录见作品说明第七节。移动端做了基础适配（横向导航、表格横向滚动、卡片单列），名片拍照与录音为演示位，不接真实 OCR 与语音服务。</p>
+  </div>
+</section>
+
+<section class="sec" id="maturity">
+  <div class="wrap">
+    <div class="num">07　MATURITY</div>
+    <h2>哪些是真的，哪些能点，哪些还没接</h2>
+    <p class="sub">评委最容易问的一句话是「这是真的还是做的」。三类证据分开列，互不冒充。</p>
+
+    <figure>
+      <img src="screenshots/13-maturity.png" alt="三层成熟度：真实业务 / 可点击原型 / 待接入生产">
+      <figcaption>L1 真实业务、L2 可点击原型、L3 待接入。三层之间不互相替代。</figcaption>
+    </figure>
+
+    <div class="layer l1">
+      <div class="tag">L1</div>
+      <div>
+        <div class="h">Real-world Validated　真实业务，已发生</div>
+        <div class="b">2026 年 9 月中东三场活动，用同一套流程走完行前、行中、行后；数据来自日历、展会 App、邮箱与本地记录。</div>
+        <div class="chips"><span class="chip">3 场海外活动</span><span class="chip">34 家会前名单</span><span class="chip">14 场 App 约见</span><span class="chip">12 个会话归档</span><span class="chip">8 场约见日历留痕</span></div>
+      </div>
+    </div>
+    <div class="layer l2">
+      <div class="tag">L2</div>
+      <div>
+        <div class="h">Interactive Prototype　可点击原型，演示数据</div>
+        <div class="b">六个入口全部可操作；名单、金额、沟通记录为构造数据，界面标注 Simulated data。</div>
+        <div class="chips"><span class="chip">6 个入口 / 9 个页面</span><span class="chip">20 家 SFF 演示名单</span><span class="chip">12 封草稿可编辑</span><span class="chip">8 个闭环全部可走</span></div>
+      </div>
+    </div>
+    <div class="layer l3">
+      <div class="tag">L3</div>
+      <div>
+        <div class="h">Planned Integration　已设计，未接生产</div>
+        <div class="b">邮件、日历、名片识别、CRM 的正式写权限需要 IT 与合规排期；原型中以「演示」提示替代真实写入。</div>
+        <div class="chips"><span class="chip">企业邮箱读写</span><span class="chip">日历双向同步</span><span class="chip">名片 OCR</span><span class="chip">CRM 字段映射</span><span class="chip">多语言多币种</span></div>
+      </div>
+    </div>
+
+    <h3>已完成 / 未完成 / 待正式集成</h3>
+    <div class="tbl-scroll">
+    <table>
+      <tr><th style="width:30%">能力</th><th style="width:16%">状态</th><th>说明</th></tr>
+      <tr><td>展会三段式工作流</td><td>已完成</td><td>真实活动中使用，模板可复用</td></tr>
+      <tr><td>跟进表 / 复盘报告结构</td><td>已完成</td><td>已沉淀为 SkillHub 上的可复用技能</td></tr>
+      <tr><td>六个入口与八个闭环</td><td>已完成</td><td>原型内可点击验证</td></tr>
+      <tr><td>商机看板拖拽改阶段</td><td>未完成</td><td>当前只能点开卡片修改</td></tr>
+      <tr><td>客户时间线全文检索</td><td>未完成</td><td>数据量上来后优先级提升</td></tr>
+      <tr><td>移动端拍照与录音</td><td>未完成</td><td>界面有入口，明确标注演示状态</td></tr>
+      <tr><td>企业邮箱读写</td><td>待集成</td><td>需 IT 授权与合规评审</td></tr>
+      <tr><td>日历双向同步</td><td>待集成</td><td>写入时不添加参会人</td></tr>
+      <tr><td>名片 OCR</td><td>待集成</td><td>替换演示位</td></tr>
+      <tr><td>CRM 字段映射</td><td>待集成</td><td>与内部字段做映射表</td></tr>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="roadmap">
+  <div class="wrap">
+    <div class="num">08　ROADMAP</div>
+    <h2>从一个人用到一群人用，再到对外可卖</h2>
+    <p class="sub">顺序不颠倒：先解决可用性，再解决现场体验，最后做管理价值。</p>
+
+    <div class="road">
+      <div class="r">
+        <div class="p">2026 Q3–Q4</div>
+        <div class="h">内部自用</div>
+        <div class="d">作者本人覆盖三场海外活动，沉淀跟进表模板、邮件话术、行程模板与复盘报告结构。</div>
+        <span class="s">已完成</span>
+      </div>
+      <div class="r">
+        <div class="p">2027 Q1</div>
+        <div class="h">团队复制</div>
+        <div class="d">复制给国际业务部 5–8 名 BD，接入企业邮箱与日历正式写权限，补名片 OCR。</div>
+        <span class="s wait">设计中</span>
+      </div>
+      <div class="r">
+        <div class="p">2027 Q2 起</div>
+        <div class="h">对外产品化</div>
+        <div class="d">面向跨境支付同业（PSP、汇款公司、外贸服务商）按席位订阅，展会期间按活动加购。</div>
+        <span class="s wait">规划中</span>
+      </div>
+    </div>
+
+    <h3>商业化逻辑</h3>
+    <p>目标买方有销售团队、有展会预算、没有能力自建 AI 销售系统。定价不按「AI 调用次数」，按「省下的 BD 工时 + 提升的会面转化」计价，这与买方的决策语言一致。差异化壁垒不在流程，在本地知识：各国付款习惯、节假日与斋月、时差与工作日、签证与航线，这些已沉淀为独立的知识包。</p>
+  </div>
+</section>
+
+<section class="sec" id="cta" style="border-bottom:none">
+  <div class="wrap">
+    <div class="final">
+      <div class="num">09　TRY IT</div>
+      <h2>三步验完这份作品</h2>
+      <ol style="margin-top:14px">
+        <li>打开原型，从首页第一条待办点进去，看它是不是直接给动作。</li>
+        <li>到 Find Customers 展开 20 家、按国家筛一次，再点「AI 批量约会议」。</li>
+        <li>回 My Pipeline 点一张卡片，改一次阶段，看它要不要你确认。</li>
+      </ol>
+      <div class="links">
+        <a class="btn p" href="prototype.html">打开可交互原型</a>
+        <a class="btn g" href="https://jasmine2886.github.io/yeesales/">产品导览</a>
+        <a class="btn g" href="https://github.com/Jasmine2886/yeesales">源码仓库</a>
+        <a class="btn g" href="llms.txt">llms.txt（给 Agent）</a>
+      </div>
+      <p class="small" style="margin-top:16px">
+        脱敏声明：本页与原型中的客户名称均为代称或虚构示例；不含真实联系人姓名、电话、邮箱、费率、额度与报价；
+        截图中金额与交易量为构造数据；不含内部系统域名与账号。
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    YeeSales 销售易 v0.9 · YEE AI 智能大赛 2.0 参赛作品 · 作者：周冰茹（易宝支付 海外子公司部）<br>
+    本页为纯静态 HTML，无 JS 依赖、无登录、无验证码，正文全部直接渲染，便于评审与 Agent 抓取 · <code>/llms.txt</code>
+  </div>
+</footer>
+
 </body>
 </html>
