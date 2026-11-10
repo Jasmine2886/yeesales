@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="D3KjSKR8fpksSx4M33bBQg">
+<head data-page-node-id="Et09TVBLS0QeN6TmOBW5SD">
+<meta charset="UTF-8" data-page-node-id="1jfw6xgyy3aNdTsbgprWAt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="fEohYeJ7Yoh7mENHWDibYw">
+<title>销售易 YeeSales · YEE AI 智能获客平台（原型）</title>
+<style>
+:root{
+  --orange:#00C566; --orange-soft:#E9F9F0; --ink:#1F2329; --sub:#646A73;
+  --line:#E5E6EB; --bg:#F5F6F7; --card:#FFFFFF; --green:#00B42A; --red:#F53F3F;
+  --blue:#165DFF; --purple:#722ED1; --gold:#F7BA1E; --radius:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
+.app{display:flex;height:100vh;overflow:hidden}
+
+/* ---------- sidebar ---------- */
+.side{width:224px;background:#fff;border-right:1px solid var(--line);display:flex;flex-direction:column;flex-shrink:0}
+.logo{padding:18px 20px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line)}
+.logo .mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#00C566,#3ED98C);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px}
+.logo b{font-size:17px}.logo small{display:block;color:var(--sub);font-size:11px;font-weight:400}
+.nav{flex:1;overflow-y:auto;padding:10px 10px}
+.nav .group{color:var(--sub);font-size:11px;padding:12px 10px 6px;letter-spacing:.05em}
+.nav a{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:8px;color:var(--ink);text-decoration:none;cursor:pointer;margin-bottom:2px}
+.nav a:hover{background:var(--bg)}
+.nav a.on{background:var(--orange-soft);color:var(--orange);font-weight:600}
+.nav a .ic{width:15px;height:15px;border-radius:4px;background:var(--orange-soft);border:1px solid rgba(0,197,102,.30);display:inline-block;flex:0 0 15px}
+.nav a .cnt{margin-left:auto;background:#F0F1F3;color:var(--sub);border-radius:9px;font-size:11px;padding:1px 7px}
+.nav a.on .cnt{background:var(--orange);color:#fff}
+.side .foot{padding:12px 16px;border-top:1px solid var(--line);font-size:11px;color:var(--sub)}
+
+/* ---------- main ---------- */
+.main{flex:1;overflow-y:auto;padding:20px 24px 40px}
+.topbar{display:flex;align-items:center;gap:14px;margin-bottom:14px;flex-wrap:wrap}
+.topbar h1{font-size:19px;white-space:nowrap}
+.topbar .crumb{color:var(--sub);font-size:12px}
+.pill{margin-left:auto;display:flex;gap:8px;align-items:center}
+.btn{background:var(--orange);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer}
+.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.search{background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 12px;width:360px;color:var(--sub);font-family:inherit}
+.view{display:none}.view.on{display:block}
+.banner{background:#F2FBF6;border:1px solid #C4F1DC;border-radius:var(--radius);padding:14px 18px;margin-bottom:18px;display:flex;gap:12px;align-items:center}
+.banner>div{flex:1;min-width:0;font-size:13px;line-height:1.6}
+.demo-note{color:var(--sub);font-size:11px;white-space:nowrap;flex:0 0 auto}
+.banner .em{font-size:22px}
+.banner b{color:var(--orange)}
+.demo-note{margin-left:auto;font-size:11px;color:var(--sub)}
+
+/* ---------- cards ---------- */
+.grid{display:grid;gap:14px;align-items:start}
+.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}.g32{grid-template-columns:1.6fr 1fr}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.card h3{font-size:14px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.card h3 .r{margin-left:auto;font-size:12px;color:var(--sub);font-weight:400}
+.kpi .num{font-size:26px;font-weight:700}
+.kpi .lbl{color:var(--sub);font-size:12px;margin-top:2px}
+.kpi .trend{font-size:12px;margin-top:6px}
+.up{color:var(--green)}.down{color:var(--red)}
+
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{color:var(--sub);font-weight:500;text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:10px;border-bottom:1px solid #F2F3F5;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr.row-click{cursor:pointer}tr.row-click:hover{background:#FAFBFC}
+
+.badge{display:inline-block;border-radius:5px;font-size:11px;padding:2px 8px;font-weight:500;white-space:nowrap}
+.b-orange{background:var(--orange-soft);color:var(--orange)}
+.b-green{background:#E8FFEA;color:var(--green)}
+.b-blue{background:#E8F3FF;color:var(--blue)}
+.b-red{background:#FFECE8;color:var(--red)}
+.b-purple{background:#F5E8FF;color:var(--purple)}
+.b-gray{background:#F0F1F3;color:var(--sub)}
+.b-gold{background:#FFF8E6;color:#00794A}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px}
+
+.prog{height:6px;background:#F0F1F3;border-radius:3px;overflow:hidden}
+.prog i{display:block;height:100%;border-radius:3px}
+
+/* timeline */
+.tl{position:relative;padding-left:20px}
+.tl::before{content:"";position:absolute;left:5px;top:4px;bottom:4px;width:2px;background:var(--line)}
+.tl .item{position:relative;padding:0 0 16px 12px}
+.tl .item::before{content:"";position:absolute;left:-19px;top:4px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid var(--orange)}
+.tl .item .meta{color:var(--sub);font-size:11px;margin-bottom:2px}
+
+/* gantt */
+.gantt{overflow-x:auto}
+.g-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;min-width:640px}
+.g-row .g-lbl{width:170px;font-size:12px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.g-track{flex:1;height:22px;background:#FAFBFC;border-radius:6px;position:relative;border:1px solid #F2F3F5}
+.g-bar{position:absolute;top:3px;height:16px;border-radius:5px;font-size:10px;color:#fff;display:flex;align-items:center;padding:0 6px;white-space:nowrap;overflow:hidden}
+.g-scale{display:flex;margin-left:180px;font-size:10px;color:var(--sub);min-width:640px;justify-content:space-between;margin-bottom:6px}
+
+/* checklist */
+.ck{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px dashed #F2F3F5;font-size:13px}
+.ck:last-child{border:none}
+.ck input{margin-top:3px;accent-color:var(--orange)}
+.ck .src{margin-left:auto;font-size:11px;color:var(--sub);white-space:nowrap}
+
+/* month calendar */
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.cal .hd{text-align:center;color:var(--sub);font-size:11px;padding:4px 0}
+.cal .cell{background:#FAFBFC;border:1px solid #F2F3F5;border-radius:8px;min-height:74px;padding:6px;font-size:11px;position:relative}
+.cal .cell.today{border:2px solid var(--orange);background:var(--orange-soft)}
+.cal .cell .d{font-weight:600;font-size:12px}
+.cal .hol{margin-top:3px;border-radius:4px;padding:1px 4px;font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.route{display:flex;gap:8px;align-items:center;padding:9px 0;border-bottom:1px dashed #F2F3F5;font-size:13px}
+.route:last-child{border:none}
+.route .no{width:22px;height:22px;border-radius:50%;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+.route .t{margin-left:auto;color:var(--sub);font-size:12px;white-space:nowrap}
+
+.source-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.source-grid .s{border:1px solid var(--line);border-radius:10px;padding:10px;font-size:12px}
+.source-grid .s b{display:block;margin-bottom:3px}
+.source-grid .s .st{font-size:11px}
+
+.tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.tabs .tab{padding:7px 14px;border-radius:8px;background:#fff;border:1px solid var(--line);cursor:pointer;font-size:13px}
+.tabs .tab.on{background:var(--orange);border-color:var(--orange);color:#fff;font-weight:600}
+
+.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.kanban .col{background:#F7F8FA;border-radius:10px;padding:10px}
+.kanban .col h4{font-size:12px;color:var(--sub);margin-bottom:8px}
+.lead{background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px;margin-bottom:8px;font-size:12px;cursor:pointer}
+.lead:hover{border-color:var(--orange)}
+.lead b{display:block;font-size:13px;margin-bottom:3px}
+.lead .m{color:var(--sub);margin-top:4px}
+
+.drawer-mask{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:50}
+.drawer{position:fixed;top:0;right:-460px;width:440px;height:100vh;background:#fff;z-index:51;box-shadow:-6px 0 24px rgba(0,0,0,.12);transition:right .25s;display:flex;flex-direction:column}
+.drawer.open{right:0}
+.drawer .dh{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center}
+.drawer .dh b{font-size:16px}
+.drawer .dh .x{margin-left:auto;cursor:pointer;color:var(--sub);font-size:18px}
+.drawer .db{padding:16px 20px;overflow-y:auto;flex:1}
+
+.footer-note{margin-top:26px;color:var(--sub);font-size:11px;text-align:center}
+h2.sec{font-size:15px;margin:22px 0 12px;display:flex;align-items:center;gap:8px}
+h2.sec:first-child{margin-top:0}
+h2.sec .r{margin-left:auto;font-size:12px;color:var(--sub);font-weight:400}
+
+/* ---------- 成品文档视图 ---------- */
+.doc{background:#fff;border:1px solid var(--line);border-radius:12px;padding:34px 44px 38px;max-width:1240px}
+.doc .doc-h1{font-size:23px;font-weight:700;margin-bottom:6px}
+.doc .doc-meta{color:var(--sub);font-size:12.5px;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.doc h2{font-size:15px;margin:24px 0 10px;padding-left:10px;border-left:3px solid var(--orange)}
+.doc h3{font-size:13.5px;margin:14px 0 6px}
+.doc p{font-size:13.5px;line-height:1.8;color:#333}
+.doc ul{margin:6px 0 6px 18px;font-size:13.5px;line-height:1.9;color:#333}
+.doc table{width:100%;border-collapse:collapse;font-size:13px}
+.doc table th{background:#F7F9FB;text-align:left;font-weight:600;color:var(--sub);padding:8px 10px;border-bottom:1px solid var(--line)}
+.doc table td{padding:8px 10px;border-bottom:1px solid #F2F3F5}
+.doc blockquote{background:var(--orange-soft);border-left:3px solid var(--orange);padding:14px 18px;border-radius:0 8px 8px 0;font-size:13px;line-height:1.8;margin:10px 0;color:#2A2F38}
+.doc .mask{display:inline-block;background:#E6E9EE;color:#9AA1AD;border-radius:3px;padding:0 8px;letter-spacing:2px;font-size:11.5px}
+.doc .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:8px 0 4px}
+.doc .kpis .k{background:#F7FBF9;border:1px solid #E3F3EA;border-radius:10px;padding:12px 14px}
+.doc .kpis .k b{display:block;font-size:22px;color:var(--orange);line-height:1.2}
+.doc .kpis .k span{font-size:11.5px;color:var(--sub)}
+.gantt-mini{margin-top:6px}
+.gantt-mini .row{display:flex;align-items:center;gap:12px;margin-bottom:8px;font-size:12px}
+.gantt-mini .lbl{width:150px;color:#3A414D;flex-shrink:0}
+.gantt-mini .track{position:relative;flex:1;height:18px;background:#F4F6F8;border-radius:4px;overflow:hidden}
+.gantt-mini .bar{position:absolute;top:0;bottom:0;background:var(--orange);border-radius:4px;opacity:.9}
+.gantt-mini .bar.soft{background:#9BE7C4}
+.doc .axis{display:flex;font-size:10.5px;color:#A6ADB9;margin:4px 0 0 162px;justify-content:space-between}
+
+
+/* ---------- AI OS 升级（ChatGPT 建议） ---------- */
+.ai-tag{display:inline-block;background:#E9F9F0;color:#00864A;border:1px solid #B9EDD2;border-radius:4px;font-size:10.5px;padding:1px 7px;font-weight:600;letter-spacing:.02em}
+.st-run{background:#E8F3FF;color:#165DFF}
+.st-done{background:#E8FFEA;color:#00B42A}
+.st-review{background:#FFF3EB;color:#C24E00}
+.st-pend{background:#F2F3F5;color:#646A73}
+.cmdrow{flex-basis:100%;display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.cmdrow .chip{font-size:11px;color:#00864A;background:#fff;border:1px solid #B9EDD2;border-radius:14px;padding:3px 10px;cursor:pointer}
+.cmdrow .chip:hover{background:#E9F9F0}
+.agentfeed .item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed #F2F3F5;font-size:12.5px}
+.agentfeed .item:last-child{border:none}
+.agentfeed .dot{width:8px;height:8px;border-radius:50%;background:#00B42A;flex-shrink:0}
+.agentfeed .dot.run{background:#165DFF;animation:pulse 1.2s infinite}
+.agentfeed .dot.rev{background:#F7BA1E}
+.agentfeed .dot.pend{background:#C9CDD4}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.agentfeed .st{margin-left:auto;font-size:10.5px;padding:1px 7px;border-radius:4px;font-weight:600}
+.rec{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px dashed #F2F3F5;font-size:12.5px}
+.rec:last-child{border:none}
+.rec .no{width:20px;height:20px;border-radius:6px;background:#00C566;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.rec .r-act{margin-left:auto;flex-shrink:0}
+.scorebar{display:flex;align-items:center;gap:8px;font-size:12px;margin-bottom:6px}
+.scorebar .lb{width:190px;color:#3A414D}
+.scorebar .tr{flex:1;display:block;height:14px;background:#F2F3F5;border-radius:4px;overflow:hidden}
+.scorebar .fl{display:block;height:100%;background:#00C566;border-radius:4px}
+.scorebar .sc{width:52px;text-align:right;color:#00864A;font-weight:700}
+.pill-flow{display:flex;gap:0;align-items:stretch;margin:10px 0}
+.pill-flow .fs{flex:1;text-align:center;font-size:11.5px;padding:8px 4px;border:1px solid var(--line);background:#fff;color:var(--sub);position:relative}
+.pill-flow .fs:first-child{border-radius:8px 0 0 8px}
+.pill-flow .fs:last-child{border-radius:0 8px 8px 0}
+.pill-flow .fs.done{background:#E9F9F0;border-color:#B9EDD2;color:#00864A;font-weight:600}
+.pill-flow .fs.cur{background:#00C566;border-color:#00C566;color:#fff;font-weight:700}
+.tier{display:inline-block;border-radius:4px;font-size:10.5px;font-weight:700;padding:1px 7px}
+.tier.a{background:#E9F9F0;color:#00864A}
+.tier.b{background:#E8F3FF;color:#165DFF}
+.tier.c{background:#F2F3F5;color:#646A73}
+.panel{display:none}
+.panel.on{display:block}
+
+</style>
+</head>
+<body data-page-node-id="o6sE3BUrFPFiP4TWHEWpqA">
+<div class="app" data-page-node-id="PhDWClfhDkB7Fp3HUqBMJT">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="side" data-page-node-id="ErJmGjaM4pdUD9JnXViLwr">
+    <div class="logo" data-page-node-id="mXnYSICU6RZvFlNRTer63Q">
+      <div class="mark" data-page-node-id="Is1CJ6QUavox3PeEYZstNP">销</div>
+      <div data-page-node-id="LBhCeXmnlE8M4ssIHMECgz"><b data-page-node-id="h8WVfPI8vtwPYcGa5R7kx6">销售易</b><small data-page-node-id="IhRaLMWa823cvh4uRZGxlk">YeeSales · YEE AI 大赛 2.0 原型</small></div>
+    </div>
+    <nav class="nav" id="nav" data-page-node-id="Ueu3ojXdLCuy8sFUYw0Z6i">
+      <div class="group">01 · AI Sales Cockpit</div>
+      <a class="on" data-v="dash"><span class="ic"></span>销售驾驶舱</a>
+      <div class="group">02 · Lead Generation</div>
+      <a data-v="pre"><span class="ic"></span>会前 · 线索与约见<span class="cnt">6</span></a>
+      <a data-v="brief"><span class="ic"></span>行前安排文档</a>
+      <div class="group">03 · Global Engagement</div>
+      <a data-v="during"><span class="ic"></span>会中 · 现场助理</a>
+      <a data-v="report"><span class="ic"></span>返程复盘报告</a>
+      <a data-v="holiday"><span class="ic"></span>全球节假日日历</a>
+      <div class="group">04 · Customer 360</div>
+      <a data-v="c360"><span class="ic"></span>客户 360</a>
+      <a data-v="graph"><span class="ic"></span>人脉图谱</a>
+      <div class="group">05 · Deal Management</div>
+      <a data-v="gantt"><span class="ic"></span>看板与甘特</a>
+      <a data-v="post"><span class="ic"></span>九源回收流水线<span class="cnt">9</span></a>
+      <div class="group">06 · AI Workforce</div>
+      <a data-v="debrief"><span class="ic"></span>Event Debrief 情报中枢</a>
+      <a data-v="sources"><span class="ic"></span>数据源与集成</a>
+    </nav>
+    <div style="padding:0 16px 10px"><a href="index.html" style="font-size:12px;color:#00864A;text-decoration:none">返回作品导览</a> <span style="color:#C9CDD4;font-size:12px">·</span> <a href="proposal.html" style="font-size:12px;color:#00864A;text-decoration:none">作品说明</a></div>
+    <div class="foot" data-page-node-id="BQq5qZWfJEkpuja1Hd1CEk">用户：J 女士 · 海外子公司部<br data-page-node-id="XhqIVqWMPvsjqCDUDwhWX3">角色：BD / 销售 · 视图：个人版</div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main" data-page-node-id="AH8IRJkuBM2TAvf53zIWnj">
+
+  <!-- ============ 今日作战板 ============ -->
+  <section class="view on" id="v-dash" data-page-node-id="ghFJT7OdywE6OptteLc2XC">
+    <div class="topbar" data-page-node-id="kAMhgcBsI6qAEs4gj6FiC9"><h1 data-page-node-id="lw8Gg6B0mw1bVvcHMHP72F">AI 销售驾驶舱</h1><span class="crumb" data-page-node-id="pkDYmZhjtFwKiqmi9F1fM9">11月9日 周一 · 北京时间 UTC+8 · Your AI-powered Global Sales Operating System</span>
+      <div class="pill" data-page-node-id="BQH6fQrkRTVWesCbyAMF0E"><input class="search" placeholder='AI 指令：寻找非洲需要 China Payout 的 PSP / 准备迪拜行程 / 生成跟进邮件' data-page-node-id="DYnX1JLfFHNRwUyGpsFe1N"><button class="btn" data-page-node-id="K8Lq0l4QQtmM5WzykdbB9F">执行 <span class="ai-tag">AI</span></button></div>
+      <div class="cmdrow" data-page-node-id="cmdchips"><span class="chip">汇总客户甲的全部沟通记录</span><span class="chip">生成今日跟进邮件草稿</span><span class="chip">列出逾期商机</span><span class="chip">准备迪拜展会行程</span></div>
+    </div>
+
+    <div class="banner" data-page-node-id="hlfauEodsLMxWSiVDgxlig"><span class="em" data-page-node-id="1lV5AFQ7YpUYiGiiCP7vQI"></span>
+      <div data-page-node-id="viulDnOw8kJcAacfoPEmfk">距 <b data-page-node-id="v3wNEz76osjebAAKfjN9RY">迪拜国际支付展会</b>（12 月 8–10 日，当地 UTC+4）还有 <b data-page-node-id="qDE7lGva83Bjs0S39Uxpwz">29 天</b>。会前准备完成度 <b data-page-node-id="1x0qx5Pa2AHCEwlPxpFrd0">62%</b>，4 家目标客户待约； 12 月 2 日为阿联酋国庆假期，建议 12 月 1 日前发出节日问候。</div>
+      <span class="demo-note" data-page-node-id="wvagQKyS7hHn7kALx2Icx3">界面为原型演示 · 全部客户为代称 · 数据虚构</span>
+    </div>
+
+    <div class="grid g4" data-page-node-id="Z9GBvTCBirJ3xdGcaHKf6G">
+      <div class="card kpi" data-page-node-id="j5EmcCJoL94nUYRr7Cx7Uv"><div class="num" data-page-node-id="07WkTSrsKG6Pd3vdMvy7Jb">128</div><div class="lbl" data-page-node-id="hNPXAH8E0dcFVwjBMxGVnD">全渠道线索（本月）</div><div class="trend up" data-page-node-id="Bz0cIBST3kUZHs0SE9KC9C">▲ 新增 12 · AI 去重后</div></div>
+      <div class="card kpi" data-page-node-id="9pSCYrDLmL1OPDNixVQLWO"><div class="num" data-page-node-id="CalofgvYUCBuTfjJgsENKn">23</div><div class="lbl" data-page-node-id="Wxhr5imdbOcv1TJ9Arjjfj">在谈商机 · Pipeline 预估 $3.2M</div><div class="trend up" data-page-node-id="hAS5F8fp9UFyMGpoIuwhv5">▲ 本月新增 5</div></div>
+      <div class="card kpi" data-page-node-id="D19ovhh7tIBVIzECC58fok"><div class="num" data-page-node-id="9iPLzNDWOWBb9UacDjHLm0">9</div><div class="lbl" data-page-node-id="PM1105fDFueAxiif0guXj4">今日待跟进（按截止排序）</div><div class="trend up" data-page-node-id="QOrXFhRSXxf4Nh1YfZT3bH">3 条今日到期</div></div>
+      <div class="card kpi" data-page-node-id="FSY0nzyHHVd4jJoenF2ttt"><div class="num" data-page-node-id="UAZtAqir05kThWvKTCd98X">4</div><div class="lbl" data-page-node-id="YnxfkxJmcljNEt7maeimuJ">逾期跟进 / 「需补联系」</div><div class="trend down" data-page-node-id="6SQ8CzyBpLAOOHEVVLfMA3">2 条超过 14 天未动</div></div>
+    </div>
+
+    <div class="grid g32" style="margin-top:14px">
+      <div class="card">
+        <h3>AI 行动建议 <span class="ai-tag">AI Recommendation</span><span class="r">可解释 · 可人工调整</span></h3>
+        <div class="rec"><span class="no">1</span><span><b>客户甲（西非 PSP）</b>：对方 7 天未回复报价方案。建议今天 18:00 前以 WhatsApp 语音留言跟进，附 China Payout 成功案例一页纸。</span><span class="r-act"><span class="ai-tag st-review">待批准</span></span></div>
+        <div class="rec"><span class="no">2</span><span><b>客户丙（东南亚钱包）</b>：印度团队 11/8 排灯节。建议 11/6 发送节日问候（festive 语气），节后二次触达。</span><span class="r-act"><span class="ai-tag st-review">待批准</span></span></div>
+        <div class="rec"><span class="no">3</span><span><b>伙伴 A（阿联酋渠道）</b>：转介绍客户乙已进入尽调。建议本周五向引荐人同步进展并致谢，强化转介绍链路。</span><span class="r-act"><span class="ai-tag st-review">待批准</span></span></div>
+      </div>
+      <div class="card">
+        <h3>AI Agent 活动中心 <span class="ai-tag">AI Workforce</span><span class="r">7 个数字员工</span></h3>
+        <div class="agentfeed">
+          <div class="item"><span class="dot run"></span>AI Account Researcher · 正在研究 Seamless 参展名单中 12 家新账户<span class="st ai-tag st-run">Running</span></div>
+          <div class="item"><span class="dot rev"></span>AI Meeting Assistant · 3 份会议纪要等待你确认关键条款<span class="st ai-tag st-review">Needs Approval</span></div>
+          <div class="item"><span class="dot rev"></span>AI Follow-up Agent · 5 封跟进邮件草稿已生成，待审阅发送<span class="st ai-tag st-review">Needs Approval</span></div>
+          <div class="item"><span class="dot"></span>AI Event Debrief Agent · 迪拜展会复盘已归档至 Event Debrief<span class="st ai-tag st-done">Completed</span></div>
+          <div class="item"><span class="dot pend"></span>AI Sales Analyst · 月度商机转化分析将在 12/1 生成<span class="st ai-tag st-pend">Pending</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid g32" style="margin-top:14px" data-page-node-id="AL72k8zUrUa1mcBLDeh1w0">
+      <div class="card" data-page-node-id="QBYJNCF2IRvJq13x07xknj">
+        <h3 data-page-node-id="kLu04mpiHgUzUsKos4sISs">今日跟进清单 <span class="r" data-page-node-id="JNJ1fjNxEfB9VetGAjeTEc">来源：会后复盘引擎自动生成</span></h3>
+        <table data-page-node-id="4qzWASo6xNadDmTiSuT34i">
+          <tr data-page-node-id="jrtHXSNU26xbhXa83AEskA"><th data-page-node-id="Nb3FPJp7LhIWAPypu92Iee">动作</th><th data-page-node-id="myIRGgEfoSVhTBzSNkASq7">客户</th><th data-page-node-id="q9vvFzZe5Od7OkI0iN4ON8">优先级</th><th data-page-node-id="zpO2kJtOD7CzAGveAnN8dO">截止</th><th data-page-node-id="K0HabV0AeiBWsqBYa5a4Ep">状态</th></tr>
+          <tr class="row-click" onclick="openClient('c1')" data-page-node-id="97LAdr7bpHn8cImkCfRvVO"><td data-page-node-id="ZNyRnr7ytmFzGcnTuQbMhc">发送 <b data-page-node-id="9U8M0uddpm6mqrrdUmzmmA">对华收单方案</b> 至对方 BD</td><td data-page-node-id="vORLxkfTzSQ1yoiNhIQ92m">客户甲 · 某西非 PSP</td><td data-page-node-id="QBBsY1JXLMzAC2IJbJNezd"><span class="badge b-red" data-page-node-id="Yce4IkNX71YP2A0NCi7CKD">P1</span></td><td data-page-node-id="cNUNyaUzC0wv8Cn95CSIaT">今天 18:00</td><td data-page-node-id="gtFIJdCbA05A5RQc9FmHLK"><span class="badge b-orange" data-page-node-id="5EIZjoI0WdgqEmBKd6OslN">待办</span></td></tr>
+          <tr class="row-click" onclick="openClient('c2')" data-page-node-id="3A0E1UTARj4DM0faYUS916"><td data-page-node-id="ZBe9r3vQzul6ZHrQhbJQDL">回询 <b data-page-node-id="ZxwblS1RKDWdmBDjIqznZY">VA 开户资料清单</b></td><td data-page-node-id="vhtpqHhQTWPgTrAZg2Zicf">客户乙 · 某中东 MSB</td><td data-page-node-id="Idc5sPNetSR7fE4zajHOlP"><span class="badge b-red" data-page-node-id="M1QP9LK0HXygTpTSUkgq9t">P1</span></td><td data-page-node-id="98axJWHgCuJyDnyJPYpoP4">今天</td><td data-page-node-id="ZfgIY2q7JC0cGnHUaS2EWx"><span class="badge b-orange" data-page-node-id="Yz1fimUJ6zCceeTvxvAC95">待办</span></td></tr>
+          <tr class="row-click" onclick="openClient('c3')" data-page-node-id="0VcF3X9DviqHQv4w5ofsHu"><td data-page-node-id="tkGCMqWU9K7A98shYXwoq4">确认 <b data-page-node-id="ApzXr3k1ffFg2DaVxPfyFV">12/9 展位会面时间</b>（避开国庆前物流高峰）</td><td data-page-node-id="s3HN7xgfC44intB0de3wCW">客户丙 · 某东南亚钱包</td><td data-page-node-id="F8cBlzieMhDtnKi95McagG"><span class="badge b-orange" data-page-node-id="HrVOa8AlNyolFjCoU9q8He">P2</span></td><td data-page-node-id="o5ctjXt2mHOmLEGVYKKxY6">明天</td><td data-page-node-id="bSOFTA7AMuqUBNnTokkQ7o"><span class="badge b-gray" data-page-node-id="IbMzveOHm6SjXKbJiKqA4F">等对方</span></td></tr>
+          <tr class="row-click" onclick="openClient('c4')" data-page-node-id="dyJ3M2k0RNqCZSVY4AsGly"><td data-page-node-id="BmFwljOGygz93j6WOXaUJj">LinkedIn 定向消息（展后第一次触达）</td><td data-page-node-id="IVgQQjd2DKvZUnc8G4M5se">客户丁 · 某欧洲收单机构</td><td data-page-node-id="wRfWs9ubP9WA9h1aIaX23S"><span class="badge b-orange" data-page-node-id="mCm0bGVyLtDXFhiudQECZt">P2</span></td><td data-page-node-id="CajAhhZzWwnp9t0mhHSYZN">周三</td><td data-page-node-id="oPmytkUNfCwKicD5nhESFN"><span class="badge b-orange" data-page-node-id="EPvBLwwzDBSwZyIPdR75c4">待办</span></td></tr>
+          <tr class="row-click" onclick="openClient('c5')" data-page-node-id="Js29zU8YoakxMmtCn3IPq9"><td data-page-node-id="ZDOfqNE2FSCBiOXlTFneXL">转介绍致谢 + 约线上演示</td><td data-page-node-id="O3dR0uF0AEyBmIRCwAU4t8">伙伴 A · 某阿联酋渠道</td><td data-page-node-id="1foadFsEPxJbfFtEPK4EN2"><span class="badge b-blue" data-page-node-id="tmFIF1QjZe5LQdWO3OOyN3">P3</span></td><td data-page-node-id="zJBpXYen3Q5zKh1a5mskF3">周五</td><td data-page-node-id="GbyUJtFgqHBiU1BDYHF6cQ"><span class="badge b-orange" data-page-node-id="C3AnSfCUY3QIsMAi2Q6PWU">待办</span></td></tr>
+        </table>
+      </div>
+      <div class="card" data-page-node-id="97hoFdAUgTMIfKCgLUMI0L">
+        <h3 data-page-node-id="sR8yK2TdAHNGVBGY5uuxkM"> 数字员工动态</h3>
+        <div class="tl" data-page-node-id="yh80cHKGviSU5GudqChO2v">
+          <div class="item" data-page-node-id="nBkHseKIcvOCbKSQVc3O66"><div class="meta" data-page-node-id="TqyYn6KfMyIKHQnkf8o8on">09:12 · 会后引擎</div>迪拜展会九源回收完成：展会 App 12 会话 / 邮件 18 封 / 日历 26 事件，生成跟进表 <b data-page-node-id="nbqf4RRJA5pwXvgOweg0io">9 条待办</b></div>
+          <div class="item" data-page-node-id="LlzLZXvtyE362f023XBPRe"><div class="meta" data-page-node-id="gIiUPN6XYsRPO9lqgfyRD7">10:03 · 跨文化日历</div>检测到 <b data-page-node-id="CqBd5RzraCkAhbKIcNOw0W">客户丙</b>（印度团队）11/8 排灯节 ，已生成节日问候草稿待 review</div>
+          <div class="item" data-page-node-id="1YqnEnX2qhIHHwFdfqnT9X"><div class="meta" data-page-node-id="XijSHbiLy0bd35zBBqfZ7E">11:47 · 合规初筛</div>新线索「客户戊」通过制裁名单初筛，可进入 Pipeline</div>
+          <div class="item" data-page-node-id="F9FGRtx2xK6OFEnVvXRliR"><div class="meta" data-page-node-id="AGkH0ZqwdVnAahK7NDPhtX">14:20 · 路线引擎</div>12/9 迪拜行程草案：地理聚类后 4 家客户合并为 2 条路线，预估节省 1.5h</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 会前 ============ -->
+  <section class="view" id="v-pre" data-page-node-id="XLyt31U7ZMhpsqPdMbyZC8">
+    <div class="topbar" data-page-node-id="sfJikuvqOO0Ekib50M76mZ"><h1 data-page-node-id="0GqOoCtXjDaTX3Rye8ftqx">会前 · 行前准备</h1><span class="crumb" data-page-node-id="zp4fuCEcx6EeuwVT6SdTat">展会易 ExpoHub · 迪拜国际支付展会 12/8–12/10</span>
+      <div class="pill" data-page-node-id="aVWMPcTYJtCSTe6upJ7Rz2"><button class="btn ghost" data-page-node-id="t3VkmZoA2YMnjivFgQUKzo">导出行前包</button><button class="btn" data-page-node-id="GCUU8RnAo9LYPZFr7gZV2F">＋ 添加目标客户</button></div>
+    </div>
+
+    <div class="tabs" data-page-node-id="lCJCdQBqDzbqaKWqDvMoKU">
+      <div class="tab on" data-page-node-id="1TjTBMhLik8LAQ1aaWhCYd"> 线索与背景研究</div><div class="tab" data-page-node-id="Mr7pDTTqbna3UqfvQxSGCo"> 会晤预定</div><div class="tab" data-page-node-id="d6nsgWpzkHEY0Pdjo50I5C">会前要点备忘</div><div class="tab" data-page-node-id="6U2ZUXlymNi2AFacFJW1ZL"> 差旅路线规划</div>
+    </div>
+
+    <div class="grid g32" data-page-node-id="9AZR9zquPu1cH8CNC6SQ16">
+      <div class="card" data-page-node-id="RM0zKnH0z3j8IkSmHBCawG">
+        <h3 data-page-node-id="ch0prZd92oA94V2QZFTX4E">目标客户名单 <span class="r" data-page-node-id="L2A4et6D80g9EyTP3G9LwP">来源：展会名录 + 网络检索 + LinkedIn + 转介绍</span></h3>
+        <table data-page-node-id="plGKJkeXKDEBalolYwGyC2">
+          <tr data-page-node-id="jWlJxmzFq08QKor0gAFOtK"><th data-page-node-id="hPZM1dnzgVz2CyZVQEkLvx">客户</th><th data-page-node-id="mJ7OLWPoFheoR9fIwU9Flc">获客途径</th><th data-page-node-id="KWdOA4N5cbikBVaasoXuyg">背景简报</th><th data-page-node-id="DuI8MgYMxeGJrA7J9wuoTe">合规初筛</th><th data-page-node-id="DVfxHlt8aCRmgFGzlZEokD">约见状态</th></tr>
+          <tr class="row-click" onclick="openClient('c1')" data-page-node-id="sL8HSblDBV7yGzAuPTGo8q"><td data-page-node-id="XMJpRWWnMRuEnPbYMHZJEE"><b data-page-node-id="d3JPaLOgEEPK35ob1kE3L1">客户甲</b> · 某西非 PSP<br data-page-node-id="2yVnTQdkaKqlPjiQ4S25r7"><span style="color:var(--sub);font-size:11px" data-page-node-id="7qV4x4yUGNq6CVP14YRrs4">Head of Partnerships</span></td><td data-page-node-id="XEYFmMMDmLW0gmtvXP0888"><span class="badge b-blue" data-page-node-id="nDGF6SqrdNZ5IB0Rt4gB0Q">上届展会复联</span></td><td data-page-node-id="axuVfHxOsLwE7Rabw8H2jy"><span class="badge b-green" data-page-node-id="FVQ3Ar2AFf71dSXBBA6SKj">已生成</span></td><td data-page-node-id="dXoIhjXy9yfnNZazhQIwJG"><span class="badge b-green" data-page-node-id="9gqE9IJStQnUsHS3CGYoSr">通过</span></td><td data-page-node-id="jgmFekyRBrsDlRbzFQ0MUR"><span class="badge b-gold" data-page-node-id="ePKiiwsYBNdnXXKksy1WGF">已确认 12/9 10:00</span></td></tr>
+          <tr class="row-click" onclick="openClient('c2')" data-page-node-id="F9KoWd5APLrthcznM1iRtO"><td data-page-node-id="Z6uCLMw8arf8CZalI5cgZn"><b data-page-node-id="3MDBja4vMIMupL8jBryUFb">客户乙</b> · 某中东 MSB<br data-page-node-id="65rFvm6n2KN05jDmfd0aYK"><span style="color:var(--sub);font-size:11px" data-page-node-id="s2iqP2xMLPrSuIq0Q7Vsm1">CEO</span></td><td data-page-node-id="hSfAeXVzAEy33SkRzcEFGY"><span class="badge b-purple" data-page-node-id="Hmss4c6jOuKJTEJYhjBg82">熟人介绍</span></td><td data-page-node-id="Nvk6FVG71FsSvBjbngkcR1"><span class="badge b-green" data-page-node-id="yMRXW4FREJJs13LeqndidZ">已生成</span></td><td data-page-node-id="4SuCa8qyGw4BM1VNUNkRTQ"><span class="badge b-green" data-page-node-id="olq7j2JZXKZgt3OQvXcnbl">通过</span></td><td data-page-node-id="wHs41R1mUDdSfRqDEAxYrE"><span class="badge b-gold" data-page-node-id="LubCKcSAD4ojPq5YuVFoEp">已确认 12/8 14:30</span></td></tr>
+          <tr class="row-click" onclick="openClient('c3')" data-page-node-id="peuPtN6C74CgMXvm1XShSC"><td data-page-node-id="Cj9TFNkyhvCfVyvqagBDpo"><b data-page-node-id="b6ccFMXg6lNimi7HuhHNLV">客户丙</b> · 某东南亚钱包<br data-page-node-id="QIcq8wrIUcl5RT7rAZRTAF"><span style="color:var(--sub);font-size:11px" data-page-node-id="YiFm9ikzVPr8uJEhx4PgAZ">BD Director</span></td><td data-page-node-id="pVZqFdRX2NdGA4RxRKu4q7"><span class="badge b-orange" data-page-node-id="l3icEKHKjsR2cfIHvVAgDi">网络检索</span></td><td data-page-node-id="NuD8WBjJjxbAZR6PZqLgu4"><span class="badge b-green" data-page-node-id="o7EnZ1yZTAckCMtEiu5DsH">已生成</span></td><td data-page-node-id="OVLQF44dTU2PWrT2V3CRXF"><span class="badge b-green" data-page-node-id="03SCHCNhWc9T917aCdemmv">通过</span></td><td data-page-node-id="qLzLEn5ezlTWjHK3XxAOzN"><span class="badge b-orange" data-page-node-id="k5ZIIfNnH1POOW0KejDzty">待回复（已发 2 封）</span></td></tr>
+          <tr class="row-click" onclick="openClient('c4')" data-page-node-id="N9rwUkFpqB4O9wf1cfjnDu"><td data-page-node-id="AFEar1h5KecLxvGHxxv0HX"><b data-page-node-id="XvWfMWqmCfCXCQtyBUuV7Z">客户丁</b> · 某欧洲收单机构<br data-page-node-id="kIDJYCrIOEBB1ooAeiipVY"><span style="color:var(--sub);font-size:11px" data-page-node-id="HYN9ZWFCmIbeXrylTUs3s2">VP Commercial</span></td><td data-page-node-id="rHT509WDMggy4cSxTqgDLM"><span class="badge b-gray" data-page-node-id="mIm8TD4SRsYFdGHDQVtGWU">社交媒体</span></td><td data-page-node-id="9hxHF9K0DjFf4Uh6pLI9uV"><span class="badge b-green" data-page-node-id="vAHC1iXAfB8xpDkCTPeIkh">已生成</span></td><td data-page-node-id="MI7EKmcxBfP2yADJvVlBn2"><span class="badge b-gold" data-page-node-id="JjnqsftYbxSVJaGE4YHKhE">复审中</span></td><td data-page-node-id="t5zwhQeDaITYVmQJ7aeSgS"><span class="badge b-gray" data-page-node-id="r2lGrCKGBm9TGBimTYm8Yp">未触达</span></td></tr>
+          <tr class="row-click" onclick="openClient('c5')" data-page-node-id="MYFvEndrJpwp1hHCYcz6ke"><td data-page-node-id="13Nf6jBjwyYLpFxwaNPEou"><b data-page-node-id="B3GH5UPR4yMwk3Pyzmhie0">客户戊</b> · 某南亚聚合支付<br data-page-node-id="PM25pdCQSzf3zZf4lJcd5u"><span style="color:var(--sub);font-size:11px" data-page-node-id="HyfnQSQ7pHHCRACxOsfCyi">Intl. Biz Head</span></td><td data-page-node-id="a3ZPgYXyKEH6myDH60AnQa"><span class="badge b-blue" data-page-node-id="F9LVgVHLAenvQPw7nXjVNy">展会名录</span></td><td data-page-node-id="Ys7zmsjolI32tnlklHCTfV"><span class="badge b-gray" data-page-node-id="ScFc3o2qzvlsRArwxNLK1N">生成中…</span></td><td data-page-node-id="Rg8DFYGK7q9bO02UsINkbo"><span class="badge b-green" data-page-node-id="lPdMlAKxLFE4jNPvfdqfJ1">通过</span></td><td data-page-node-id="C1sUomLCplookFBp7ytTHc"><span class="badge b-gray" data-page-node-id="2ZngHabGcqUceoVEHviE2r">未触达</span></td></tr>
+        </table>
+      </div>
+      <div class="card" data-page-node-id="ssBCMkSCBpHkphN4w5P5C1">
+        <h3 data-page-node-id="C2mQmxXj2VC7nqCLMFnmvD"> 客户甲 · 行前简报（AI 生成）</h3>
+        <div style="font-size:13px;line-height:1.8;color:#3C4045" data-page-node-id="THon25rZzGoxLvEmhg10fq">
+          <b data-page-node-id="4v8LWtBqBP2qZF1ndzyLre">背景</b>：西非头部移动支付聚合平台，月交易 <span style="color:var(--sub)" data-page-node-id="GmtCAXuHKuDc5FNkuf5QPO">＜量级：客户自报口径，待核实＞</span>，正寻求对华收款通道。<br data-page-node-id="TxD2f0z4wE061wD3Wvh4hK">
+          <b data-page-node-id="EyZxvew50Fw2vYVAHGVwKl">我方切入点</b>：人民币结汇 + T+0 出款；上次展会对方关注 <b data-page-node-id="csYwCrRdwpdhyqAh7phGgG">个人结汇额度</b> 限制 → 准备对公账户方案页。<br data-page-node-id="QUrTsZTdKULX8HDlFipR6V">
+          <b data-page-node-id="JdEjxCiXHTF5u8HGCAkM4S">文化提示</b> ：商务寒暄重视个人关系，开场先问候家庭；12 月有节庆季，可带小礼品（<span style="color:var(--red)" data-page-node-id="5ZP52YHy5kBx5BFlG3zA6t">勿含酒类</span>）。<br data-page-node-id="izcfpVZ6QEBQqPF1YGfG3o">
+          <b data-page-node-id="rI1RhsF9JETW6ILaQEyazd">时差</b>：当地 UTC+0 ≈ 北京 −8h，建议约当地上午（北京 16:00–19:00）。
+        </div>
+        <div style="margin-top:10px" data-page-node-id="mn3OSVnRbOBVPm3D74lhxB"><button class="btn ghost" style="font-size:12px" data-page-node-id="pfU87FjsDmMGoT420Yij0l">查看完整简报</button> <button class="btn ghost" style="font-size:12px" data-page-node-id="Wzq1QE50j0wJy0UCRpis0D">重新生成</button></div>
+      </div>
+    </div>
+
+    <h2 class="sec" data-page-node-id="GerV6Mgl3NPBWpO9dCgcU2"> 路线引擎 · 12/9 迪拜行程建议 <span class="r" data-page-node-id="vYc3LXT7kiF4Gw00k2rcvh">地理聚类 + 交通方式 + 缓冲时间</span></h2>
+    <div class="grid g2" data-page-node-id="lhu9PZc4IXrmIusv2bI7NA">
+      <div class="card" data-page-node-id="SI5hO6naX73n3Hfm7cyr3J">
+        <h3 data-page-node-id="6eX5yVshj29I0VDnBbClNL">上午线 · 会展中心圈</h3>
+        <div class="route" data-page-node-id="rmHFXhYHzJ8ACOJybKd0jQ"><div class="no" data-page-node-id="gx9DPNoP4AL3RG9FfOahmO">1</div><div data-page-node-id="d0Z6JrbuZbBDRMUeutQHJL">客户乙 · 展位 Z42（<b data-page-node-id="ydaZetCAPPA1CEk6bGA4LH">开场首访</b>，CEO 级）</div><div class="t" data-page-node-id="m91taATqXxdIVPJDMNrp2U">09:30–10:15</div></div>
+        <div class="route" data-page-node-id="TY4Di2GPuYzfawUUe0Yzf6"><div class="no" data-page-node-id="GocXAU1gIqzlv41d4pj4Rz">2</div><div data-page-node-id="1g3xapCChIGVCnvNydwKUc">客户甲 · 展位 Z57 <span class="badge b-gold" style="font-size:10px" data-page-node-id="SwXgH1e096IA4lf80En9jE">同展馆步行 6 分钟</span></div><div class="t" data-page-node-id="xlsV4n2DCxBmvYHwqqY3V1">10:25–11:10</div></div>
+        <div class="route" data-page-node-id="d4xgaoGNXZUKPDnBcssHEB"><div class="no" data-page-node-id="moCcTQ3rTlm9Vy4TeoSQ4m">3</div><div data-page-node-id="U3Rd8OFxTFJrMDm2eIMzjm">演讲厅 3 · 目标嘉宾演讲（间隙 social）</div><div class="t" data-page-node-id="bTB8GxoVxGQaDhvlVIUXBP">11:30–12:00</div></div>
+        <div style="margin-top:10px;font-size:12px;color:var(--sub)" data-page-node-id="cabn4sPbEJ3S5tgpqcEHxf"> 场馆内全程步行 · 无需打车 · 预留转场缓冲 10–15 分钟</div>
+      </div>
+      <div class="card" data-page-node-id="SKYAZC6GAI3O7F2RqsIdrO">
+        <h3 data-page-node-id="H7YpNTFh0O7qITV0yKNWfP">下午线 · 市区拜访圈</h3>
+        <div class="route" data-page-node-id="8nwJdf8tHGvEaZTLqs2Ytk"><div class="no" data-page-node-id="a33PoVX0DnMX9WfYcw2vvA">1</div><div data-page-node-id="9G6fMma8uCk7pFqPxNhFwz">伙伴 A · Business Bay 办公室</div><div class="t" data-page-node-id="JzGMqBy2HlWLMYZge9YWVD">14:00–15:00</div></div>
+        <div class="route" data-page-node-id="ALuTtTZ9fe3hOtvMaGs4Tc"><div class="no" data-page-node-id="NpOn0wKVaO8sWEwxXBviEq">2</div><div data-page-node-id="7eIWns8rVP1Q9EFhTQoP1Z">客户丙 · DIFC 咖啡会面 <span class="badge b-gold" style="font-size:10px" data-page-node-id="rLA3fAVODoOiRwrNSA9qwL">打车 12 分钟 ≈ AED 30</span></div><div class="t" data-page-node-id="SzwZ9HloWBH1NKN7imnKk7">15:30–16:30</div></div>
+        <div class="route" data-page-node-id="STmw8XxsOsAJmH7C7rTzKu"><div class="no" data-page-node-id="FMDmfk5Zc9UTiHfPuvjhGJ">3</div><div data-page-node-id="7Bo5Dnb6INTvSMsemiAMIe">回酒店整理纪要 · 语音转写兜底</div><div class="t" data-page-node-id="RVEvWFbMFY5mIvXdjehLkG">17:00–17:30</div></div>
+        <div style="margin-top:10px;font-size:12px;color:var(--sub)" data-page-node-id="ZOEn4fQ996DYT5CJ4vhRlv"> 建议全程网约车（下午高温 + 两点间无地铁直达）· 已避开 12/2 国庆封路风险</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 会中 ============ -->
+  <section class="view" id="v-during" data-page-node-id="zmPmgvPVkiEd1Pq8t9FOAJ">
+    <div class="topbar" data-page-node-id="qvBq7GZn1dpDUCsbXHntKW"><h1 data-page-node-id="8HOr6TPpLzx5rRynFkyQCb">会中 · 现场留痕</h1><span class="crumb" data-page-node-id="XPXTFRryBzderN5zEg14sc">展会易 ExpoHub · 展期模式</span>
+      <div class="pill" data-page-node-id="c7Ir4UkCCvxGKHW1jloRxb"><button class="btn" data-page-node-id="xplGYwzpCPnUxgBK9dXvS6"> 开始记录会面</button></div>
+    </div>
+
+    <div class="grid g3" data-page-node-id="5T8g9Yw65uOgdeov5gggFA">
+      <div class="card" data-page-node-id="H9xAkAmBNVjpF1A6OZG32O"><h3 data-page-node-id="qRTYsru0ECzzFb4YVM9w4k"> 会议录音 · 转写纪要</h3>
+        <div style="font-size:12px;color:var(--sub);margin-bottom:8px" data-page-node-id="x2Zecs8sdDEBXID0B1CDhl">客户甲 · 12/9 10:00 · 32 分钟</div>
+        <div class="ck" data-page-node-id="xmMEvZvYKxAMkUmHURD4ZT"><input type="checkbox" checked data-page-node-id="6v1Atl83clAkZd0EHv8AQl"><span data-page-node-id="L8nILXAf2NK1cJrqUmtS0Z">对方诉求：对华收款 T+0，关注个人结汇额度</span><span class="src" data-page-node-id="suKXqcdBkidCNVkcCkH7k6">录音 04:12</span></div>
+        <div class="ck" data-page-node-id="772YZMJGQtVjeoTuvYFU9O"><input type="checkbox" checked data-page-node-id="PZFTEbhp09TL7SFayIYl4d"><span data-page-node-id="vESWNVqdaVlg50FpxKlvkW">我方给出：对公账户方案 + SAFE 合规说明</span><span class="src" data-page-node-id="OtdFWgmAm38cKpVIp79xHj">录音 12:40</span></div>
+        <div class="ck" data-page-node-id="RdpIjb1kgcC6mSvmzeEjin"><input type="checkbox" checked data-page-node-id="JLDYia5YDmIKn73FKSkYbx"><span data-page-node-id="495yW2DvjhN8MBIYXDTOcx">承诺：下周一前发正式方案（<b style="color:var(--orange)" data-page-node-id="0TNudPcpwvSqzJDr3M5B3V">已自动建任务</b>）</span><span class="src" data-page-node-id="8KIdLCqFfjh48qxpi3CDEF">录音 28:05</span></div>
+        <div style="margin-top:8px" data-page-node-id="hv4tQ43kEeYpTHUDFzwOrN"><span class="badge b-green" data-page-node-id="dXvruOYAwWN6FwwVkYBWqn">纪要已生成</span> <span class="badge b-blue" data-page-node-id="BN1MdfEzJkXhxn7hbpqJAm">行动项 ×2 已落任务</span></div>
+      </div>
+      <div class="card" data-page-node-id="cVoNDsogOWCC673192wFLp"><h3 data-page-node-id="xR6ZV0JyBPVj15Ct8iO4lH"> 实时沟通记录汇集</h3>
+        <div class="ck" data-page-node-id="lLzl92oxxJITRQ49CHcLnP"><input type="checkbox" checked data-page-node-id="KlP3ukClFaI63ecEqYg0Ac"><span data-page-node-id="zvF1qwl9GzqYvefYWSebmB">WhatsApp：客户乙改约 14:30 → 日历已自动更新</span><span class="src" data-page-node-id="bZe18nLyIfV3dDh8eYcv5x">2 分钟前</span></div>
+        <div class="ck" data-page-node-id="TFCU1Kd1qdM3B2GhosdlLh"><input type="checkbox" checked data-page-node-id="OSgQXZTKy08xylX2lBMHuB"><span data-page-node-id="uWxL4zXKEXHBIiJzmibvRk">展会 App：客户丙接受邀约并互留 WhatsApp</span><span class="src" data-page-node-id="EIU7PXBxa1JEAhGUMXZb0I">11:20</span></div>
+        <div class="ck" data-page-node-id="BxzKnpRVWaOan8ErdKWP4P"><input type="checkbox" data-page-node-id="HL3XhUaXozFJB2b217W83O"><span data-page-node-id="O6Vkml9pGEdORtFOa1IJ4X">邮箱：主办方午宴邀请（.ics 已解析，无冲突）</span><span class="src" data-page-node-id="TldXcBHuomKCiB1THcBL7J">10:55</span></div>
+        <div class="ck" data-page-node-id="hj5DMdqPgU69pthEuOnAtZ"><input type="checkbox" data-page-node-id="tEKT5FroAIgPFnvs4clSX3"><span data-page-node-id="pDRv3bzaKvFQnfCBmIVihp">飞书 IM：同事 X 提示「客户丁展位改到 Z9」→ <b style="color:var(--orange)" data-page-node-id="j0EyqSlYh6NJR117D09ZMM">路线引擎重算中…</b></span><span class="src" data-page-node-id="dErdtGcKEHyFQ5rWc2YqYu">09:40</span></div>
+        <div style="margin-top:8px;font-size:12px;color:var(--sub)" data-page-node-id="9uCwPGJGyG8NPdA1SqwCye">留痕自动挂到对应日历事件备注（「 沟通留痕」），零手工整理</div>
+      </div>
+      <div class="card" data-page-node-id="AD8ltZcWw9JIruEXQEhEJ1"><h3 data-page-node-id="VKNbm1D9VmzNjsjR1HqAOB"> 现场快记</h3>
+        <div style="background:#FAFBFC;border:1px dashed var(--line);border-radius:10px;padding:14px;color:var(--sub);font-size:13px" data-page-node-id="TPmRzdCGrDftxu7wcsh5ou">
+          手机 / 语音速记入口（现场电脑受限时可用）：<br data-page-node-id="kb8VFkW8Jmex53gdZFRWx5"><br data-page-node-id="83UOppUb570bVCVA4Jymq3">
+          「客户甲 提到下季度想试个人汇款通道 —— 待核实合规口径」<br data-page-node-id="pNqgnfBrNyOA4Jut9Hauru">
+          <span style="font-size:11px" data-page-node-id="ObyIXQD4ZHqug06ZAHFbLi">↑ 已自动切片归档到客户甲 360 时间线</span>
+        </div>
+        <div style="margin-top:10px" data-page-node-id="HDHkcJSdwzlFLtBqkyc0wS"><span class="badge b-purple" data-page-node-id="enRhAhDVXIYMbNLo8dg53x">语音兜底已启用</span> <span class="badge b-gray" data-page-node-id="cwvVKroetf5NumkzAhSSA6">离线可用 · 联网后回传</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 会后 ============ -->
+  <section class="view" id="v-post" data-page-node-id="I1WNg6F5NuzYHEBtGBkFKn">
+    <div class="topbar" data-page-node-id="7D4t8S8XWElBUAyGbRTyyh"><h1 data-page-node-id="yn2rhtgLHZH5FfiK8fGMh5">会后 · 复盘跟进</h1><span class="crumb" data-page-node-id="PciSJvMX1YVcYdNMtAHJKy">展会易 ExpoHub · 迪拜展会复盘</span>
+      <div class="pill" data-page-node-id="d3XDxioQ3AEdsvYlpECKD8"><button class="btn ghost" data-page-node-id="NPxrufxHFRxFbQ6lDvoATG">导出复盘报告</button><button class="btn" data-page-node-id="QadDtPlUdHNrVG8RJUF11G">一键落任务</button></div>
+    </div>
+
+    <div class="card" style="margin-bottom:14px" data-page-node-id="QSYn8YFFULHjbYCT5dpWcr">
+      <h3 data-page-node-id="o5IJ9TWNzL06INtDPnnXIl"> 九源素材回收 <span class="r" data-page-node-id="0beeVkN1XBAfK2Pt3Fst5P">跑完回头核对 · 缺源标 !! 不中断</span></h3>
+      <div class="source-grid" data-page-node-id="RcLa0S1PHtWUTqq6gaM8H7">
+        <div class="s" data-page-node-id="dSgQ0RTx5HV8qIArNCPhGV"><b data-page-node-id="AUg6mtKLOm84FhzFjtRNTM">S1 日历（现场实况）</b><span class="st badge b-green" style="font-size:10px" data-page-node-id="2S3LMNneoqoh9UQYjPIG3D"> 26 事件</span></div>
+        <div class="s" data-page-node-id="gqtKOiV1LzDqZUoHDtBi77"><b data-page-node-id="gGWOC8KmvFWZ9TCqNk1Pbt">S2 AI 语音纪要</b><span class="st badge b-green" style="font-size:10px" data-page-node-id="hLsTLchyXSfm2UxGK4wzL7"> 3 段转写</span></div>
+        <div class="s" data-page-node-id="5CLCNGn6KnOormHhx0zfbZ"><b data-page-node-id="ppRJHFny9QzsG9NdSHfShU">S3 WhatsApp 本地库</b><span class="st badge b-orange" style="font-size:10px" data-page-node-id="DmXJmklmc5Bf8pOuQPXxDU">待授权 !!</span></div>
+        <div class="s" data-page-node-id="rMUNVhkuu3MgMiaEMcEGli"><b data-page-node-id="m3WblhejlDs1IIF2iCe3mC">S4 展会 App Messages</b><span class="st badge b-green" style="font-size:10px" data-page-node-id="5hASVWMCCPLFkj9HIBBAue"> 12 会话</span></div>
+        <div class="s" data-page-node-id="BDB8M5V3bpP36dYfFpUuLn"><b data-page-node-id="QJkHfB5UWUY8aFMbCeOPBC">S5 飞书 IM</b><span class="st badge b-green" style="font-size:10px" data-page-node-id="YmwO2xPuxLkCzYK3i7Jr8k"> 4 群</span></div>
+        <div class="s" data-page-node-id="CgUZInTPQQR7MStWUBRRKA"><b data-page-node-id="zT6D1vYDT97ZdcGMGz3Cke">S6 外部邮箱</b><span class="st badge b-green" style="font-size:10px" data-page-node-id="gniMdb5CQvaIlH92JFoc1L"> 18 封</span></div>
+        <div class="s" data-page-node-id="XFQR1LH6WntaKSMBAuNBGx"><b data-page-node-id="4cN6BrFgYIgh2ZXoZVu9yu">S7 飞书邮箱</b><span class="st badge b-green" style="font-size:10px" data-page-node-id="HDczoGP0LJra6kAEUuuoUI"> 6 封</span></div>
+        <div class="s" data-page-node-id="YKpRQRoksxBAjcZlGeiO5u"><b data-page-node-id="aWg6RfQaT9cMWZl1zMHrGK">S8 飞书任务</b><span class="st badge b-green" style="font-size:10px" data-page-node-id="t7PlwlAL3XVDqP03MHrL9O"> 11 条核对</span></div>
+        <div class="s" data-page-node-id="NX8IZ5H06e4k1cZldKvTB8"><b data-page-node-id="b60CBDAMUcn4EvZz5ZRXEJ">S9 台账 Pipeline</b><span class="st badge b-green" style="font-size:10px" data-page-node-id="CIMglPkjoAei7s7TGst4KH"> 已回填</span></div>
+      </div>
+    </div>
+
+    <div class="grid g32" data-page-node-id="zE9UKEDCTYtOdzLNWThB1P">
+      <div class="card" data-page-node-id="Ex6bZh24LMI0ECwFxKJxL5">
+        <h3 data-page-node-id="aq72Y8xb31rbu8TsQehj2j">跟进待办表 <span class="r" data-page-node-id="lkELX5A2LAoIMyLrbwEP2C">按截止时间排序 · 每条可单独转发</span></h3>
+        <table data-page-node-id="QWjyKz7okMDKKdEV54vFaQ">
+          <tr data-page-node-id="Tg3ih83JPsT9z4RMQmGBnk"><th data-page-node-id="7g49PHvE9BoVKU3vlb0Db4">动作</th><th data-page-node-id="mgAFF08aS1iJfyqxENUbxI">客户</th><th data-page-node-id="8L1R0vsBzYWAZq6pJPET0W">优先级</th><th data-page-node-id="Ee9DY2DM3EDjOF58DSE0da">截止</th><th data-page-node-id="iytoPfWs3EQPZQyUXUyy6m">状态</th><th data-page-node-id="VNWHH26XAtGnc6y8MhcdGZ">证据源</th></tr>
+          <tr class="row-click" onclick="openClient('c1')" data-page-node-id="Rkp34lcUJ7u5Y5zxz16CqB"><td data-page-node-id="GnkUqgY9kCrqLuPrIh71UO">发对华收单方案</td><td data-page-node-id="qwEayYDTHpaRioLXvnRcrX">客户甲 · 某西非 PSP</td><td data-page-node-id="i81QiE4uLb7Xn5Qrr0zsuu"><span class="badge b-red" data-page-node-id="ZdN7jUIsiFL1a8XRoVQ6JH">P1</span></td><td data-page-node-id="te9Y1TanVpzIRIVCsXpGZy">11/10</td><td data-page-node-id="nGQsZhT4hfbGOpXFqg53F1"><span class="badge b-orange" data-page-node-id="N3ncAw1B2BzoOq4xxSpvQa">待办</span></td><td style="font-size:11px;color:var(--sub)" data-page-node-id="jIR4Qw3FBr0TJEg8BkiNDv">S1S2S4</td></tr>
+          <tr class="row-click" onclick="openClient('c2')" data-page-node-id="BtqEJDhVNBv3asPwjRGjEy"><td data-page-node-id="u59M2g1DtgsIt7UAQRTWOl">回询 VA 开户资料</td><td data-page-node-id="d6VYWNElFFsanIAT1XFihg">客户乙 · 某中东 MSB</td><td data-page-node-id="8cskLPAFtJGXSMKwGOaL8t"><span class="badge b-red" data-page-node-id="GqtxmdcEc2ENxkpb3EvVa7">P1</span></td><td data-page-node-id="Ao3GNpId0NcNEGLKl2yPhA">11/10</td><td data-page-node-id="mqk6v0VMe9FqBmWQJQAge1"><span class="badge b-orange" data-page-node-id="K0AMChxVXV4nvVC3nQOhNc">待办</span></td><td style="font-size:11px;color:var(--sub)" data-page-node-id="QQk3YsZ85qUD5fHCZsHNSC">S1S3</td></tr>
+          <tr class="row-click" onclick="openClient('c6')" data-page-node-id="CgSSXEbxIubOV1yjDPKe6u"><td data-page-node-id="P52esAAYbxUFBuvlmjhkUL">LinkedIn 首次触达（App 内未回）</td><td data-page-node-id="rHdNj3pcHSKq14EWd7bHCl">客户己 · 某南亚网关</td><td data-page-node-id="DyWAY4NwcxTVODqi41P4zX"><span class="badge b-orange" data-page-node-id="CF4HgTE6FGkxqjwKUoq9Dr">P2</span></td><td data-page-node-id="s96H1YGpXrtV3jQjHy72DA">11/14</td><td data-page-node-id="65GpfbFJ4XqfUm0ZANUHQz"><span class="badge b-purple" data-page-node-id="9Ns7oOMvExi9HoNJBOjuQG">未见到 · 需补联系</span></td><td style="font-size:11px;color:var(--sub)" data-page-node-id="XGqzPdnCux0u8VqNf4VEZM">S4</td></tr>
+          <tr class="row-click" onclick="openClient('c7')" data-page-node-id="G0TEsZ02J4IwlLbty0sQSG"><td data-page-node-id="CmiSI2oOrKNhIqatYLnoLu">邀请过期 · 换 LinkedIn/邮件补联系</td><td data-page-node-id="uX7qRmHkpPZEC7C1CRgMCJ">客户庚 · 某独联体 PSP</td><td data-page-node-id="n7ERInMoOg2Qh65KLCsmZ9"><span class="badge b-orange" data-page-node-id="hQ1B9klnx4sHksnBhJe7B5">P2</span></td><td data-page-node-id="1kdE7REElH6GCjCFwmCGGR">11/14</td><td data-page-node-id="vlPkPrGTKlQAwSGwFmGMYm"><span class="badge b-purple" data-page-node-id="cPH3fiCWsTN2R03QnefefE">未见到 · 需补联系</span></td><td style="font-size:11px;color:var(--sub)" data-page-node-id="OdHq1Q9H2xwM01N1A9LKfA">S4S6</td></tr>
+          <tr class="row-click" onclick="openClient('c3')" data-page-node-id="jszF9zN8f9B8yEw2LmSn7b"><td data-page-node-id="XmLxd6ZgSRAKLhLHpOtYle">确认 12/9 会面时间</td><td data-page-node-id="zlB33DTGlwkmotQFIaKxaT">客户丙 · 某东南亚钱包</td><td data-page-node-id="k82D8kOpn4SAevH2GcNDsA"><span class="badge b-orange" data-page-node-id="hqbEvAKnH8kQ6RfqBjmlCo">P2</span></td><td data-page-node-id="41KFM2YWGRYXWjfKH0RIHe">11/21</td><td data-page-node-id="DrHekmgnZEg1o7n5pwNo1V"><span class="badge b-gray" data-page-node-id="ywc2dK9XwGnD4KSRQObXbV">等对方</span></td><td style="font-size:11px;color:var(--sub)" data-page-node-id="Dq6IfjJHHgh3YhXZScQYXx">S4</td></tr>
+        </table>
+      </div>
+      <div class="card" data-page-node-id="dJmP7joAt3Oa1OGEA75C8X">
+        <h3 data-page-node-id="lgDmgTsYdRiREZpGexZ9FF">复盘速览</h3>
+        <div class="ck" data-page-node-id="CL6EegzABrA8HYlNiA0uoZ"><span data-page-node-id="9lUwicycZ3X1TkTlEVZh38"> 目标约见 12 家，实际见面 <b data-page-node-id="YwitAmdDB7Ru6Hr8OMX0WG">9</b> 家（达标 75%）</span></div>
+        <div class="ck" data-page-node-id="fYZNK46ganofCiDXK2FnwV"><span data-page-node-id="hJl9vzDpWUvfYfj5EuL68e"> 新增线索 4 条（均无日历事件，由 App/WhatsApp 挖出）</span></div>
+        <div class="ck" data-page-node-id="wJaj7SayC4YWiM8aEzHOlY"><span data-page-node-id="pICp8DLs4AEQHa3wZXgKMp"> 2 家临时爽约 → 已入「未见到 · 需补联系」</span></div>
+        <div class="ck" data-page-node-id="AjwoY03xwq7nQcwEGqGDcN"><span data-page-node-id="Ee9OkR4SI1YodBhOdRIn6Y"> 展位号冲突 1 起（两家同号）→ 待用户核实</span></div>
+        <div class="ck" data-page-node-id="bqyl6FHUHwIXbqKPAOFWxl"><span data-page-node-id="Ev05S95Y6xdAbsgNQzkcfH"> 展会成本 / 有效商机 = <b data-page-node-id="mHyIQG3A8q4qITzu2mYWZl">—（待财务口径）</b></span></div>
+        <div style="margin-top:10px;font-size:12px;color:var(--sub)" data-page-node-id="FedkOdAm12RJaUPnaJZhjo">完整复盘报告含：达标情况 · Pipeline 变动 · 转出待办 9 条</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 客户360 ============ -->
+  <section class="view" id="v-c360" data-page-node-id="RfsXv5CSeDpmxQywGmTd5d">
+    <div class="topbar" data-page-node-id="ZKJc1vsZX3KCF4tw60ShUU"><h1 data-page-node-id="hzDGLQog1kE4xnf87wVLfx">客户 360</h1><span class="crumb" data-page-node-id="4BxofMhOVuOp5cG2wsS1wS">九源 沟通记录 聚合 · 单客户时间线</span></div>
+    <div class="grid g32" data-page-node-id="8HUP3oH8rL3pErMvXKxdL1">
+      <div class="card" data-page-node-id="tUP5W5WbOnioq6MXQelKx0">
+        <h3 data-page-node-id="MFPf8HGkZhEJpM7CHMURTQ">客户甲 · 某西非 PSP <span class="badge b-gold" style="margin-left:6px" data-page-node-id="ZYVUdoRVDGTJ0Emkh40rqn">在谈客户 · P1</span><span class="r" data-page-node-id="0xuJvbg2Ol7AlHnJEl6rml">交接零口述：全记录在此</span></h3>
+        <div class="tl" data-page-node-id="NLgI4T1PHPy8BjQUmg6JOD">
+          <div class="item" data-page-node-id="NbL7Kfr7pyYwa4lpG0QBix"><div class="meta" data-page-node-id="V3Q8Y6boO03Fwix3XIu1rn">09 展会 · 会面（日历S1 + 语音S2）</div>现场会面 32 分钟：对华收款 T+0 诉求；我方给对公账户方案；<b data-page-node-id="Ueuq5EdaXW3iOkD0o5X6Xj">承诺下周一发方案</b></div>
+          <div class="item" data-page-node-id="85WC8eFi3mDVGwEmwTnBy8"><div class="meta" data-page-node-id="YwOxtZQ5XbUdR5TFy2Q071">09 展会 · 展会 App S4</div>会前互认 + 交换 WhatsApp；对方询问展位路线</div>
+          <div class="item" data-page-node-id="xmFyWTqQ2gbpOtsfuodv9W"><div class="meta" data-page-node-id="X7YezlEyYk3gsfzWPuuMMX">08 展前 · 外部邮箱 S6</div>对方 BD 邮件确认会面时间，附公司介绍 PDF（附件已存档）</div>
+          <div class="item" data-page-node-id="u03Tc1WrJ15DsNyG2cCeeK"><div class="meta" data-page-node-id="SPxzC1qoDhp7l43OYqnB7i">08 展前 · 飞书任务 S8</div>展前承诺「准备西非通道材料」→ <span class="badge b-green" data-page-node-id="ocaCm7jX3wtsmBeBAq7zHL">已完成</span></div>
+          <div class="item" data-page-node-id="EIipnfUdHcAAP4Gg4sy6BT"><div class="meta" data-page-node-id="BhahcHmBa3gBeJtcpNWsT6">07 线下 · 台账 S9</div>列入 P1 目标名单（上届展会复联）</div>
+        </div>
+      </div>
+      <div class="card" data-page-node-id="CZeXK80EN1YGgDKdBE8Svt">
+        <h3 data-page-node-id="dZ7gDR7tVIfKGk90bonX14">档案卡</h3>
+        <table data-page-node-id="RyFV5rjizloqNdjKdo5zDW">
+          <tr data-page-node-id="ZvSCTBP7C4sl7zcriBFmHi"><td style="color:var(--sub)" data-page-node-id="JYhWnKGuPI0CWzzvreIMeP">联系人</td><td data-page-node-id="0Ki52uRLiQ3vAJSFqImIVA">对方 BD（代称）</td></tr>
+          <tr data-page-node-id="C29asRxkayZaAv2vzdzdrM"><td style="color:var(--sub)" data-page-node-id="ALhytir5hTSzU9endi1174">级别 / 优先级</td><td data-page-node-id="mCcNn71WkbZatJQlE4ahFq"><span class="badge b-gold" data-page-node-id="QKkhSRmfzeSUMRCqcqcmEb">在谈客户</span> <span class="badge b-red" data-page-node-id="OmwUeV1z5HXyed96uIbEkP">P1</span></td></tr>
+          <tr data-page-node-id="fjB0rrtmnlITDI0CkmyO8Y"><td style="color:var(--sub)" data-page-node-id="3pPkFLxUXd63QqiVFCZ3EL">合规初筛</td><td data-page-node-id="wHs7e6YDuuoJnETXBX3yhx"><span class="badge b-green" data-page-node-id="Vh5038bzv6YY92LsbeDH1E">通过（11/09）</span></td></tr>
+          <tr data-page-node-id="4Ix6q2ucx5XVy2KrlTBtiV"><td style="color:var(--sub)" data-page-node-id="EjzSiB2fSeRX26nBmiGJ9m">商机阶段</td><td data-page-node-id="AqO5ADsGp1FGpMr7zkMdif">方案报价中</td></tr>
+          <tr data-page-node-id="3gxEDfFmWwDl3RKLvuSj2V"><td style="color:var(--sub)" data-page-node-id="1EKSbDqsZMDV7EgfGNsnl5">健康度</td><td data-page-node-id="U3UTvCtiZ0XrfvW94Fpg7G"><span class="badge b-orange" data-page-node-id="ncyGGRe0Ef2arCziYQqhLK"> 方案发出后 7 天无回访即预警</span></td></tr>
+          <tr data-page-node-id="3dWI925eo9PdJHwU1LQLBQ"><td style="color:var(--sub)" data-page-node-id="ZrkqHG6Tz1qsXQFhFEA4Qj">文化档案</td><td data-page-node-id="EE6yOFXtjaR1y4wuSxGTym"> 节庆季送礼勿含酒类 · 问候重视个人关系</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 人脉图谱 ============ -->
+  <section class="view" id="v-graph" data-page-node-id="srHeBO8pZKREavA4P7xZmG">
+    <div class="topbar" data-page-node-id="nm4cSMu2CC7XDKJagMYCAb"><h1 data-page-node-id="iYkslNovRPTWSBm1YsX8uD">人脉图谱</h1><span class="crumb" data-page-node-id="F9LqNLzO0ItSPQCRSvzqMl">熟人介绍路径量化 · 谁引荐谁</span></div>
+    <div class="grid g32" data-page-node-id="0p3AINbrzvHHSWuIVZqUgl">
+      <div class="card" data-page-node-id="PRniJdNrgYwxHAQ1rQkEYW"><h3 data-page-node-id="QNTazW3BtBGx1SwKi3Nieo">关系网络 <span class="r" data-page-node-id="D0vdgfoHL5uADNqiFMkkDg">点击节点查看详情</span></h3>
+        <svg viewBox="0 0 680 330" style="width:100%" data-page-node-id="3OLFhErUnMCSFEsEiZCjsV">
+          <line x1="340" y1="165" x2="150" y2="80" stroke="#E5E6EB" stroke-width="2" data-page-node-id="Ca77K9W4Gsn09B4UNm6DWO"/>
+          <line x1="340" y1="165" x2="530" y2="70" stroke="#E5E6EB" stroke-width="2" data-page-node-id="416rHDMTWBnbR7YbqU62Nh"/>
+          <line x1="340" y1="165" x2="540" y2="250" stroke="#E5E6EB" stroke-width="2" data-page-node-id="iZjl3bYoZULBeaL4dVWD3x"/>
+          <line x1="150" y1="80" x2="530" y2="70" stroke="#C4F1DC" stroke-width="2" stroke-dasharray="5,4" data-page-node-id="ZKNXHEEBxd1AjHAjHvJZbC"/>
+          <line x1="340" y1="165" x2="140" y2="260" stroke="#E5E6EB" stroke-width="2" data-page-node-id="Neurf2Toxk5bqLLS4hxzDC"/>
+          <line x1="150" y1="80" x2="140" y2="260" stroke="#C4F1DC" stroke-width="2" stroke-dasharray="5,4" data-page-node-id="w6n81Q5BNACNpVBJBzctEo"/>
+          <rect x="285" y="145" width="110" height="40" rx="20" fill="#00C566" data-page-node-id="qBb7PlvuPcnhR6htHFoux8"/>
+          <text x="340" y="170" text-anchor="middle" fill="#fff" font-size="13" font-weight="600" data-page-node-id="ABiLNnPrdo0vn08NAGPhQt">我（J 女士）</text>
+          <circle cx="150" cy="80" r="34" fill="#E8F3FF" data-page-node-id="udKmBI4NSb7V7d7m0fL6k2"/><text x="150" y="85" text-anchor="middle" font-size="12" data-page-node-id="0xURImfzCjFJaVpgUy0bmx">伙伴A</text>
+          <circle cx="530" cy="70" r="34" fill="#E8FFEA" data-page-node-id="wAaKBRA0qzpgQHoLPgvurT"/><text x="530" y="75" text-anchor="middle" font-size="12" data-page-node-id="uF1SKhwUEly0iWEWKDnuMU">客户乙</text>
+          <circle cx="540" cy="250" r="34" fill="#E9F9F0" data-page-node-id="3w9qUJETe4lJLEteEHF3ZG"/><text x="540" y="255" text-anchor="middle" font-size="12" data-page-node-id="fXAWe8YzZD7lGJKxYrTumL">客户甲</text>
+          <circle cx="140" cy="260" r="34" fill="#F5E8FF" data-page-node-id="ksPEIqKJAsVGQ7IxzpUVDj"/><text x="140" y="265" text-anchor="middle" font-size="12" data-page-node-id="ctrMb8HsLM51UZR4M9P6NQ">客户己</text>
+          <text x="335" y="70" fill="#00794A" font-size="11" data-page-node-id="cCSl25Iu7uu204ApUkBCi7">引荐 </text>
+          <text x="115" y="175" fill="#00794A" font-size="11" data-page-node-id="eSqigejlvsU70IH8Ym8z8q">转介绍</text>
+        </svg>
+      </div>
+      <div class="card" data-page-node-id="l6JPrxhVjXCykAmFBDIA1G"><h3 data-page-node-id="WQfjWKYBhx8JECpZtQyG3e">转介绍追踪</h3>
+        <div class="ck" data-page-node-id="P4H5uFEHSy4I0iiFsmFQMV"><span data-page-node-id="UY7Lr57QeFxHZmCoe2ZeWB"><b data-page-node-id="n0UBPgjVNwKa87ho5G4Kil">伙伴 A</b> 引荐 <b data-page-node-id="Np7J0jjkIIpN6AMoQqGody">客户乙</b>（某中东 MSB）</span><span class="src" data-page-node-id="kkLUdviAlJoit1AAShTN3d"><span class="badge b-gold" data-page-node-id="B9OebjJFviXhE2ikocBJfo">已进 P1</span></span></div>
+        <div class="ck" data-page-node-id="zBYoKkb1LCK7m3ub88nfoH"><span data-page-node-id="QZHDDU0AK85VDxnx1M2DWi"><b data-page-node-id="Krzs4CYpl2Awo4dZAGJTgJ">伙伴 A</b> 引荐 <b data-page-node-id="NgdtHKxGuFYCoMySc7M77S">客户己</b></span><span class="src" data-page-node-id="yvCAWsh6fp4SxQ9UanL0Bc"><span class="badge b-purple" data-page-node-id="mK7Bs4uSxyMOpCXu2Hlf2j">未见到 · 补联系</span></span></div>
+        <div class="ck" data-page-node-id="2zjjvTAPhRhEA4ejmepgeB"><span data-page-node-id="Gl8ojut1XWv7vsDTjjEwnl">上届展会老客户 → 客户甲（复联）</span><span class="src" data-page-node-id="BZGgA4rapWoxqbCfHAK0cF"><span class="badge b-orange" data-page-node-id="jyFhXdrKSgDbPL7CiejI0J">方案报价中</span></span></div>
+        <div style="margin-top:10px;font-size:12px;color:var(--sub)" data-page-node-id="p2Rtnf9dBH6OQfvUgn4HjT">转介绍商机首答率 78%，显著高于冷触达——图谱让「人情债」可看见、可偿还（致谢任务自动生成）</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 节假日日历 ============ -->
+  <section class="view" id="v-holiday" data-page-node-id="y8pJM38YaqUiInvDHaBisu">
+    <div class="topbar" data-page-node-id="d4cIhcx0Keuxtvky2JmdRU"><h1 data-page-node-id="2Ql32WI1rn2HYPDpxvYwhJ">全球节假日日历</h1><span class="crumb" data-page-node-id="WzdHuNn8GA2APmdpZEiGzw">28 国 · 402 事件 · 三语气框架（已实战上线）</span>
+      <div class="pill" data-page-node-id="iN4vhZuzAbx95o02ORezNZ"><button class="btn ghost" data-page-node-id="Ndrife8paA7kOTcPdvUfXF">同步到我的日历</button></div>
+    </div>
+
+    <div class="grid g32" data-page-node-id="tmYjVjKgBW76OGMODOiuIv">
+      <div class="card" data-page-node-id="eHtNyWbCVi1mNh4Fgy7Hhw">
+        <h3 data-page-node-id="lyiSXvdvxIMIBHkksLdScs">2026年11月 <span class="r" data-page-node-id="uYzX89VPx7nFDa4fThRj69"> 今天 · 含客户所在国节日提醒</span></h3>
+        <div class="cal" id="cal" data-page-node-id="hbEZm317XM8fm9szF018E3"></div>
+      </div>
+      <div class="card" data-page-node-id="N7nAYyWUPgCyyYCBMEugSK">
+        <h3 data-page-node-id="FUD2SZ0DCjUwQNcluZ0LNE">本月文化提醒 <span class="r" data-page-node-id="QKUs0L7CcQQg4HPHsn0L3j">约会避让 + 问候建议</span></h3>
+        <div class="ck" data-page-node-id="jANkbMTwe9foXCNOPKxfLA"><span data-page-node-id="gXWslLDoCSLutqwaWqfGBo"><b data-page-node-id="UfMRdtQBM0oG5cJGxo4FOU"> 11/8 排灯节</b> <span class="badge b-green" data-page-node-id="ygTHARyzyb1UZfLHmycDS8">festive </span><br data-page-node-id="5gpSOuDMfJ4y6M3xuu9UkS">客户丙（印度团队）→ 问候草稿已生成：<i data-page-node-id="rU8tWRDHp7DWk4KMO5FG6B">"Happy Diwali! May this festival of lights bring you joy and prosperity."</i></span></div>
+        <div class="ck" data-page-node-id="iQFBfYtnVdK9nffOf8x981"><span data-page-node-id="9PSw319IzK3e9FErs1MWai"><b data-page-node-id="sHlGpY4eN6JTWBNCaoAy5b"> 11/2 Finados</b> <span class="badge b-purple" data-page-node-id="Qp0BLDhKihHEzdoe52akhH">solemn </span><br data-page-node-id="gQhyYJfvzOjmpMI42oAbX5">巴西客户 → <b data-page-node-id="E789lYJ0q9ZIhzwARevlKV">只致意不庆祝</b>：<i data-page-node-id="idb6JAQMDuamyAYDRODXdq">"Wishing you a meaningful Finados."</i>（ 墨西哥同日 Día de Muertos 却是 festive——同名节日按国别覆盖）</span></div>
+        <div class="ck" data-page-node-id="JGDkAhuLNNYDFQ2ZtK7CSg"><span data-page-node-id="hPpiBaaWR4m4tHLn66CFW3"><b data-page-node-id="WaxtmxQuDUxbvEYJcg5fjD"> 11/26 感恩节</b> <span class="badge b-green" data-page-node-id="yCuSjAAtqEbdsAQkR6JGvy">festive </span><br data-page-node-id="8ie3gdY803uADwzjdCOGrE">美国客户放假 1 天 · <b data-page-node-id="vxFkYs9HTTYBgf5tIKFSbE">不要安排会议</b>；问候可带轻商务</span></div>
+        <div class="ck" data-page-node-id="eAT9PhVO3dUoSpXMYO8KDq"><span data-page-node-id="bATyxEvKJTOvhZUmFzcaF5"><b data-page-node-id="WolZV8SN7PJmiAlqDHGEhK"> 12/2 国庆</b> <span class="badge b-green" data-page-node-id="LKTIqUbeAPAjKe1RmDKKID">festive </span><br data-page-node-id="nNRlNxoLboWx3pgzY4BQOi">迪拜展会前 6 天 · 预告：可提前发问候，物流/收款注意假期顺延</span></div>
+        <div style="margin-top:10px;font-size:12px;color:var(--sub)" data-page-node-id="j8NxzveWRQO1SzzZXRSx4Z">约会引擎自动联动：客户所在国节日当天 → 不排会议，给问候建议 + 母语选项</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 甘特图 ============ -->
+  <section class="view" id="v-gantt" data-page-node-id="S85vXeOocpkiEWNL7WtUKT">
+    <div class="topbar" data-page-node-id="eMV0l8WP6jrQuBjQAAjlRl"><h1 data-page-node-id="gL2bTUYtncymInUErNFpHO">Deal Management · 看板与甘特</h1><span class="crumb" data-page-node-id="dUBfK1yHN5birWpdQb5dpA">Kanban 按商机阶段管理 · Gantt 按任务时间线推进</span></div>
+    <div class="tabs" data-panels="gm">
+      <div class="tab on" data-t="kb">Kanban View</div>
+      <div class="tab" data-t="gt">Gantt View</div>
+    </div>
+    <div class="panel on" id="gm-kb">
+    <div class="kanban">
+      <div class="col"><h4>Lead（线索）</h4><div class="lead"><b>客户庚 · 独联体 PSP</b><div class="m">邀请过期 · 远程邀约草稿已备</div></div><div class="lead"><b>客户己 · 南亚网关</b><div class="m">App 未回 · LinkedIn 首触待发</div></div></div>
+      <div class="col"><h4>Qualified（已验证）</h4><div class="lead"><b>Pacific CrossPay</b><div class="m">AI Score 78 · 产品介绍待发</div></div><div class="lead"><b>客户丙 · 东南亚钱包</b><div class="m">排灯节问候 · 节后触达</div></div></div>
+      <div class="col"><h4>Meeting（会面）</h4><div class="lead"><b>客户甲 · 西非 PSP</b><div class="m">展会会面 32 分钟 · 方案报价中</div></div><div class="lead"><b>Meridian Payments</b><div class="m">Speed Networking · 二次会面待约</div></div></div>
+      <div class="col"><h4>Proposal（方案）</h4><div class="lead"><b>客户乙 · 中东 MSB</b><div class="m">VA 开户尽调 · 资料回询中</div></div></div>
+      <div class="col"><h4>Compliance（合规）</h4><div class="lead"><b>AtlasPay Global</b><div class="m">China Payout · KYB 材料准备（虚构演示）</div></div></div>
+      <div class="col"><h4>Live（上线）</h4><div class="lead"><b>伙伴 A · 阿联酋渠道</b><div class="m">转介绍合作已生效</div></div></div>
+    </div>
+    <p style="font-size:11px;color:var(--sub);margin-top:8px">阶段流转：Lead → Qualified → Meeting → Proposal → Negotiation → Compliance → Integration → Live。卡片可拖拽（演示为静态展示），每个商机关联源展会与源会议。</p>
+    </div>
+    <div class="panel" id="gm-gt">
+    <div class="card">
+      <h3 data-page-node-id="gl3n8lgXcaBDNc90s6WYzC">Pipeline 时间线（11/09 – 12/31）<span class="r" data-page-node-id="TBgyuMnCKb4gfemsQDJHFE"><i style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#A8E6C4;margin:0 4px 0 8px"></i>已完成<i style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#00C566;margin:0 4px 0 8px"></i>进行中<i style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#F7BA1E;margin:0 4px 0 8px"></i>预警<i style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#DCE0E5;margin:0 4px 0 8px"></i>计划</span></h3>
+      <div class="gantt" data-page-node-id="fkEhQlTBQS7UFZhb5z0voL">
+        <div class="g-scale" data-page-node-id="1yc09DuqGBWnBvSVDbtgBD"><span data-page-node-id="ZOtuol7LZ8YgEmy5ozzivv">11/09</span><span data-page-node-id="ktQSgu2Ydq1llqHGxdryvj">11/16</span><span data-page-node-id="ChcBVDco16LIok8HX5GwRZ">11/23</span><span data-page-node-id="UAp0yGvoAU3pzR5aRNSxG8">11/30</span><span data-page-node-id="Y04A8eEszJsS2FDvZzYFyC">12/07</span><span data-page-node-id="Y0wxXaWIjtRW59cOJPDLMC">12/14</span><span data-page-node-id="XfuAAyUVLG8RArS77aTecn">12/21</span><span data-page-node-id="dunFTapaIBrsr1wjGabn1D">12/28</span></div>
+        <div class="g-row" data-page-node-id="uqmxfhlhCRzrUTPOrd4pAg"><div class="g-lbl" data-page-node-id="6lvJXz6hyUkpbs6PGqClOo">客户甲 · 方案报价</div><div class="g-track" data-page-node-id="VBdXDOYZJTcrxpko541cUm"><div class="g-bar" style="left:0%;width:26%;background:#00C566" data-page-node-id="LlgR0RQ5xuuV6cHID0W3D4">方案 11/10</div><div class="g-bar" style="left:30%;width:22%;background:#A8E6C4" title="等对方确认" data-page-node-id="TNSSewBNuAycvF5Icppksp">商务谈判</div></div></div>
+        <div class="g-row" data-page-node-id="zcrIwu67FJFqbzhMLdlvQy"><div class="g-lbl" data-page-node-id="uC0bT767DIHVyFOrVyLSGA">客户乙 · VA 开户</div><div class="g-track" data-page-node-id="RBnle9ZmtXq8yqZy81p1EP"><div class="g-bar" style="left:4%;width:18%;background:#4FCB8B" data-page-node-id="ZiRq8TAbyx1hPTmFgkO8fV">资料收集</div><div class="g-bar" style="left:24%;width:30%;background:#A8E6C4" data-page-node-id="WHu8mLjkw4K0qfDvTqxCCy">尽调上线</div></div></div>
+        <div class="g-row" data-page-node-id="BCu9DWddyczyVcMje2amx4"><div class="g-lbl" data-page-node-id="78k5k9MThluA8I2UHuT9XM">客户丙 · 通道接入</div><div class="g-track" data-page-node-id="CGWOY68IdqNAHCPX3R2iVz"><div class="g-bar" style="left:12%;width:14%;background:#A8E6C4" data-page-node-id="ifnaBs0naFWvRu0pRDufQe">等回复</div><div class="g-bar" style="left:28%;width:40%;background:#00C566" data-page-node-id="yIVFkDyzPD6irZVmAHrMUG">展会会面 12/9</div></div></div>
+        <div class="g-row" data-page-node-id="oVKaFRR4P5RhsQ2KyYOjZo"><div class="g-lbl" data-page-node-id="eKp9gBAUuaIWvDniF34plp">客户己 · 补联系</div><div class="g-track" data-page-node-id="9JSwAPm9gDX0mLxxjFbrFD"><div class="g-bar" style="left:6%;width:12%;background:var(--red)" data-page-node-id="BzQLLbcE5CuzaPFSFSWutm"> 超期</div><div class="g-bar" style="left:20%;width:20%;background:#8FD9B6" data-page-node-id="Tqn3EuWVXdvkGBxwWttwmP">LinkedIn 触达</div></div></div>
+        <div class="g-row" data-page-node-id="nkfU3RtRqlZc2EBGEuHK1j"><div class="g-lbl" data-page-node-id="6pQJfitAjElZVw8OGq1b37">客户戊 · 新线索</div><div class="g-track" data-page-node-id="DY5lDxoAZFX4HqgAq3ERJA"><div class="g-bar" style="left:18%;width:16%;background:#DCE0E5" data-page-node-id="4u6WIjRT9jD7XFMcRy57QB">简报生成</div><div class="g-bar" style="left:36%;width:34%;background:#DCE0E5" data-page-node-id="SnAh0VFVJGWWFT1PnGAtt9">展会首触达</div></div></div>
+        <div class="g-row" data-page-node-id="zjSbnyEz49jOZ1JW5LHcBP"><div class="g-lbl" data-page-node-id="aTQIzRtWwKv9fK8ME7P840">迪拜展会 · 项目</div><div class="g-track" data-page-node-id="wBWx539uBUaljMEdPCRZgm"><div class="g-bar" style="left:20%;width:12%;background:var(--gold)" data-page-node-id="9gxqsEYF3cM3lGNfOuUleH">行前</div><div class="g-bar" style="left:33%;width:6%;background:var(--red)" data-page-node-id="oJUL7JZiaRs5h0S21WTvOO">展期</div><div class="g-bar" style="left:40%;width:24%;background:var(--green)" data-page-node-id="sGDFnjKWvXtpPuIcDWGXdI">复盘跟进</div></div></div>
+      </div>
+      <div style="margin-top:12px;font-size:12px;color:var(--sub)" data-page-node-id="3RQi6clwDexGW58CepU1jE">静默预警规则：商机阶段停留超 14 天自动提醒，并给出「动词开头可直接转发」的建议动作</div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ============ 数据源 ============ -->
+  <section class="view" id="v-sources" data-page-node-id="YkcT0RGhxvF8dcWvZNxAHJ">
+    <div class="topbar" data-page-node-id="dAJgXVJPZU1ACuwDOsnI9J"><h1 data-page-node-id="5Dp3APD8oeJCyJC3bUT5dx">数据源接入</h1><span class="crumb" data-page-node-id="APXP4sMVaodwIeaiJGbbMI">九源引擎 · 全部只读 · 凭证仅本机/环境变量</span></div>
+    <div class="grid g3" data-page-node-id="GF24RTlS36LWQXlmLKGwR1">
+      <div class="card" data-page-node-id="Aj8lZBQCXeNx3fyZMOrDgg"><h3 data-page-node-id="zSy4eQJx7O0nJ4IUVFFmal"> 日历（真相锚点）</h3><p style="font-size:12px;color:var(--sub);line-height:1.7" data-page-node-id="8vHaZryWLddcTBUNPwMXBT">出差期间日历为最高优先级事实源：现场手动补记的短事件 = 实际会面清单。展前「已确认」的未必发生，以此杜绝「把计划当成果」。</p><span class="badge b-green" data-page-node-id="gNQbr7937eP55FASKgL7vN">已连接 · 用户身份</span></div>
+      <div class="card" data-page-node-id="iYdyCG9LiHXh2CiAHG5IOe"><h3 data-page-node-id="YtDi8pCIfIVY7Glfh76Gy1"> WhatsApp 本地库</h3><p style="font-size:12px;color:var(--sub);line-height:1.7" data-page-node-id="g4bGcUr0zGEq2qcQ5OCwSn">桌面版 sqlite 只读解析（mode=ro）；CFAbsoluteTime 时间基准；新版发送人哈希自动回退「群成员」。</p><span class="badge b-orange" data-page-node-id="lSbiIEXb5DNWFGAhhwwuX3">待磁盘权限</span></div>
+      <div class="card" data-page-node-id="SAei0zzhuBTsaLDrjbeYT0"><h3 data-page-node-id="ZyJcCEFZd0zoXEHgaXuqhI"> 展会 App</h3><p style="font-size:12px;color:var(--sub);line-height:1.7" data-page-node-id="4nCGAsDTWKuSVvwPZcAVQ1">Messages 会话直链一次抓全；聊天原文按浏览器时区换算后回填日历备注「 沟通留痕」。</p><span class="badge b-green" data-page-node-id="jy60AnoHKEtH5ZbD4iIALe">已连接</span></div>
+      <div class="card" data-page-node-id="bSlEnEjvHAsri6ntdysiLh"><h3 data-page-node-id="KY5M1hTvebZ29zDjOKovTz"> 双邮箱</h3><p style="font-size:12px;color:var(--sub);line-height:1.7" data-page-node-id="dkcaEEuDG93zdyntIu1679">外部 IMAP（服务端粗筛+本地精筛）与平台邮件两套系统分别扫描；.ics 附件为日程权威时间源。</p><span class="badge b-green" data-page-node-id="J076mj18lELbCG5mcsyEms">已连接 ×2</span></div>
+      <div class="card" data-page-node-id="X7yNfc9cteGKVIekccYawA"><h3 data-page-node-id="nQ0b3ermC1yBygWtwCNs8k"> 飞书 IM / 任务</h3><p style="font-size:12px;color:var(--sub);line-height:1.7" data-page-node-id="bjNmrjeTk6Qk4NO4ooLNhy">群聊按关键词+时间窗（正序）拉取；展前任务做「承诺兑现检查」三种账目。</p><span class="badge b-green" data-page-node-id="guoe4JF8sfE4tdXfu42A71">已连接</span></div>
+      <div class="card" data-page-node-id="dZXppovrM5xGPu9FqkDiBb"><h3 data-page-node-id="5dHtOVm9VCt9udUFituG29"> 合规与隐私层</h3><p style="font-size:12px;color:var(--sub);line-height:1.7" data-page-node-id="THKWXnA4ahMqmRgOovpwm0">新线索制裁/负面初筛；L1 自用写真名 / L2 外发代称的两级产出；25 项敏感词外发自检内建于流程。</p><span class="badge b-purple" data-page-node-id="X3Xi5KIdhyMHrwcYZBCOZR">内建</span></div>
+    </div>
+  </section>
+
+
+  <!-- ============ 行前安排文档 ============ -->
+  <section class="view" id="v-brief">
+    <div class="topbar"><h1>行前安排 · 成品文档</h1><span class="crumb">迪拜国际支付展会 · 12/7–12/12 · 当地 UTC+4</span>
+      <div class="pill"><button class="btn ghost">导出 PDF</button><button class="btn">同步到日历</button></div>
+    </div>
+    <div class="doc">
+      <div class="doc-h1">行前安排：迪拜国际支付展会（12/7–12/12）</div>
+      <div class="doc-meta">编制：J 女士 · 生成 12/1 09:20 · 版本 v3 · 数据源 S1 日历 / S4 展会 App / S6 外部邮箱 · 客户均为代称</div>
+
+      <h2>1 航班与住宿</h2>
+      <table>
+        <tr><th>项目</th><th>安排</th><th>关键信息</th></tr>
+        <tr><td>去程</td><td>12/7 CA941 北京首都 T3 09:20 → 迪拜 T1 14:35</td><td>直飞 8h15 · 落地后 2 小时入境缓冲</td></tr>
+        <tr><td>返程</td><td>12/12 EK306 迪拜 T3 03:15 → 北京 14:45</td><td>前一晚 23:00 退房，机场 40 分钟</td></tr>
+        <tr><td>酒店</td><td>市中心商务酒店（世贸中心片区）</td><td>距 DWTC 3.2 km · 车程 12 分钟 · 含早 · 可延迟退房</td></tr>
+        <tr><td>备选</td><td>展馆步行圈酒店</td><td>展期满房，已登记候补；若释放优先改订</td></tr>
+      </table>
+      <ul>
+        <li>起飞前 48 小时在线值机；护照有效期需超过 6 个月，阿联酋免签 30 天。</li>
+        <li>展商证 QR 已存离线，另打印一份放随身包；名片按 200 张准备。</li>
+      </ul>
+
+      <h2>2 客户地理分布与交通</h2>
+      <table>
+        <tr><th>对象</th><th>位置</th><th>距酒店</th><th>建议交通</th><th>耗时</th><th>出发建议</th></tr>
+        <tr><td>客户甲</td><td>DWTC Sheikh Saeed Hall 2</td><td>3.2 km</td><td>步行 + 馆内摆渡</td><td>12 分钟</td><td>09:10 出发，留 20 分钟找展位</td></tr>
+        <tr><td>客户乙</td><td>Business Bay 办公区</td><td>8.4 km</td><td>网约车</td><td>20 分钟（早高峰 30）</td><td>避开 08:30–09:30</td></tr>
+        <tr><td>客户丙</td><td>JBR 酒店大堂</td><td>26 km</td><td>网约车</td><td>35 分钟</td><td>15:00 出发，避开海滨晚高峰</td></tr>
+        <tr><td>客户丁</td><td>DIFC Gate Village</td><td>11 km</td><td>地铁红线 + 步行 8 分钟</td><td>28 分钟</td><td>周五午间礼拜时段不排会</td></tr>
+        <tr><td>伙伴 A</td><td>Deira 办公室</td><td>9.6 km</td><td>网约车</td><td>22 分钟</td><td>与客户乙同日，按南北顺序串联</td></tr>
+      </table>
+      <blockquote>动线原则：同一半天只排同一片区，跨区不超过一次；每段预留 15 分钟缓冲。12/9 下午为展馆与市区两段，中间回酒店休整 40 分钟。</blockquote>
+
+      <h2>3 每日动线</h2>
+      <table>
+        <tr><th>日期</th><th>上午</th><th>下午</th><th>晚间</th></tr>
+        <tr><td>12/8 周二</td><td>09:30 展馆开幕，客户甲、客户丙（E46 片区）</td><td>14:00 客户乙（Business Bay）；16:30 回展馆补漏</td><td>19:30 伙伴 A 工作晚餐</td></tr>
+        <tr><td>12/9 周三</td><td>10:00 客户丁（DIFC）；12:00 回展馆</td><td>14:00–16:30 展馆连排 3 场；17:00 撤场</td><td>整理当日记录，22:00 前完成</td></tr>
+        <tr><td>12/10 周四</td><td>09:30 补联清单对象现场拜访</td><td>14:00 收尾；16:00 回酒店整理</td><td>23:00 退房赴机场</td></tr>
+      </table>
+
+      <h2>4 行前检查清单</h2>
+      <div class="ck"><input type="checkbox" checked><span>护照、签证、保险三件套已核</span></div>
+      <div class="ck"><input type="checkbox" checked><span>展商证 QR 与名片已备</span></div>
+      <div class="ck"><input type="checkbox" checked><span>5 份客户资料包（含最近一次沟通要点与卡点）</span></div>
+      <div class="ck"><input type="checkbox" checked><span>斋期与礼拜时段已设为日历不可排会区间</span></div>
+      <div class="ck"><input type="checkbox"><span>应急联系人卡（酒店前台、主办方、同事 X）待打印</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 返程复盘报告 ============ -->
+  <section class="view" id="v-report">
+    <div class="topbar"><h1>返程复盘 · 成品文档</h1><span class="crumb">12/8–12/10 迪拜 · 九源自动汇总 · 12/11 复核</span>
+      <div class="pill"><button class="btn ghost">导出报告</button><button class="btn">生成跟进任务</button></div>
+    </div>
+    <div class="doc">
+      <div class="doc-h1">返程复盘报告：迪拜国际支付展会</div>
+      <div class="doc-meta">编制：J 女士 · 生成于返程航班 · 复核 12/11 · 数据源 S1–S9 · 金额与客户信息按外发版脱敏</div>
+
+      <h2>1 关键结果</h2>
+      <div class="kpis">
+        <div class="k"><b>12</b><span>目标约见</span></div>
+        <div class="k"><b>9</b><span>实际见面（75%）</span></div>
+        <div class="k"><b>4</b><span>新增可跟进线索</span></div>
+        <div class="k"><b>6</b><span>有效商机（进入 Pipeline）</span></div>
+      </div>
+      <p>未成行 3 场均已留痕并转入补联：1 场对方临时改期、1 场展位变更未找到、1 场邀请过期未接受。计划与实际分开记录，不把意向计入成果。</p>
+
+      <h2>2 成本与回收（金额脱敏）</h2>
+      <table>
+        <tr><th>口径</th><th>数值</th><th>说明</th></tr>
+        <tr><td>展会总投入</td><td><span class="mask">██████</span> AED</td><td>差旅、住宿、会籍与物料，按财务口径归集</td></tr>
+        <tr><td>单有效商机成本</td><td><span class="mask">████</span> AED</td><td>总投入 ÷ 6 个有效商机</td></tr>
+        <tr><td>预计回收周期</td><td>2 个季度</td><td>按现有 Pipeline 加权金额测算，不含转介绍溢出</td></tr>
+      </table>
+      <p style="color:var(--sub);font-size:12px">本页为外发版，金额一律以遮蔽块呈现；自用版保留原始数字与凭证链接。</p>
+
+      <h2>3 跟进包（已写入飞书任务）</h2>
+      <table>
+        <tr><th>动作</th><th>优先级</th><th>截止</th><th>渠道</th><th>关联任务</th></tr>
+        <tr><td>发送对华收单方案至对方 BD</td><td><span class="badge b-red">P1</span></td><td>11/12</td><td>邮箱</td><td>FE-1042</td></tr>
+        <tr><td>回询 VA 开户资料清单</td><td><span class="badge b-red">P1</span></td><td>11/11</td><td>邮箱</td><td>FE-1043</td></tr>
+        <tr><td>确认 12/9 展位会面时间</td><td><span class="badge b-orange">P2</span></td><td>11/14</td><td>WhatsApp</td><td>FE-1044</td></tr>
+        <tr><td>LinkedIn 首次定向触达</td><td><span class="badge b-orange">P2</span></td><td>11/15</td><td>LinkedIn</td><td>FE-1045</td></tr>
+        <tr><td>节庆问候（排灯节 / 阿联酋国庆）</td><td><span class="badge b-blue">P3</span></td><td>11/20</td><td>邮件</td><td>FE-1046</td></tr>
+      </table>
+
+      <h2>4 跟进邮件草稿（待 review）</h2>
+      <blockquote>
+        <b>Subject:</b> Following up on our meeting at the Dubai expo — cross-border collection for Client A<br><br>
+        Hi [Name],<br><br>
+        Thanks for the time at Sheikh Saeed Hall. As discussed, we can support your China inbound collection with T+0 settlement and a documented compliance trail. I have attached the proposed structure and the onboarding checklist.<br><br>
+        Two points we did not close on site: the settlement cut-off for same-day value, and the documents required for your corporate account. My proposal: a 30-minute call next week, Tuesday or Wednesday, your time zone.<br><br>
+        Best regards,<br>Jasmine
+      </blockquote>
+      <div class="ck"><input type="checkbox"><span>存入邮箱草稿箱（人工复核后发送）</span></div>
+      <div class="ck"><input type="checkbox"><span>同步为飞书任务，截止 11/12 18:00</span></div>
+
+      <h2>5 跟进甘特图</h2>
+      <div class="gantt-mini">
+        <div class="row"><div class="lbl">方案发送与确认</div><div class="track"><div class="bar" style="left:2%;width:14%"></div></div></div>
+        <div class="row"><div class="lbl">技术对接</div><div class="track"><div class="bar soft" style="left:10%;width:30%"></div></div></div>
+        <div class="row"><div class="lbl">合规材料</div><div class="track"><div class="bar soft" style="left:16%;width:38%"></div></div></div>
+        <div class="row"><div class="lbl">商务条款</div><div class="track"><div class="bar" style="left:38%;width:32%"></div></div></div>
+        <div class="row"><div class="lbl">上线准备</div><div class="track"><div class="bar" style="left:64%;width:28%"></div></div></div>
+      </div>
+      <div class="axis"><span>11/11</span><span>11/20</span><span>12/01</span><span>12/10</span><span>12/20</span></div>
+    </div>
+  </section>
+
+
+  <!-- ============ Event Debrief & Intelligence ============ -->
+  <section class="view" id="v-debrief">
+    <div class="topbar"><h1>Event Debrief &amp; Intelligence</h1><span class="crumb">Dubai Seamless 2026 · 9/22–9/24 · DWTC · Debrief Ready</span>
+      <div class="pill"><button class="btn ghost">Review Data Sources</button><button class="btn">Generate AI Debrief <span class="ai-tag">AI</span></button></div>
+    </div>
+
+    <div class="tabs" data-panels="db">
+      <div class="tab on" data-t="ov">Overview</div>
+      <div class="tab" data-t="acc">Account Intelligence</div>
+      <div class="tab" data-t="mtg">Meeting Insights</div>
+      <div class="tab" data-t="act">Action Center</div>
+      <div class="tab" data-t="rpt">Reports &amp; Export</div>
+    </div>
+
+    <!-- Overview -->
+    <div class="panel on" id="db-ov">
+      <div class="grid g4">
+        <div class="card kpi"><div class="num">16</div><div class="lbl">Companies Identified</div><div class="trend">12 existing + 4 new</div></div>
+        <div class="card kpi"><div class="num">21</div><div class="lbl">Business Interactions</div><div class="trend">meetings · booth visits · messages</div></div>
+        <div class="card kpi"><div class="num">9</div><div class="lbl">Qualified Opportunities</div><div class="trend up">AI-qualified · 6 进入 Pipeline</div></div>
+        <div class="card kpi"><div class="num">26</div><div class="lbl">Follow-up Actions</div><div class="trend">11 任务已建 · 5 封邮件草稿待审</div></div>
+      </div>
+      <div class="grid g32" style="margin-top:14px">
+        <div class="card">
+          <h3>AI Event Performance <span class="ai-tag">AI Analysis</span></h3>
+          <table>
+            <tr><th>指标</th><th>数值</th><th>口径</th></tr>
+            <tr><td>Lead qualification rate</td><td><b>56%</b></td><td>14 场约见 · 8 场确认成行</td></tr>
+            <tr><td>Meeting-to-opportunity rate</td><td><b>42.9%</b></td><td>21 次互动 · 9 个合格商机</td></tr>
+            <tr><td>新线索占比</td><td><b>25%</b></td><td>4 / 16 · 全部无日历记录、由多源挖出</td></tr>
+          </table>
+          <div class="ck"><span class="ai-tag">A · Strategic</span> 4 家 · 立即重点跟进</div>
+          <div class="ck"><span class="ai-tag">B · Potential</span> 5 家 · 持续推进</div>
+          <div class="ck"><span class="ai-tag">C · Nurture</span> 7 家 · 长期培育</div>
+        </div>
+        <div class="card">
+          <h3>AI Executive Summary <span class="ai-tag">AI Generated</span></h3>
+          <p style="font-size:12.5px;line-height:1.8;color:#3A414D">本次展会识别 16 家公司、21 次商务互动。AI 判定 9 个合格商机，集中于跨境收款、中国供应商人民币付款（China Payout）与全球收单基础设施三类需求。价值最高的机会来自已有 B2B 商户网络、并明确提出中国付款需求的国际 PSP。</p>
+          <p style="font-size:12.5px;line-height:1.8;color:#3A414D"><b>AI 建议：</b>优先对 4 家 A 级账户启动商务跟进；2 家临时爽约客户 24 小时内补联；所有 AI 推断数据（交易量、费率预期）须由 BD 确认后方可写入台账。</p>
+          <p style="font-size:11px;color:var(--sub)">演示数据 · 基于 9 源沟通记录归集，指标随真实数据动态计算。</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top:14px">
+        <h3>AI Processing Timeline <span class="ai-tag">Completed</span></h3>
+        <div class="agentfeed">
+          <div class="item"><span class="dot"></span>Collecting Sources · 12 会话记录 · 21 互动 · 14 份附件<span class="st ai-tag st-done">Done</span></div>
+          <div class="item"><span class="dot"></span>Matching Accounts · 去重与公司匹配（2 处展位号冲突已标记）<span class="st ai-tag st-done">Done</span></div>
+          <div class="item"><span class="dot"></span>Analyzing Meetings · 会议纪要与业务需求已提取<span class="st ai-tag st-done">Done</span></div>
+          <div class="item"><span class="dot"></span>Scoring Opportunities · 9 个合格商机 · A/B/C 分级完成<span class="st ai-tag st-done">Done</span></div>
+          <div class="item"><span class="dot"></span>Generating Follow-ups · 26 条建议动作 · 5 封邮件草稿<span class="st ai-tag st-review">Needs Review</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Account Intelligence -->
+    <div class="panel" id="db-acc">
+      <div class="card">
+        <h3>展会客户分级 <span class="r">AI Business Fit Score · 0–100 · 可人工调整</span></h3>
+        <table>
+          <tr><th>Company</th><th>Country</th><th>Type</th><th>Lead Source</th><th>AI Score</th><th>Tier</th><th>Next Action</th></tr>
+          <tr><td><b>客户甲</b> · 某西非 PSP（代称）</td><td>西非</td><td>PSP</td><td>Booth E46</td><td><b style="color:#00864A">91</b></td><td><span class="tier a">A</span></td><td>发送对华收单方案</td></tr>
+          <tr><td><b>AtlasPay Global</b>（虚构演示账户）</td><td>Kenya</td><td>PSP</td><td>Booth 拍照识别</td><td><b style="color:#00864A">94</b></td><td><span class="tier a">A</span></td><td>Priority follow-up 24h</td></tr>
+          <tr><td><b>客户乙</b> · 某中东 MSB（代称）</td><td>海湾</td><td>MSB</td><td>Referral（伙伴 A）</td><td><b style="color:#00864A">85</b></td><td><span class="tier a">A</span></td><td>回询 VA 开户资料</td></tr>
+          <tr><td><b>Meridian Payments</b>（虚构演示账户）</td><td>UAE</td><td>Acquirer</td><td>Speed Networking</td><td><b style="color:#00864A">87</b></td><td><span class="tier a">A</span></td><td>确认区域牌照覆盖</td></tr>
+          <tr><td><b>Pacific CrossPay</b>（虚构演示账户）</td><td>东南亚</td><td>EMI</td><td>Booth C34</td><td>78</td><td><span class="tier b">B</span></td><td>发送产品介绍</td></tr>
+          <tr><td><b>客户己</b> · 某南亚网关（代称）</td><td>南亚</td><td>Gateway</td><td>App Message 未回</td><td>72</td><td><span class="tier b">B</span></td><td>LinkedIn 首次触达</td></tr>
+          <tr><td><b>客户庚</b> · 某独联体 PSP（代称）</td><td>独联体</td><td>PSP</td><td>邀请过期</td><td>64</td><td><span class="tier c">C</span></td><td>远程会议邀约</td></tr>
+        </table>
+        <p style="font-size:11px;color:var(--sub)">AI Score ≠ 成交概率；成交预测需基于真实历史数据另行校准。代称行在自用版显示真名。</p>
+      </div>
+      <div class="grid g32" style="margin-top:14px">
+        <div class="card">
+          <h3>AtlasPay Global · AI 评分依据 <span class="ai-tag">Explainable</span></h3>
+          <div class="scorebar"><span class="lb">Strategic Fit（25%）</span><span class="tr"><span class="fl" style="width:96%"></span></span><span class="sc">24/25</span></div>
+          <div class="scorebar"><span class="lb">China Payout Demand（25%）</span><span class="tr"><span class="fl" style="width:100%"></span></span><span class="sc">25/25</span></div>
+          <div class="scorebar"><span class="lb">Transaction Potential（20%）</span><span class="tr"><span class="fl" style="width:90%"></span></span><span class="sc">18/20</span></div>
+          <div class="scorebar"><span class="lb">License &amp; Compliance（15%）</span><span class="tr"><span class="fl" style="width:87%"></span></span><span class="sc">13/15</span></div>
+          <div class="scorebar"><span class="lb">Engagement &amp; Intent（15%）</span><span class="tr"><span class="fl" style="width:93%"></span></span><span class="sc">14/15</span></div>
+          <p style="font-size:12px;color:#3A414D;margin-top:8px"><b>AI Explanation：</b>该公司服务从中国采购的非洲进口商，现有 B2B 支付基础设施 + 明确的本币收款与人民币付款需求，为高契合潜在伙伴。建议 24 小时内优先跟进。</p>
+        </div>
+        <div class="card">
+          <h3>账户详情 Drawer（点击客户行展开）</h3>
+          <table>
+            <tr><td style="color:var(--sub);width:110px">Company Overview</td><td>背景、官网、地区、规模</td></tr>
+            <tr><td style="color:var(--sub)">Key Contacts</td><td>CEO / BD / Finance / Compliance</td></tr>
+            <tr><td style="color:var(--sub)">Historical Relationship</td><td>邮件、WhatsApp、飞书历史与本次展会信息合并，不重复建档</td></tr>
+            <tr><td style="color:var(--sub)">AI Opportunity</td><td>潜在合作、评分依据、推荐产品、下一步</td></tr>
+          </table>
+          <p style="font-size:11px;color:var(--sub)">点击任一客户行打开右侧详情抽屉（演示：见「客户 360」视图）。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Meeting Insights -->
+    <div class="panel" id="db-mtg">
+      <div class="card">
+        <h3>AtlasPay Global · 多源会议情报 <span class="ai-tag">5 Sources Matched</span></h3>
+        <div class="agentfeed" style="margin-bottom:10px">
+          <div class="item"><span class="dot"></span>Booth Photo · AI Vision 识别展位 Logo → 匹配 CRM<span class="st ai-tag st-done">Done</span></div>
+          <div class="item"><span class="dot"></span>Business Card · Michael Okoro · Head of Partnerships · michael@atlaspay.example（虚构）<span class="st ai-tag st-done">OCR</span></div>
+          <div class="item"><span class="dot"></span>Voice Recording · 12 分 35 秒 · 转写完成<span class="st ai-tag st-done">Done</span></div>
+          <div class="item"><span class="dot"></span>WhatsApp History · 此前询问收款人支持、结算时效、手续费<span class="st ai-tag st-done">Done</span></div>
+          <div class="item"><span class="dot"></span>BD Notes · 关注 CNY 对公付款；需与运营合规开技术会<span class="st ai-tag st-done">Done</span></div>
+        </div>
+        <table>
+          <tr><th>AI 提取字段</th><th>结果</th><th>状态</th></tr>
+          <tr><td>China Payout 需求</td><td>明确提出（当地收款 + 中国供应商 CNY 付款）</td><td><span class="ai-tag st-done">Confirmed</span></td></tr>
+          <tr><td>牌照</td><td>Kenya 当地支付 / 汇款许可</td><td><span class="ai-tag st-done">Confirmed</span></td></tr>
+          <tr><td>结算币种</td><td>USD / CNY</td><td><span class="ai-tag st-done">Confirmed</span></td></tr>
+          <tr><td>预估月交易量</td><td>USD 5M</td><td><span class="ai-tag st-review">AI Inferred</span></td></tr>
+          <tr><td>API 对接计划</td><td>尚未讨论</td><td><span class="ai-tag st-pend">Missing · 待补</span></td></tr>
+        </table>
+        <p style="font-size:11px;color:var(--sub)">三态原则：Confirmed（客户明确表达）/ AI Inferred（上下文推断，待确认）/ Missing（提示 BD 补充）。AI 推断值不直接写入台账。</p>
+      </div>
+      <div class="grid g32" style="margin-top:14px">
+        <div class="card">
+          <h3>AI Meeting Summary</h3>
+          <table>
+            <tr><td style="color:var(--sub);width:130px">Business Overview</td><td>服务中非贸易进口商的肯尼亚 PSP（虚构演示）</td></tr>
+            <tr><td style="color:var(--sub)">Key Requirements</td><td>本币收款 · USD 跨境结算 · 中国供应商 CNY 对公付款 · 收款人预验证</td></tr>
+            <tr><td style="color:var(--sub)">Pain Points</td><td>跨境结算慢 · 供应商付款管理难 · 缺可靠 China payout 伙伴</td></tr>
+            <tr><td style="color:var(--sub)">Recommended</td><td>China Payout + FX 转换 + 收款人预验证 + API 集成</td></tr>
+            <tr><td style="color:var(--sub)">AI Talking Points</td><td>介绍中国本地清算网络与人民币资质；澄清结算时效；确认监管结构与资金流</td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <h3>Payment Flow Intelligence <span class="ai-tag">支付流画像</span></h3>
+          <table>
+            <tr><td style="color:var(--sub);width:130px">付款方</td><td>Kenya 进口商（Corporate）</td></tr>
+            <tr><td style="color:var(--sub)">收款方</td><td>中国大陆供应商（Corporate）</td></tr>
+            <tr><td style="color:var(--sub)">币种路径</td><td>KES / USD 收款 → CNY 付款</td></tr>
+            <tr><td style="color:var(--sub)">资金用途</td><td>货款 · 贸易结算</td></tr>
+            <tr><td style="color:var(--sub)">是否 China Payout</td><td><b>是</b> · Confirmed</td></tr>
+            <tr><td style="color:var(--sub)">预估量 / 频率</td><td>USD 5M / 月 · <span class="ai-tag st-review">AI Inferred</span></td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Center -->
+    <div class="panel" id="db-act">
+      <div class="card">
+        <h3>四步审批流 <span class="ai-tag">Human in the Loop</span></h3>
+        <div class="pill-flow">
+          <div class="fs done">1 Review AI Extraction</div>
+          <div class="fs done">2 Confirm Accounts</div>
+          <div class="fs cur">3 Approve Deals &amp; Tasks</div>
+          <div class="fs">4 Generate Drafts</div>
+        </div>
+        <p style="font-size:11px;color:var(--sub)">支持全部批准 / 选择性批准 / 修改后批准 / 拒绝或合并重复；一条数据异常不阻塞整个复盘。AI 推荐与已执行动作严格区分展示。</p>
+      </div>
+      <div class="grid g32" style="margin-top:14px">
+        <div class="card">
+          <h3>AtlasPay Global · <span class="tier a">A</span> 推荐动作</h3>
+          <div class="ck"><input type="checkbox" checked><span>24h 内发送个性化致谢邮件（草稿已生成）</span></div>
+          <div class="ck"><input type="checkbox" checked><span>发送 China Payout 产品介绍</span></div>
+          <div class="ck"><input type="checkbox"><span>安排技术探索会议（BD + 产品）</span></div>
+          <div class="ck"><input type="checkbox"><span>索取业务流与预估月交易量（补 AI Inferred 数据）</span></div>
+          <div class="pill" style="margin-top:10px"><button class="btn">Review Email Draft</button><button class="btn ghost">View Deal Plan</button></div>
+        </div>
+        <div class="card">
+          <h3>Meridian Payments · <span class="tier b">B</span> 推荐动作</h3>
+          <div class="ck"><input type="checkbox"><span>发送公司介绍</span></div>
+          <div class="ck"><input type="checkbox"><span>确认区域牌照覆盖范围</span></div>
+          <div class="ck"><input type="checkbox"><span>安排第二次会议</span></div>
+          <p style="font-size:11px;color:var(--sub);margin-top:8px">基于虚构会议数据的示例推荐。批准后写入 CRM、任务与甘特，全部记录可回溯到本次展会与源会议。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reports -->
+    <div class="panel" id="db-rpt">
+      <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+        <div class="card"><h3>Executive Event Report</h3><p style="font-size:12px;color:var(--sub)">展会表现、线索统计、战略账户、商机、市场洞察、下一步建议。面向管理层。</p><div class="pill" style="margin-top:10px"><button class="btn">导出 PDF</button></div></div>
+        <div class="card"><h3>BD Follow-up Report</h3><p style="font-size:12px;color:var(--sub)">逐客户小结、会议记录、商机评估、跟进任务、邮件状态。面向 BD 自己。</p><div class="pill" style="margin-top:10px"><button class="btn">生成报告</button></div></div>
+        <div class="card"><h3>CRM Data Export</h3><p style="font-size:12px;color:var(--sub)">Companies / Contacts / Meetings / Opportunities / Tasks 结构化导出；支持创建飞书文档。</p><div class="pill" style="margin-top:10px"><button class="btn ghost">导出 Excel</button><button class="btn">创建飞书文档</button></div></div>
+      </div>
+      <div class="card" style="margin-top:14px">
+        <h3>数据实体与关联 <span class="ai-tag">Normalized Entities</span></h3>
+        <table>
+          <tr><th>实体</th><th>作用</th><th>关联</th></tr>
+          <tr><td>Event</td><td>展会基本信息（Dubai Seamless 2026）</td><td>—</td></tr>
+          <tr><td>Company / Contact</td><td>统一客户与联系人档案</td><td>可关联多个 Event / Meeting / Opportunity</td></tr>
+          <tr><td>SourceRecord</td><td>原始录音、名片、照片、邮件，含授权与处理状态</td><td>→ Meeting → Company</td></tr>
+          <tr><td>MeetingInsight</td><td>AI 提取的会议情报（三态标记 + 置信度）</td><td>→ Meeting / Opportunity</td></tr>
+          <tr><td>Opportunity / Task / EmailDraft</td><td>商机、任务（含依赖与负责人）、邮件草稿（人工审批）</td><td>→ Company + Source Meeting</td></tr>
+        </table>
+        <p style="font-size:11px;color:var(--sub)">全部实体使用稳定 ID 关联；每条 AI 提取值保留来源与置信度；重要 CRM 更新留审批与操作日志。</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer-note" data-page-node-id="2tDDHFOLZp9q8hDJkonii3">销售易 YeeSales · YEE AI 智能大赛 2.0 参赛原型 · 本页为交互演示，全部客户均为代称、数据虚构 · 引擎已沉淀 SkillHub（@hwfgs/expo-followup-pipeline）</div>
+  </main>
+</div>
+
+<!-- drawer -->
+<div class="drawer-mask" id="mask" onclick="closeDrawer()" data-page-node-id="B3bCeW2LqQhUt2xer2bxgp"></div>
+<aside class="drawer" id="drawer" data-page-node-id="yfWZycKftBqCdNLWiWvw0k">
+  <div class="dh" data-page-node-id="R3ikSZ1txUeDJ5wFaBU45e"><b id="d-title" data-page-node-id="W4WsU3AXxMhOq4EGhtvZe5">客户详情</b><span class="x" onclick="closeDrawer()" data-page-node-id="kU4AraD1siG1kBPjv3zK5A"></span></div>
+  <div class="db" id="d-body" data-page-node-id="KivwZHGWgktDhAHOvjOxxM"></div>
+</aside>
+
+<script>
+// ---------- nav ----------
+const views={dash:'AI 销售驾驶舱',pre:'会前 · 线索与约见',brief:'行前安排文档',during:'会中 · 现场助理',post:'九源回收流水线',report:'返程复盘报告',c360:'客户 360',graph:'人脉图谱',holiday:'全球节假日日历',gantt:'看板与甘特',debrief:'Event Debrief 情报中枢',sources:'数据源与集成'};
+document.querySelectorAll('#nav a').forEach(a=>{
+  a.onclick=()=>{
+    document.querySelectorAll('#nav a').forEach(x=>x.classList.remove('on'));
+    a.classList.add('on');
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+    document.getElementById('v-'+a.dataset.v).classList.add('on');
+    document.querySelector('.main').scrollTop=0;
+    history.replaceState(null,'','#'+a.dataset.v);
+  };
+});
+// 深链：#dash / #pre / #brief / #during / #post / #report / #debrief / #c360 / #graph / #holiday / #gantt / #sources
+(function(){
+  const go=v=>{const a=document.querySelector('#nav a[data-v="'+v+'"]');if(a)a.click();};
+  const init=()=>{const v=(location.hash||'').replace('#','');if(v)go(v);};
+  window.addEventListener('hashchange',()=>go((location.hash||'').replace('#','')));
+  init();
+})();
+
+// tab panels（Event Debrief 等）
+document.querySelectorAll('.tabs[data-panels]').forEach(ts=>{
+  const pre=ts.getAttribute('data-panels');
+  ts.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
+    ts.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+    t.classList.add('on');
+    document.querySelectorAll('.panel[id^="'+pre+'-"]').forEach(pn=>pn.classList.remove('on'));
+    const el=document.getElementById(pre+'-'+t.dataset.t); if(el)el.classList.add('on');
+  });
+});
+
+
+
+// ---------- client drawer ----------
+const CLIENTS={
+ c1:{n:'客户甲 · 某西非 PSP（代称）',rows:[['阶段','方案报价中 · P1'],['约定动作','11/10 前发送对华收单方案'],['上次接触','展会会面 32 分钟 + App 互认'],['对方诉求','对华收款 T+0；关注个人结汇额度'],['我方应对','对公账户方案 + SAFE 合规说明'],['文化档案',' 重视个人关系；节庆送礼勿含酒类'],['证据源','S1日历 S2语音 S4展会App S6邮箱']],
+      acts:['发送对华收单方案（今天 18:00）','7 天无回访 → 自动提醒回访']},
+ c2:{n:'客户乙 · 某中东 MSB（代称）',rows:[['来源','伙伴 A 转介绍'],['阶段','尽调上线 · P1'],['约定动作','回询 VA 开户资料清单'],['备注','现场改约 14:30，WhatsApp 已自动更新日历'],['合规初筛','通过'],['证据源','S1日历 S3WhatsApp']],
+      acts:['今天回询资料','上线后致谢引荐人']},
+ c3:{n:'客户丙 · 某东南亚钱包（代称）',rows:[['来源','网络检索'],['阶段','等对方回复 · P2'],['文化提醒','印度团队 11/8 排灯节 → 问候草稿待 review'],['约定动作','确认 12/9 会面时间'],['证据源','S4展会App']],
+      acts:['节后二次触达','会前 1 周再确认']},
+ c4:{n:'客户丁 · 某欧洲收单机构（代称）',rows:[['来源','社交媒体（LinkedIn）'],['阶段','合规复审中 · P2'],['备注','展位号变更 Z9（同事 X 现场提示，路线引擎已重算）'],['证据源','S5飞书IM']],
+      acts:['合规复审通过后 LinkedIn 定向触达']},
+ c5:{n:'伙伴 A · 某阿联酋渠道（代称）',rows:[['关系','转介绍人（引荐客户乙、客户己）'],['约定动作','转介绍致谢 + 约线上演示'],['证据源','S1日历']],
+      acts:['周五致谢并约演示']},
+ c6:{n:'客户己 · 某南亚网关（代称）',rows:[['状态','未见到 · 需补联系（App 内未回）'],['动作','11/14 前 LinkedIn 首次触达'],['提醒','过期邀请与未回消息不计入有效商机，但绝不丢弃'],['证据源','S4展会App']],
+      acts:['LinkedIn 定向消息（草稿已备）']},
+ c7:{n:'客户庚 · 某独联体 PSP（代称）',rows:[['状态','邀请已过期未接受 · 未见到'],['动作','换 LinkedIn/邮件远程补联系'],['证据源','S4展会App S6外部邮箱']],
+      acts:['远程会议邀约（附时区选项）']}
+};
+function openClient(id){
+  const c=CLIENTS[id];if(!c)return;
+  document.getElementById('d-title').textContent=c.n;
+  let h='<table style="font-size:13px">';
+  c.rows.forEach(r=>h+=`<tr><td style="color:var(--sub);width:90px;padding:8px 10px">${r[0]}</td><td style="padding:8px 10px">${r[1]}</td></tr>`);
+  h+='</table><h3 style="margin:14px 0 8px;font-size:13px">建议下一步</h3>';
+  c.acts.forEach(a=>h+=`<div class="ck"><input type="checkbox"><span>${a}</span></div>`);
+  h+='<div style="margin-top:12px;font-size:11px;color:var(--sub)">本卡由九源引擎自动聚合 · 真名/条款仅存于 L1 自用版，本演示视图为 L2 脱敏版</div>';
+  document.getElementById('d-body').innerHTML=h;
+  document.getElementById('mask').style.display='block';
+  document.getElementById('drawer').classList.add('open');
+}
+function closeDrawer(){document.getElementById('mask').style.display='none';document.getElementById('drawer').classList.remove('open');}
+
+// ---------- month calendar ----------
+const HOLS={
+ 2:[[' Finados','solemn'],[' 亡灵节','festive']],
+ 8:[[' 排灯节','festive']],
+ 26:[[' 感恩节','festive']],
+ 12:[[' 国庆(预告)','festive']]
+};
+(function(){
+  const cal=document.getElementById('cal');if(!cal)return;
+  const hd=['一','二','三','四','五','六','日'];hd.forEach(d=>cal.insertAdjacentHTML('beforeend',`<div class="hd">${d}</div>`));
+  const first=new Date(2026,10,1);let start=(first.getDay()+6)%7;
+  for(let i=0;i<start;i++)cal.insertAdjacentHTML('beforeend','<div class="cell" style="opacity:.35"></div>');
+  for(let d=1;d<=30;d++){
+    const hol=HOLS[d]||[];
+    let tags=hol.map(h=>`<div class="hol" style="background:${h[1]==='solemn'?'#F5E8FF':'#E8FFEA'};color:${h[1]==='solemn'?'#722ED1':'#00B42A'}">${h[0]}</div>`).join('');
+    cal.insertAdjacentHTML('beforeend',`<div class="cell ${d===9?'today':''}"><div class="d">${d}</div>${tags}</div>`);
+  }
+})();
+</script>
+</body>
+</html>
