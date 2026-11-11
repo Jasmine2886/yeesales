@@ -169,6 +169,39 @@ tr:hover td{background:#FAFBFC}
 .draft.editing textarea{display:block}
 .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:#1F2329;color:#fff;border-radius:10px;padding:10px 18px;font-size:13px;z-index:99;opacity:0;pointer-events:none;transition:all .25s;max-width:80vw}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+/* 甘特 / 客户生命周期模拟 */
+.gantt{border:1px solid var(--line);border-radius:12px;background:#fff;padding:14px 16px 10px;margin-top:12px;overflow-x:auto}
+.ginner{min-width:880px}
+.gaxis{position:relative;height:22px;margin-left:200px;border-bottom:1px solid var(--line)}
+.gaxis span{position:absolute;transform:translateX(-50%);font-size:11px;color:var(--mute);top:2px}
+.grow{display:grid;grid-template-columns:190px 1fr;gap:10px;align-items:center;padding:8px 0;border-top:1px dashed #EEF1F4}
+.grow:first-of-type{border-top:none}
+.glabel{font-size:12.5px;font-weight:700;color:var(--ink);cursor:pointer;line-height:1.35}
+.glabel:hover{color:var(--green-deep)}
+.glabel span{display:block;font-weight:400;font-size:11px;color:var(--mute)}
+.gtrack{position:relative;height:36px;background:#FAFBFC;border-radius:8px}
+.gseg{position:absolute;top:8px;height:20px;border-radius:10px;font-size:9.5px;color:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;white-space:nowrap}
+.gseg.plan{background:#fff !important;border:1.5px dashed;color:transparent}
+.gdot{position:absolute;top:-5px;width:13px;height:13px;border-radius:50%;border:2.5px solid #fff;box-shadow:0 0 0 1.5px rgba(18,24,31,.18);cursor:pointer;transform:translateX(-50%);transition:transform .12s}
+.gdot:hover{transform:translateX(-50%) scale(1.3)}
+.gnow{position:absolute;top:-4px;bottom:-4px;width:2px;background:#E05656;border-radius:1px}
+.gnow i{position:absolute;top:-16px;left:-14px;font-style:normal;font-size:10px;color:#E05656;font-weight:700}
+.glegend{display:flex;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--sub);margin:10px 0 4px 200px}
+.glegend i{display:inline-block;width:18px;height:9px;border-radius:5px;margin-right:5px;vertical-align:1px}
+.glegend i.plan{background:#fff;border:1.5px dashed #9AA1AC}
+.glegend i.dot{width:11px;height:11px;border-radius:50%;background:#2F6BD8;border:2px solid #fff;box-shadow:0 0 0 1.5px rgba(18,24,31,.18)}
+/* 生命周期节点弹层 */
+.life-rec{background:#F7F9F8;border:1px solid var(--line);border-left:3px solid var(--green);border-radius:8px;padding:12px 14px;font-size:13.5px;line-height:1.7;margin-top:10px}
+.life-oth{margin-top:14px;border-top:1px solid var(--line);padding-top:10px}
+.life-oth a{display:flex;gap:10px;align-items:baseline;padding:6px 8px;border-radius:8px;font-size:13px;color:var(--body);text-decoration:none;cursor:pointer}
+.life-oth a:hover{background:#F4F6F8}
+.life-oth a.on{background:var(--green-soft)}
+.life-oth .d{color:var(--mute);font-size:11.5px;min-width:42px}
+.evtag{display:inline-block;font-size:10.5px;font-weight:700;border-radius:6px;padding:1px 7px;margin-right:6px;vertical-align:1px}
+.evtag.chat{background:#EAF1FF;color:#2F6BD8}
+.evtag.mail{background:#EAF8F0;color:#00864A}
+.evtag.meet{background:#FDF3E3;color:#9A6A12}
+.evtag.task{background:#FDECEC;color:#C0392B}
 .stageSel{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
 .stageSel select{border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-size:13px;font-family:inherit}
 @media(max-width:1000px){.g2,.g2e,.g3,.g4,.cust-layout{grid-template-columns:1fr}.kanban{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -515,7 +548,11 @@ tr:hover td{background:#FAFBFC}
       <div class="kcol"><h4>合规 / 上线 <span>1</span></h4>
         <div class="kcard" onclick="openDeal(this)" data-c="伙伴 A" data-d="渠道合作" data-s="Live" data-a="已生效" data-n="致谢引荐人" data-t="11/30"><b>伙伴 A · 渠道合作</b><div class="m">已生效</div><div class="due">11/30 致谢引荐人</div></div></div>
     </div>
-    <div style="margin-top:14px"><button class="btn ghost" onclick="toast('甘特 / 路线图视图：45 天成交路线图，日常用看板就够了（二级视图，演示）')">切换甘特 / 路线图视图</button></div>
+    <div style="margin-top:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+      <button class="btn ghost" id="btn-gantt" onclick="toggleGantt()">切换甘特 / 路线图视图</button>
+      <span class="mut" style="font-size:12px">客户生命周期模拟 · 实线为已发生，虚线为 AI 预测，圆点可点开原始记录</span>
+    </div>
+    <div id="gantt-view" style="display:none"></div>
   </section>
 
   <!-- ============ AI ASSISTANT ============ -->
@@ -668,6 +705,10 @@ Jasmine</textarea>
   <div class="sheet" id="deal-body"></div>
 </div>
 
+<div class="mask" id="m-life" onclick="if(event.target===this)closeM('m-life')">
+  <div class="sheet" id="life-body"></div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -769,6 +810,134 @@ function confirmStage(btn){
   closeM('m-deal');
   toast('商机阶段已更新为「'+v+'」（演示：真实系统中写入前同样需要你确认）','ok');
 }
+// ===== 甘特 / 客户生命周期模拟 =====
+const G_DAYS=76, G_START='10/19';
+const G_WEEKS=[[0,'10/19'],[14,'11/02'],[28,'11/16 · 今天'],[42,'11/30'],[56,'12/14'],[70,'12/28']];
+const G_TODAY=28;
+const G_SC={'Lead':'#C4CAD3','Qualified':'#6FA8F5','Meeting':'#3FB6A8','Proposal':'#00A85A','Negotiation':'#00864A','Compliance':'#E8A23D','Integration':'#8E7CE0','Live':'#1F7A4D'};
+const G_TC={chat:'#2F6BD8',mail:'#00A85A',meet:'#E8A23D',task:'#E05656'};
+const G_TN={chat:'交谈',mail:'邮件',meet:'会议',task:'待办'};
+const LIFECYCLE=[
+ {key:'atlas',name:'AtlasPay Global',deal:'China Payout',cur:'Proposal',amt:'$480K',cust:true,
+  segs:[['Lead',9,16],['Qualified',16,26],['Meeting',26,27],['Proposal',27,40],['Negotiation',40,52,1],['Compliance',52,62,1],['Live',62,72,1]],
+  events:[
+   {id:'a1',day:9,d:'10/28',type:'chat',title:'WhatsApp 首次触达',src:'s1',srcT:'客户自述',
+    body:'对方 Daniel Otieno（CEO）：「我们服务肯尼亚进口商，货从中国来，每月大概 40 万美元付 CNY 给供应商，现在走 SWIFT，T+3，周末不到账，旺季资金压得比较紧。」',
+    next:'确认收款主体、月量峰值与付款用途（进口货款）'},
+   {id:'a2',day:18,d:'11/06',type:'mail',title:'英文邮件 · 发初步资料',src:'s2',srcT:'已发送',
+    body:'发送 China Payout 简介（T+0 人民币付款 + 周末结算）。对方回复：「方案看起来对路，我转发给财务总监。」',
+    next:'等财务总监反馈；一周内未回复则电话跟进'},
+   {id:'a3',day:26,d:'11/14',type:'meet',title:'视频会议 · China Payout 方案',src:'s1',srcT:'客户自述',
+    body:'会上确认三点：① 月量 40 万美元可走企业付款；② 最关心 T+0 与周末到账；③ Daniel 承诺拿到正式方案后一周内给答复。现有通道 SWIFT 代理行，替换成本是主要顾虑。',
+    next:'11/16 前发正式方案（今天，已拖 2 天）'},
+   {id:'a4',day:28,d:'11/16',type:'task',title:'待办 · 发正式方案',src:'s3',srcT:'AI 提醒',
+    body:'方案与报价区间已备好，发送前需你确认。商机停滞 2 天，AI 建议：保持 Proposal，先发方案；对方确认后再推进。',
+    next:'今天 18:00 前'},
+   {id:'a5',day:29,d:'11/18',type:'meet',title:'SFF 展位 B42 见面（计划）',src:'s3',srcT:'AI 预测',
+    body:'预测：现场敲定费率区间与周末结算细节后，推进到 Negotiation。需提前准备 KES→CNY 报价表与进口商批量付款案例。',
+    next:'会前 3 分钟简报已生成，见 Events & Travel'}]},
+ {key:'meridian',name:'Meridian Payments',deal:'VA 开户',cur:'Negotiation',amt:'$820K',cust:false,
+  segs:[['Lead',15,19],['Qualified',19,23],['Meeting',23,28],['Negotiation',28,45,1],['Compliance',45,58,1],['Live',58,72,1]],
+  events:[
+   {id:'m1',day:15,d:'11/03',type:'chat',title:'LinkedIn 首次触达',src:'s2',srcT:'公开资料',
+    body:'看到对方在扩 VA（虚拟账户）业务。公开资料：阿联酋 MSB 牌照，客群以南亚贸易商为主，有 multi-currency 收款需求。',
+    next:'确认 VA 开户的目标客群与币种范围'},
+   {id:'m2',day:20,d:'11/08',type:'mail',title:'英文邮件 · 开户材料清单',src:'s2',srcT:'已发送',
+    body:'发送 VA 开户所需材料清单（UBO 结构、牌照复印件、业务说明）。对方合规同事回复了两个关于受益所有人穿透的问题，已答复。',
+    next:'补齐材料后进入正式报价'},
+   {id:'m3',day:24,d:'11/12',type:'chat',title:'WhatsApp · 牌照范围问询',src:'s3',srcT:'AI 提醒',
+    body:'对方问：「你们的 VA 牌照是否覆盖接收南亚汇入？」——这个问题的答案决定方案口径。我方尚未答复，风险：明天会上被再次问到。',
+    next:'会前必须和产品确认牌照范围'},
+   {id:'m4',day:29,d:'11/17',type:'meet',title:'明天 14:00 会议（计划）',src:'s3',srcT:'AI 预测',
+    body:'议程：UBO 结构确认 → 牌照范围答复 → 报价。文化注意：先聊关系再谈价，报价留余地。预测：会议顺利则进入合规材料阶段。',
+    next:'会议简报已生成，见 Home'}]},
+ {key:'pacific',name:'Pacific CrossPay',deal:'PHP→CNY Collection',cur:'Qualified',amt:'$440K',cust:false,
+  segs:[['Lead',20,23],['Qualified',23,29],['Meeting',29,35,1],['Proposal',35,48,1],['Negotiation',48,62,1],['Live',62,72,1]],
+  events:[
+   {id:'p1',day:20,d:'11/08',type:'chat',title:'LinkedIn 首聊',src:'s1',srcT:'客户自述',
+    body:'对方 Head of Ops（Marco Reyes）：「PHP→CNY 走廊量很大，中国的供应商要求周末也能收款，我们现在的渠道做不到。」',
+    next:'确认走廊月量与结算时效要求'},
+   {id:'p2',day:24,d:'11/12',type:'chat',title:'WhatsApp 跟进',src:'s1',srcT:'客户自述',
+    body:'确认 11/17 SFF 展位 D08 见面，对方会带运营总监一起来，想直接谈价格区间。',
+    next:'准备 indicative pricing（非正式报价，需注明）'},
+   {id:'p3',day:29,d:'11/17',type:'meet',title:'SFF 展位 D08 见面（计划）',src:'s3',srcT:'AI 预测',
+    body:'目标：把 Qualified 推进到 Meeting。谈判要点：先谈走廊月量与时效，价格放到第二轮；避免现场承诺费率。',
+    next:'见面后 24 小时内发会议纪要与下一步'}]},
+ {key:'harbour',name:'Harbour Remit',deal:'Collection + Payout',cur:'Lead',amt:'—',cust:false,
+  segs:[['Lead',25,40],['Qualified',40,52,1],['Meeting',52,62,1],['Proposal',62,72,1]],
+  events:[
+   {id:'h1',day:25,d:'11/13',type:'chat',title:'展会名片 + 背景',src:'s2',srcT:'公开资料',
+    body:'迪拜展会交换名片。公开资料：中国香港 MSO，做中港汇款走廊。规模、通道与合规状态均未确认。',
+    next:'首次触达：发英文介绍 + 完成制裁初筛'},
+   {id:'h2',day:29,d:'11/17',type:'task',title:'首次触达（计划）',src:'s3',srcT:'AI 建议',
+    body:'AI 建议：先发一封介绍邮件（已起草，等确认），同时查香港海关 MSO 名录核对牌照。制裁初筛：通过。',
+    next:'发出后第 3 天未回复，转 LinkedIn 定向'}]},
+ {key:'sable',name:'Sable Financial',deal:'英国 EMI 合作',cur:'Qualified',amt:'—',cust:false,
+  segs:[['Lead',3,14],['Qualified',14,29],['Meeting',29,38,1],['Proposal',38,52,1],['Negotiation',52,66,1],['Live',66,72,1]],
+  events:[
+   {id:'s1',day:3,d:'10/22',type:'chat',title:'行业群引荐',src:'s1',srcT:'客户自述',
+    body:'Emma Clarke（Compliance）在行业群里主动加我：「我们在看欧洲以外靠谱的收付通道，FCA 框架下的合作模式你们怎么做？」',
+    next:'约一次合规对合规的通话'},
+   {id:'s2',day:22,d:'11/10',type:'mail',title:'英文邮件 · 合规问询答复',src:'s2',srcT:'已发送',
+    body:'就 FCA 相关的三个问题（资金存管、数据出境、制裁名单机制）做了书面答复，已抄送双方合规负责人。',
+    next:'等对方合规终审（已 6 天）'},
+   {id:'s3',day:32,d:'11/20',type:'task',title:'跟进提醒（计划）',src:'s3',srcT:'AI 建议',
+    body:'若 11/20 前仍无回复，AI 建议改打对方 COO 电话，并附一句「合规问题我们已全部书面答复，方便的话约 15 分钟电话」。',
+    next:'电话前准备好答复摘要'}]}
+];
+let ganttOn=false;
+function toggleGantt(force){
+  ganttOn=(force===true)?true:!ganttOn;
+  const v=document.getElementById('gantt-view');
+  if(ganttOn&&!v.dataset.done){v.innerHTML=renderGantt();v.dataset.done=1;}
+  v.style.display=ganttOn?'block':'none';
+  document.getElementById('btn-gantt').textContent=ganttOn?'返回看板视图':'切换甘特 / 路线图视图';
+}
+function renderGantt(){
+  const pc=d=>(d/G_DAYS*100).toFixed(2)+'%';
+  let h='<div class="gantt"><div class="ginner">';
+  h+='<div class="gaxis">';
+  G_WEEKS.forEach(w=>{h+='<span style="left:'+pc(w[0])+'">'+w[1]+'</span>';});
+  h+='</div>';
+  LIFECYCLE.forEach(r=>{
+    h+='<div class="grow"><div class="glabel" onclick="'+(r.cust?"closeM('m-life');go('customers');showCust()":"toast('演示数据：该客户详情未包含在本演示中')")+'">'+r.name+'<span>'+r.deal+' · '+r.cur+(r.amt!=='—'?' · '+r.amt:'')+'</span></div><div class="gtrack">';
+    r.segs.forEach(s=>{
+      const w=(s[2]-s[1]);
+      const light=(s[0]==='Lead'||s[0]==='Qualified');
+      h+='<div class="gseg'+(s[3]?' plan':'')+'" style="left:'+pc(s[1])+';width:'+pc(w)+';background:'+G_SC[s[0]]+';color:'+(s[3]?G_SC[s[0]]:(light?'#2A3138':'#fff'))+'" title="'+s[0]+(s[3]?'（AI 预测）':'')+'">'+(w>=6?s[0]:'')+'</div>';
+    });
+    r.events.forEach(e=>{
+      h+='<div class="gdot" style="left:'+pc(e.day)+';background:'+G_TC[e.type]+'" title="'+e.d+' '+e.title+'" onclick="openLife(\''+r.key+'\',\''+e.id+'\')"></div>';
+    });
+    h+='<div class="gnow" style="left:'+pc(G_TODAY)+'"></div></div></div>';
+  });
+  h+='<div class="glegend"><span><i style="background:'+G_SC['Proposal']+'"></i>已发生（按实际记录）</span><span><i class="plan"></i>AI 预测（虚线，需你确认）</span><span><i class="dot"></i>可点开的原始记录：交谈 / 邮件 / 会议 / 待办</span><span><i style="background:#E05656;width:3px;border-radius:1px"></i>今天</span></div>';
+  h+='<p style="font-size:11.5px;color:var(--mute);margin:6px 0 4px">生命周期模拟覆盖 5 个重点商机，其余在看板中。点公司名打开客户 360，点圆点看那次沟通的原文与下一步。</p></div></div>';
+  return h;
+}
+function openLife(key,eid){
+  const r=LIFECYCLE.find(x=>x.key===key); if(!r)return;
+  const e=r.events.find(x=>x.id===eid)||r.events[0];
+  let h='<button class="x" onclick="closeM(\'m-life\')">✕</button>';
+  h+='<h3>'+r.name+' · '+e.d+' '+G_TN[e.type]+'</h3>';
+  h+='<p class="sub">'+r.deal+' · 当前阶段 '+r.cur+(r.amt!=='—'?' · 预估 '+r.amt:'')+'</p>';
+  h+='<div class="life-rec"><span class="evtag '+e.type+'">'+G_TN[e.type]+'</span><b>'+e.title+'</b>'+(e.src?' <span class="src '+e.src+'">'+e.srcT+'</span>':'')+'<br>'+e.body+'</div>';
+  h+='<table class="kv" style="margin-top:12px"><tr><td>下一步</td><td>'+e.next+'</td></tr><tr><td>来源</td><td>'+(e.srcT==='客户自述'?'对话原文，可直接引用':(e.srcT==='AI 预测'||e.srcT==='AI 建议'||e.srcT==='AI 提醒'?'AI 推断，写入前需你确认':'系统留痕'))+'</td></tr></table>';
+  h+='<div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">';
+  h+='<button class="btn sm" onclick="closeM(\'m-life\');go(\'pipeline\');setTimeout(function(){var c=document.querySelector(\'.kcard[data-c*='+keyName(r.name)+']\');if(c)openDeal(c);},60)">商机详情</button>';
+  if(e.type==='mail'||key==='atlas')h+='<button class="btn ghost sm" onclick="closeM(\'m-life\');openDrafts('+(key==='atlas'?"'atlas'":'')+')">相关邮件草稿</button>';
+  if(e.type==='meet')h+='<button class="btn ghost sm" onclick="closeM(\'m-life\');go(\'event\');eventTab(\'ed\')">会议纪要</button>';
+  if(r.cust)h+='<button class="btn ghost sm" onclick="closeM(\'m-life\');go(\'customers\');showCust()">打开客户 360</button>';
+  h+='</div>';
+  h+='<div class="life-oth"><b style="font-size:12.5px;color:var(--sub)">'+r.name+' 的生命周期（'+r.events.length+' 个节点）</b>';
+  r.events.forEach(o=>{
+    h+='<a class="'+(o.id===e.id?'on':'')+'" onclick="openLife(\''+key+'\',\''+o.id+'\')"><span class="d">'+o.d+'</span><span class="evtag '+o.type+'">'+G_TN[o.type]+'</span><span>'+o.title+'</span></a>';
+  });
+  h+='</div>';
+  document.getElementById('life-body').innerHTML=h;
+  openM('m-life');
+}
+function keyName(n){return n.split(' ')[0];}
 // assistant input
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 function aiReply(q){
@@ -796,7 +965,7 @@ function sendAI(){
 }
 function askAI(q){go('assistant');document.getElementById('ai-in').value=q;setTimeout(sendAI,50);}
 // deep link
-function init(){const h=(location.hash||'').replace('#',''); if(titles[h])go(h); if(h==='cust'){go('customers');showCust();} if(h==='drafts')openDrafts();}
+function init(){const h=(location.hash||'').replace('#',''); if(titles[h])go(h); if(h==='cust'){go('customers');showCust();} if(h==='drafts')openDrafts(); if(h==='gantt'){go('pipeline');toggleGantt(true);}}
 window.addEventListener('hashchange',init); init();
 </script>
 </body>

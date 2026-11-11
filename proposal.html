@@ -385,9 +385,20 @@ footer code{background:#F1F3F5;padding:1px 6px;border-radius:5px;font-size:12px}
       <figcaption>左栏支付业务字段、中栏沟通时间线、右栏 AI 洞察；每个字段标来源；左下三个按钮彼此独立：新建商机、跟进任务、AI 写邮件。<span class="demo-flag">演示数据</span></figcaption>
     </figure>
 
+    <h3>四、一个商机的来龙去脉，能按时间轴点开</h3>
+    <figure>
+      <img src="screenshots/14-lifecycle.png" alt="YeeSales 客户生命周期视图">
+      <figcaption>看板可切到生命周期视图：5 个重点商机的阶段推进与 17 次沟通节点排在同一条时间轴上，实线是已发生、虚线是 AI 预测，红线上方是今天。<span class="demo-flag">演示数据</span></figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/15-lifecycle-record.png" alt="沟通原文弹层">
+      <figcaption>点任一节点，直接看到那次沟通的原文、下一步与来源，并可一键跳到商机详情、相关邮件草稿、会议纪要或客户 360。信息回到它产生的地方，而不是另建一个「记录」页面。<span class="demo-flag">演示数据</span></figcaption>
+    </figure>
+
     <h3>其余界面：证明深度，也证明能点</h3>
     <div class="gal">
       <a href="prototype.html#pipeline"><img src="screenshots/08-pipeline.png" alt="商机看板"><span>My Pipeline · 八阶段看板，停滞单标红</span></a>
+      <a href="prototype.html#gantt"><img src="screenshots/14-lifecycle.png" alt="客户生命周期"><span>客户生命周期 · 实线已发生、虚线 AI 预测</span></a>
       <a href="prototype.html#pipeline"><img src="screenshots/11-deal.png" alt="商机详情"><span>商机详情 · AI 建议阶段，人确认</span></a>
       <a href="prototype.html#assistant"><img src="screenshots/09-assistant.png" alt="AI 助手"><span>AI Assistant · 输入即得结论与按钮</span></a>
       <a href="prototype.html#drafts"><img src="screenshots/12-drafts.png" alt="邮件草稿箱"><span>草稿箱 · 可编辑、确认、放弃</span></a>
@@ -395,8 +406,8 @@ footer code{background:#F1F3F5;padding:1px 6px;border-radius:5px;font-size:12px}
       <a href="prototype.html#event"><img src="screenshots/04-event-during.png" alt="展中页"><span>展中 · 支付结构提取</span></a>
     </div>
 
-    <h3>端到端测试：26 项断言，17 次点击走完六步</h3>
-    <p>在无头浏览器里按 BD 的真实操作顺序驱动原型，逐步断言状态变化，不靠人工目测。首轮有 2 项不通过，排查为测试选择器与实际 DOM 不一致，非产品缺陷；修正断言后复测全部通过。</p>
+    <h3>端到端测试：38 项断言，20 次点击走完七步</h3>
+    <p>在无头浏览器里按 BD 的真实操作顺序驱动原型，逐步断言状态变化，不靠人工目测。补做生命周期视图时断言首轮全红，定位为一段引号转义写错导致整段脚本解析失败，修复后 38 项全通过、控制台零报错；此前两轮的不通过项均为测试选择器与真实 DOM 不一致，非产品缺陷。</p>
     <div class="tbl-scroll">
     <table>
       <tr><th style="width:9%">步骤</th><th style="width:39%">动作</th><th style="width:40%">结果</th><th class="n">点击</th></tr>
@@ -408,6 +419,7 @@ footer code{background:#F1F3F5;padding:1px 6px;border-radius:5px;font-size:12px}
       <tr><td>S8</td><td>看板卡片 → 改阶段 → 确认</td><td>通过：11 张卡片、阶段下拉、确认反馈</td><td class="n">3</td></tr>
       <tr><td>S9</td><td>展会三段连续切换</td><td>通过：展前 / 展中 / 展后，上下文不丢</td><td class="n">4</td></tr>
       <tr><td>S10–S11</td><td>AI 助手输入发送，深链直达</td><td>通过：返回名单规模与按钮；#cust / #drafts 可直达</td><td class="n">2</td></tr>
+      <tr><td>S12</td><td>切生命周期视图 → 点节点 → 跳商机与草稿</td><td>通过：5 行 29 段 17 节点；原文、来源、下一步齐全；商机详情与草稿均可跳转</td><td class="n">3</td></tr>
     </table>
     </div>
     <p class="small">完整走查记录见作品说明第七节。移动端做了基础适配（横向导航、表格横向滚动、卡片单列），名片拍照与录音为演示位，不接真实 OCR 与语音服务。</p>
