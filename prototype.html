@@ -186,6 +186,7 @@ tr:hover td{background:#FAFBFC}
 .gdot:hover{transform:translateX(-50%) scale(1.3)}
 .gnow{position:absolute;top:-4px;bottom:-4px;width:2px;background:#E05656;border-radius:1px}
 .gnow i{position:absolute;top:-16px;left:-14px;font-style:normal;font-size:10px;color:#E05656;font-weight:700}
+.mob-hint{display:none;margin:0 0 6px;font-size:11.5px;color:var(--mute)}
 .glegend{display:flex;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--sub);margin:10px 0 4px 200px}
 .glegend i{display:inline-block;width:18px;height:9px;border-radius:5px;margin-right:5px;vertical-align:1px}
 .glegend i.plan{background:#fff;border:1.5px dashed #9AA1AC}
@@ -221,6 +222,7 @@ tr:hover td{background:#FAFBFC}
  .bar{flex-direction:column;align-items:flex-start}
  .top{padding:8px 12px}
 }
+@media(max-width:700px){.mob-hint{display:block}}
 </style>
 </head>
 <body>
@@ -895,7 +897,7 @@ function toggleGantt(force){
 }
 function renderGantt(){
   const pc=d=>(d/G_DAYS*100).toFixed(2)+'%';
-  let h='<div class="gantt"><div class="ginner">';
+  let h='<p class="mob-hint">手机端可左右滑动查看完整时间轴。</p><div class="gantt"><div class="ginner">';
   h+='<div class="gaxis">';
   G_WEEKS.forEach(w=>{h+='<span style="left:'+pc(w[0])+'">'+w[1]+'</span>';});
   h+='</div>';
